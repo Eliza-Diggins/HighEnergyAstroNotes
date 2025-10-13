@@ -1,0 +1,53 @@
+name: Build and Publish LaTeX PDF
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:   # allows manual trigger
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Compile LaTeX to PDF
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex     # change this if your main .tex file is named differently
+          latexmk_use_xelatex: true   # optional: use xelatex for better unicode/font support
+
+      - name: Prepare output directory
+        run: |
+          mkdir -p output
+          mv main.pdf output/
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+
+  deploy:
+    name: Deploy PDF to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
