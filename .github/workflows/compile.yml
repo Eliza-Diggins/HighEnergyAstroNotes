@@ -28,7 +28,8 @@ jobs:
         with:
           root_file: main.tex     # change this if your main .tex file is named differently
           latexmk_use_xelatex: true   # optional: use xelatex for better unicode/font support
-
+          args: -f
+        
       - name: Prepare output directory
         run: |
           mkdir -p output
