@@ -1,0 +1,386 @@
+In this chapter, we study a few \textbf{classic theoretical models} of accretion in isotropic media. The formal regime of these models is accretion where \textbf{angular momentum plays a minimal role} - allowing accretion to occur without the formation of a disk.
+\par
+In practice, this sort of accretion cannot happen: angular momentum is never really negligible. Nonetheless, it is a very simple toy model which can be used in various scenarios as long as one is careful to never trust it as a ground truth model.
+
+\section{Bondi Accretion}
+
+In the \textbf{Bondi Accretion} scenario, we imagine an accretor with mass $M$ embedded in an \textbf{isotropic and homogeneous} medium with density $\rho(\infty)$ and corresponding ambient sound speed $c_s(\infty)$. We assume that
+
+\begin{enumerate}
+    \item The system is \textbf{spherically symmetric},
+    \item That the system accretes in a \textbf{steady state},
+    \item That the flow is \textbf{inviscid, non-magnetic, and non-relativistic},
+    \item That the flow follows a \textbf{polytropic equation of state}.
+    \item That the flow does not rotate.
+\end{enumerate}
+
+With these assumptions, we can derive a rather beautiful formulation for the steady state accretion.
+
+\subsection{The Bondi Radius}
+
+A quantity which will appear in the formal derivation presented below is the so-called \textbf{Bondi Radius} or \textbf{Sphere of Influence}. The idea is reasonably simple: in order gas to be \textbf{bound} to the central accretor, it must have velocities smaller than the escape velocity. At a radius $R$, the gravitational potential of the central body is
+\[
+\Phi = - \frac{GM}{R} \implies v_{\rm esc} = \sqrt{\frac{2GM}{R}}.
+\]
+Since the fluid has no bulk motions and is in local equilibrium, it cannot be moving faster than the local sound speed $c_s$. Thus, if 
+\[
+v_{\rm esc} \ge c_s,
+\]
+then the material will be bound to the accretor. This implies that
+\[
+\frac{2GM}{R} \ge c_s^2 \implies R \le \frac{2GM}{c_s^2}.
+\]
+We therefore introduce the \textbf{Bondi Radius}:
+\vspace{20pt}
+\begin{definition}
+    \label{def:bondi_radius}
+    The radius at which accreting material is bound to the central accretor in spherical accretion is the \textbf{Bondi Radius}, defined as
+    \begin{equation}
+        \label{eq:bondi_radius}
+        R_{\rm Bondi} = \frac{2GM}{c_s^2}.
+    \end{equation}
+It is clear from inspection that this value depends on the ambient sound speed and on the mass of the accretor. If the surrounding material behaves as an ideal gas, then
+\[
+c_s^2 = \gamma \frac{P}{\rho} = \gamma \frac{kT}{m_p\mu}.
+\]
+As such,
+\[
+R_{\rm Bondi} = \frac{2GM}{\gamma kT} m_p\mu
+\]
+\end{definition}
+\vspace{20pt}
+To get a back-of-the-envelope sense of the Bondi radius, let's look at the behavior for a few different relevant scales.
+\begin{itemize}
+    \item 
+\end{itemize}
+
+
+
+\subsection{The Intuitive Picture}
+
+The full hydrodynamic derivation of Bondi accretion is rigorous but not something one
+needs to memorize. What is most useful to retain is the simple physical intuition that
+leads directly to the correct scaling for the accretion rate.
+
+\par
+The key concept is the existence of an \textbf{accretion radius}, $r_{\rm acc}$, where
+the gravitational binding energy of the accretor balances the thermal energy of the gas:
+\[
+\frac{GM}{r_{\rm acc}} \sim \frac{1}{2}c_s^2(\infty).
+\]
+Inside this radius, gravity dominates over pressure support, and gas is effectively
+captured. Thus $r_{\rm acc} \sim 2GM/c_s^2(\infty)$ defines the size of the accretor's
+sphere of influence.
+
+\par
+Now, how much material is drawn in? Imagine that gas within this radius is funneled
+inward at roughly the sound speed, $c_s(\infty)$, since this is the characteristic
+velocity scale of the medium. The \emph{feeding rate} of mass across the surface of
+the capture sphere is then
+\[
+\dot{M} \sim \rho_\infty \, v \, A
+\;\;\;\;\;\; \sim \;\;\;\; \rho_\infty \, c_s(\infty) \, \pi r_{\rm acc}^2.
+\]
+
+\par
+Substituting the scaling for $r_{\rm acc}$,
+\[
+\dot{M} \;\sim\; \pi \rho_\infty \left(\frac{2GM}{c_s^2(\infty)}\right)^2 c_s(\infty).
+\]
+
+\par
+Thus we immediately arrive at the Bondi scaling
+\[
+\boxed{\dot{M} \;\propto\; \frac{(2GM)^2 \rho_\infty}{c_s^3(\infty)}.}
+\]
+
+\par
+This heuristic argument is not exact—it ignores the subtleties of transonic flow and
+the precise dependence on the polytropic index $\gamma$—but it captures the correct
+dependence on $M$, $\rho_\infty$, and $c_s$. The rigorous hydrodynamic treatment
+merely supplies the order-unity prefactor. The essential physics is therefore
+straightforward: accretion is controlled by the size of the gravitational capture
+region and by the rate at which gas can flow into it at the ambient sound speed.
+
+
+\subsection*{Assumptions}
+
+In Bondi accretion, we make the following simplifying assumptions:
+\vspace{0.5cm}
+\begin{enumerate}
+    \item \textbf{Spherical symmetry: }The entire flow is treated as spherically symmetric and the accretor is at rest relative to the ambient material. \rmk{This plays out mathematically immediately.}
+    \item \textbf{Steady State}: The nature of the flow does not change over time. Formally, this means that any of the field variables $\psi$ is independent of time. \rmk{This is a trickier requirement as it allows us to define a constant accretion rate; however, we know this to be not in keeping with physical systems.}
+    \item \textbf{Polytropic Equation of State}: We assume a \textit{barotropic equation of state} following the form of a polytrope
+    \[
+    P = \kappa \rho^\gamma.
+    \]
+    \rmk{In the limiting cases, we have either adiabatic flows (optically thin) or isothermal (optically thick).}
+    \item \textbf{Gravity}: Is assumed to be fully Newtonian and the accretor is treated as a point mass.
+    \item \textbf{No Additional Forces}: The only relevant force is that of gravity. MHD effects are ignored.
+\end{enumerate}
+
+\subsection*{Derivation}
+
+Formally, we have 3 equations: the \textbf{continuity equation}, the \textbf{Euler equation}, and the \textbf{equation of state}. In this scenario, continuity provides that
+\[
+\underbrace{\frac{\partial \rho}{\partial t}}_{\text{$=0$ (assumpt. 2)}} + \nabla \cdot(\rho{\bf u}) = 0 \implies \frac{1}{r^2} \partial_r[r^2 \rho {\bf u}] = 0.
+\]
+We therefore find that
+\[
+r^2 \rho {\bf u} = \rm{Constant}.
+\]
+This is a very useful integral of the motion because the accretion rate is
+\[
+\dot{M} = -4\pi r^2 \rho u = {\rm Constant}.
+\]
+\rmk{This is deducible from the fact that we have steady flow and therefore cannot collect mass in shells.}
+\par
+We also have the \textbf{Euler Equation} in the form
+\[
+u \frac{du}{dr} + \frac{1}{\rho}\frac{dP}{dr} + \frac{GM}{r^2} = 0.
+\]
+Using the polytropic equation of state,
+\[
+\frac{dP}{dr} = \frac{dP}{d\rho} \frac{d\rho}{dr} = c_s^2 \frac{d\rho}{dr}.
+\]
+\rmk{Remember that $c_s^2$ is a function of radius.} From the continuity equation,
+\[
+\frac{1}{r^2} \partial_r (\rho r^2 u) = 0 \implies \underbrace{\rho \frac{1}{r^2}\partial(r^2u) + u \partial_r \rho}_{\text{product rule}} = 0 \implies \partial_r \log \rho = - \frac{1}{r^2 u} \partial_r ur^2,
+\]
+so (\rmk{substitute $\partial_r \log \rho$ and then expand out the prod. rule}),
+\[
+u \frac{du}{dr} - \frac{c_s^2}{ur^2} \frac{du}{dr} + \frac{GM}{r^2} = 0.
+\]
+If we perform some rearrangements, we find the critical equation which will consume our discussion for the rest of the section:
+\begin{equation}
+    \boxed{
+    \frac{1}{2}\left(1-\frac{c_s^2}{u^2}\right) \frac{du^2}{dr} = -\frac{GM}{r^2} \left[1-\frac{2c_s^2 r}{GM}\right].
+    }
+\end{equation}
+
+\subsubsection{The Sonic Point}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Pictures/figures/bondi_regime.png}
+    \caption{The parameter space of Bondi-accretion solutions. The sonic point $r_b$ is shown on the $x$-axis and the velocity on the $y$ axis.}
+    \label{fig:bondi_regime}
+\end{figure}
+It is not immediately clear why we should have gone to all the work of building out this complicated ODE for ourselves; however, we can see that there are several very interesting features. The most important of these is that equation~\eqref{eq:bondi_critical_radius} is \textbf{singular} at 
+\begin{equation}
+    \label{eq:bondi_critical_radius}
+    \boxed{
+    r_s = \frac{GM}{2c_s^2}.
+    }
+\end{equation}
+\rmk{Remember that $c_s$ is still a function of the radius. This means that this is \textbf{implicit}.} This is the so-called \textbf{sonic point} of the flow: \textit{if} the flow is going to make a transition to or from \textbf{sub-sonic} to \textbf{super-sonic}, it \textit{must occur at $r_s$.} This means that there are 4 important regimes to consider:
+\vspace{0.5cm}
+\begin{enumerate}
+    \item \textbf{Transitioning Solution}: If we enforce that $u = c_s$ at the sonic radius, then the solution is entirely determined by the choice of behavior as $r\to \infty$ or by the choice of behavior as $r\to0$. If we let $u \to 0$ at $\infty$, then we obtain \textbf{accreting flows} featuring a transition point, and if we permit $u \to 0$ as $r\to 0$, then we obtain \textbf{wind flows} with transition points.
+    \item \textbf{Non-Transitioning Solutions}: If a solution is not going to have $u=c_s$, then one \textit{must let $du^2/dr = 0$} at the sonic radius. In this case, the entire solution is fixed either by the behavior at either asymptote or by the behavior (the velocity) at the sonic point.
+\end{enumerate}
+\vspace{0.5cm}
+
+\subsubsection{Bernoulli Flow}
+We have now clarified the general behavior of the ODE we wish to solve and identified the relevant regimes. Most importantly, we are now able to recognize that uniqueness of our solution can be guaranteed by specifying the behavior both at the critical point and at $\infty$. Let us now fully solve the problem. To do so, we will apply \textbf{Bernoulli's Theorem}:
+\[
+u \frac{du}{dr}+ \nabla(h+\phi) = 0 \implies \frac{1}{2} u^2 + h + \phi = 0.
+\]
+For a \textbf{barotropic equation of state}, the specific enthalpy is
+\[
+h = \int \frac{dP}{\rho} = \int \frac{dP}{d\rho} \frac{1}{\rho} d\rho = \frac{K\gamma}{\gamma -1} \rho^{\gamma - 1} = \frac{c_s^2}{\gamma -1}.
+\]
+Thus,
+\begin{equation}
+    \frac{u^2}{2} + \frac{c_s^2}{\gamma -1} - \frac{GM}{r} = \rm{Constant}.
+\end{equation}
+\rmk{In the isothermal case, we actually need to have a logarithm here instead of $\gamma -1$.}
+\par
+Now, for \textbf{accreting flows}, we have $u(\infty) = 0$. Thus,
+\[
+c_s^2(\infty) = C(\gamma-1) \implies C = \frac{c_s^2(\infty)}{\gamma -1}.
+\]
+Additionally, the sonic point requires that
+\[
+c_s^2(r_s) = \frac{GM}{2r_s},
+\]
+so at $r_s$, we have
+\[
+\frac{c_s^2(r_s)}{2} + \frac{c_s^2(r_s)}{\gamma -1} - 2c_s^2(r_s) = \frac{c_s^2(\infty)}{\gamma -1}.
+\]
+So
+\begin{equation}
+\boxed{\
+    c_s(r_s) = c_s(\infty) \left(\frac{2}{5 - 3\gamma}\right)^{1/2}
+    }
+\end{equation}
+\rmk{NOTES: degeneracies!}
+The mass accretion rate is constant at all radii, so we can evaluate it at the sonic point and find
+\begin{equation}
+    \boxed{
+    \dot{M} = \pi G^2 M^2 \frac{\rho(\infty)}{c_s^3(\infty)} \left[\frac{2}{5-3\gamma}\right]^{(5-3\gamma)/2(\gamma-1)}.
+    }
+\end{equation}
+\subsubsection{The Accretion Radius}
+
+The Bondi solution motivates the introduction of a characteristic length scale, the
+\textbf{accretion radius}, defined as
+\begin{equation}
+    \label{eq:bondi_radius}
+    r_{\rm acc} \equiv \frac{2GM}{c_s^2(\infty)}.
+\end{equation}
+This can be understood from a simple energetic argument. At radius $r$, the
+\textbf{gravitational binding energy per unit mass} is
+\[
+E_{\rm grav} \sim \frac{GM}{r},
+\]
+while the \textbf{thermal energy per unit mass} of the gas is set by the sound speed,
+\[
+E_{\rm th} \sim c_s^2(\infty).
+\]
+The radius $r_{\rm acc}$ is defined as the point where these two energy scales balance:
+inside this radius, gravitational attraction dominates over thermal motions, so gas is
+gravitationally captured by the accretor. Outside this radius, pressure forces can
+support the gas against collapse. Thus, $r_{\rm acc}$ plays the role of an effective
+``sphere of influence'' for accretion.
+
+\begin{remark}
+Note that $r_{\rm acc}$ is distinct from the precise sonic radius $r_s$, which depends
+on the local sound speed $c_s(r_s)$. The accretion radius is defined in terms of the
+\emph{asymptotic} sound speed at infinity, and provides a more intuitive, order-of-magnitude
+measure of the capture region.
+\end{remark}
+
+\subsubsection{Free-Fall Behavior Beyond the Sonic Point}
+
+Once the gas passes through the sonic point, the flow is \textbf{supersonic}. In this
+regime, pressure forces are negligible compared to inertia and gravity: the gas
+effectively undergoes free fall. This allows us to extract the asymptotic scaling of
+velocity, density, and temperature in the inner region.
+
+\paragraph{Velocity:} In free fall onto a point mass, the velocity is set by the
+gravitational potential:
+\[
+u(r) \sim \left(\frac{2GM}{r}\right)^{1/2}.
+\]
+
+\paragraph{Density:} The accretion rate is constant at all radii,
+\[
+\dot{M} = 4\pi r^2 \rho u.
+\]
+Substituting the free-fall velocity,
+\[
+\rho(r) \sim \frac{\dot{M}}{4\pi r^2 u(r)} \;\propto\; r^{-3/2}.
+\]
+
+\paragraph{Temperature:} For a polytropic gas,
+\[
+T \propto \frac{P}{\rho} \propto \rho^{\gamma-1}.
+\]
+Thus, in the inner free-fall region,
+\[
+T(r) \;\propto\; r^{-3(\gamma-1)/2}.
+\]
+For example:
+\begin{itemize}
+    \item Isothermal case ($\gamma=1$): $T(r) = \rm{const}$.  
+    \item Adiabatic monoatomic gas ($\gamma=5/3$): $T(r) \propto r^{-1}$.
+\end{itemize}
+
+\subsection{Feasibility as an Accretion Mechanism}
+
+A natural question to ask is whether Bondi accretion can plausibly power luminous 
+astrophysical phenomena such as X-ray binaries, ultraluminous X-ray sources (ULXs), 
+or active galactic nuclei (AGN). The answer depends sensitively on the mass of the accretor 
+and on the density and temperature of the ambient medium. 
+\par
+Let us consider first a \textbf{compact object} embedded in the 
+interstellar medium (ISM). For typical ISM conditions, 
+$n \sim 1\,{\rm cm^{-3}}$ and $T \sim 10^{4}\,{\rm K}$, the sound speed is of order 
+$c_s \sim 10\,{\rm km\,s^{-1}}$. Substituting into the Bondi scaling,
+\[
+\dot{M}_{\rm Bondi} \;\sim\; 10^{12} 
+\left(\frac{M}{M_\odot}\right)^2 \, {\rm g\,s^{-1}},
+\]
+we find accretion rates that correspond to luminosities
+\[
+L_{\rm acc} = \eta \dot{M} c^2 = 9\times 10^{32}\;\eta \left(\frac{M}{M_\odot}\right)^2 {\rm erg\;s^{-1}}
+\]
+where $\eta \sim 0.1$ is a typical accretion efficiency. For a \textbf{stellar mass} system, it is very hard to imagine scenarios in which this can work since $L_{\rm acc}$ might be as many as 10 magnitudes too low to explain the energetics of events like XRBs and ULXs. For \textbf{supermassive black holes}, the accretion can be considerably more energetic. For a $10^6$ solar mass black hole, we can already get up to $10^{45}\;{\rm erg \;s^{-1}}$, which puts us in range to explain AGN luminosity. \rmk{This is not actually the correct mechanism, however. We have said nothing yet of the emission mechanisms, which are also difficult to make work in the case of spherical accretion.}
+
+
+\subsection*{Summary and Key Formulae}
+
+Bondi accretion provides the simplest classical model for spherically symmetric accretion onto a compact object. While highly idealized, it illustrates several key physical principles:
+
+\begin{itemize}
+    \item The flow is uniquely determined by the requirement that it pass smoothly through the \textbf{sonic point}. This makes the solution transonic, subsonic at infinity and supersonic near the accretor. 
+    \item The \textbf{accretion radius} 
+    \[
+    r_{\rm acc} = \frac{2GM}{c_s^2(\infty)}
+    \]
+    defines the natural scale inside which gravity dominates over thermal pressure. Gas at $r \lesssim r_{\rm acc}$ is gravitationally captured.
+    \item The \textbf{Bondi accretion rate} can be expressed either in terms of $r_{\rm acc}$ or directly in terms of asymptotic conditions:
+    \[
+    \dot{M}_{\rm Bondi} \;\sim\; \pi r_{\rm acc}^2 \rho_\infty c_s(\infty),
+    \qquad
+    \dot{M}_{\rm Bondi} = \pi G^2 M^2 \frac{\rho(\infty)}{c_s(\infty)^3}\left[\frac{2}{5-3\gamma}\right]^{(5-3\gamma)/2(\gamma-1)}.
+    \]
+    The exact prefactor depends on the adiabatic index $\gamma$, but the scaling is robust.
+    \item Inside the sonic point, the flow is effectively in free fall, with the following power-law scalings:
+    \[
+    u(r) \propto r^{-1/2}, \qquad \rho(r) \propto r^{-3/2}, \qquad T(r) \propto r^{-3(\gamma-1)/2}.
+    \]
+    For an adiabatic monoatomic gas ($\gamma=5/3$), this gives $T(r) \propto r^{-1}$.
+    \item Order-of-magnitude estimates show that for compact objects, the rates are very small compared to what is observable:
+    \[
+    \dot{M}_{\rm Bondi} \sim 1.4 \times 10^{11}\;\; \left(\frac{M}{M_\odot}\right)^2 \left(\frac{\rho_\infty}{1\,{\rm cm}^{-3}\;m_p}\right)\left(\frac{10\,{\rm km/s}}{c_s(\infty)}\right)^3 \;{\rm g\,s^{-1}}.
+    \]
+    For example:
+    \begin{itemize}
+        \item White Dwarf ($M \sim 1M_\odot$, $R \sim 10^9\,$cm): $\dot{M} \sim 10^{12}\,{\rm g\,s^{-1}}$.
+        \item Neutron Star ($M \sim 1.4M_\odot$, $R \sim 10^6\,$cm): $\dot{M} \sim 10^{13}\,{\rm g\,s^{-1}}$.
+    \end{itemize}
+    
+Even though compact objects have deep gravitational potentials, the sparse interstellar medium is simply too dilute: Bondi accretion in realistic astrophysical settings is far below detectable levels.
+\end{itemize}
+\vspace{0.5cm}
+
+\begin{bigidea}
+\textbf{Bondi Accretion: Must-Remember Formulae}
+\begin{align*}
+r_{\rm acc} &= \frac{2GM}{c_s^2(\infty)} \\[6pt]
+\dot{M}_{\rm Bondi} &\sim \pi r_{\rm acc}^2 \rho_\infty c_s(\infty) \;\;\;\; \propto \frac{(GM)^2 \rho_\infty}{c_s^3(\infty)} \\[6pt]
+\rho(r) &\propto r^{-3/2}, \qquad T(r) \propto r^{-3(\gamma-1)/2}, \qquad u(r) \propto r^{-1/2} \\[6pt]
+\dot{M}_{\rm WD} &\sim 10^{12} \;\left(\frac{M}{M_\odot}\right)^2\;{\rm g\,s^{-1}}, \qquad
+\dot{M}_{\rm NS} \sim 10^{13} \;\left(\frac{M}{M_\odot}\right)^2\;{\rm g\,s^{-1}}
+\end{align*}
+\textbf{Takeaway:} Bondi accretion sets the baseline scale for spherical capture from a uniform medium, but the resulting accretion rates are far too small to be astrophysically significant in most environments.
+\end{bigidea}
+
+\begin{conceptbox}
+
+Practical applications include:
+\begin{itemize}
+    \item Isolated neutron stars or black holes accreting from the interstellar medium.
+    \item Quiescent supermassive black holes (e.g.\ Sgr A*) accreting from hot gas in galaxies.
+    \item Wind-fed X-ray binaries, modeled with the related Bondi--Hoyle--Lyttleton formalism.
+    \item Central black holes in galaxy clusters accreting from the intracluster medium.
+    \item Subgrid prescriptions for black hole growth in cosmological simulations.
+\end{itemize}
+In each case, the Bondi rate provides an order-of-magnitude estimate of fuel availability, 
+though real systems are often modified by angular momentum, turbulence, or feedback processes.
+\end{conceptbox}
+
+\section{Hoyle-Lyttleton Accretion}
+
+- balistic characterization
+- limitations.
+- formalism
+
+\subsection*{Summary and Key Formulae}
+
+\section{Bondi-Hoyle-Lyttleton Accretion}
+
+Summary and Key Formulae
+
+\subsection{Issues with BHL Accretion}

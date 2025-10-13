@@ -1,0 +1,813 @@
+
+In this chapter, we will explore the \textbf{standard model of accretion disk physics}: the so-called \textbf{thin disk model}. This model forms the cornerstone of modern accretion theory and underlies our understanding of systems ranging from protostellar disks to luminous quasars. Despite its simplicity, the thin disk model is remarkably predictive, yielding quantitative relations between disk structure, luminosity, and accretion rate that are broadly consistent with observations.
+\par
+Before we get into the details of the thin disk model, we'll want to first derive the equations of fluid dynamics in axisymmetric coordinates.
+
+\section{Fluid Dynamics of an Axisymmetric Rotating Disk}
+
+We now derive the vertically integrated equations of \emph{mass}, \emph{momentum}, and \emph{angular momentum} 
+for an axisymmetric viscous disk, retaining an \emph{arbitrary} rotation law $\Omega(R)$. 
+This will lead us to the \textbf{general viscous diffusion equation} governing the surface density $\Sigma(R,t)$---a result 
+that can later be specialized to the familiar Keplerian case.
+\par
+We begin by assuming \textbf{axisymmetry}, so that all quantities are independent of the azimuthal coordinate $\phi$. 
+The disk is characterized by its \textbf{surface density},
+\begin{equation}
+\label{eq:def_surface_density}
+\Sigma(R,t) \;\equiv\; \int_{-\infty}^{\infty} \rho(R,z,t)\,dz,
+\end{equation}
+obtained by integrating the three-dimensional density $\rho$ over the vertical coordinate $z$. 
+The velocity field of the gas is denoted ${\bf u} = (v_r, v_\phi, v_z)$, with the azimuthal component dominated by rotation:
+\[
+v_\phi(R,t) = R\,\Omega(R,t),
+\]
+where $\Omega(R,t)$ is the \textbf{angular velocity field} describing the disk’s differential rotation. The \textbf{viscosity} of the disk is another relevant quantity which we will denote by $\nu(R,t)$ (\rmk{this is the effective / turbulent kinematic viscosity}) such that the \textbf{viscous stress tensor} has the form
+\[
+\tau_{r\phi} \;\equiv\; \rho\,\nu\,R\,\frac{d\Omega}{dR}
+\]
+Its vertical integral is
+\begin{equation}
+W_{r\phi}(R,t) \;\equiv\; \int_{-\infty}^{\infty}\tau_{r\phi}\,dz
+\;=\; \nu\,\Sigma\,R\,\frac{d\Omega}{dR}.
+\label{eq:Wrphi_def}
+\end{equation}
+
+\subsection*{The Continuity Equation}
+
+The most general form of the \textbf{continuity equation} requires that
+\[
+\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho {\bf u}) = 0.
+\]
+Because of our constraints on the symmetry of the system, we have that
+\[
+\frac{\partial \rho}{\partial t} + \frac{1}{R}\frac{\partial}{\partial R}\left(R\rho v_r\right) + \frac{\partial}{\partial z} \left(\rho v_z\right) = 0
+\]
+Integrating over the vertical extent of the disk, we have
+\[
+\frac{\partial \Sigma}{\partial t} + \frac{1}{R}\frac{\partial}{\partial R}\left(R\Sigma v_r\right) + \underbrace{\int_{-\infty}^\infty \rho v_z\;dz}_{0 \;\text{because}\;\lim_{z\to\infty} \rho = 0}= 0
+\]
+Thus, we arrive at the first of our \textbf{critical equations}:
+\begin{equation}
+\boxed{\;
+\frac{\partial \Sigma}{\partial t}
++ \frac{1}{R}\,\frac{\partial}{\partial R}\!\left(R\,\Sigma\,v_r\right) \;=\; 0.
+\;}
+\label{eq:continuity_disk_general}
+\end{equation}
+
+\subsection*{Angular Momentum Conservation}
+
+Let's now turn our attention to the conservation of angular momentum in the disk. Clearly the angular momentum density is
+\[
+\boldsymbol{\ell} = \rho {\bf u} \times {\bf r} = \Sigma R^2 \Omega \;\hat{\bf z}.
+\]
+There are \textbf{two modes of angular momentum transport}: viscous transfer and advective transfer. The advective transfer is determined by the \textbf{radial flux} which is
+\[
+f_\ell = \underbrace{\Sigma R^2 \Omega}_{\text{Ang. Mom.}} \cdot v_r. 
+\]
+The total viscous torque exerted across a cylinder of radius $R$ is 
+\begin{equation}
+G(R,t) \;=\; 2\pi R \times (R\,W_{r\phi})
+\;=\; 2\pi R^2\,W_{r\phi}
+\;=\; 2\pi R^2\,\nu\,\Sigma\,R\,\frac{d\Omega}{dR}
+\;=\; \boxed{-\,2\pi\,R^3\,\nu\,\Sigma\,\frac{d\Omega}{dR}},
+\label{eq:G_def}
+\end{equation}
+where the final minus sign is conventional: for disks with $d\Omega/dR<0$ (e.g.\ Keplerian) the outward torque $G$ is positive. The result is the standard vertically integrated angular momentum equation:
+\begin{equation}
+\boxed{\;
+\frac{\partial}{\partial t}\!\left(\Sigma R^2\Omega\right)
++ \frac{1}{R}\frac{\partial}{\partial R}\!\left(R\,\Sigma v_r\,R^2\Omega\right)
+= \frac{1}{2\pi R}\,\frac{\partial G}{\partial R}.
+\;}
+\label{eq:angmom_cons_disk}
+\end{equation}
+Finally, for a Newtonian viscous stress with kinematic viscosity $\nu$,
+\begin{equation}
+\tau_{r\phi} \;=\; \rho\,\nu\,R\,\frac{d\Omega}{dR}
+\quad\Longrightarrow\quad
+W_{r\phi} \;=\; \nu\,\Sigma\,R\,\frac{d\Omega}{dR},
+\end{equation}
+and hence the torque can be written as
+\begin{equation}
+G(R,t) \;=\; 2\pi R^2 W_{r\phi}
+\;=\; 2\pi R^3 \nu \Sigma \frac{d\Omega}{dR}
+\;=\; \boxed{-\,2\pi\,R^3\,\nu\,\Sigma\,\frac{d\Omega}{dR}},
+\end{equation}
+where the final minus sign is inserted by convention so that $G>0$ for disks with $d\Omega/dR<0$ (e.g.\ Keplerian). Substituting this $G$ into \eqref{eq:angmom_cons_disk} yields the form used in the main text.
+
+
+Conservation of angular momentum (advection + viscous transport) then reads
+\begin{equation}
+\boxed{\;
+\frac{\partial}{\partial t}\!\left(\Sigma R^2\Omega\right)
++ \frac{1}{R}\frac{\partial}{\partial R}\!\left(R\,\Sigma\,v_r\,R^2\Omega\right)
+= \frac{1}{2\pi R}\,\frac{\partial G}{\partial R}.
+\;}
+\label{eq:angmom_cons_disk}
+\end{equation}
+
+\subsection*{The Diffusion Equation of Disk Dynamics}
+Comparing equations \eqref{eq:angmom_cons_disk} and \eqref{eq:continuity_disk_general}, one can eliminate $v_r$ in favor of the torque gradient. \rmk{This is a simple manipulation: $\Omega$ is a function of $R$ alone, so you simply clarify the time derivative and substitute continuity.} This leads directly to the well-known \textbf{diffusion equation for thin accretion disks}:
+\begin{equation}
+\boxed{\;
+\frac{\partial \Sigma}{\partial t}
+= -\,\frac{1}{R}\,\frac{\partial}{\partial R}
+\left[
+\frac{1}{\displaystyle \frac{d}{dR}\!\big(R^2\Omega\big)}
+\;\frac{\partial}{\partial R}\!\left(\nu\,\Sigma\,R^3\,\frac{d\Omega}{dR}\right)
+\right].
+\;}
+\label{eq:general_diffusion}
+\end{equation}
+Equation \eqref{eq:general_diffusion} is valid for \emph{any} axisymmetric viscous disk, independent of the specific rotation law.  
+All microphysics of angular-momentum transport is encapsulated in the effective $\nu\Sigma$; 
+all dynamics of orbital support enter through $\Omega(R,t)$.
+
+\begin{remark}[Where pressure and gravity enter]
+The rotation profile $\Omega(R,t)$ is set by the \emph{radial momentum} equation,
+\[
+\frac{v_\phi^2}{R} - \frac{1}{\rho}\frac{\partial P}{\partial R} \;=\; \frac{\partial \Phi}{\partial R},
+\]
+so that, if desired, pressure support can be retained via
+$\Omega^2 = R^{-1}\partial_R\Phi + (R\rho)^{-1}\partial_R P$.
+Equation \eqref{eq:general_diffusion} itself does not assume Keplerian rotation;  
+Keplerianity (or any other choice) is imposed by specifying $\Omega(R)$ from this radial balance.
+\end{remark}
+
+For a Newtonian point mass, Keplerian motion implies $\Omega(R)=\Omega_K=(GM/R^3)^{1/2}$, hence
+\[
+\frac{d}{dR}\!\big(R^2\Omega_K\big) \;=\; \frac{1}{2}\,R\,\Omega_K,
+\qquad
+\frac{d\Omega_K}{dR} \;=\; -\frac{3}{2}\frac{\Omega_K}{R}.
+\]
+Substituting these into \eqref{eq:general_diffusion} gives the classic \textbf{\emph{Pringle diffusion equation}:}
+\begin{equation}
+\boxed{\;
+\frac{\partial \Sigma}{\partial t}
+= \frac{3}{R}\,\frac{\partial}{\partial R}
+\left[
+R^{1/2}\,\frac{\partial}{\partial R}\!\big(\nu\,\Sigma\,R^{1/2}\big)
+\right].
+\;}
+\label{eq:Pringle}
+\end{equation}
+
+\subsection*{The Drift Velocity}
+\par
+In deriving the diffusion equation \eqref{eq:general_diffusion}, we eliminated the radial velocity $v_r$ in favor of the torque gradient. While this was convenient for expressing the time evolution of $\Sigma$, it is often useful to recover an explicit expression for $v_r$ itself. The radial drift velocity determines the direction and rate of mass accretion in the disk, and it connects the diffusive picture of angular-momentum transport to the physical inflow of matter.
+\par
+We start from the vertically integrated \textbf{continuity equation}:
+\begin{equation}
+\label{eq:cont_eqn}
+\frac{\partial \Sigma}{\partial t} 
++ \frac{1}{R}\frac{\partial}{\partial R}\!\left(R\,\Sigma\,v_r\right) = 0.
+\end{equation}
+For a Keplerian disk, the \textbf{Pringle diffusion equation} \eqref{eq:Pringle} provides $\partial_t \Sigma$ as
+\begin{equation}
+\label{eq:pringle_diffusion}
+\frac{\partial \Sigma}{\partial t}
+= \frac{3}{R}\frac{\partial}{\partial R}
+\left[
+R^{1/2}\,\frac{\partial}{\partial R}\big(\nu\,\Sigma\,R^{1/2}\big)
+\right].
+\end{equation}
+Substituting equation~\eqref{eq:pringle_diffusion} into \eqref{eq:cont_eqn} gives
+\begin{equation}
+\frac{1}{R}\frac{\partial}{\partial R}\!\left(R\,\Sigma\,v_r\right)
+= -\,\frac{3}{R}\frac{\partial}{\partial R}
+\left[
+R^{1/2}\,\frac{\partial}{\partial R}\big(\nu\,\Sigma\,R^{1/2}\big)
+\right].
+\end{equation}
+Multiplying through by $R$ and integrating with respect to $R$ yields
+\begin{equation}
+R\,\Sigma\,v_r
+= -\,3\,R^{1/2}\,\frac{\partial}{\partial R}\big(\nu\,\Sigma\,R^{1/2}\big)
++ C,
+\end{equation}
+where $C$ is an integration constant determined by boundary conditions.
+If the disk experiences no mass inflow from large radii (i.e.\ $v_r \to 0$ as $R \to \infty$),
+then $C=0$. We thus obtain the standard expression for the radial drift velocity:
+\begin{equation}
+\label{eq:vr_solution}
+\boxed{
+v_r(R,t)
+= -\,\frac{3}{\Sigma\,R^{1/2}}
+\frac{\partial}{\partial R}\!\left(\nu\,\Sigma\,R^{1/2}\right).
+}
+\end{equation}
+
+\subsection*{Solutions for Constant Viscosity}
+
+To gain further intuition, let us now consider the case where the viscosity is taken to be a constant, $\nu=\text{const}$. In this case, the \textbf{Pringle diffusion} equation 
+\begin{equation}
+    \frac{\partial \Sigma}{\partial t} = 
+    \frac{3\nu}{R}\frac{\partial}{\partial R}
+    \left[ R^{1/2}\frac{\partial}{\partial R}\big(\Sigma R^{1/2}\big)\right]
+\end{equation}
+simplifies considerably. We first introduce the variable
+\[
+x \equiv R^{1/2}, \qquad R = x^2,
+\]
+so that the equation is \textbf{expressed in a more standard diffusive form}. We define a new dependent variable
+\[
+u(x,t) \equiv \Sigma(R,t)\, x,
+\]
+such that the evolution equation becomes
+\begin{equation}
+    \frac{\partial u}{\partial t} = \frac{12\nu}{x^2}\frac{\partial^2 u}{\partial x^2}.
+\end{equation}
+This form still has explicit $x$-dependence, but the choice of variables sets us up to see the equation as a diffusion-type operator. \rmk{This is quite an obvious picture: we don't like the $R^{1/2}$, so we replace with $x$. We don't like multiple terms in the derivatives: let $u = \Sigma x$, then everything is nice and standardized.}
+
+\vspace{0.25cm}
+\noindent
+To proceed analytically, we assume solutions of the form
+\[
+u(x,t) = X(x)\,T(t).
+\]
+\rmk{This is a classic Cauchy-problem for a Sturm-Liouville problem. We can just proceed with separation.} Substituting into the PDE gives
+\[
+\frac{1}{T}\frac{dT}{dt} = \frac{12\nu}{x^2}\,\frac{1}{X}\frac{d^2X}{dx^2} = -\lambda,
+\]
+where $\lambda$ is a separation constant. Thus we obtain
+\begin{align}
+    \frac{dT}{dt} &= -\lambda T, \\
+    \frac{d^2X}{dx^2} + \frac{\lambda}{12\nu}x^2 X &= 0.
+\end{align}
+The temporal part integrates immediately to $T(t) = e^{-\lambda t}$. The spatial equation is a Sturm--Liouville problem: \textbf{it resembles a Schrödinger-type equation with a quadratic potential.} Its solutions are linear combinations of functions related to parabolic cylinder functions.
+
+\vspace{0.25cm}
+\noindent
+\textbf{Green's function approach.} \;
+While separation of variables gives a formal solution in terms of special functions, the more practical approach used in the literature (Lynden-Bell \& Pringle 1974) is to construct a Green's function for the diffusion operator. The Green's function $G(R,R';t)$ is defined such that
+\[
+\Sigma(R,t) = \int_0^\infty G(R,R';t)\,\Sigma(R',0)\, R'\,dR',
+\]
+where $G(R,R';t)$ represents the surface density response at $R$ and time $t$ due to an initial $\delta$-function ring at $R'$. For constant viscosity, this Green's function can be computed explicitly and has the form of a broadened Gaussian in the $R^{1/2}$ variable.
+\par
+For $\nu=\text{const}$, one finds that the Green's function can be written in terms of modified Bessel functions of the first kind, $I_\nu(x)$. The result is
+\begin{equation}
+    G(R,R';t) = \frac{1}{4\pi \nu t}\,
+    \left(\frac{R}{R'}\right)^{1/4}
+    \exp\!\left[-\frac{R+R'}{4\nu t}\right]\,
+    I_{1/4}\!\left(\frac{\sqrt{RR'}}{2\nu t}\right).
+\end{equation}
+This function satisfies the normalization condition
+\[
+\int_0^\infty G(R,R';t)\,R\,dR = 1,
+\]
+which ensures mass conservation: the total mass in the disk remains constant (unless boundary conditions at the inner radius allow accretion onto the central object).
+\par
+\textbf{What does this tell us?}
+Here's the big takeaway, we see that the Green's Function relies on a characteristic time scale: the \textbf{viscous time scale} 
+\begin{equation}
+    \label{eq:viscous_timescale}
+    \boxed{
+    t_{\rm visc} \sim \frac{R^2}{\nu} \sim \frac{R}{v_R},
+    }
+\end{equation}
+on which changes in the disc occur. Similarly, if the disk has spatial gradients on the scale of some length $\ell$, then the resulting time scale of evolution is
+\[
+t_{\rm visc} \sim \frac{\ell^2}{\nu} \sim \frac{\ell}{v_R},
+\]
+which means that \textbf{shorter / sharper} features in the accretion disk will \textbf{decay more quickly} than those which are less pronounced. This serves to \textbf{smooth out} the disk. We have now accomplished all of the \textbf{general} fluid dynamics we will need for the thin disk model. We can now discuss the core physics of the model!
+
+\newpage
+\section{Assumptions of the Thin Disk Model}
+
+\begin{bigidea}
+The \textbf{thin disk model} is a physically motivated \emph{approximation scheme}. By making a hierarchy of geometric, dynamical, and thermodynamic simplifications, we reduce the full three-dimensional, time-dependent hydrodynamic problem to a one-dimensional, vertically integrated system. Its strength lies not in its realism, but in its self-consistent internal logic and its ability to describe a wide range of astrophysical disks with a small set of parameters.
+\end{bigidea}
+
+We will begin by laying out the assumptions and prescriptions that define the model. These assumptions serve both to simplify the governing equations and to encode the physical regime in which the thin disk approximation holds. They can be grouped into three categories: (i) \textbf{structural assumptions}, which define the geometry and kinematics of the disk;  (ii) \textbf{physical prescriptions}, which specify how turbulence, pressure, and viscosity are modeled; and (iii) \textbf{consistency conditions}, which summarize the dynamical consequences that must follow if the model is valid.
+
+\subsection{I. Structural Assumptions}
+
+\begin{table}[ht!]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{p{0.28\linewidth} p{0.65\linewidth}}
+\toprule
+\textbf{Assumption} & \textbf{Consequence / Description} \\
+\midrule
+\textbf{Axisymmetry} & All quantities are independent of azimuth: $\partial/\partial\phi = 0$.  The disk is fully described by $(R,z,t)$. \\[4pt]
+\textbf{Geometric Thinness} & The vertical scale height is small compared to the radius: $H/R \ll 1$.  Enables vertical integration and Taylor expansion of the gravitational potential. \\[4pt]
+\textbf{Nearly Circular Orbits} & The flow is dominated by rotation, $v_\phi \gg v_r, v_z$.  To leading order, the centrifugal and gravitational forces balance: $\Omega \simeq \Omega_K$. \\[4pt]
+\textbf{Vertical Hydrostatic Equilibrium} & The vertical velocity is negligible ($v_z \approx 0$), and $dP/dz = -\rho \Omega_K^2 z$.  This defines the Gaussian vertical density profile and the scale height $H=c_s/\Omega_K$. \\[4pt]
+\textbf{Neglect of Self-Gravity} & The disk’s own gravity is small compared to the central potential: $\Phi \simeq -GM/\sqrt{R^2+z^2}$. \\[4pt]
+\bottomrule
+ {\bf Steady State}&We assume that dynamical changes in the conditions of the accretion source happen on time scales longer than those of the viscous time scales determining the structure of the disk. This permits a steady state assumption.\\
+\end{tabular}
+\caption{Structural assumptions defining the thin disk geometry and kinematics.}
+\end{table}
+
+These are the foundational simplifications that define what we mean by a ``thin'' accretion disk. The most obvious of these is the condition of \textbf{axisymmetry}, which is very sensible. The most \textbf{important} is the concept of the disk as a \textbf{geometrically thin system}. As we will see later, this allows us to treat the problem as separable, which would not be possible in a more general scenario. We also make a number of other reasonable assumptions about the nature of the flow fields in order to keep things tractable as summarized in the following table:
+
+While these assumptions are reasonable in many situations, there are notable situations where we cannot blindly assume that they will be sufficient. The statement of \textbf{vertical hydrostatic equilibrium} is reliant on the argument that the sound crossing time $\tau_{z} = H/c_s \ll \tau_{\rm visc}$, so the vertical structure reacts instantaneously to changes in the disk structure. This fails for \textbf{wind launching} in disks and in \textbf{warped disks}, both of which can occur.
+\par
+Likewise, there are some rare scenarios where self-gravity becomes relevant: particularly in circumstellar disks and in massive AGN disks.
+
+
+\subsection{II. Physical Prescriptions}
+
+\begin{table}[ht!]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{p{0.28\linewidth} p{0.65\linewidth}}
+\toprule
+\textbf{Prescription} & \textbf{Description / Consequence} \\
+\midrule
+\textbf{Equation of State} & The gas is barotropic or {\bf locally isothermal}: $P = \rho c_s^2$.  Pressure depends only on density through the local sound speed. \\[4pt]
+\textbf{Viscous Stress} & Angular momentum transport is parameterized by a kinematic viscosity $\nu$ through the stress tensor component $T_{r\phi} = -\nu \Sigma R\,d\Omega/dR$. Really, we're assuming this is the only relevant set of stresses. This includes assuming pressure is subdominant.\\[4pt]
+\textbf{Alpha Prescription} & Turbulent viscosity is modeled as $\nu = \alpha c_s H$, where $0 < \alpha < 1$.  The dimensionless parameter $\alpha$ captures the efficiency of angular momentum transport. \\[4pt]
+\textbf{Local Energy Balance} & Viscous heating is locally balanced by radiative cooling: $D(R) = \sigma T_{\rm eff}^4$. This means that {\bf all} of the energy is radiated away on a timescale shorter than the viscous timescale. \\[4pt]
+\textbf{Optically Thick Emission} & Radiation escapes by vertical diffusion, and each annulus radiates approximately as a blackbody with effective temperature $T_{\rm eff}(R)$. \\[4pt]
+\bottomrule
+\end{tabular}
+\caption{Physical prescriptions specifying viscosity, pressure, and thermal behavior in the thin disk.}
+\end{table}
+
+
+On top of the core assumptions that we have stipulated above, we make a number of prescriptions about the physics. These assumptions \textbf{close the system of equations} by prescribing how pressure, viscosity, and energy transport behave.
+
+\subsection{III. Consistency Conditions}
+
+If the above assumptions hold, several scaling relations and inequalities follow naturally.  
+These relations are not separate assumptions, but \emph{self-consistency checks} that must be satisfied within the thin disk regime.
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{p{0.35\linewidth} p{0.58\linewidth}}
+\toprule
+\textbf{Relation} & \textbf{Interpretation} \\
+\midrule
+$H/R = c_s / v_\phi \ll 1$ & The disk is geometrically thin. \\[4pt]
+$v_r \sim \alpha (H/R)^2 v_\phi \ll c_s$ & Inflow is slow and subsonic. \\[4pt]
+$\Omega \simeq \Omega_K = \sqrt{GM/R^3}$ & Rotation is Keplerian to leading order. \\[4pt]
+$(1/\rho)\,dP/dR \ll GM/R^2$ & Radial pressure forces are negligible. \\[4pt]
+$t_{\rm visc} \sim R^2/\nu \gg t_{\rm dyn} \sim 1/\Omega_K$ & Viscous evolution occurs on timescales much longer than orbital motion. \\[4pt]
+\bottomrule
+\end{tabular}
+\caption{Consistency relations that characterize the thin disk regime.}
+\end{table}
+
+\bigskip
+Together, these assumptions and prescriptions form the foundation of the thin disk model.  
+They allow the full hydrodynamic problem to be reduced to a set of vertically integrated equations governing the surface density, torque, and energy dissipation of the disk— the so-called \emph{canonical thin-disk equations}, which we now derive.
+
+\section{The Structure of Thin Disks}
+
+Let's imagine that the external conditions on the accretion disk depend on time scales which are long compared to the viscous time scale. In such a case (\rmk{which is generally valid}), the disk will have a sufficient amount of time to settle into a steady state before dynamical changes can modify the behavior again. Thus, we settle into a \textbf{steady state solution}. In this section, we investigate this solution.
+
+\subsection{The Accretion Rate}
+
+From the continuity equation \eqref{eq:cont_eqn},
+\[
+\underbrace{\frac{\partial \Sigma}{\partial t} }_{=0} + \frac{1}{R} \partial_R(R \Sigma v_R) = 0 \implies R\Sigma v_R = {\rm Constant}.
+\]
+Just as we saw in the \textbf{Bondi accretion} derivation, this corresponds to constant mass flux across disks in order to maintain the steady state. Thus, we can immediately obtain the accretion rate equation:
+\begin{equation}
+    \label{eq:disc_acc_rate}
+    \boxed{
+    \dot{M} = 2\pi R \Sigma (-v_R).
+    }
+\end{equation}
+Already, we have achieved a very \textbf{powerful statement about accretion rates}. This has the same benefits that it did in the Bondi scenario: we were able to self-consistently understand the constant rate of accretion in terms of the external parameters. In this case, specifying $\dot{M}$ fixes many of the internal parameters of the model!
+
+\subsection{Boundary Conditions}
+
+So far we have characterized the thin disk using the continuity equation, but we have not yet made any specifications for the model at the boundary. In order to do this, we use the angular momentum conservation equation with no time dependence. This takes the form
+\begin{equation}
+\label{eq:disk_steady_integral}
+    R^3 \Sigma v_R \Omega = \frac{G}{2\pi} + \frac{C}{2\pi}.
+\end{equation}
+As such, we see that the steady state solution is really quite simple to arrive at. Let's now determine how one constrains the value of the integration factor $C$. If we remember, 
+\[
+R^3 \Sigma v_r \Omega = R f_\ell = \frac{1}{2\pi}(G(R)+C).
+\]
+So really, $C$ is going to be constrained by the \textbf{momentum flux behavior at the boundary.} It is worth discussing in more detail how the boundary condition constrains the steady--state solution, and in particular how the integration constant $C$ is determined.
+\par
+At large radii, the disk rotation is nearly Keplerian and the torque $G(R)$ is the sole mechanism redistributing angular momentum. However, the situation is different at the \textbf{inner edge} of the disk, near $R_{\rm in}$, where the disk must connect to the central object. In this region, \textbf{we cannot assume perfect Keplerian rotation}: the material must transition from orbital motion in the disk to either plunging motion (for black holes) or to corotation with the stellar surface (for neutron stars or white dwarfs). This transition region is called the \textbf{boundary layer}. 
+
+\paragraph{Surface-Free Boundary}
+For systems like \textbf{black holes}, there is no viscous stress at the \textbf{inner-most stable orbit} (ISCO). As such, the torque $G(R)$ must disappear at the inner boundary. In that case, equation~\eqref{eq:disk_steady_integral} at the ISCO radius $R_I$ is
+\[
+R_{I}^3 \Sigma_I v_{r,I} \Omega_{I} = \frac{C}{2\pi}.
+\]
+We know that the accretion rate is precisely, see equation~\eqref{eq:disc_acc_rate},
+\[
+\dot{M} = 2\pi R \Sigma (-v_R) \implies C = - \dot{M} R_I^2 \Omega
+\]
+As such, substitution back into equation~\eqref{eq:disk_steady_integral}, we find
+\[
+R^3 \Sigma v_R \Omega = \frac{1}{2\pi}\left[G(R) - \dot{M} R_I^2 \Omega_I\right]
+\]
+We know $G(R)$ (equation~\ref{eq:disc_torque}) takes the form
+\[
+G(R) = -2\pi R^2 \nu \Sigma \frac{\partial \Omega}{\partial R},
+\]
+so
+\[
+2\pi R^3 \Omega v_R \Sigma = -\dot{M} R^2 \Omega = -2\pi R^2 \nu \Sigma \frac{\partial \Omega}{\partial R} - \dot{M} R_I^2 \Omega_I.
+\]
+If we insist that $\Omega \propto R^{-3/2}$, then $\partial_R \Omega = -(3/2)\Omega/R$, so
+\begin{equation}
+    \label{eq:viscous_density_free_surface}
+    \boxed{
+    \nu\Sigma = \frac{\dot{M}}{3\pi}\left[1 - \left(\frac{R_{I}}{R}\right)^{1/2}\right].
+    }
+\end{equation}
+This expression tells us that the surface density (weighted by viscosity) is \textbf{proportional to the accretion rate} and the term in the parenthesis scales from $0$ (at ISCO) out to $1$ at large radii.
+\vspace{10pt}
+\paragraph{Surface Boundary}
+In a scenario where the accretor has a \textbf{material surface} (e.g.\ a neutron star), the inner boundary at $R_*$ may exert a finite torque $G_*$ on the disk. In this case, equation~\eqref{eq:disk_steady_integral} becomes
+\[
+R^3 \Sigma v_R \Omega = \frac{1}{2\pi}\left[G(R) - G_*\right].
+\]
+Using the definition of the accretion rate, equation~\eqref{eq:disc_acc_rate},
+\[
+\dot{M} = 2\pi R \Sigma (-v_R) \quad \implies \quad R^3 \Sigma v_R \Omega = -\frac{\dot{M}}{2\pi}R^2\Omega,
+\]
+we may substitute back to obtain
+\[
+-\dot{M}R^2\Omega = -2\pi R^2 \nu \Sigma \frac{\partial \Omega}{\partial R} - G_*.
+\]
+If we again assume Keplerian rotation, $\Omega \propto R^{-3/2}$ so that $\partial_R \Omega = -(3/2)\Omega/R$, the equation simplifies to
+\[
+-\dot{M}R^2\Omega = 3\pi R \nu \Sigma \Omega - G_*.
+\]
+Rearranging gives
+\begin{equation}
+    \label{eq:viscous_density_surface}
+    \boxed{
+    \nu \Sigma = \frac{\dot{M}}{3\pi}\left[1 - \frac{j_* - G_*/\dot{M}}{j(R)}\right],
+    }
+\end{equation}
+where $j(R) = R^2\Omega(R)$ is the specific angular momentum at radius $R$ and $j_* = R_*^2 \Omega_*$ is that at the stellar surface.  
+
+This expression shows that the surface density (weighted by viscosity) is again \textbf{proportional to the accretion rate}, but now explicitly depends on the \emph{torque applied at the surface}. For $G_*=0$ (no torque, as in the black hole case), we recover equation~\eqref{eq:viscous_density_free_surface}. For a material surface with spin, however, $G_*$ modifies the inner boundary behavior and alters the dissipation profile in the inner disk.
+\vspace{10pt}
+\subsection{Energy Dissipation in the Thin Disk}
+Having established the steady--state surface density structure of the disk, we now turn to the question of 
+\textbf{energy dissipation}. In an accretion disk, viscous stresses transport angular momentum outward, and 
+the resulting loss of gravitational binding energy is dissipated locally as heat. This viscous dissipation is 
+ultimately responsible for the observed radiative luminosity of the disk.
+\vspace{0.3cm}
+\noindent
+The dissipation rate per unit surface area of the disk at radius $R$ is, from equation~\eqref{eq:disk_dissipation_per_unit_area},
+\begin{equation}
+    D(R) = \frac{1}{2}\,\nu\Sigma\,
+    \left(R\frac{d\Omega}{dR}\right)^2.
+\end{equation}
+For a Keplerian rotation law, $\Omega(R) = (GM/R^3)^{1/2}$, we have
+\[
+\frac{d\Omega}{dR} = -\frac{3}{2}\frac{\Omega}{R}.
+\]
+Substituting this yields
+\begin{equation}
+    \label{eq:disk_dissipation_profile}
+    \boxed{
+    D(R) = \frac{9}{8}\,\nu\Sigma\,\Omega^2.
+    }
+\end{equation}
+\vspace{0.3cm}
+\noindent
+To proceed, we insert the steady--state expression for $\nu\Sigma$ obtained previously.  
+In the \textbf{free-surface case} (appropriate to black holes, where the torque vanishes at the ISCO), 
+we found
+\[
+\nu\Sigma = \frac{\dot{M}}{3\pi}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
+\]
+Substituting into equation~\eqref{eq:disk_dissipation_profile} gives
+\begin{equation}
+\label{eq:free_surface_disip_rate}
+\boxed{
+D(R) = \frac{3}{8\pi}\frac{GM\dot{M}}{R^3}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
+}
+\end{equation}
+This is the standard dissipation profile of a Keplerian thin disk around a black hole.  
+The dissipation vanishes at $R=R_{\rm in}$ because the viscous torque is zero there.
+
+\vspace{0.3cm}
+\noindent
+If instead the accretor possesses a \textbf{finite surface torque} $G_*$ (as for a star with a solid surface), 
+the expression becomes
+\begin{equation}
+    D(R) = \frac{3}{8\pi}\frac{GM\dot{M}}{R^3}
+    \left[1 - \frac{j_* - G_*/\dot{M}}{j(R)}\right],
+\end{equation}
+where $j(R)=R^2\Omega(R)$ is the specific angular momentum at $R$, and 
+$j_*=R_*^2\Omega_*$ that at the stellar surface.
+\vspace{0.4cm}
+\subsubsection*{Integrated Luminosity}
+If all dissipated energy is radiated locally, the luminosity emitted between radii $R_1$ and $R_2$ is
+\begin{equation}
+    L(R_1,R_2) = 2\pi \int_{R_1}^{R_2} R\,D(R)\,dR.
+\end{equation}
+For the free--surface case, integrating equation~\eqref{eq:free_surface_disip_rate} from 
+$R_{\rm in}$ to infinity gives
+\begin{equation}
+    \label{L_disk}
+    \boxed{
+    L_{\rm disk} = \frac{GM\dot{M}}{2R_{\rm in}} = \tfrac{1}{2}L_{\rm acc}.
+    }
+\end{equation}
+Thus, a thin accretion disk radiates away exactly one--half of the gravitational energy 
+released by infall from infinity to $R_{\rm in}$.  
+The other half remains as kinetic energy in the orbiting gas and \textbf{is carried inward with the flow.  }
+For black holes this energy disappears through the event horizon, while for neutron stars 
+and white dwarfs it is released in the \textbf{boundary layer} as the accreting gas is brought into 
+corotation with the stellar surface.
+
+\vspace{0.4cm}
+\subsubsection*{Radial Dependence of Dissipation}
+The dissipation profile from equation~\eqref{eq:free_surface_disip_rate} is
+\[
+D(R) = \frac{3GM\dot{M}}{8\pi R^3}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
+\]
+At large radii ($R \gg R_{\rm in}$), this scales as $D \propto R^{-3}$, while near $R_{\rm in}$ the 
+dissipation is suppressed by the vanishing torque condition. Integrating this profile shows that roughly three--quarters of the total luminosity is emitted within a factor of two of the inner edge:
+\begin{equation}
+    L(R < 2R_{\rm in}) \approx \frac{3}{4} L_{\rm disk}.
+\end{equation}
+This concentration of dissipation explains why the innermost disk regions dominate the observed luminosity, especially in X-rays for compact accretors. It is also instructive to compare the dissipation rate with the local rate of release of gravitational binding energy. Material of mass $\dot{M}\,dt$ moving inward releases energy at a rate
+\begin{equation}
+    \frac{dL_{\rm bind}}{dR} = \frac{GM\dot{M}}{2R^2}.
+\end{equation}
+By contrast, the actual rate of viscous dissipation in an annulus is
+\begin{equation}
+    \frac{dL_{\rm diss}}{dR} = 2\pi R D(R) 
+    = \frac{3GM\dot{M}}{2R^2}\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
+\end{equation}
+The two are related by
+\begin{equation}
+    \frac{dL_{\rm diss}}{dR} = \frac{dL_{\rm bind}}{dR}
+    \left[ 3 - 3\left(\frac{R_{\rm in}}{R}\right)^{1/2} \right].
+\end{equation}
+At large radii ($R \gg R_{\rm in}$), the bracket tends to $3$, indicating that each annulus radiates three times more power than it gains from its own local gravitational energy release.  The excess energy originates from viscous torques, which transport energy outward from smaller radii.  At $R = (9/4)R_{\rm in}$ the two rates are equal, marking the transition between inner and outer disk behavior:
+\begin{itemize}
+    \item \textbf{Inner disk} ($R < 9R_{\rm in}/4$): dissipation is \emph{less} than local binding energy release, 
+    since part of the energy is carried outward.  
+    \item \textbf{Outer disk} ($R > 9R_{\rm in}/4$): dissipation exceeds local energy release, powered by energy 
+    transported outward by viscous torques.  
+\end{itemize}
+This redistribution of energy explains both the centrally concentrated emission and the fact that 
+the outer disk shines more brightly than would be expected from its own gravitational potential energy alone.
+
+\subsection{Vertical Structure of the Thin Disk}
+
+We now turn to the \textbf{vertical structure} of the thin accretion disk.  Because the disk is rotationally supported in the radial direction and the \textbf{vertical velocity is negligible} ($v_z \approx 0$),  the disk must be in \textbf{vertical hydrostatic equilibrium} (HSE). This means that the vertical pressure gradient balances the vertical component of gravity. In cylindrical coordinates $(R, \phi, z)$, neglecting disk self-gravity, the vertical component of the \textbf{Euler Equation} is
+\begin{equation}
+\frac{1}{\rho}\frac{dP}{dz} = -\,\frac{\partial \Phi}{\partial z},
+\end{equation}
+where $\Phi$ is the gravitational potential of the central object.  
+For a point mass $M$,
+\[
+\Phi(R,z) = -\,\frac{GM}{\sqrt{R^2 + z^2}}.
+\]
+The vertical gravitational acceleration is therefore
+\[
+\frac{\partial \Phi}{\partial z} = \frac{GMz}{(R^2 + z^2)^{3/2}}.
+\]
+Since the thin-disk assumption requires $z \ll R$, we can expand this expression using a binomial expansion:
+\[
+(R^2 + z^2)^{-3/2} \simeq R^{-3}\left(1 - \frac{3z^2}{2R^2} + \cdots\right),
+\]
+and keep only the leading term:
+\begin{equation}
+\frac{\partial \Phi}{\partial z} \simeq \frac{GM}{R^3}\,z \;=\; \Omega_K^2\,z,
+\end{equation}
+where $\Omega_K = \sqrt{GM/R^3}$ is the Keplerian angular velocity. The hydrostatic equilibrium equation now becomes
+\begin{equation}
+\frac{dP}{dz} = -\,\rho\,\Omega_K^2\,z.
+\label{eq:vertical_hse}
+\end{equation}
+To close this equation, we assume an isothermal equation of state in the vertical direction:
+\[
+P = \rho\,c_s^2,
+\]
+where $c_s$ is the isothermal sound speed, assumed constant with height. Substituting into equation~\eqref{eq:vertical_hse} gives
+\[
+c_s^2\,\frac{d\rho}{dz} = -\,\rho\,\Omega_K^2\,z.
+\]
+Separating variables and integrating,
+\[
+\int \frac{d\rho}{\rho} = -\,\frac{\Omega_K^2}{c_s^2}\int z\,dz
+\quad\Rightarrow\quad
+\ln\rho = -\,\frac{z^2}{2H^2} + \text{const},
+\]
+where we define the \textbf{scale height}
+\begin{equation}
+\boxed{
+H \;\equiv\; \frac{c_s}{\Omega_K}.
+}
+\end{equation}
+Thus, the vertical density profile is Gaussian:
+\begin{equation}
+\boxed{
+\rho(R,z) = \rho_0(R)\,
+\exp\!\left[-\,\frac{z^2}{2H^2}\right],
+}
+\end{equation}
+where $\rho_0(R)$ is the midplane density. Notably, this is why we so frequently care to model \textbf{Gaussian Disks}!
+\par
+The \textbf{thin-disk approximation} requires that the disk be geometrically thin, i.e.
+\begin{equation}
+\frac{H}{R} = \frac{c_s}{v_\phi} \ll 1,
+\end{equation}
+since $v_\phi \simeq R\,\Omega_K$ is the orbital velocity.  This means that the gas must be \emph{cold} compared to the orbital motion—\textbf{its sound speed must be significantly less than the orbital velocity:}
+\begin{equation}
+\boxed{
+c_s \ll v_\phi.
+}
+\end{equation}
+If this condition is violated (i.e.\ if $c_s$ approaches or exceeds $v_\phi$), the vertical pressure forces would cause the disk to \textbf{puff up}, and the thin-disk approximation would no longer be valid. Such a flow becomes a \textbf{thick disk} or \textbf{advection-dominated} accretion flow (ADAF), which requires a different treatment.
+\par
+\subsubsection*{Checking the Keplerian Nature of Orbits}
+
+Up to this point, we have repeatedly assumed that the tangential velocity of the disk material is \textbf{Keplerian}, yet we have not explicitly shown this to be the case.  We now verify this assumption by examining the \textbf{radial component} of the Euler equation, and by checking the relative importance of each contributing term. The steady--state, axisymmetric Euler equation in the radial direction is
+\begin{equation}
+v_r \frac{dv_r}{dR} - \frac{v_\phi^2}{R}
+= -\,\frac{1}{\rho}\frac{dP}{dR} - \frac{GM}{R^2}.
+\label{eq:radial_euler}
+\end{equation}
+The terms represent, respectively, the inertial, centrifugal, pressure--gradient, and gravitational forces per unit mass.  We can estimate the relative importance of each term by recalling that in a geometrically thin disk,
+\[
+\frac{H}{R} \equiv \frac{c_s}{v_\phi} \ll 1,
+\]
+where $H$ is the scale height and $c_s$ the sound speed. Using the standard $\alpha$--prescription for viscosity,
+\[
+\nu = \alpha c_s H,
+\]
+and the steady--state radial velocity derived earlier,
+\[
+v_r \sim \frac{\nu}{R} \sim \alpha \left(\frac{H}{R}\right)^2 v_\phi,
+\]
+we can compare the typical magnitudes of the radial Euler terms.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Term} & \textbf{Typical Magnitude} & \textbf{Relative to Gravity ($GM/R^2$)} \\
+\midrule
+Centrifugal, $v_\phi^2/R$ & $\sim GM/R^2$ & $1$ \\
+Pressure gradient, $(1/\rho)\,dP/dR$ & $\sim c_s^2 / R$ & $(H/R)^2 \ll 1$ \\
+Radial acceleration, $v_r dv_r/dR$ & $\sim v_r^2 / R$ & $\sim \alpha^2 (H/R)^4 \ll (H/R)^2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The table clearly shows that the \textbf{pressure} and \textbf{radial inertial} terms are negligibly small compared to the gravitational and centrifugal forces. Thus, to leading order,
+\begin{equation}
+\frac{v_\phi^2}{R} \simeq \frac{GM}{R^2},
+\end{equation}
+which immediately implies
+\begin{equation}
+\boxed{
+v_\phi(R) \simeq v_K(R) = \sqrt{\frac{GM}{R}}.
+}
+\end{equation}
+
+\subsection{Radiative Transport in Thin Disks}
+
+We have so far derived the vertical structure of the thin accretion disk under the assumption of an \emph{isothermal} equation of state, which suffices to describe vertical hydrostatic balance at each radius. However, while hydrostatic equilibrium fixes the \emph{vertical} pressure stratification locally, it does not determine how the temperature varies \emph{radially} across the disk. To obtain the full thermal structure, we must therefore supplement the mechanical equilibrium equations with an \textbf{energy equation} that accounts for viscous heating and radiative cooling. To do this, we impose an \textbf{equation of state} which contains both the ideal gas pressure and the radiation pressure. Assuming that the medium is \textbf{optically thick} and therefore \textbf{thermalized}, we know that the energy density should be a \textbf{black body}:
+\[
+u = \frac{4}{c} \sigma_{\rm SB} T^4.
+\]
+Since this must carry, isotopically, radiation pressure, we have a radiation pressure of
+\[
+P_{\rm rad} = \frac{4\sigma_{\rm SB}}{3c} T^4,
+\]
+and therefore we may use an equation of state of the form
+\[
+P = \frac{\rho k_B T}{\mu m_p} + \frac{4\sigma_{\rm SB}}{3c}T^4.
+\]
+\bigskip
+\noindent
+Clearly, this equation of state alone does not \emph{close} the system of disk equations: we still lack a relation describing how energy generated by viscous dissipation is transported and radiated away. To proceed, we therefore introduce an \textbf{energy equation} based on radiative diffusion.
+
+\subsubsection*{Radiative Transfer and the Diffusion Approximation}
+
+In an optically thick medium---such as a geometrically thin accretion disk---photons are repeatedly absorbed, re-emitted, and scattered before escaping the surface. In this regime, the radiation field is nearly isotropic and can be described by the \textbf{diffusion approximation}. The specific intensity $I_\nu$ of radiation obeys the \textbf{radiative transfer equation}:
+\begin{equation}
+\frac{dI_\nu}{ds} = -\kappa_\nu \rho\, I_\nu + \kappa_\nu \rho\, S_\nu,
+\label{eq:radiative_transfer_eqn}
+\end{equation}
+where $\kappa_\nu$ is the opacity (per unit mass), $\rho$ the density, and $S_\nu$ the source function.  
+In local thermodynamic equilibrium (LTE), $S_\nu = B_\nu(T)$, where $B_\nu(T)$ is the Planck function.
+In the diffusion limit, the radiation field deviates only slightly from isotropy, allowing us to expand it as
+\[
+I_\nu(\hat{\bf n}) = B_\nu(T) + \delta I_\nu(\hat{\bf n}),
+\qquad
+\text{with } |\delta I_\nu| \ll B_\nu.
+\]
+Integrating equation~\eqref{eq:radiative_transfer_eqn} over solid angle and using this expansion leads to the \textbf{radiative flux} at frequency $\nu$:
+\begin{equation}
+F_\nu = -\,\frac{4\pi}{3\kappa_\nu\rho}\,\frac{dB_\nu}{dz}.
+\label{eq:freq_diffusion_flux}
+\end{equation}
+This expresses \textbf{the diffusive nature of radiative transport}: energy flows down the temperature gradient, with a ``radiative conductivity'' proportional to $1/(\kappa_\nu\rho)$. The total flux is the sum over all frequencies:
+\begin{equation}
+F = \int_0^\infty F_\nu\,d\nu
+= -\,\frac{4\pi}{3\rho}\int_0^\infty
+\frac{1}{\kappa_\nu}\,\frac{dB_\nu}{dz}\,d\nu.
+\end{equation}
+Since $B_\nu$ depends on $T$, we can write
+\[
+\frac{dB_\nu}{dz} = \frac{dB_\nu}{dT}\frac{dT}{dz},
+\]
+so that
+\begin{equation}
+F = -\,\frac{4\pi}{3\rho}\,\frac{dT}{dz}
+\int_0^\infty \frac{1}{\kappa_\nu}\,\frac{dB_\nu}{dT}\,d\nu.
+\label{eq:flux_integral_dB}
+\end{equation}
+We now seek to define a single \emph{effective} opacity $\kappa_R$ such that this expression reproduces the familiar frequency-integrated diffusion law we would obtain if $\kappa_\nu$ was frequency independent:
+\begin{equation}
+F = -\,\frac{16\sigma_{\rm sb} T^3}{3\kappa_R\rho}\,\frac{dT}{dz}.
+\label{eq:diffusion_equation}
+\end{equation}
+To do so, we equate equations~\eqref{eq:flux_integral_dB} and \eqref{eq:diffusion_equation}, and note that
+\[
+\int_0^\infty \frac{dB_\nu}{dT}\,d\nu = \frac{4\sigma_{\rm sb}T^3}{\pi}.
+\]
+We thus define the \textbf{Rosseland mean opacity}:
+\begin{equation}
+\boxed{
+\frac{1}{\kappa_R} =
+\frac{\displaystyle \int_0^\infty \frac{1}{\kappa_\nu}
+\frac{\partial B_\nu}{\partial T}\,d\nu}
+{\displaystyle \int_0^\infty \frac{\partial B_\nu}{\partial T}\,d\nu}.
+}
+\label{eq:rosseland_mean}
+\end{equation}
+This is a \emph{harmonic mean} of the frequency-dependent opacity, weighted by $\partial B_\nu/\partial T$, which emphasizes the frequencies that most efficiently carry energy (those where $\kappa_\nu$ is smallest).  
+Physically, the Rosseland mean represents the ``effective resistance'' to radiative energy flow in an optically thick medium, analogous to a set of parallel resistors: photons escape preferentially through low-opacity windows.
+\par
+Finally, energy conservation in the steady state requires that the vertical divergence of the radiative flux balances the local viscous heating rate per unit volume, $q^+$:
+\begin{equation}
+\frac{dF}{dz} = q^+ = \frac{9}{4}\,\nu\,\rho\,\Omega_K^2.
+\end{equation}
+Integrating this from the midplane ($z=0$, where $F=0$ by symmetry) to the disk surface ($z=H$, where $F=F_{\rm surf}$) yields the emergent flux:
+\[
+F_{\rm surf} = \frac{9}{8}\,\nu\,\Sigma\,\Omega_K^2,
+\]
+which must equal the radiative flux escaping from each face of the disk:
+\begin{equation}
+F_{\rm surf} = \sigma_{\rm sb}T_{\rm eff}^4.
+\end{equation}
+This condition provides the final \textbf{closure relation} linking the vertical temperature gradient, midplane temperature, and effective surface temperature via radiative diffusion, completing the thermal structure of the thin disk.
+
+\section{The Canonical Formulation of the Thin Disk Model}
+
+The various equations derived above now form a closed system of eight algebraic relations linking the key local disk quantities
+\[
+\left\{\,\rho_c,\,H,\,c_s^2,\,P_c,\,T_c,\,T_{\rm eff},\,\nu,\,\Sigma\,\right\},
+\]
+together with the external parameters $\dot{M}$, $M$, $\alpha$, and the opacity law $\kappa_R(\rho, T)$.
+
+\begin{table}[ht!]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{p{0.40\linewidth} p{0.52\linewidth}}
+\toprule
+\textbf{Equation} & \textbf{Description} \\
+\midrule
+$P_c = \rho_c k_B T_c / (\mu m_p) + (4\sigma_{\rm sb}/3c)T_c^4$ 
+& Equation of state (gas + radiation pressure). \\[4pt]
+$c_s^2 = P_c / \rho_c$ 
+& Definition of sound speed. \\[4pt]
+$H = c_s / \Omega_K$ 
+& Vertical hydrostatic equilibrium (defines scale height). \\[4pt]
+$\Sigma = \sqrt{2\pi}\,\rho_c\,H$ 
+& Surface density from vertical integration. \\[4pt]
+$F = \sigma_{\rm sb} T_{\rm eff}^4 = (9/8)\nu\Sigma\Omega_K^2$ 
+& Local energy balance between viscous heating and radiation. \\[4pt]
+$T_c^4 = \frac{3}{8}\kappa_R \Sigma T_{\rm eff}^4$ 
+& Vertical temperature relation (radiative diffusion). \\[4pt]
+$\nu = \alpha c_s H$ 
+& Shakura–Sunyaev $\alpha$ viscosity prescription. \\[4pt]
+$\nu\Sigma = \dot{M}/(3\pi)\,[1 - (R_{\rm in}/R)^{1/2}]$ 
+& Steady–state mass accretion constraint. \\[4pt]
+\bottomrule
+\end{tabular}
+\caption{The eight canonical thin–disk equations, forming a closed local system for $\rho_c$, $H$, $c_s$, $P_c$, $T_c$, $T_{\rm eff}$, $\nu$, and $\Sigma$ at a given radius $R$.}
+\label{tab:canonical_eqs}
+\end{table}
+
+\noindent
+These equations collectively define the \textbf{standard thin accretion disk model} (Shakura \& Sunyaev 1973; Pringle 1981).  
+Solving them self–consistently yields the full radial structure of the disk — including its density, temperature, thickness, and emergent spectrum — as a function of radius and accretion rate.
+
+\begin{remark}[Physical content]
+Equations~\eqref{tab:canonical_eqs} embody a remarkable closure:
+the entire macroscopic structure of the disk is governed by just four microphysical ingredients — 
+hydrostatic balance, viscous angular momentum transport, radiative diffusion, and local thermodynamic equilibrium — together with a single dimensionless parameter, $\alpha$.  
+Despite this simplicity, the model captures the essential physics of accretion flows across an enormous range of astrophysical environments.
+\end{remark}

@@ -1,0 +1,169 @@
+A \textbf{tidal disruption event} occurs in scenarios where a star's orbit brings it within a close enough radius of a black hole to disrupt the star. The material from the star may then be either partially accreted or fully accreted in a luminous transient event. In this section, we'll discuss the theory and relevant observational context of these events.
+
+\section{TDE Theory}
+Before we dig into the observational details of TDEs, we'll first discuss the theory of TDE formation and the relevant scalings and typical equations in play. 
+
+\subsection{Tidal Disruption}
+
+Tidal forces on a star of radius $R_\star$ and mass $M_\star$ become relevant only when their corresponding gravitational field \textbf{varies significantly from one side of the star to the other}. Assuming that the star is originally at radius $r$ from the point mass it is orbiting, the star will then rest in the potential
+\[
+\Phi = -\frac{GM}{r}.
+\]
+In such a potential, the center of mass of the star moves in an orbit as described by standard mechanics. The relative force $dF_i$ in direction $x^i$ due to a shift in position $dx^j$ is 
+\[
+dF_i = \nabla_i \Phi(x + dx^j),
+\]
+which defines a \emph{tidal tensor} that characterizes the second derivatives of the gravitational potential.
+\vspace{10pt}
+\begin{definition}[Tidal Tensor]
+The \textbf{tidal tensor} describes the differential gravitational acceleration across a finite-sized body in an external potential. It is given by
+\begin{equation}
+    \label{eq:tidal_tensor}
+    \boxed{
+    T_{ij} = -\Phi_{;ij} = \frac{\partial^2 \Phi}{\partial x^i\partial x^j}.
+    }
+\end{equation}
+The corresponding \textbf{differential force} due to a shift $\delta {\bf x}$ is 
+\[
+\delta {\bf F} = \bf{T} \delta {\bf x}.
+\]
+\par
+For a point-mass potential $\Phi = -GM/r$, this becomes
+\[
+T_{ij} = \frac{GM}{r^3}\left(3 - \delta_{ij}\right).
+\]
+The eigenvalues of $T_{ij}$ quantify the degree of stretching or compression along different directions in space.
+\end{definition}
+\vspace{10pt}
+If the differential tidal acceleration across the star \textbf{exceeds its own self-gravity}, the star can no longer maintain hydrostatic equilibrium and is torn apart. At the surface of a star of radius $R_\star$, the tidal tensor tells us that the differential force is
+\[
+{\bf F}_{\rm tidal} = {\bf F}(r + R_\star) - {\bf F}(r) 
+\simeq \left(\frac{d{\bf F}}{dr}\right) R_\star
+= \left(\frac{GM}{r^3}\right) R_\star,
+\]
+which corresponds to a differential acceleration
+\[
+a_{\rm tidal} \sim \frac{GM R_\star}{r^3}.
+\]
+This is the characteristic acceleration difference felt between the near and far sides of the star due to the black hole’s gravitational field.
+
+The star’s own self-gravity at its surface, which provides the restoring acceleration maintaining hydrostatic balance, is
+\[
+a_{\rm self} \sim \frac{G M_\star}{R_\star^2}.
+\]
+When $a_{\rm tidal} \gtrsim a_{\rm self}$, the black hole’s tidal forces dominate over the star’s self-gravity, and the star is disrupted. Setting the two equal defines the \textbf{tidal radius} $r_t$:
+\[
+\frac{G M R_\star}{r_t^3} = \frac{G M_\star}{R_\star^2}
+\quad \Longrightarrow \quad
+\boxed{r_t = R_\star \left(\frac{M}{M_\star}\right)^{1/3}}.
+\]
+This simple scaling captures the essential physics: \textbf{more massive black holes have larger tidal spheres of influence}, while more compact (smaller $R_\star$) or massive ($M_\star$) stars are harder to disrupt. In practice, the exact disruption condition depends on the internal structure of the star, the encounter geometry, and relativistic corrections for very massive black holes.
+\par
+It is worth looking at this scaling in a fiducial context. For stars of approximately solar mass and radius and black holes of mass around $10^6\;{\rm M_\odot}$, the relationship
+\[
+\begin{aligned}
+    r_t &\approx 7 \times 10^{12} \left(\frac{R_\star}{R_\odot}\right) \left(\frac{M}{10^6\;{\rm M_\odot}}\right)^{1/3} \left(\frac{M_\star}{M_\odot}\right)^{-1/3} \; {\rm cm}\\
+    &\approx 0.5 \left(\frac{R_\star}{R_\odot}\right) \left(\frac{M}{10^6\;{\rm M_\odot}}\right)^{1/3} \left(\frac{M_\star}{M_\odot}\right)^{-1/3} \; {\rm AU}
+\end{aligned}
+\]
+\par
+Another feature of these systems which is worth being aware of is the $r_t$ is \textbf{not always outside the event horizon}. For a Schwarzchild black hole, 
+\[
+r_s = \frac{2GM}{c^2} \implies \frac{r_t}{r_s} =\frac{c^2}{2G}\; R_\star M_\star^{-1/3} M^{-2/3}.
+\]
+For relevant scalings,
+\[
+\frac{r_t}{r_s} \approx 5 \left(\frac{R_\star}{R_\odot}\right) \left(\frac{M_\star}{M_\odot}\right)^{-1/3}\left(\frac{M}{10^7\;{\rm M_\odot}}\right)^{-2/3}.
+\]
+And so for black holes larger than about $10^7$, tidal disruption simply cannot occur.
+\par
+If the \textbf{pericenter} of the stellar orbit passes within $r_t$ of the black hole, then disruption will occur. The degree of disruption depends sensitively on the ratio $\beta \equiv r_t / r_p$, known as the \textbf{penetration factor}. For $\beta \lesssim 1$, the star \textbf{may only be partially stripped}, losing a small fraction of its envelope. For $\beta \gtrsim 1$, the \textbf{star is fully disrupted}, and its material is stretched into a long, thin stream by tidal forces.
+
+\subsection{Accretion onto the Black Hole}
+
+Assuming the \textbf{ballistic approximation}, the star is completely torn apart as it crosses the tidal radius $r_t$, and the stellar debris moves thereafter in the gravitational field of the black hole \textbf{without significant hydrodynamic interaction}. Each fluid element inherits approximately the velocity of the stellar center of mass at the moment of disruption but originates from a slightly different position within the star. This positional offset \textbf{leads to a spread in the specific orbital energy of the debris.}
+
+The specific orbital energy of a test particle in the gravitational potential of the black hole is
+\[
+\epsilon = \frac{1}{2}v^2 - \frac{GM}{R}.
+\]
+Expanding about the tidal radius $r_t$, we find that the differential in energy across the stellar diameter is approximately
+\[
+\Delta \epsilon \approx \left.\frac{d\Phi}{dr}\right|_{r_t} R_\star = \frac{GM}{r_t^2} R_\star = \epsilon_\star \left(\frac{M}{M_\star}\right)^{1/3},
+\]
+where $\epsilon_\star = GM_\star / R_\star$ is the characteristic binding energy per unit mass of the star. Thus, the debris inherits a roughly uniform distribution of energies between
+\[
+-\Delta \epsilon \leq \epsilon \leq +\Delta \epsilon.
+\]
+
+Because the original stellar orbit is nearly parabolic ($\epsilon \approx 0$), half of the debris ends up with $\epsilon < 0$ and remains gravitationally bound to the black hole, while the other half with $\epsilon > 0$ becomes unbound and escapes on hyperbolic trajectories. \textbf{Importantly, both bound and unbound debris streams \emph{initially pass through the same pericenter} $r_p \approx r_t$}, because they are all launched from approximately the same point in space at the moment of disruption. What differs between them is their \emph{orbital energy}, and hence their semimajor axis and eccentricity.
+
+\paragraph{Eccentricities of the Bound Debris.}
+For the bound material, the semimajor axis of a given debris element is related to its specific energy by
+\[
+a = -\frac{GM}{2\epsilon}.
+\]
+Since the most tightly bound debris has $\epsilon = -\Delta \epsilon$, its semimajor axis is
+\[
+a_{\rm min} = \frac{GM}{2\Delta \epsilon} \approx \frac{r_t^2}{2R_\star} \approx \frac{1}{2}R_\star \left(\frac{M}{M_\star}\right)^{2/3}.
+\]
+The corresponding orbital eccentricity is determined by the relation between pericenter and semimajor axis:
+\[
+e = 1 - \frac{r_p}{a}.
+\]
+Substituting $r_p \approx r_t$ and $a = a_{\rm min}$ gives
+\[
+e_{\rm min} = 1 - 2\frac{R_\star}{r_t}
+\simeq 1 - 2\left(\frac{M_\star}{M}\right)^{1/3}.
+\]
+For a solar-type star disrupted by a $10^6\,M_\odot$ black hole, this yields $e_{\rm min} \approx 0.9998$: \textbf{the bound orbits are extremely eccentric. } Immediately after disruption, the bound debris occupies a family of highly eccentric orbits with (nearly) common pericenter $r_p \simeq r_t$ but different semimajor axes $a(\epsilon) = -GM/(2\epsilon)$. In the absence of dissipation, these orbits would not circularize. However, \textbf{apsidal precession} produced by general relativity (and, to a lesser degree, pressure gradients) rotates the orbit between pericenter passages, causing the outgoing stream to intersect the incoming stream. The resulting \textbf{shocks} dissipate orbital energy at (approximately) fixed specific angular momentum, enabling the debris to settle into a compact, near-circular flow.
+
+Conservation of specific angular momentum, $j \simeq \sqrt{2GM r_p}$ for a (nearly) parabolic encounter, implies that the circular orbit with the same $j$ has
+\begin{equation}
+\label{eq:R_circ}
+\boxed{\,R_{\rm circ} \;=\; \frac{j^2}{GM} \;\simeq\; 2\,r_p \;\approx\; 2\,r_t.\,}
+\end{equation}
+Thus, \textbf{efficient dissipation drives the debris toward a \emph{circularization radius} of order a few times the tidal radius.} If precession is weak or the stream is thick/cool, self-intersection may occur farther out and circularization can be delayed; conversely, strong precession produces deep, prompt intersections near $r_p$ and rapid disk formation.
+\par
+For a Schwarzschild black hole, the advance of pericenter per orbit for a test particle of semimajor axis $a$ and eccentricity $e$ is
+\begin{equation}
+\Delta\varpi \;=\; \frac{6\pi GM}{c^2 a(1-e^2)}.
+\end{equation}
+Using $r_p = a(1-e)$ and $1-e^2 \simeq 2(1-e)$ for $e\to 1$, we obtain the very convenient near-parabolic form
+\begin{equation}
+\label{eq:precession_rp}
+\boxed{\,\Delta\varpi \;\simeq\; \frac{3\pi r_s}{r_p} \;=\; \frac{6\pi GM}{c^2 r_p}.\,}
+\end{equation}
+Even a modest precession angle ($\gtrsim$ a few degrees) is sufficient to bend the outgoing stream into the inbound trajectory on the next pass, ensuring a strong self-intersection shock. For Kerr black holes, additional \emph{nodal} (Lense–Thirring) precession tilts the orbital plane and can either aid or delay intersection, depending on spin magnitude and orientation.
+
+Label the specific binding energy of a debris element by $\epsilon<0$. Its Kepler period is
+\[
+P(\epsilon) \;=\; \frac{2\pi a^{3/2}}{\sqrt{GM}}
+\;=\; \frac{2\pi}{\sqrt{GM}}\left(\frac{GM}{2|\epsilon|}\right)^{3/2}
+\;=\; \frac{\pi GM}{\sqrt{2}\,|\epsilon|^{3/2}}.
+\]
+The most bound debris has $|\epsilon|=\Delta\epsilon$, and thus returns to pericenter after
+\begin{equation}
+\label{eq:tmin}
+\boxed{\,t_{\min} \;\equiv\; P(\Delta\epsilon) \;=\; \frac{\pi GM}{\sqrt{2}\,\Delta\epsilon^{3/2}}.\,}
+\end{equation}
+Using $\Delta\epsilon \simeq (GM/r_t^2)R_\star$ and $r_t = R_\star(M/M_\star)^{1/3}$ yields the standard scaling
+\[
+t_{\min} \;\sim\; \frac{\pi}{\sqrt{2}}\,
+\frac{GM}{\left[(GM/R_\star^2)\,R_\star\,(M/M_\star)^{2/3}\right]^{3/2}}
+\;\propto\; M^{1/2}\,R_\star^{3/2}\,M_\star^{-1}.
+\]
+Numerically, for a solar-type star and $M=10^6\,M_\odot$,
+\[
+t_{\min} \sim \text{a few weeks}.
+\]
+Because the mass in debris is (to leading order) uniformly distributed in specific energy near $\epsilon=0$, i.e.\ $dM/d\epsilon \approx \text{const}$, and because $t\propto |\epsilon|^{-3/2}$, one finds the classic \textbf{fallback rate}:
+\begin{equation}
+\label{eq:fallback}
+\boxed{\,\dot M_{\rm fb}(t) \;=\; \frac{1}{3}\,\frac{M_\star}{t_{\min}}
+\left(\frac{t}{t_{\min}}\right)^{-5/3} \quad (t \gtrsim t_{\min}).\,}
+\end{equation}
+The normalization (the factor $1/3$) is conventional and encodes the near-uniform $dM/d\epsilon$ assumption; detailed stellar structure, partial disruptions ($\beta\lesssim 1$), and relativistic effects can modify both the peak and early-time behavior.
+
+
+

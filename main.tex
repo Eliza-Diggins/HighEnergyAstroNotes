@@ -1,0 +1,168 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  My documentation report
+%  Objetive: Explain what I did and how, so someone can continue with the investigation
+%
+% Important note:
+% Chapter heading images should have a 2:1 width:height ratio,
+% e.g. 920px width and 460px height.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta,shapes.geometric,shapes.misc,positioning,calc}
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{amsthm}
+\usepackage[most]{tcolorbox}
+\usepackage{vwcol}  
+\usepackage{multicol}
+% Define a new command for the idea callout box
+\newtcolorbox{ideabox}[1][]{colback=blue!10!white, colframe=blue!75!black, title=Idea, fonttitle=\bfseries, #1}
+% Big Idea callout box
+\newtcolorbox{bigidea}[1][]{
+  enhanced,
+  breakable,
+  colback=yellow!10!white,         % background
+  colbacktitle=yellow!40!white,   % title background
+  colframe=orange!80!black,       % border color
+  coltitle=black,                 % title text color
+  fonttitle=\bfseries\Large,      % title font
+  boxrule=1pt,                    % border thickness
+  arc=6pt,                        % rounded corners
+  outer arc=2pt,
+  left=6pt, right=6pt, top=8pt, bottom=8pt,
+  drop shadow=black!50!white,     % shadow
+  title=Big Idea,               % default title with icon
+  #1
+}
+\newtcolorbox{conceptbox}[1][]{
+  enhanced,
+  breakable,
+  colback=purple!8!white,        % soft background
+  colbacktitle=purple!20!white,  % title background
+  colframe=purple!70!black,      % border color
+  coltitle=black,                % title text color
+  fonttitle=\bfseries\large,     % title font
+  boxrule=1pt,                   % border thickness
+  arc=6pt,                       % rounded corners
+  outer arc=2pt,
+  left=6pt, right=6pt, top=8pt, bottom=8pt,
+  drop shadow=black!40!white,    % subtle shadow
+  title=Where in the Universe?,  % default title
+  #1
+}
+
+% Bibliography
+% Bibliography
+\usepackage[numbers,sort&compress]{natbib}
+
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+%----------------------------------------------------------------------------------------
+%	Definitions of new commands
+%----------------------------------------------------------------------------------------
+
+\def\R{\mathbb{R}}
+\newcommand{\cvx}{convex}
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begingroup
+\thispagestyle{empty}
+\AddToShipoutPicture*{\put(0,0){\includegraphics[scale=1.25]{esahubble}}} % Image background
+\centering
+\vspace*{5cm}
+\par\normalfont\fontsize{35}{35}\sffamily\selectfont
+{\LARGE High Energy Astrophysics}\par % Book title
+\vspace*{1cm}
+{\Huge Lecture Notes}\par % Author name
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+%\noindent Copyright \copyright\ 2014 Andrea Hidalgo\\ % Copyright notice
+
+\noindent \textsc{Eliza Diggins, UC Berkeley}\\
+
+\noindent \textsc{github.com/eliza-diggins}\\ % URL
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\chapterimage{Pictures/high_energy.jpg} % Table of contents heading image
+
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 1
+%----------------------------------------------------------------------------------------
+
+\chapterimage{Pictures/high_energy.jpg} % Chapter heading image
+
+\part{Equations And Values}
+\input{Sections/values}
+
+\part{Fundamentals}
+
+\chapter{Introduction}
+\include{Sections/ch1.tex}
+\chapter{Radiative Processes}
+\include{Sections/ch2.tex}
+\chapter{Detection of High Energy Photons}
+\include{Sections/ch3}
+
+\part{Accretion Physics}
+\chapter{Introduction to Accretion}
+\input{Sections/ch4}
+\chapter{Spherical Accretion}
+\input{Sections/ch5}
+\chapter{Binary Accretion}
+\input{Sections/ch6}
+\chapter{Thin Disk Accretion}
+\input{Sections/ch7}
+
+\part{Phenomenology}
+\chapter{X-Ray Binaries}
+\input{Sections/xrbs}
+\chapter{Tidal Disruption Events}
+\input{Sections/TDE}
+% later in the document
+\bibliographystyle{abbrvnat}
+\bibliography{bibliography}
+
+
+
+\end{document}

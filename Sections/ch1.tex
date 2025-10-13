@@ -1,0 +1,125 @@
+High energy astrophysics is, to first order, the study of violent / extreme processes which produce high energy light (X-ray and $\gamma$-ray). In the modern view, this includes things like gravitational radiation, high energy particles, etc. In general, high energy phenomena need to bring together two relevant processes: \textbf{energy generation} and \textbf{energy dissipation}. Generally, high energy processes are driven by a conversion to kinetic energy and then a secondary dissipation into thermal energy.
+
+\section{What Makes High Energy Different}
+
+There are a number of things that distinguish the high energy regime of astrophysics from lower energy regimes. A few relevant ones are
+\vspace{0.5cm}
+\begin{enumerate}
+    \item High energy photons are $\sim 1\; \rm{MeV}$, so for the same energy budget, you can expect to get \textbf{only a fraction as many photons}.
+    \item The high energy sky is \textbf{quite}, there are relatively few environments in which you can generate high energy photons. These tend to be point sources,
+    although exceptions do exist.
+    \item These photons often require some specialized techniques to be stopped.
+\end{enumerate}
+
+We also get emission from a large number of different sources, all of which have very different physics and scale very differently:
+
+\begin{table}[htp!]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{3cm}|p{3cm}|p{8cm}|}
+\hline
+\textbf{Energy Range} & \textbf{Thermal Equivalent} & \textbf{Processes Probed} \\
+\hline
+$E < 10\;\mathrm{keV}$ 
+& $T < 10^{8}\;\mathrm{K}$ 
+& 
+\begin{itemize}
+  \item K, L shell line emission ($T \lesssim 5\times 10^{7}\,$K), e.g. iron K$\alpha$ line at 6.4 keV  
+  \item Bremsstrahlung (galaxy clusters, SNRs, AGN coronae)  
+  \item Blackbody emission
+\end{itemize} \\
+\hline
+$10\;\mathrm{keV} - 10\;\mathrm{MeV}$ 
+& typically all atoms fully ionized, electrons stripped 
+& 
+\begin{itemize}
+  \item Isomeric transitions from metastable nuclei  
+  \item $\gamma$-ray lines that are nucleosynthetic signatures (e.g. $^{60}$Co $\rightarrow$ $^{60}$Ni + $e^-$ + $\bar{\nu}_e$ + $\gamma$, $E_\gamma \approx 1.1\;\mathrm{MeV}$; SN remnants)  
+  \item Radioactive decay: excited nucleus $\rightarrow$ ground state + $\gamma$-ray
+\end{itemize} \\
+\hline
+$E \sim 511\;\mathrm{keV} = m_e c^2$ 
+& $T \sim 10^{9}\;\mathrm{K},\; \Gamma \sim 1$ 
+& 
+\begin{itemize}
+  \item $e^+ e^-$ annihilation lines: $e^+ + e^- \rightarrow \gamma + \gamma$
+\end{itemize} \\
+\hline
+$140\;\mathrm{MeV} - 10\;\mathrm{GeV}$ 
+& $T \sim 10^{12}\;\mathrm{K},\; \Gamma \sim 1000$ (up to $10^{6}$) 
+& 
+\begin{itemize}
+  \item Pion mass scale (strong force $\rightarrow$ hadrons)  
+  \item Baryons ($uud$, $udd$; 3 quarks)  
+  \item Mesons ($u\bar{d}$, etc.; 2 quarks, includes pions)
+\end{itemize} \\
+\hline
+$E > 10\;\mathrm{GeV}$ 
+& $\Gamma > 10^{6}$ 
+& 
+\begin{itemize}
+  \item Non-thermal processes:  
+  \begin{itemize}
+    \item Inverse Compton scattering  
+    \item Particle acceleration
+  \end{itemize}
+\end{itemize} \\
+\hline
+\end{tabular}
+\caption{Physics probed at different photon energies.}
+\end{table}
+
+
+\section{Where Does the Energy Come From}
+
+There are 3 major processes which produce the energy that drives high energy phenomena:
+\vspace{0.5cm}
+\begin{enumerate}
+    \item \textbf{Gravitational Energy:}  
+    In high-energy astrophysics, gravitation is the dominant source of kinetic energy. Material falling in a gravitational potential well is accelerated to high velocities; this energy is then thermalized and radiated.  
+
+    For a uniform-density sphere, the total gravitational binding energy is
+    \[
+        U = -\frac{3}{5}\frac{GM^2}{R}.
+    \]
+    The characteristic \textit{specific energy} (energy per unit mass) is therefore
+    \[
+        \tilde{u} \sim \frac{GM}{R}.
+    \]
+    In cgs units, this scales as
+    \[
+        \tilde{u} \approx 1.9 \times 10^{15}
+        \left(\frac{M}{M_\odot}\right)
+        \left(\frac{R}{R_\odot}\right)^{-1}
+        \;\mathrm{\frac{erg}{g}}.
+    \]
+    \begin{remark}
+        One thing to keep in mind is that of these three, gravitation is the only one that is decidedly variable. For instance, in a stellar system, we have around $10^{15}\;{\rm erg \;g^{-1}}$, but in a highly compact system $(GM/R \sim 1)$, we have instead $10^{21}\;{\rm erg\;g^{-1}}$.
+    \end{remark}
+    \item \textbf{Nuclear Energy:}  
+    Nuclear fusion reactions in stellar cores release $\sim 1\;\mathrm{MeV}$ per baryon, corresponding to a specific energy of order
+    \[
+        \tilde{u}_{\rm nuc} \sim 10^{18}\;\mathrm{\frac{erg}{g}}.
+    \]
+
+    \item \textbf{Chemical Energy:}  
+    Chemical reactions typically release energy on the $\sim 1\;\mathrm{eV}$ per baryon scale, giving a specific energy of order
+    \[
+        \tilde{u}_{\rm chem} \sim 10^{13}\;\mathrm{\frac{erg}{g}}.
+    \]
+\end{enumerate}
+
+\section{How is the Energy Dissipated?}
+
+Regardless of the initial source, high energy phenomena leave us with many particles moving at extreme velocities. To produce the observable high-energy radiation, this kinetic energy must be \textbf{thermalized} or otherwise converted into photon emission. There are three major dissipation channels:
+
+\begin{itemize}
+    \item \textbf{Shocks:}  
+    When supersonic flows collide, they form shock fronts. Shocks provide an efficient way to convert bulk kinetic energy into random particle motion. In astrophysics, strong shocks are ubiquitous --- e.g.\ supernova remnants, accretion flows, and jets --- and they often accelerate particles to non-thermal distributions (Fermi acceleration).
+
+    \item \textbf{Viscous Dissipation:}  
+    Even in the absence of strong shocks, turbulent or shearing flows can gradually convert bulk kinetic energy into thermal energy through viscosity. In astrophysical plasmas the ``viscosity'' is often anomalous, mediated by small-scale instabilities and wave–particle interactions (rather than molecular collisions). This mechanism is critical in accretion disks.
+
+    \item \textbf{Magnetic Fields:}  
+    Magnetized plasmas store and redistribute energy through magnetic tension and reconnection. Magnetic reconnection events rapidly convert magnetic energy into particle kinetic energy and heat, often producing non-thermal particle populations (e.g.\ solar flares, pulsar magnetospheres). Synchrotron and inverse-Compton processes then radiate this energy efficiently.
+\end{itemize}
