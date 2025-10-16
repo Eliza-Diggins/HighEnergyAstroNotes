@@ -67,37 +67,25 @@ f_\ell = \underbrace{\Sigma R^2 \Omega}_{\text{Ang. Mom.}} \cdot v_r.
 \]
 The total viscous torque exerted across a cylinder of radius $R$ is 
 \begin{equation}
-G(R,t) \;=\; 2\pi R \times (R\,W_{r\phi})
-\;=\; 2\pi R^2\,W_{r\phi}
-\;=\; 2\pi R^2\,\nu\,\Sigma\,R\,\frac{d\Omega}{dR}
-\;=\; \boxed{-\,2\pi\,R^3\,\nu\,\Sigma\,\frac{d\Omega}{dR}},
+G(R,t) \;=\; \underbrace{2\pi R}_{\rm circumference} 
+\times 
+\underbrace{(R\,W_{r\phi})}_{r\times F}
+\;=\; 2\pi R^2\,W_{r\phi}.
+\end{equation}
+Here the factor $2\pi R$ integrates the torque per unit azimuthal length around the ring, while the extra factor of $R$ arises from the lever arm.  
+Substituting $W_{r\phi} = \nu\,\Sigma\,R\,\tfrac{d\Omega}{dR}$ gives
+\begin{equation}
+G(R,t) \;=\; 2\pi R^3\,\nu\,\Sigma\,\frac{d\Omega}{dR}.
+\end{equation}
+Because $d\Omega/dR < 0$ for Keplerian rotation, it is conventional to define the outward torque as positive, giving
+\begin{equation}
+\boxed{
+G(R,t)
+= -\,2\pi R^3\,\nu\,\Sigma\,\frac{d\Omega}{dR}.
+}
 \label{eq:G_def}
 \end{equation}
-where the final minus sign is conventional: for disks with $d\Omega/dR<0$ (e.g.\ Keplerian) the outward torque $G$ is positive. The result is the standard vertically integrated angular momentum equation:
-\begin{equation}
-\boxed{\;
-\frac{\partial}{\partial t}\!\left(\Sigma R^2\Omega\right)
-+ \frac{1}{R}\frac{\partial}{\partial R}\!\left(R\,\Sigma v_r\,R^2\Omega\right)
-= \frac{1}{2\pi R}\,\frac{\partial G}{\partial R}.
-\;}
-\label{eq:angmom_cons_disk}
-\end{equation}
-Finally, for a Newtonian viscous stress with kinematic viscosity $\nu$,
-\begin{equation}
-\tau_{r\phi} \;=\; \rho\,\nu\,R\,\frac{d\Omega}{dR}
-\quad\Longrightarrow\quad
-W_{r\phi} \;=\; \nu\,\Sigma\,R\,\frac{d\Omega}{dR},
-\end{equation}
-and hence the torque can be written as
-\begin{equation}
-G(R,t) \;=\; 2\pi R^2 W_{r\phi}
-\;=\; 2\pi R^3 \nu \Sigma \frac{d\Omega}{dR}
-\;=\; \boxed{-\,2\pi\,R^3\,\nu\,\Sigma\,\frac{d\Omega}{dR}},
-\end{equation}
-where the final minus sign is inserted by convention so that $G>0$ for disks with $d\Omega/dR<0$ (e.g.\ Keplerian). Substituting this $G$ into \eqref{eq:angmom_cons_disk} yields the form used in the main text.
-
-
-Conservation of angular momentum (advection + viscous transport) then reads
+Conservation of angular momentum—including both advection and viscous transport—then reads
 \begin{equation}
 \boxed{\;
 \frac{\partial}{\partial t}\!\left(\Sigma R^2\Omega\right)
@@ -106,6 +94,17 @@ Conservation of angular momentum (advection + viscous transport) then reads
 \;}
 \label{eq:angmom_cons_disk}
 \end{equation}
+Substituting equation~\eqref{eq:G_def} gives the standard vertically integrated angular–momentum equation for a viscous, axisymmetric accretion disk:
+\begin{equation}
+\boxed{\;
+\frac{\partial}{\partial t}\!\left(\Sigma R^2\Omega\right)
++ \frac{1}{R}\frac{\partial}{\partial R}\!\left(R\,\Sigma\,v_r\,R^2\Omega\right)
+= \frac{1}{R}\frac{\partial}{\partial R}
+   \!\left(\nu\,\Sigma\,R^3\,\frac{d\Omega}{dR}\right).
+\;}
+\label{eq:angmom_cons_viscous}
+\end{equation}
+This is the vertically integrated form of angular momentum conservation in a viscous disk and forms the foundation of the thin–disk diffusion equation derived in the next section.
 
 \subsection*{The Diffusion Equation of Disk Dynamics}
 Comparing equations \eqref{eq:angmom_cons_disk} and \eqref{eq:continuity_disk_general}, one can eliminate $v_r$ in favor of the torque gradient. \rmk{This is a simple manipulation: $\Omega$ is a function of $R$ alone, so you simply clarify the time derivative and substitute continuity.} This leads directly to the well-known \textbf{diffusion equation for thin accretion disks}:
@@ -521,7 +520,7 @@ released by infall from infinity to $R_{\rm in}$.
 The other half remains as kinetic energy in the orbiting gas and \textbf{is carried inward with the flow.  }
 For black holes this energy disappears through the event horizon, while for neutron stars 
 and white dwarfs it is released in the \textbf{boundary layer} as the accreting gas is brought into 
-corotation with the stellar surface.
+corotation with the stellar surface. We were able to make this same argument just on the basis of the available energy budget, but we are now showing that we can actually get \textbf{all of that energy out}!
 
 \vspace{0.4cm}
 \subsubsection*{Radial Dependence of Dissipation}
@@ -676,15 +675,18 @@ v_\phi(R) \simeq v_K(R) = \sqrt{\frac{GM}{R}}.
 
 \subsection{Radiative Transport in Thin Disks}
 
-We have so far derived the vertical structure of the thin accretion disk under the assumption of an \emph{isothermal} equation of state, which suffices to describe vertical hydrostatic balance at each radius. However, while hydrostatic equilibrium fixes the \emph{vertical} pressure stratification locally, it does not determine how the temperature varies \emph{radially} across the disk. To obtain the full thermal structure, we must therefore supplement the mechanical equilibrium equations with an \textbf{energy equation} that accounts for viscous heating and radiative cooling. To do this, we impose an \textbf{equation of state} which contains both the ideal gas pressure and the radiation pressure. Assuming that the medium is \textbf{optically thick} and therefore \textbf{thermalized}, we know that the energy density should be a \textbf{black body}:
+At this point, we have solved \textbf{independently} for the structure of the vertical disk:
 \[
-u = \frac{4}{c} \sigma_{\rm SB} T^4.
+\rho(R,z) = \rho_0(R)\,
+\exp\!\left[-\,\frac{z^2}{2H^2}\right],
 \]
-Since this must carry, isotopically, radiation pressure, we have a radiation pressure of
+but we still have the task of relating this to the \textbf{disk itself}. Furthermore, we'd like to know information about the emission, the temperature, etc. from the disk. We therefore need to turn our attention toward \textbf{radiative transfer}.
+\par
+In order to specify the scale height $H \sim c_s/\Omega_k$, we need to know the \textbf{density and the pressure} in the disk. We can \textbf{estimate the density} as 
 \[
-P_{\rm rad} = \frac{4\sigma_{\rm SB}}{3c} T^4,
+\rho \sim \frac{\Sigma}{H},
 \]
-and therefore we may use an equation of state of the form
+but the pressure will depend on both the \textbf{ideal gas EOS} and on \textbf{radiation pressure}:
 \[
 P = \frac{\rho k_B T}{\mu m_p} + \frac{4\sigma_{\rm SB}}{3c}T^4.
 \]
@@ -811,3 +813,86 @@ the entire macroscopic structure of the disk is governed by just four microphysi
 hydrostatic balance, viscous angular momentum transport, radiative diffusion, and local thermodynamic equilibrium — together with a single dimensionless parameter, $\alpha$.  
 Despite this simplicity, the model captures the essential physics of accretion flows across an enormous range of astrophysical environments.
 \end{remark}
+
+\section{The Emitted Spectrum}
+
+In the previous sections, we established that a geometrically thin accretion disk is \textbf{optically thick} and therefore radiates approximately as a \textbf{blackbody} at each radius.  The emergent flux from each face of the disk satisfies
+\[
+F(R) = \sigma_{\rm SB}\,T_{\rm eff}^4(R),
+\]
+where $T_{\rm eff}(R)$ is the \textbf{effective temperature} of the photosphere at radius $R$.  Importantly, $T_{\rm eff}(R)$ represents the radiating temperature at the disk surface, not the (larger) midplane temperature $T_c(R)$ that sets the internal pressure support.
+\par
+From the balance between viscous heating and radiative cooling,
+\[
+F(R) = D(R) = \frac{9}{8}\,\nu\,\Sigma\,\Omega_K^2,
+\]
+and for a steady accretion rate $\dot{M}$, we have $\nu\Sigma = \dot{M}/(3\pi)\left[1 - \sqrt{R_{\rm in}/R}\right]$. Substituting into the expression above gives the standard thin–disk temperature law:
+\begin{equation}
+\boxed{
+\sigma_{\rm SB}\,T_{\rm eff}^4(R)
+= \frac{3GM\dot{M}}{8\pi R^3}
+\!\left[1 - \sqrt{\frac{R_{\rm in}}{R}}\right].
+}
+\label{eq:thin_disk_temperature}
+\end{equation}
+In the outer disk ($R \gg R_{\rm in}$), the bracket approaches unity, and we find the asymptotic scaling
+\begin{equation}
+\boxed{
+T_{\rm eff}(R) \propto R^{-3/4}.
+}
+\label{eq:temperature_scaling}
+\end{equation}
+More concretely, 
+\begin{equation}
+    T = \left(\frac{R}{R_\star}\right)^{-3/4} \cdot\begin{cases}4.1 \times 10^4\;\dot{M}_{\rm 16}^{1/4} m_1^{1/4} R_9^{-3/4}\;{\rm K},&\text{(WD)}\\
+    1.3 \times 10^7\;\dot{M}_{\rm 17}^{1/4} m_1^{1/4} R_6^{-3/4}\;{\rm K},&\text{(NS)}
+    \end{cases}
+\end{equation}
+Thus, while the outer regions of disks radiate p\textbf{rimarily in the optical or infrared, the inner regions can dominate the emission at ultraviolet or X–ray wavelengths, depending on the depth of the potential well.}
+
+\subsection*{Multi–Temperature Blackbody Spectrum}
+
+Each annulus of the disk radiates as a blackbody at its local $T_{\rm eff}(R)$, with specific intensity
+\[
+I_\nu(R) = B_\nu[T_{\rm eff}(R)]
+= \frac{2h\nu^3}{c^2}\left[\exp\!\left(\frac{h\nu}{kT_{\rm eff}(R)}\right)-1\right]^{-1}.
+\]
+The total observed flux (for a disk viewed at inclination $i$) is obtained by integrating over radius:
+\begin{equation}
+F_\nu = \frac{2\pi\cos i}{D^2}
+\int_{R_{\rm in}}^{R_{\rm out}} B_\nu[T_{\rm eff}(R)]\,R\,dR,
+\label{eq:disk_spectrum_integral}
+\end{equation}
+where $D$ is the source distance. Because $T_{\rm eff}(R)$ decreases outward, this represents a \textbf{sum of blackbodies} spanning a wide range of temperatures—an \emph{extended blackbody spectrum}. The disk’s emission thus forms a continuous spectrum rather than a single-temperature Planck curve.
+
+\subsection*{Asymptotic Behavior of the Spectrum}
+
+The integral in equation~\eqref{eq:disk_spectrum_integral} yields three characteristic regimes:
+
+\begin{itemize}
+\item \textbf{Rayleigh–Jeans limit ($h\nu \ll kT_{\rm out}$):}  
+   The entire disk contributes in the RJ regime, and since $B_\nu \propto \nu^2 T$,  
+   integrating over $R$ gives
+   \[
+   F_\nu \propto \nu^2.
+   \]
+
+\item \textbf{Intermediate regime ($kT_{\rm out} \ll h\nu \ll kT_{\rm in}$):}  
+   Only the annulus where $h\nu \sim kT_{\rm eff}(R)$ contributes significantly.  
+   Using $T_{\rm eff}\propto R^{-3/4}$ and $B_\nu \propto \nu^3/(\exp(h\nu/kT)-1)$, one finds
+   \[
+   \boxed{F_\nu \propto \nu^{1/3},}
+   \]
+   the celebrated spectral slope of a multi–temperature blackbody disk.
+
+\item \textbf{Wien limit ($h\nu \gg kT_{\rm in}$):}  
+   The exponential cutoff of the Planck function dominates, giving  
+   \[
+   F_\nu \propto \nu^3\,\exp(-h\nu/kT_{\rm in}).
+   \]
+\end{itemize}
+
+\medskip
+\noindent
+These regimes together produce the characteristic \textbf{multi–temperature disk spectrum}, rising as $\nu^2$ at low frequencies, flattening to $\nu^{1/3}$ over a broad intermediate range, and falling exponentially beyond the high–energy cutoff.  
+The result is remarkably insensitive to the detailed viscosity prescription—only the temperature profile $T_{\rm eff}(R)$ matters.

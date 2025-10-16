@@ -422,7 +422,7 @@ In reality, few binaries are perfectly conservative.  Mass and angular momentum 
 \noindent
 As we will see in the sections that follow, the coupled transfer of mass and angular momentum governs the fate of a binary system—determining whether it expands or contracts, remains stable, or undergoes runaway mass transfer leading to a common-envelope phase.
 
-\subsubsection{The Role of Angular Momentum}
+\subsubsection{The Orbital Behavior}
 
 Given an orbital period $P$ and angular velocity $\omega = 2\pi / P$, the total orbital angular momentum is
 \[
@@ -447,12 +447,11 @@ J = M_1 M_2 \left(\frac{G a}{M_1 + M_2}\right)^{1/2}.
 If we now take the \textbf{logarithmic derivative} of the above equation, we find after requiring \textbf{conservative mass transfer} that
 \begin{equation}
     \label{eq:ang_mom_binary_ev}
+    \boxed{
 \frac{\dot{a}}{a} = \frac{2\dot{J}}{J}
-    + 2\frac{(-\dot{M}_2)}{M_2}\left(1 - \frac{M_2}{M_1}\right),
+    + 2\frac{(-\dot{M}_2)}{M_2}\left(1 - \frac{M_2}{M_1}\right),}
 \end{equation}
-which leads us immediately to a big idea:
 \begin{bigidea}
-
 Equation~\eqref{eq:ang_mom_binary_ev} shows how the \textbf{orbital separation $a$} responds to changes in angular momentum and mass transfer! From this expression, we can immediately draw several key conclusions:
 \begin{itemize}
     \item If \textbf{angular momentum is conserved} ($\dot{J}=0$):
@@ -464,11 +463,175 @@ Equation~\eqref{eq:ang_mom_binary_ev} shows how the \textbf{orbital separation $
     \end{itemize}
     \item If \textbf{angular momentum is lost} ($\dot{J}<0$), this term always contributes to orbital contraction, regardless of the mass ratio.  
 \end{itemize}
-An intuitive way to think about this is in the limit $q \gg 1$, in which case we are just adding mass or removing mass from a mass on a string. If we add mass, we would need to swing harder
-to keep it at the same distance, or we would shorten the string. Likewise, if we remove mass, it will want to drift outward.
 \end{bigidea}
 
-\medskip
+We can also write an equivalent statement in terms of the \textbf{orbital period} since
+\[
+P^2 \propto a^3 \implies 2\frac{\dot{P}}{P} = 3 \frac{\dot{a}}{a},
+\]
+so
+\begin{equation}
+    \label{eq:ang_mom_period_binary_ev}
+    \boxed{
+\frac{\dot{P}}{P} = \frac{3\dot{J}}{J}
+    + 3\frac{(-\dot{M}_2)}{M_2}\left(1 - \frac{M_2}{M_1}\right),}
+\end{equation}
+This statement is \textbf{entirely equivalent} to the one above, simply recast in terms of the period.
+
+\subsubsection{The Roche-Lobe Behavior}
+Let's now ask the following question: \textbf{what happens to the Roche Lobe when mass is transferred?} Since we already know how $a$ evolves in response to changes in mass and momentum, we can use the Paczynski equation we saw earlier to deduce the behavior of the Roche Radius.
+\par
+From equation~\eqref{eq:paczynski_lobe_radius}, we can logarithmically differentiate to find
+\[
+\boxed{
+\frac{\dot{R}_{2,L}}{R_{2,L}} = \frac{\dot{a}}{a} + \frac{\dot{M}_2}{3M_2},
+}
+\]
+which can then be substituted into \eqref{eq:ang_mom_binary_ev} to obtain
+\begin{equation}
+\label{eq:roche_lobe_stability}
+\boxed{
+    \frac{\dot{R}_{2,L}}{R_{2,L}} = \frac{2\dot{J}}{J} - \frac{2\dot{M}_2}{M_2}\left(\frac{5}{6}-\frac{M_2}{M_1}\right).
+}
+\end{equation}
+\par
+We can now interpret equation~\eqref{eq:ang_mom_binary_ev} together with the Roche lobe response.  The key diagnostic is
+\[
+\frac{\dot{R}_{2,L}}{R_{2,L}} = \frac{2\dot{J}}{J}
+   + \frac{2(-\dot{M}_2)}{M_2}\!\left(\frac{5}{6} - \frac{M_2}{M_1}\right),
+\]
+which measures how the Roche lobe of the donor responds as mass is lost. Generally, the following regimes are relevant; however, we will explore this in more detail in the next section:
+
+
+\begin{enumerate}
+    \item \textbf{Unstable (Cataclysmic) Mass Transfer, $q > 5/6$:}  
+    In this regime, the term $\left(\tfrac{5}{6} - q\right)$ becomes negative, so the second term on the right--hand side of 
+    equation~\eqref{eq:roche_lobe_stability} is \emph{positive}.  
+    Since $\dot{M}_2 < 0$, the Roche lobe \textbf{shrinks} as mass is lost, driving the donor to overfill its Roche lobe further.  
+    This runaway behavior leads to \textbf{dynamically unstable} mass transfer, characteristic of cataclysmic variables and common-envelope evolution.
+
+    \item \textbf{Stable Mass Transfer, $q < 5/6$:}  
+    Here, $\left(\tfrac{5}{6} - q\right)$ is positive, making the second term on the right--hand side \emph{negative}.  
+    As $\dot{M}_2 < 0$, this implies that the Roche lobe \textbf{expands} as mass is removed.  
+    Provided angular momentum loss is not excessive, the Roche lobe can expand in step with the donor’s radius, 
+    enabling long--lived, \textbf{stable mass transfer} on nuclear or thermal timescales.
+
+    \item \textbf{Role of Angular Momentum Loss:}  
+    Angular momentum loss ($\dot{J}<0$) always contributes to Roche-lobe contraction.  
+    Even systems that would otherwise be stable ($q < 5/6$) can be driven unstable if angular momentum is lost rapidly, 
+    for example through \textbf{gravitational radiation} or \textbf{magnetic braking}.  
+    Conversely, in the absence of angular momentum loss ($\dot{J}=0$), systems with $q < 5/6$ remain stably transferring.
+\end{enumerate}
+
+
+\subsubsection{The Behavior of RL Filling Stars}
+So far, we have provided two critical equations which determine the evolution of the binary system: the first dictates the response of the \textbf{Roche-Lobe radius}
+\begin{equation}
+        \frac{\dot{R}_{2,L}}{R_{2,L}} = \frac{2\dot{J}}{J} - \frac{2\dot{M}_2}{M_2}\left(\frac{5}{6}-\frac{M_2}{M_1}\right)
+\end{equation}
+and
+\[
+\frac{\dot{a}}{a} = \frac{2\dot{J}}{J}
+    + 2\frac{(-\dot{M}_2)}{M_2}\left(1 - \frac{M_2}{M_1}\right),
+\]
+which determines the \textbf{orbital response}. Now, in the specific scenario where the \textbf{secondary fills its Roche-Lobe}, we can also invoke the \textbf{period-mass relations} of the previous discussion. Proceeding from 
+\[
+\frac{\dot{P}}{P} = \frac{3\dot{J}}{J}
+    + 3\frac{(-\dot{M}_2)}{M_2}\left(1 - \frac{M_2}{M_1}\right),
+\]
+if we have that $P \sim M^\kappa$, then
+\[
+\frac{\dot{M}_2}{M_2} = \frac{1}{\kappa}\left[\frac{3\dot{J}}{J}+ 3\frac{(-\dot{M}_2)}{M_2}\left(1 - \frac{M_2}{M_1}\right)\right]
+\]
+This then supplies a statement about the \textbf{angular momentum loss and the mass loss}:
+\[
+\frac{\dot{J}}{J} = \frac{\dot{M}_2}{M_2} \left(\frac{\kappa}{3} + 1 - q\right).
+\]
+\begin{bigidea}
+    Here's the takeaway we want to have from this: given that a specific type of object is going to maintain its \textbf{Roche-Lobe}, we can answer the question
+    of \textbf{how much angular momentum} must be lost in order to allow this object to match up to its Roche Lobe.
+\end{bigidea}
+There are a few \textbf{specific scenarios} that can be mentioned here and are worth keeping in perspective:
+\begin{itemize}
+    \item \textbf{Main--sequence donors:}  
+    A low--mass main--sequence star roughly obeys $R_2 \propto M_2^{3/4}$.  Since the orbital period scales as $P \propto M^{5/8}$, Substituting into the previous relation gives
+    \[
+    \boxed{\frac{\dot{J}}{J} = \frac{\dot{M}_2}{M_2}\left(\frac{5}{8} + 1 - q\right)
+    = \frac{\dot{M}_2}{M_2}\left(\frac{13}{8} - q\right).}
+    \]
+    For typical cataclysmic--variable mass ratios $q \simeq 0.2$--$0.8$, the bracket is positive, 
+    meaning that $\dot{J}/J$ must be \textbf{negative} (since $\dot{M}_2 < 0$):  
+    the system requires continual \textbf{angular--momentum loss} (via magnetic braking or gravitational radiation) to sustain contact.
+
+    \item \textbf{Degenerate donors:}  
+    For white--dwarf or fully degenerate secondaries, the relation is $R_2 \propto M_2^{-1/3}$.  
+    Then $P \propto M_2^{-1}$, giving $\kappa = -1$.  
+    Substituting this yields
+    \[
+    \boxed{\frac{\dot{J}}{J} = \frac{\dot{M}_2}{M_2}\left(-\frac{1}{3} + 1 - q\right)
+    = \frac{\dot{M}_2}{M_2}\left(\frac{2}{3} - q\right).}
+    \]
+    For typical ultra--compact binaries ($q \lesssim 0.1$), this term is positive, so $\dot{J}/J < 0$ again: 
+    \textbf{angular--momentum loss} from gravitational radiation is sufficient to maintain contact.  
+    However, if $q > 2/3$, the bracket changes sign and the system would detach unless additional AML mechanisms operate.
+\end{itemize}
+
+\subsubsection{Binary Evolution Feedback}
+
+We have now derived the \textbf{two critical equations} which govern the evolution of binary systems during mass and angular momentum transfer:
+\[
+    \frac{\dot{R}_2}{R_2} = \frac{2\dot{J}}{J} - \frac{2\dot{M}_2}{M_2}\left(\frac{5}{6}-\frac{M_2}{M_1}\right)
+\]
+tells us how the \textbf{Roche-Lobe radius} responds and
+\[
+\frac{\dot{a}}{a} = \frac{2\dot{J}}{J}
+    + 2\frac{(-\dot{M}_2)}{M_2}\left(1 - \frac{M_2}{M_1}\right),
+\]
+tells us how the \textbf{orbital separation} responds. In this section, we'll dive a bit deeper into understanding how these equations dictate the behavior of our systems and the implications they have for our study of binary accretion.
+\par
+As we suggested in the previous section while discussing equation~\eqref{eq:roche_lobe_stability}, the resulting implications for mass transfer have to do with the \textbf{mass-radius response} of the secondary. In general, this response is a very complex picture because shrinkage of the RL, mass transfer, etc. may significantly alter the nature of the mass-radius response with time. Nonetheless, we will focus here on scenarios where 
+\[
+M_2 \sim R^\Gamma
+\]
+for some \textbf{constant} $\Gamma$. This sort of prescription will allow us to be more qualitative about the behavior of the feedback mechanisms at play.
+
+\paragraph{Fully Conservative Feedback}
+Let's begin with the simplest case: \textbf{fully-conservative mass transfer}. In this case, we have $\dot{J} = 0$, which means that we can avoid any consideration of that term in the equations above:
+\[
+\begin{aligned}
+    \frac{\dot{R}_{2,L}}{R_{2,L}} &= 2\frac{(-\dot{M}_2)}{M_2}\left(\frac{5}{6}-q\right)\\
+    \frac{\dot{a}}{a} &= 2\frac{(-\dot{M}_2)}{M_2}\left(1-q\right)\\
+    \frac{\dot{R}_2}{R_2} &= \frac{1}{\Gamma} \frac{\dot{M}_2}{M_2}.
+\end{aligned}
+\]
+We can see immediately that the change in the \textbf{orbital distance} is determined by $q$. When $q < 1$, mass flows from the \textbf{lighter to the heavier component,} and the orbit \textbf{expands}; conversely, when $q > 1$, the more massive star transfers \textbf{mass to a lighter companion} and the orbit \textbf{shrinks}.  This behavior provides a natural feedback mechanism: as the orbit contracts for $q > 1$, the Roche Lobe shrinks even faster, driving \textbf{runaway mass transfer} until $q$ decreases toward unity.  Once the mass ratio inverts ($q \lesssim 1$), the trend reverses—the orbit begins to widen, stabilizing the system and eventually halting further mass exchange.  
+\begin{bigidea}
+    Nature want to drive mass transfer \textbf{toward $q = 1$!}
+\end{bigidea}
+Now, once $q < 5/6$, we see that $\dot{R}_{2,L}>0$, so we have an \textbf{expanding Roche Lobe radius}, and an \textbf{expanding orbit}. How can we continue to transfer mass from the secondary to the primary? There are two options:
+\vspace{10pt}
+\par
+\begin{enumerate}
+    \item The secondary \textbf{expands} to continue filling its Roche Lobe. This is generally evolution off of the main sequence which allows for the evolution to maintain its mass transfer relative to the Roche Lobe.
+    \item There is \textbf{angular momentum transfer} at play in the system. This is the scenario for mass transfer between degenerate systems where they are no longer expanding.
+\end{enumerate}
+
+\paragraph{Conservative Mass Transfer}
+
+Let's now \textbf{relax our assumption about $J$.} We now let $\dot{J} \neq 0$, which permits angular momentum to leave the system. We now have to handle the mass transfer scenario where
+\[
+\begin{aligned}
+    \frac{\dot{R}_{2,L}}{R_{2,L}} &= 2\frac{\dot{J}}{J} +2\frac{(-\dot{M}_2)}{M_2}\left(\frac{5}{6}-q\right)\\
+    \frac{\dot{a}}{a} &= 2\frac{\dot{J}}{J}+2\frac{(-\dot{M}_2)}{M_2}\left(1-q\right)\\
+    \frac{\dot{R}_2}{R_2} &= \frac{1}{\Gamma} \frac{\dot{M}_2}{M_2}.
+\end{aligned}
+\]
+Now, we can see that \textbf{angular momentum loss} wants to drive \textbf{contraction of the Roche Lobe and the orbit}. For $1 \lesssim q$, we have exacerbated Roche Lobe contraction, which will lead to rapid mass transfer; however, once $q \sim 1$, stability becomes a much more complex question. For $q < 5/6$, the orbit \textbf{expands}, the Roche Lobe will \textbf{also expand} IF 
+\[
+\underbrace{\left|\frac{2\dot{J}}{J}\right|}_{\text{Ang. Mom. ($<0$)}} < \underbrace{\frac{2(-\dot{M}_2)}{M_2} \left(\frac{5}{6} -q \right) }_{\text{mass transfer}}
+\]
+And we therefore get a \textbf{detailed balance} in which all three pieces of the puzzle will come into play in order to determine how the mass loss can proceed.
+
 \paragraph{Angular Momentum Loss Channels.}
 In the idealized \emph{fully conservative} case, the total angular momentum of the system is conserved ($\dot{J}=0$).  
 However, in realistic binaries, a variety of processes can remove angular momentum from the orbit.  
@@ -479,8 +642,8 @@ The most important loss mechanisms are summarized below.
     \item \textbf{Gravitational Radiation.}  
     Compact binaries (white dwarfs, neutron stars, black holes) emit gravitational waves as they orbit, carrying away angular momentum at a rate
     \[
-    \dot{J}_{\rm GW} = -\frac{32}{5}\frac{G^{7/2}}{c^5}
-        \frac{M_1^2 M_2^2 (M_1 + M_2)^{1/2}}{a^{7/2}}.
+    \dot{J}_{\rm GW} = -\frac{32}{5}\frac{G^{3}}{c^5}
+        \frac{M_1M_2(M_1 + M_2)}{a^{4}}.
     \]
     This loss steeply depends on $a^{-7/2}$, making gravitational radiation dominant only in very tight systems.  
     The resulting orbital decay leads to a gradual inspiral, eventually producing a merger or the onset of Roche–lobe overflow.
@@ -514,105 +677,207 @@ The most important loss mechanisms are summarized below.
     If either star contracts or expands (changing its moment of inertia), this coupling can further exchange angular momentum with the orbit.
 \end{itemize}
 
-\paragraph{Consequences of Angular Momentum Loss.}
-All of these processes modify the orbital separation through the relation
-\[
-\frac{\dot{a}}{a} = \frac{2\dot{J}}{J}
-    - 2\frac{\dot{M}_2}{M_2}\left(1 - \frac{M_2}{M_1}\right),
-\]
-which shows that $\dot{J}<0$ always drives orbital contraction.  
-In compact systems, this can bring the stars into contact and trigger Roche–lobe overflow, while in wider systems it may gradually shrink the orbit over gigayear timescales.
 
-\begin{bigidea}
-\textbf{Angular Momentum Loss Summary}
-\begin{itemize}
-    \item \textbf{Gravitational waves} dominate at small separations ($a \lesssim R_\odot$).
-    \item \textbf{Magnetic braking} dominates for cool, magnetized donors in wider binaries.
-    \item \textbf{Winds and circumbinary mass loss} remove angular momentum at intermediate scales and often govern long-term orbital evolution.
-    \item \textbf{Tidal coupling} redistributes angular momentum between spin and orbit, enforcing synchronization and circularization.
-\end{itemize}
-Together, these mechanisms determine whether a binary will widen, shrink, or merge—and hence whether it becomes a stable accretor, a contact binary, or a gravitational wave source.
-\end{bigidea}
-
-\subsection{Mass Transfer Stability}
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=1\linewidth]{Pictures/figures/binary_mass_accretion.png}
     \caption{The various modes of binary mass transfer and the resulting stability as dictated by the stellar contraction response, $\zeta_\star$ and the contraction of the donor Roche Lobe. This is characterized by equation~\eqref{eq:roche_lobe_stability}.}
     \label{fig:roche_transfer_stability}
 \end{figure}
+\paragraph{Gravitational Waves}
+Let's imagine the scenario where \textbf{angular momentum loss} is driven by gravitational waves. We have
+    \[
+    \frac{\dot{J}_{\rm GW}}{J_{\rm GW}} = -\frac{32}{5}\frac{G^{3}}{c^5}
+        \frac{M_1M_2(M_1 + M_2)}{a^{4}}.
+        \]
 
-Let's now ask the following question: \textbf{what happens to the Roche Lobe when mass is transferred?} 
-From equation~\eqref{eq:paczynski_lobe_radius}, we can logarithmically differentiate to find
+If we have \textbf{no mass loss} in the system, then we have simply that
 \[
-\boxed{
-\frac{\dot{R}_2}{R_2} = \frac{\dot{a}}{a} + \frac{\dot{M}_2}{3M_2},
-}
+\frac{\dot{a}}{a} = 2\frac{\dot{J}_{\rm GW}}{J}
+= -\frac{64}{5}\frac{G^3}{c^5}\,\frac{M_1M_2(M_1+M_2)}{a^4},
+\qquad
+\frac{\dot{P}}{P}=\frac{3}{2}\frac{\dot{a}}{a}
+= -\frac{96}{5}\frac{G^3}{c^5}\,\frac{M_1M_2(M_1+M_2)}{a^4}.
 \]
-which can then be substituted into \eqref{eq:ang_mom_binary_ev} to obtain
+The characteristic GW inspiral timescale is
+\[
+t_{\rm GW}\equiv\left|\frac{a}{\dot{a}}\right|
+= \frac{5}{64}\,\frac{c^5\,a^4}{G^3 M_1M_2(M_1+M_2)}
+= \frac{5}{96}\,\frac{c^5}{G^{5/3}}\,
+\frac{1}{(2\pi)^{8/3}}\,
+\frac{P^{8/3}}{\mathcal{M}^{5/3}},
+\]
+where $\mathcal{M}\equiv (M_1M_2)^{3/5}(M_1+M_2)^{-1/5}$ is the \emph{chirp mass}. Numerically,
+\[
+t_{\rm GW} \simeq 1.0\times10^{8}\ {\rm yr}\;
+\left(\frac{P_{\rm hr}}{2}\right)^{8/3}
+\left(\frac{\mathcal{M}}{0.3\,M_\odot}\right)^{-5/3},
+\]
+so GW losses become astrophysically important \textbf{only at very short periods}.
+\medskip
+\par
+Let us now consider the scenario where \textbf{mass transfer is ongoing}, so that the secondary 
+fills its Roche Lobe while angular momentum is continually lost to gravitational waves.
+In this case, the Roche--Lobe radius evolves according to
+\[
+    \frac{\dot{R}_{2,L}}{R_{2,L}} = 2\frac{\dot{J}}{J}
+    + 2\frac{(-\dot{M}_2)}{M_2}\left(\frac{5}{6}-q\right).
+\]
+\textbf{If the system maintains Roche--Lobe contact}, then the stellar radius evolves as
+\[
+\frac{\dot{R}_2}{R_2} = \frac{\dot{R}_{2,L}}{R_{2,L}}.
+\]
+For a donor with a mass--radius relation $R_2 \propto M_2^n$, we have
+\[
+\frac{\dot{R}_2}{R_2} = n\,\frac{\dot{M}_2}{M_2}.
+\]
+Equating the two expressions gives
+\[
+n\,\frac{\dot{M}_2}{M_2}
+= 2\frac{\dot{J}}{J}
++ 2\frac{(-\dot{M}_2)}{M_2}\left(\frac{5}{6}-q\right),
+\]
+or equivalently,
+\[
+\frac{\dot{M}_2}{M_2}\bigg(n + \frac{5}{3} - 2q\bigg)
+= 2\frac{\dot{J}}{J}.
+\]
+Hence, the general relation between the mass loss rate and angular momentum loss rate is
 \begin{equation}
-\label{eq:roche_lobe_stability}
+\label{eq:mass_transfer_gw_general}
 \boxed{
-    \frac{\dot{R}_2}{R_2} = \frac{2\dot{J}}{J} - \frac{2\dot{M}_2}{M_2}\left(\frac{5}{6}-\frac{M_2}{M_1}\right).
+\frac{\dot{M}_2}{M_2}
+= \frac{2\,(\dot{J}/J)}{n + \tfrac{5}{3} - 2q}.
 }
 \end{equation}
-\par
-We can now interpret equation~\eqref{eq:ang_mom_binary_ev}
-together with the Roche lobe response.  The key diagnostic is
+The angular momentum loss rate due to gravitational radiation for a circular orbit is
 \[
-\frac{\dot{R}_2}{R_2} = \frac{2\dot{J}}{J}
-   + \frac{2(-\dot{M}_2)}{M_2}\!\left(\frac{5}{6} - \frac{M_2}{M_1}\right),
+\frac{\dot{J}_{\rm GW}}{J}
+= -\frac{32}{5}\frac{G^{3}}{c^5}
+  \frac{M_1M_2(M_1 + M_2)}{a^{4}}.
 \]
-which measures how the Roche lobe of the donor responds as mass is lost.
+Using Kepler’s third law, $a = [G(M_1 + M_2)P^2 / 4\pi^2]^{1/3}$, we can express this entirely in terms of observable parameters:
+\[
+\frac{\dot{J}_{\rm GW}}{J}
+= -\frac{32}{5}\frac{G^{5/3}}{c^{5}}(2\pi)^{8/3}
+  \frac{M_1M_2}{(M_1+M_2)^{1/3}}\,P^{-8/3}.
+\]
+Substituting this into equation~\eqref{eq:mass_transfer_gw_general}, we obtain the gravitational--wave--driven mass loss rate:
+\begin{equation}
+\label{eq:mdot_gw_general}
+\boxed{
+-\dot{M}_2
+= \frac{64}{5}\frac{G^{5/3}}{c^{5}}(2\pi)^{8/3}
+  \frac{M_1M_2^2}{(M_1+M_2)^{1/3}}
+  \frac{P^{-8/3}}{n + \tfrac{5}{3} - 2q}.
+}
+\end{equation}
 
-\begin{enumerate}
-    \item \textbf{Unstable (Cataclysmic) Mass Transfer, $q > 5/6$:}  
-    In this regime the second term on the right--hand side is negative.  
-    If there is any angular momentum loss ($\dot{J}<0$), the Roche lobe shrinks as material is lost.  
-    The donor thus overfills its Roche lobe more and more, leading to a runaway process.  
-    This behavior underlies cataclysmic variables and other explosive transfer scenarios.
+Two characteristic donor types are especially relevant:
 
-    \item \textbf{Stable Mass Transfer, $q < 5/6$:}  
-    Here the second term tends to be positive, so the Roche lobe expands as mass is removed.  
-    Provided angular momentum loss is not too strong, the Roche lobe expansion can keep pace with 
-    the donor’s radius, allowing for long--lived, secular mass exchange on nuclear or thermal timescales.  
+\begin{itemize}
+    \item \textbf{Main--Sequence donors ($n \approx 1$).}  
+    In this case, with $q \ll 1$ we have $n + \tfrac{5}{3} - 2q \simeq \tfrac{8}{3}$, yielding
+    \[
+    \boxed{
+    -\dot{M}_2 \;\simeq\;
+    10^{-10}\ M_\odot\,{\rm yr^{-1}}
+    \left(\frac{P_{\rm hr}}{2}\right)^{-2/3}.
+    }
+    \]
+    This corresponds to low--mass cataclysmic variables in which GW losses drive steady,
+    weak mass transfer between a convective secondary and a white--dwarf primary.
 
-    \item \textbf{Role of Angular Momentum Loss:}  
-    Even for $q > 5/6$, strong angular momentum loss (e.g.\ by gravitational radiation or magnetic braking) 
-    can still cause the Roche lobe to contract, destabilizing the system.  
-    Conversely, with $\dot{J}=0$ and $q > 5/6$, mass transfer remains stable.
-\end{enumerate}
-
-\noindent
-Thus the fate of the binary depends jointly on the \emph{mass ratio} and the \emph{angular momentum loss channels}:  
-low-$q$ systems tend toward runaway transfer, while high-$q$ systems may support stable, long-lived exchange.
+    \item \textbf{Degenerate donors ($n = -1/3$).}  
+    For a fully degenerate white--dwarf secondary, $n + \tfrac{5}{3} - 2q \simeq \tfrac{4}{3}$, giving
+    \[
+    \boxed{
+    -\dot{M}_2 \;\simeq\;
+    10^{-12}\ M_\odot\,{\rm yr^{-1}}
+    \left(\frac{P_{\rm hr}}{2}\right)^{-14/3}.
+    }
+    \]
+    This steep dependence is characteristic of ultra--compact systems such as AM~CVn stars, 
+    where GW losses dominate and mass transfer declines rapidly as the orbit expands.
+\end{itemize}
 
 \begin{bigidea}
-    From the discussion above, we have two very useful criteria which tell us \textbf{a lot} about the nature of our accretion.
-    \begin{enumerate}
-        \item The equation
-            \[ 
-            \frac{\dot{a}}{a} = \frac{2\dot{J}}{J} - \frac{2 \dot{M}_2}{M_2} \left(1-\frac{M_2}{M_1}\right)
-            \]
-            derived above gives us a clear threshold for the \textbf{expansion / contraction} of the orbits:
-            \begin{itemize}
-                \item If $M_2>M_1$, then the orbit will \textbf{shrink}.
-                \item If $M_1 > M_2$, then the orbit will \textbf{expand}.
-            \end{itemize}
-            Thus, the stability of the binary depends crucially on the initial mass ratio.
-        \item Using the Paczyński approximation, we also know that 
-        \[
-        \frac{\dot{R}_2}{R_2} = \frac{2\dot{J}}{J} - \frac{2\dot{M}_2}{M_2}\left(\frac{5}{6}-\frac{M_2}{M_1}\right),
-        \]
-        which tells us how the Roche lobe radius evolves relative to the donor mass. 
-        \begin{itemize}
-            \item If $\frac{M_2}{M_1} < \tfrac{5}{6}$, then (because $\dot{M}_2 < 0$), the second term on the RHS provides a \textbf{positive contribution} and therefore generally leads to Roche Lobe \textbf{expansion} unless $\dot{J}$ is \textbf{very large}. This is the regime where stable mass transfer can occur.
-            \item If $\frac{M_2}{M_1} > \tfrac{5}{6}$, then the coefficient of $\dot{M}_2$ is negative, and the Roche lobe radius \textbf{shrinks}. This drives \textbf{unstable}, runaway mass transfer.
-            \item Angular momentum losses ($\dot{J}<0$) further reduce $R_2$, making instability \textbf{more likely}.
-        \end{itemize}
-    \end{enumerate}
-    In summary: binaries with initially \textbf{low mass ratios} ($M_2/M_1 < 5/6$) can support stable Roche-lobe overflow, while systems with \textbf{high mass ratios} ($M_2/M_1 > 5/6$) tend toward unstable transfer and potentially a common-envelope phase.
+The donor’s internal structure, expressed through its mass–radius index $n$, determines how strongly the mass loss rate depends on orbital period.  
+For main–sequence donors, $\dot{M}_2 \propto P^{-2/3}$, while for degenerate donors, $\dot{M}_2 \propto P^{-14/3}$.  
+In both cases, the gravitational–wave torque provides the necessary angular–momentum sink to keep the donor in contact with its Roche Lobe.
 \end{bigidea}
+
+
+
+
+
+When the donor fills its Roche lobe and GW losses dominate the orbital AM budget, the GW torque
+\[
+\frac{\dot{J}}{J}=\frac{\dot{J}_{\rm GW}}{J}
+\]
+\emph{sets} \textbf{the mass–transfer rate}. For $q\!\equiv\!M_2/M_1\!\ll\!1$ we take the Roche–lobe size $R_{L}\propto a\,q^{1/3}$ and Kepler’s law with $M_1$ constant. Writing the donor’s mass–radius relation as $R_2\propto M_2^\alpha$, Roche–lobe contact
+($\dot{R}_2/R_2=\dot{R}_L/R_L$) and the orbital response give
+\[
+\frac{\dot{a}}{a}=(\alpha-\tfrac13)\frac{\dot{M}_2}{M_2},\qquad
+\frac{\dot{a}}{a}=2\frac{\dot{J}}{J}+2\frac{\dot{M}_2}{M_2}\quad(q\ll1).
+\]
+Eliminating $\dot{a}/a$ yields
+\[
+\frac{\dot{M}_2}{M_2} \;=\;
+\frac{2}{\,\alpha-\tfrac13-2\,}\,\frac{\dot{J}}{J}.
+\]
+For GW emission one further has (again for $q\ll1$) $\dot{J}/J\propto M_2\,a^{-4}\propto M_2\,P^{-8/3}$, 
+and, under contact, $R_2\!=\!R_L$ implies $M_2 \propto P^{\frac{2}{3(\alpha-1/3)}}$.
+Combining these scalings determines how the \emph{absolute} mass–loss rate $-\dot{M}_2$ depends on $P$.
+
+\medskip
+\noindent
+Two important cases:
+
+\begin{itemize}
+\item \textbf{Main–sequence donors (fully convective; $R_2\propto M_2^{\alpha}$ with $\alpha\simeq 1$).}
+Then $M_2\propto P^{\,\frac{2}{3(1-1/3)}}=P^{1}$ and
+\[
+\frac{\dot{M}_2}{M_2} = -\frac{3}{2}\,\frac{\dot{J}}{J}
+\quad\Rightarrow\quad
+-\dot{M}_2 \;\propto\; M_2\,\Bigl|\tfrac{\dot{J}}{J}\Bigr|
+\;\propto\; P^{1}\,P^{-8/3} \;=\; P^{-2/3}.
+\]
+A convenient normalization (for $M_1\!\sim\!1\,M_\odot$ and $q\!\ll\!1$) is
+\[
+\boxed{\;
+-\dot{M}_2 \;\simeq\; 10^{-10}\ M_\odot\,{\rm yr^{-1}}\,
+\left(\frac{P_{\rm hr}}{2}\right)^{-2/3}\!,
+}
+\]
+appropriate to GW–driven CVs with fully convective donors.
+(Here we have absorbed the order-unity geometric factors of the Roche-lobe approximation into the coefficient.)
+
+\item \textbf{Degenerate donors ($R_2\propto M_2^{-1/3}$; $\alpha=-1/3$).}
+Then $M_2\propto P^{-1}$ and
+\[
+\frac{\dot{M}_2}{M_2} = -\frac{3}{4}\,\frac{\dot{J}}{J}
+\quad\Rightarrow\quad
+-\dot{M}_2 \;\propto\; M_2\,\Bigl|\tfrac{\dot{J}}{J}\Bigr|
+\;\propto\; P^{-1}\,P^{-11/3} \;=\; P^{-14/3}.
+\]
+A useful normalization (again for $M_1\!\sim\!1\,M_\odot$, $q\!\ll\!1$) is
+\[
+\boxed{\;
+-\dot{M}_2 \;\simeq\; 10^{-12}\ M_\odot\,{\rm yr^{-1}}\,
+\left(\frac{P_{\rm hr}}{2}\right)^{-14/3}\!,
+}
+\]
+characteristic of ultracompact, GW–driven systems (e.g.\ AM\,CVn stars).
+\end{itemize}
+
+\noindent
+These scalings highlight two key facts:
+(i) GW losses alone can sustain mass transfer at short periods; 
+(ii) the donor’s internal structure (via $\alpha$) sets the $P$–dependence of $-\dot{M}_2$.
+For fully convective MS donors, $-\dot{M}_2$ falls relatively slowly with $P$ ($\propto P^{-2/3}$),
+whereas for degenerate donors it falls very steeply ($\propto P^{-14/3}$).
+
 
 \section{Disk Formation}
 
@@ -696,67 +961,67 @@ Since the accreted material has negligible binding energy when it falls in from 
     L_{\rm disk} = \frac{GM_1\dot{M}}{2R} = \frac{1}{2}L_{\rm acc}.
     }
 \end{equation}
-This is \textbf{incredible}. Nearly 50\% of the binding energy can be dissipated away!
+This is \textbf{incredible}. Nearly 50\% of the binding energy \textbf{can} be dissipated away (we're not guaranteed that it will)!
 \par
 Just as the energy of the material must be lost during its inspiral, so too much the angular momentum. This will rely on outward angular momentum transfer vis-a-vis viscous torques on the material.
 
 \section{Viscous Torques and Angular Momentum Transport}
 
-In this final section regarding binary accretion scenarios, we discuss the nature of angular momentum transport and viscosity. This will lay the group work for our next chapter regarding the nature of thin disk accretion.
+In this final section regarding binary accretion scenarios, we discuss the nature of angular momentum transport and viscosity. This will lay the ground work for our next chapter regarding the nature of thin disk accretion.
 
 \subsection{Microscopic Intuition for Viscous Flows}
+On a \textbf{statistical level}, viscosity arises due to random motions bringing momentum across laminae. These motions may be \textbf{thermal} or they may be \textbf{turbulent} or have some other driving mechanism; however, the formal treatement is the same nonetheless. We introduce a \textbf{standard length scale} $\tilde{\lambda}$ and a \textbf{standard velocity} of the random motions $\tilde{v}$. These two quantities determine the effective viscosity as we will now derive.
 
-On a statistical level, turbulent motion in a fluid can be \textbf{characterized by a length scale $\lambda$ and a velocity scale $u$}.  These scales represent the typical size and speed of eddies which exchange fluid parcels between adjacent layers.
-
-Consider two laminae at slightly different vertical positions, moving with horizontal velocity $v(z)$. 
-Although there is no net \emph{mass} flux across the interface (the exchange is symmetric), 
-the parcels that cross carry their horizontal momentum with them.  
-\rmk{This is much like pedestrians wandering from the sidewalk into the street: 
-they carry their momentum and disrupt the flow of traffic, even though the net number of people on the street does not change.}
+Consider two laminae at \textbf{slightly different vertical positions}, moving with horizontal velocity $v(z)$. 
+Although there is no net \emph{mass} flux across the interface (the exchange is symmetric),  the parcels that cross carry their horizontal momentum with them. \rmk{This is much like pedestrians wandering from the sidewalk into the street: they carry their momentum and disrupt the flow of traffic, even though the net number of people on the street does not change.}
 
 Over a characteristic time interval $\Delta t$, a fluid mass of order
 \[
-\Delta m \;\sim\; \rho\, u \,\Delta t
+\Delta m \;\sim\; \rho\, \tilde{v}\,\Delta t
 \]
-crosses between the laminae, where $\rho$ is the density. Because the velocity difference between the two laminae is of order $\partial_z v \, \lambda$,  the exchanged parcels transport a momentum
+crosses between the laminae, where $\rho$ is the density. Because the velocity difference between the two laminae is of order $\partial_z v \,\tilde{\lambda}$,  the exchanged parcels transport a momentum
 \[
-\Delta p \;\sim\; \Delta m \,\bigl(\partial_z v \,\lambda \bigr)
-      \;\sim\; \rho\, u \,\lambda \,\partial_z v \,\Delta t .
+\Delta p \;\sim\; \Delta m \,\bigl(\partial_z v \,\tilde{\lambda} \bigr)
+      \;\sim\; \rho\, \tilde{v} \,\tilde{\lambda} \,\partial_z v \,\Delta t .
 \]
-Thus the turbulent momentum flux is proportional to the local shear $\partial_z v$, 
-with an \textbf{effective turbulent viscosity}
+Thus the turbulent momentum flux is proportional to the local shear $\partial_z v$, with an \textbf{effective turbulent viscosity}
 \[
-\nu_{\rm turb} \;\sim\; u \lambda .
+\nu_{\rm turb} \;\sim\; \tilde{v}\tilde{\lambda} ,\implies \eta = \rho\nu_{\rm turb} = \rho \tilde{v}\tilde{\lambda}.
 \]
-
+so that
+\[
+\frac{\Delta p_x}{\Delta t} = - \eta \frac{\partial v}{\partial z}.
+\]
+which is the \textbf{canonical form we anticipate}:
+\[
+\sigma_{xz} = - \eta \frac{\partial v}{\partial z}.
+\]
 \medskip
-A very similar argument applies to accretion disks.  
-Consider two neighboring annuli at radii $R$ and $R+\lambda$, where $\lambda$ is the radial displacement of turbulent eddies. 
-In steady state the mean radial velocity vanishes, so there is no net mass flux across the annulus boundary. 
-Nonetheless, turbulence exchanges fluid parcels between the annuli.
+\textbf{A very similar argument applies to accretion disks}.  Consider two neighboring annuli at radii $R$ and $R+\tilde{\lambda}$, where $\tilde{\lambda}$ is the radial displacement of turbulent eddies. In steady state the mean radial velocity vanishes, so there is no net mass flux across the annulus boundary. Nonetheless, turbulence exchanges fluid parcels between the annuli.
 
-The mass exchanged across the boundary per unit arc length $d\ell$ 
-in a time interval $dt$ is
+The mass exchanged across the boundary per unit arc length $d\ell$ in a time interval $dt$ is
 \[
 dm \;\sim\; \rho \, v_{\rm turb} \, H \, d\ell \, dt ,
 \]
-where $\rho$ is the midplane density, $H$ is the disk scale height, 
-and $v_{\rm turb}$ is the characteristic turbulent velocity.  
+where $\rho$ is the midplane density, $H$ is the disk scale height, and $v_{\rm turb}$ is the characteristic turbulent velocity.  
 
 Each parcel carries its specific angular momentum
 \[
 \ell(R) \;=\; R^2 \Omega(R).
 \]
-Expanding to first order in $\lambda$, the difference between parcels exchanged from 
-$R+\lambda$ and $R-\lambda$ is
+Expanding to first order in $\tilde{\lambda}$, the difference between parcels exchanged from 
+$R+\tilde{\lambda}$ and $R-\tilde{\lambda}$ is
 \[
-\ell(R+\lambda) - \ell(R-\lambda)
-   \;\approx\; 2\lambda \,\frac{d}{dR}\!\bigl(R^2\Omega\bigr).
+\ell(R+\tilde{\lambda}/2) - \ell(R-\tilde{\lambda}/2)
+   \;\approx (R+\tilde{\lambda}/2)^2\Omega(R+\tilde{\lambda}/2) - (R-\tilde{\lambda}/2)^2\Omega(R-\tilde{\lambda}/2).
 \]
-The bulk $2R\Omega$ term cancels in the symmetric exchange, 
-leaving only the shear contribution:
+This is effectively,
 \[
-\Delta \ell \;\approx\; 2\lambda \, R^2 \frac{d\Omega}{dR}.
+\ell(R+\tilde{\lambda}/2)-\ell(R-\tilde{\lambda}/2) \approx R^2 \Omega(R+\tilde{\lambda}/2) - R^2\Omega(R-\tilde{\lambda}/2) \sim\tilde{\lambda} R^2 \frac{d\Omega}{dR}.
+\]
+The bulk $2R\Omega$ term cancels in the symmetric exchange, leaving only the shear contribution:
+\[
+\Delta \ell \;\approx\;\tilde{\lambda} \, R^2 \frac{d\Omega}{dR}.
 \]
 \rmk{Formally, one evaluates this in a frame comoving with the inner annulus; in that frame only the differential shear, not the bulk motion, contributes.}
 
@@ -764,28 +1029,22 @@ The net angular momentum flux across the boundary per unit arc length is
 \[
 F_J \;\equiv\; \frac{dJ}{d\ell\,dt}
    \;\sim\; \rho \, v_{\rm turb}\, H \, \Delta \ell
-   \;\sim\; 2 \rho \, v_{\rm turb}\, H \, \lambda \, R^2 \frac{d\Omega}{dR}.
+   \;\sim\; \rho \, v_{\rm turb}\, H \,\tilde{\lambda} \, R^2 \frac{d\Omega}{dR}.
 \]
-The $r\phi$ component of the stress tensor, $\sigma_{r\phi}$, is defined
-as the flux of azimuthal momentum across a radial surface—i.e.\ the angular momentum flux per unit area. 
-Dividing by the vertical area element $H\,d\ell$ gives
+The $r\phi$ component of the stress tensor, $\sigma_{r\phi}$, is defined as the flux of azimuthal momentum across a radial surface—i.e.\ the angular momentum flux per unit area. Dividing by the vertical area element $H\,d\ell$ gives
 \[
 \sigma_{r\phi} \;\sim\; \frac{F_J}{H}
-   \;\sim\; 2 \rho \, v_{\rm turb}\, \lambda \, R^2 \frac{d\Omega}{dR}.
+   \;\sim\; \rho \, v_{\rm turb}\,\tilde{\lambda}\, R^2 \frac{d\Omega}{dR}.
 \]
-
 Finally, identifying the effective turbulent viscosity
 \[
-\nu_{\rm turb} \;\sim\; v_{\rm turb}\,\lambda ,
+\nu_{\rm turb} \;\sim\; v_{\rm turb}\,\tilde{\lambda} ,
 \]
 the stress reduces to the familiar viscous form
 \[
-\boxed{\;\sigma_{r\phi} \;=\; - \rho \,\nu_{\rm turb}\, R \frac{d\Omega}{dR}\;}
+\boxed{\;\sigma_{r\phi} \;=\; - \rho \,\nu_{\rm turb}\, R \frac{d\Omega}{dR}\; = -\eta R\frac{d\Omega}{dR}.}
 \]
-
-This is precisely the form obtained from the Navier--Stokes equations, 
-demonstrating the consistency between the molecular (statistical) intuition 
-and the macroscopic fluid-dynamical description of viscosity.
+This is precisely the form obtained from the Navier--Stokes equations, demonstrating the consistency between the molecular (statistical) intuition and the macroscopic fluid-dynamical description of viscosity.
 
 \subsection{Viscous Dissipation}
 
@@ -817,9 +1076,7 @@ This expression can be rearranged as
 d\dot{W} = d(\Omega \tau) - \tau\, d\Omega.
 \end{equation}
 The first term, $d(\Omega \tau)$, represents the \emph{convection} of angular momentum 
-through the disk and does not contribute to local heating.  
-The second term, $-\tau\,d\Omega$, \textbf{corresponds to the irreversible 
-conversion of mechanical energy into heat.}
+through the disk and does not contribute to local heating.  The second term, $-\tau\,d\Omega$, \textbf{corresponds to the irreversible conversion of mechanical energy into heat.}
 
 \medskip
 Dividing by the annular surface area $2\pi R\,dR$ (for each disk face), 

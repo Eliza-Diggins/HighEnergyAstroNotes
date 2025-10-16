@@ -401,16 +401,117 @@ In each case, the Bondi rate provides an order-of-magnitude estimate of fuel ava
 though real systems are often modified by angular momentum, turbulence, or feedback processes.
 \end{conceptbox}
 
-\section{Hoyle-Lyttleton Accretion}
+\section{Bondi--Hoyle--Lyttleton Accretion}
+\label{sec:BHL}
 
-- balistic characterization
-- limitations.
-- formalism
+When the accretor moves with respect to the ambient medium (or, equivalently, the medium flows past the accretor), spherical symmetry is broken and the appropriate idealized model is \textbf{Bondi--Hoyle--Lyttleton (BHL)} accretion. This captures \emph{gravitational focusing} of upstream streamlines into a downstream \emph{accretion column} and is the canonical toy model for wind-fed accretion in high-mass X-ray binaries, compact objects moving through the ISM, and black holes traversing gaseous environments.
+\par
+We consider an accretor of mass $M$ immersed in a uniform medium with density $\rho_\infty$ and sound speed $c_{s,\infty}$, experiencing a uniform relative flow with speed $v_{\rm rel}$ (equivalently, the accretor moves at $v_{\rm rel}$
+through a static medium). We assume:
+\vspace{10pt}
+\begin{enumerate}
+    \item \textbf{Steady state in the accretor frame}.
+    \item \textbf{Inviscid, non-magnetic, non-relativistic} hydrodynamics.
+    \item A \textbf{barotropic/polytropic} equation of state, $P=K\rho^\gamma$.
+    \item \textbf{Point-mass gravity} for the accretor.
+    \item The upstream medium is \textbf{homogeneous and isotropic} at infinity.
+\end{enumerate}
+\vspace{10pt}
+
+\subsection{The Heuristic Picture}
+
+In the accretor frame, upstream gas with impact parameter $b$ is focused by gravity. Particles with sufficiently small $b$ are gravitationally captured and funneled into a downstream \emph{wake} that feeds the accretor. Balancing kinetic/thermal energy against gravitational binding suggests the characteristic \textbf{accretion radius}
+\begin{equation}
+    r_{\rm acc} \;\equiv\; \frac{2GM}{v_{\rm eff}^2},
+    \qquad
+    v_{\rm eff} \;\equiv\; \sqrt{v_{\rm rel}^2 + c_{s,\infty}^2},
+    \label{eq:bhl_racc}
+\end{equation}
+which reduces to the Bondi radius when $v_{\rm rel}\to 0$. Streamlines with $b\lesssim r_{\rm acc}$ are strongly focused and can be captured. A geometric capture argument gives a mass flux through the ``accretion cylinder''
+of area $\pi r_{\rm acc}^2$:
+\[
+\dot M \sim \pi r_{\rm acc}^2 \rho_\infty v_{\rm eff}
+= \pi \left(\frac{2GM}{v_{\rm eff}^2}\right)^2 \rho_\infty v_{\rm eff}
+= 4\pi \frac{G^2 M^2 \rho_\infty}{v_{\rm eff}^{\,3}}.
+\]
+A more careful hydrodynamic analysis (and numerical calibration) yields the standard \textbf{BHL accretion rate}
+\begin{equation}
+    \boxed{
+    \dot M_{\rm BHL} \;=\; 4\pi\,\lambda(\gamma,{\cal M})\,
+    \frac{G^2 M^2\,\rho_\infty}{\big(v_{\rm rel}^2 + c_{s,\infty}^2\big)^{3/2}}
+    }
+    \label{eq:bhl_rate}
+\end{equation}
+where ${\cal M}\equiv v_{\rm rel}/c_{s,\infty}$ is the upstream Mach number and $\lambda(\gamma,{\cal M})$ is an order-unity dimensionless coefficient (reducing to the Bondi $\lambda(\gamma)$ for ${\cal M}\to 0$). The \emph{key scaling} is robust:
+\[
+\dot M_{\rm BHL} \;\propto\; M^2\,\rho_\infty\,v_{\rm eff}^{-3}.
+\]
+Thus, BHL accretion is \emph{extremely sensitive} to the relative speed $v_{\rm rel}$ and the upstream temperature through $c_{s,\infty}$.
+
+\subsection{BHL Accretion Morphology}
+
+The qualitative flow depends on the \textbf{Mach number} ${\cal M}$:
+
+\paragraph{Subsonic (${\cal M}<1$):}
+The pattern resembles a gently deflected flow with broad focusing into the wake.
+Pressure communicates upstream, smoothing gradients.
+
+\paragraph{Supersonic (${\cal M}>1$):}
+A \textbf{bow shock} forms upstream of the accretor with a stand-off distance
+$R_{\rm sh}\sim {\cal O}(r_{\rm acc})$. Downstream, a narrow, dense \emph{accretion column} forms along the symmetry axis and terminates at the inner boundary. The global topology is approximately axisymmetric but can exhibit
+time-dependent structure depending on cooling and dimensionality.
+
+\subsubsection{Dynamical Drag (Gaseous Dynamical Friction)}
+
+Gravitational focusing produces an overdense wake that exerts a \emph{drag} on the
+accretor. To leading order one expects a drag of order the accretion \emph{momentum}
+flux, $F_{\rm drag}\sim \dot M_{\rm BHL}\,v_{\rm rel}$, with additional
+contributions from the extended wake (``dynamical friction''). The drag scales
+$\propto \rho_\infty M^2 v_{\rm eff}^{-2}$ and can be dynamically important for
+compact objects in dense media or for SMBHs moving in galactic gas.
+
+\subsubsection{Angular Momentum and Disc Formation}
+
+Even tiny upstream gradients (in density or velocity) or turbulence impart specific
+angular momentum to the captured flow. Although the \emph{ideal} BHL solution is
+axisymmetric with zero net $j$, realistic BHL flows generically form small discs or
+\emph{mini-discs} around the accretor once material circularizes at $r_{\rm circ}\!\sim\! j^2/(GM)$. Thus, BHL is best viewed as the \emph{capture} stage; the inner accretion geometry often departs from the purely ballistic picture.
+
+\subsection{Feasibility and Order-of-Magnitude Estimates}
+
+Using Eq.~\eqref{eq:bhl_rate}, a handy normalization is
+\begin{equation}
+\dot M_{\rm BHL} \;\simeq\;
+4\pi\,\lambda\,\frac{G^2 M^2 \rho_\infty}{\big(v_{\rm rel}^2 + c_{s,\infty}^2\big)^{3/2}}
+\;\approx\;
+6.3\times 10^{15}\,\lambda\,
+\left(\frac{M}{10\,M_\odot}\right)^{\!2}
+\left(\frac{n}{10^{10}\,{\rm cm^{-3}}}\right)
+\left(\frac{v_{\rm eff}}{1000\,{\rm km\,s^{-1}}}\right)^{-3}
+\ \frac{{\rm g}}{\rm s},
+\end{equation}
+where $\rho_\infty=\mu m_p n$ and $v_{\rm eff}=\sqrt{v_{\rm rel}^2+c_{s,\infty}^2}$.
+The $v_{\rm eff}^{-3}$ dependence means fast winds \textbf{dramatically quench accretion}, while dense, slow flows can yield appreciable $\dot M$. A corresponding luminosity estimate $L\simeq \eta \dot M c^2$ must be tempered by geometry (mini-discs, shocks) and radiative efficiency (often $\eta\ll 0.1$ for inefficient, quasi-spherical flows).
 
 \subsection*{Summary and Key Formulae}
 
-\section{Bondi-Hoyle-Lyttleton Accretion}
+\begin{bigidea}
+\textbf{Bondi--Hoyle--Lyttleton: Must-Remember Formulae}
+\begin{align*}
+r_{\rm acc} &= \frac{2GM}{v_{\rm rel}^2 + c_{s,\infty}^2},
+\qquad
+v_{\rm eff}=\sqrt{v_{\rm rel}^2+c_{s,\infty}^2} \\[6pt]
+\dot M_{\rm BHL} &= 4\pi\,\lambda(\gamma,{\cal M})\,
+\frac{G^2 M^2 \rho_\infty}{\big(v_{\rm rel}^2 + c_{s,\infty}^2\big)^{3/2}}
+\;\;\;\; \propto\; M^2 \rho_\infty v_{\rm eff}^{-3} \\[6pt]
+\text{Bow shock (}\mathcal{M}>1\text{)}&:\ \ R_{\rm sh}\sim \mathcal{O}(r_{\rm acc}),\ \ \text{narrow downstream column} \\[6pt]
+F_{\rm drag} &\sim \dot M_{\rm BHL}\,v_{\rm rel}\ \ \propto\ \rho_\infty M^2 v_{\rm eff}^{-2}
+\end{align*}
+\textbf{Takeaway:} BHL accretion is a gravitational capture process regulated by
+$v_{\rm eff}^{-3}$. It smoothly connects to Bondi for $v_{\rm rel}\!\to\!0$, but in
+wind-fed systems the large $v_{\rm rel}$ (and often large $c_{s,\infty}$) suppresses
+$\dot M$ unless the flow is sufficiently dense and slow. Small angular-momentum
+seeds generically produce mini-discs, making BHL a capture model rather than a
+strictly disc-free accretion solution.
+\end{bigidea}
 
-Summary and Key Formulae
-
-\subsection{Issues with BHL Accretion}
