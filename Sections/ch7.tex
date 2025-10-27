@@ -21,16 +21,32 @@ The velocity field of the gas is denoted ${\bf u} = (v_r, v_\phi, v_z)$, with th
 \[
 v_\phi(R,t) = R\,\Omega(R,t),
 \]
-where $\Omega(R,t)$ is the \textbf{angular velocity field} describing the disk’s differential rotation. The \textbf{viscosity} of the disk is another relevant quantity which we will denote by $\nu(R,t)$ (\rmk{this is the effective / turbulent kinematic viscosity}) such that the \textbf{viscous stress tensor} has the form
+where $\Omega(R,t)$ is the \textbf{angular velocity field} describing the disk’s differential rotation.
+\subsection{Viscosity}
+As was discussed in the previous chapter, there are \textbf{viscous effects} which play a role in the theory of accretion disks. As such, we will need to consider them in our fluid dynamics.
+\par
+We will, for the sake of generality, consider some \textbf{shear viscosity} which is
 \[
-\tau_{r\phi} \;\equiv\; \rho\,\nu\,R\,\frac{d\Omega}{dR}
+\nu = \nu(R,t).
 \]
-Its vertical integral is
+In is typical to assign the \textbf{$\alpha$-prescription} here, but not necessary for the general discussion we are going to have preliminarily.
+\par
+As we proved in the previous chapter, the \textbf{viscous stress tensor} has the form
+\[
+\sigma_{r\phi} \;\equiv\; \rho\,\nu\,R\,\frac{d\Omega}{dR}.
+\]
+\rmk{Remember, this is the \textbf{force per area} exerted on a surface by viscous processes.}
+\par
+Now, for a particular region of area $dA = R\;dzd\phi$ at a distance $R$ from the center of the disk, the \textbf{torque} is
+\[
+\tau = R\sigma_{r\phi} dA = R^2\sigma_{r\phi} \;dz\;d\phi = \rho \nu R^3 \Omega'\;dz\;d\phi.
+\]
+The \textbf{total torque} exerted on a particular cylinder is then 
 \begin{equation}
-W_{r\phi}(R,t) \;\equiv\; \int_{-\infty}^{\infty}\tau_{r\phi}\,dz
-\;=\; \nu\,\Sigma\,R\,\frac{d\Omega}{dR}.
-\label{eq:Wrphi_def}
+    \label{eq:G_def}
+G = \int_{-\infty}^{\infty} \;dz \;\int_{0}^{2\pi}\; \rho \nu R^3 \Omega' \;d\phi = 2\pi \Sigma \nu R^3 \Omega'.
 \end{equation}
+We also recognize that have (by choosing $\tau \propto \sigma$ instead of $\tau \propto -\sigma$) that this is the torque \textbf{on the inside of the cylinder} from the \textbf{outside of the cylinder.} As such, we $\Omega' < 0$, the inside is \textbf{losing angular momentum}, which is as expected. We are now ready to start performing the fluid dynamics in earnest.
 
 \subsection*{The Continuity Equation}
 
@@ -54,57 +70,58 @@ Thus, we arrive at the first of our \textbf{critical equations}:
 \;}
 \label{eq:continuity_disk_general}
 \end{equation}
+This is our \textbf{continuity equation} in axisymmetric coordinates.
 
 \subsection*{Angular Momentum Conservation}
 
-Let's now turn our attention to the conservation of angular momentum in the disk. Clearly the angular momentum density is
+In order to discuss the \textbf{conservation of angular momentum}, let's keep track of the \textbf{surface angular momentum density}, which we will denote as $\ell$ and write
 \[
-\boldsymbol{\ell} = \rho {\bf u} \times {\bf r} = \Sigma R^2 \Omega \;\hat{\bf z}.
+\ell = \Sigma R^2 \Omega.
 \]
-There are \textbf{two modes of angular momentum transport}: viscous transfer and advective transfer. The advective transfer is determined by the \textbf{radial flux} which is
+Angular momentum in a viscous disk can be transported in two distinct ways:
+\begin{enumerate}
+    \item \textbf{Advection:} bulk motion of the gas carries angular momentum inward or outward;
+    \item \textbf{Viscous stresses:} internal friction between adjacent annuli transports angular momentum through the disk.
+\end{enumerate}
+\vspace{10pt}
+The first transfer modality we need to pay attention to is \textbf{advection}, which can occur across a cylindrical laminae of the disk. Given a \textbf{radial drift} velocity $v_r$, a linear flux density (mass per unit length) of mass passes through the boundary carrying $\ell$, which means that
 \[
-f_\ell = \underbrace{\Sigma R^2 \Omega}_{\text{Ang. Mom.}} \cdot v_r. 
+f_\ell = \Sigma R^2 \Omega v_r
 \]
-The total viscous torque exerted across a cylinder of radius $R$ is 
-\begin{equation}
-G(R,t) \;=\; \underbrace{2\pi R}_{\rm circumference} 
-\times 
-\underbrace{(R\,W_{r\phi})}_{r\times F}
-\;=\; 2\pi R^2\,W_{r\phi}.
-\end{equation}
-Here the factor $2\pi R$ integrates the torque per unit azimuthal length around the ring, while the extra factor of $R$ arises from the lever arm.  
-Substituting $W_{r\phi} = \nu\,\Sigma\,R\,\tfrac{d\Omega}{dR}$ gives
-\begin{equation}
-G(R,t) \;=\; 2\pi R^3\,\nu\,\Sigma\,\frac{d\Omega}{dR}.
-\end{equation}
-Because $d\Omega/dR < 0$ for Keplerian rotation, it is conventional to define the outward torque as positive, giving
+is the \textbf{linear angular momentum flux density}. 
+\par
+We can also \textbf{transfer viscously}. For a laminae of the disk of radius $\delta R$, there is an inner and outer torque and the net-torque is 
+\[
+G_{\rm net} = G(R+\delta R) - G(R) = \frac{dG}{dR} \delta R.
+\]
+the resulting torque \textbf{per unit area} (angular momentum loss / gain per unit area) is
+\[
+\frac{(dG/dR)\delta R}{2\pi R \delta R} = \frac{1}{2\pi R} \frac{dG}{dR}.
+\]
+As such, if we tie these together into a conservation law,
 \begin{equation}
 \boxed{
-G(R,t)
-= -\,2\pi R^3\,\nu\,\Sigma\,\frac{d\Omega}{dR}.
+\frac{\partial}{\partial t}\!\left(\Sigma R^2 \Omega\right)
++ \frac{1}{R}\frac{\partial}{\partial R}\!\left(R\,\Sigma v_r\,R^2 \Omega\right)
+= \frac{1}{2\pi R}\frac{\partial G}{\partial R}.
 }
-\label{eq:G_def}
-\end{equation}
-Conservation of angular momentum—including both advection and viscous transport—then reads
-\begin{equation}
-\boxed{\;
-\frac{\partial}{\partial t}\!\left(\Sigma R^2\Omega\right)
-+ \frac{1}{R}\frac{\partial}{\partial R}\!\left(R\,\Sigma\,v_r\,R^2\Omega\right)
-= \frac{1}{2\pi R}\,\frac{\partial G}{\partial R}.
-\;}
 \label{eq:angmom_cons_disk}
 \end{equation}
-Substituting equation~\eqref{eq:G_def} gives the standard vertically integrated angular–momentum equation for a viscous, axisymmetric accretion disk:
+The right-hand side represents the difference in viscous torque between neighboring annuli, i.e.\ the net angular momentum injected or removed by shear.
+\rmk{We're getting the $2\pi R$ term because we had to integrate over a surface.}
+Substituting equation~\eqref{eq:G_def} into the conservation law~\eqref{eq:angmom_cons_disk} gives the standard vertically integrated angular–momentum equation for a viscous, axisymmetric disk:
 \begin{equation}
-\boxed{\;
+\boxed{
 \frac{\partial}{\partial t}\!\left(\Sigma R^2\Omega\right)
 + \frac{1}{R}\frac{\partial}{\partial R}\!\left(R\,\Sigma\,v_r\,R^2\Omega\right)
 = \frac{1}{R}\frac{\partial}{\partial R}
    \!\left(\nu\,\Sigma\,R^3\,\frac{d\Omega}{dR}\right).
-\;}
+}
 \label{eq:angmom_cons_viscous}
 \end{equation}
-This is the vertically integrated form of angular momentum conservation in a viscous disk and forms the foundation of the thin–disk diffusion equation derived in the next section.
+This equation states that the evolution of the angular momentum in a viscous disk results from the competition between advection by the radial flow (left-hand side) and viscous torques between adjacent rings (right-hand side).  
+It provides the physical foundation for the thin–disk diffusion equation derived in the next section.
+
 
 \subsection*{The Diffusion Equation of Disk Dynamics}
 Comparing equations \eqref{eq:angmom_cons_disk} and \eqref{eq:continuity_disk_general}, one can eliminate $v_r$ in favor of the torque gradient. \rmk{This is a simple manipulation: $\Omega$ is a function of $R$ alone, so you simply clarify the time derivative and substitute continuity.} This leads directly to the well-known \textbf{diffusion equation for thin accretion disks}:
@@ -272,16 +289,77 @@ t_{\rm visc} \sim \frac{\ell^2}{\nu} \sim \frac{\ell}{v_R},
 \]
 which means that \textbf{shorter / sharper} features in the accretion disk will \textbf{decay more quickly} than those which are less pronounced. This serves to \textbf{smooth out} the disk. We have now accomplished all of the \textbf{general} fluid dynamics we will need for the thin disk model. We can now discuss the core physics of the model!
 
-\newpage
-\section{Assumptions of the Thin Disk Model}
-
 \begin{bigidea}
-The \textbf{thin disk model} is a physically motivated \emph{approximation scheme}. By making a hierarchy of geometric, dynamical, and thermodynamic simplifications, we reduce the full three-dimensional, time-dependent hydrodynamic problem to a one-dimensional, vertically integrated system. Its strength lies not in its realism, but in its self-consistent internal logic and its ability to describe a wide range of astrophysical disks with a small set of parameters.
+    We can actually get $t_{\rm visc}$ much more heuristically. Note that the Navier-Stokes equation in the incompressible limit looks like
+    \[
+    \partial_t {\bf u} + \ldots = \ldots + \nu \nabla^2{\bf u},
+    \]
+    which means that for a characteristic length $\ell$ and time $t_{\rm visc}$,
+    \[
+    \frac{{\bf u}}{t_{\rm visc}} \sim \nu {\bf u}/\ell^2 \implies t_{\rm visc} = \frac{\ell^2}{\nu}.
+    \]
 \end{bigidea}
 
-We will begin by laying out the assumptions and prescriptions that define the model. These assumptions serve both to simplify the governing equations and to encode the physical regime in which the thin disk approximation holds. They can be grouped into three categories: (i) \textbf{structural assumptions}, which define the geometry and kinematics of the disk;  (ii) \textbf{physical prescriptions}, which specify how turbulence, pressure, and viscosity are modeled; and (iii) \textbf{consistency conditions}, which summarize the dynamical consequences that must follow if the model is valid.
+\newpage
 
-\subsection{I. Structural Assumptions}
+\section{Overview of Thin Disk Accretion}
+
+We are now ready to explore the \textbf{structure of the thin accretion disk model}.  Because the derivation involves many interdependent quantities, it is easy to lose sight of the physical picture.  Before diving into the detailed equations, we will first summarize the key variables and the logical structure of the model.
+
+\subsection{The Model Structure}
+
+The \textbf{thin accretion disk} is described by a set of coupled dynamical and thermodynamic variables.  Each depends on the radial coordinate $R$ and is connected to the others through physical relations \textbf{such as hydrostatic balance, angular momentum conservation, and radiative diffusion}. The primary variables are listed below:
+
+\begin{table}[ht!]
+\centering
+\caption{Primary dynamical and thermodynamic variables of the thin accretion disk.}
+\begin{tabular}{p{3cm}|p{1.5cm}|p{9cm}}
+\hline
+\textbf{Quantity} & \textbf{Symbol} & \textbf{Notes} \\
+\hline
+Density & $\rho(R)$ &
+Midplane mass density of the disk gas.  Related to surface density through $\Sigma = 2\rho H$. \\[4pt]
+Surface Density & $\Sigma(R)$ &
+Vertically integrated density; couples to $\rho$ and $H$ through hydrostatic equilibrium. \\[4pt]
+Scale Height & $H(R)$ &
+Vertical pressure scale height, given by $H = c_s / \Omega_K$, where $c_s$ is the sound speed. \\[4pt]
+Temperature & $T(R)$ &
+Midplane temperature; sets the sound speed $c_s$, pressure, and effective viscosity. \\[4pt]
+Radial Velocity & $v_r(R)$ &
+Mean inflow velocity determined by mass conservation:
+$\dot{M} = 2\pi R \Sigma |v_r|$. \\[4pt]
+Viscosity & $\nu(R)$ &
+Effective (turbulent) kinematic viscosity.  Commonly parameterized by $\nu = \alpha c_s H$, though any physically motivated prescription $\nu(\rho, T, R)$ may be used. \\[4pt]
+Optical Depth & $\tau(R)$ &
+Vertical optical depth, $\tau = \tfrac{1}{2}\kappa(\rho,T)\Sigma$.  
+Not an independent quantity; determined from the opacity law $\kappa(\rho,T)$ and the surface density. \\[4pt]
+\hline
+\end{tabular}
+\label{tab:disk_variables}
+\end{table}
+
+\par
+To close the system, several additional \textbf{input prescriptions} are required:
+\vspace{10pt}
+\begin{itemize}
+    \item the \textbf{viscosity law} $\nu(\rho, T, R)$, such as the $\alpha$-disk model $\nu = \alpha c_s H$;
+    \item the \textbf{opacity law} $\kappa(\rho, T)$, which specifies the radiative transport regime (e.g.\ Kramers opacity or electron scattering);
+    \item and the \textbf{global parameters} --- the accretion rate $\dot{M}$ and central mass $M$.
+\end{itemize}
+\vspace{10pt}
+With these specified, the coupled equations of mass conservation, angular momentum conservation, hydrostatic balance, and energy balance can be solved self-consistently for all disk quantities: $\rho(R)$, $\Sigma(R)$, $T(R)$, $H(R)$, $\nu(R)$, $v_r(R)$, and $\tau(R)$.  From these, one can derive secondary observables such as the midplane pressure, emergent flux, and effective temperature.
+\par
+In what follows, we will build up the model by connecting three key aspects:
+\begin{enumerate}
+    \item the \textbf{density structure} of the disk, governed by hydrostatic equilibrium;
+    \item the \textbf{local thermodynamics}, relating pressure, temperature, and sound speed;
+    \item and the \textbf{energy balance}, linking viscous dissipation and radiative cooling.
+\end{enumerate}
+Together, these relations define the full self-consistent solution of the thin accretion disk.
+\par
+Before we proceed to the derivation, we will want to also address various assumptions that go into the model.
+
+\subsection{Structural Assumptions}
 
 \begin{table}[ht!]
 \centering
@@ -308,7 +386,7 @@ While these assumptions are reasonable in many situations, there are notable sit
 Likewise, there are some rare scenarios where self-gravity becomes relevant: particularly in circumstellar disks and in massive AGN disks.
 
 
-\subsection{II. Physical Prescriptions}
+\subsection{Physical Prescriptions}
 
 \begin{table}[ht!]
 \centering
@@ -330,7 +408,7 @@ Likewise, there are some rare scenarios where self-gravity becomes relevant: par
 
 On top of the core assumptions that we have stipulated above, we make a number of prescriptions about the physics. These assumptions \textbf{close the system of equations} by prescribing how pressure, viscosity, and energy transport behave.
 
-\subsection{III. Consistency Conditions}
+\subsection{Consistency Conditions}
 
 If the above assumptions hold, several scaling relations and inequalities follow naturally.  
 These relations are not separate assumptions, but \emph{self-consistency checks} that must be satisfied within the thin disk regime.
@@ -373,11 +451,11 @@ Just as we saw in the \textbf{Bondi accretion} derivation, this corresponds to c
     \dot{M} = 2\pi R \Sigma (-v_R).
     }
 \end{equation}
-Already, we have achieved a very \textbf{powerful statement about accretion rates}. This has the same benefits that it did in the Bondi scenario: we were able to self-consistently understand the constant rate of accretion in terms of the external parameters. In this case, specifying $\dot{M}$ fixes many of the internal parameters of the model!
+Already, we have achieved a very \textbf{powerful statement about accretion rates}. This has the same benefits that it did in the Bondi scenario: we were able to self-consistently understand the constant rate of accretion in terms of the external parameters. In this case, specifying $\dot{M}$ fixes many of the internal parameters of the model! \rmk{This is the first of \textbf{many} of the constitutive equations that we will rely on to close the model parameters.}
 
 \subsection{Boundary Conditions}
 
-So far we have characterized the thin disk using the continuity equation, but we have not yet made any specifications for the model at the boundary. In order to do this, we use the angular momentum conservation equation with no time dependence. This takes the form
+So far we have characterized the thin disk using the continuity equation, but we have not yet made any specifications for the model at the boundary.\textbf{ In order to do this, we use the angular momentum conservation equation with no time dependence.} This takes the form
 \begin{equation}
 \label{eq:disk_steady_integral}
     R^3 \Sigma v_R \Omega = \frac{G}{2\pi} + \frac{C}{2\pi}.
@@ -418,7 +496,8 @@ If we insist that $\Omega \propto R^{-3/2}$, then $\partial_R \Omega = -(3/2)\Om
     \nu\Sigma = \frac{\dot{M}}{3\pi}\left[1 - \left(\frac{R_{I}}{R}\right)^{1/2}\right].
     }
 \end{equation}
-This expression tells us that the surface density (weighted by viscosity) is \textbf{proportional to the accretion rate} and the term in the parenthesis scales from $0$ (at ISCO) out to $1$ at large radii.
+This expression tells us that the surface density (weighted by viscosity) is \textbf{proportional to the accretion rate} and the term in the parenthesis scales from $0$ (at ISCO) out to $1$ at large radii. \rmk{This is the \textbf{second} of our critical relations!}
+
 \vspace{10pt}
 \paragraph{Surface Boundary}
 In a scenario where the accretor has a \textbf{material surface} (e.g.\ a neutron star), the inner boundary at $R_*$ may exert a finite torque $G_*$ on the disk. In this case, equation~\eqref{eq:disk_steady_integral} becomes
@@ -447,12 +526,29 @@ Rearranging gives
 where $j(R) = R^2\Omega(R)$ is the specific angular momentum at radius $R$ and $j_* = R_*^2 \Omega_*$ is that at the stellar surface.  
 
 This expression shows that the surface density (weighted by viscosity) is again \textbf{proportional to the accretion rate}, but now explicitly depends on the \emph{torque applied at the surface}. For $G_*=0$ (no torque, as in the black hole case), we recover equation~\eqref{eq:viscous_density_free_surface}. For a material surface with spin, however, $G_*$ modifies the inner boundary behavior and alters the dissipation profile in the inner disk.
+\par
+\begin{bigidea}
+We have now established the \textbf{two foundational relations} that form the backbone of the thin--disk model:
+\[
+\begin{aligned}
+\dot{M} &= 2\pi R \Sigma (-v_R)
+& \hspace{2em} & 
+(\dot{M},\, \Sigma,\, v_R)
+\\[1em]
+\nu\Sigma &= \frac{\dot{M}}{3\pi}\!\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right]
+& &
+(\nu,\, \Sigma,\, \dot{M},\, R_{\rm in},\, R)
+\label{eq:summary_viscous_surface_density}
+\end{aligned}
+\]
+The first expresses \textbf{mass conservation}---the constancy of the mass flux through the disk at steady state.  
+The second arises from \textbf{angular momentum conservation} and encodes how the combination $\nu\Sigma$ adjusts to enforce the specified inner boundary condition.  
+Together, they define the global flow of mass and angular momentum in the disk.
+\end{bigidea}
+
 \vspace{10pt}
 \subsection{Energy Dissipation in the Thin Disk}
-Having established the steady--state surface density structure of the disk, we now turn to the question of 
-\textbf{energy dissipation}. In an accretion disk, viscous stresses transport angular momentum outward, and 
-the resulting loss of gravitational binding energy is dissipated locally as heat. This viscous dissipation is 
-ultimately responsible for the observed radiative luminosity of the disk.
+Having established the steady--state surface density structure of the disk, we now turn to the question of \textbf{energy dissipation}. In an accretion disk, viscous stresses transport angular momentum outward, and the resulting loss of gravitational binding energy is dissipated locally as heat. This viscous dissipation is ultimately responsible for the observed radiative luminosity of the disk.
 \vspace{0.3cm}
 \noindent
 The dissipation rate per unit surface area of the disk at radius $R$ is, from equation~\eqref{eq:disk_dissipation_per_unit_area},
@@ -558,6 +654,19 @@ At large radii ($R \gg R_{\rm in}$), the bracket tends to $3$, indicating that e
 This redistribution of energy explains both the centrally concentrated emission and the fact that 
 the outer disk shines more brightly than would be expected from its own gravitational potential energy alone.
 
+\begin{bigidea}
+The \textbf{dissipation law for a steady, Keplerian thin disk} is
+\begin{equation}
+\boxed{
+\
+D(R) = \frac{3}{8\pi}\,\frac{GM\dot{M}}{R^3}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].\;\;\;\;(D,\, R,\, R_{\rm in},\, M,\, \dot{M})
+}
+\end{equation}
+This is the central result connecting angular momentum transport, viscous heating, and the emergent luminosity of the thin disk.
+\end{bigidea}
+
+
 \subsection{Vertical Structure of the Thin Disk}
 
 We now turn to the \textbf{vertical structure} of the thin accretion disk.  Because the disk is rotationally supported in the radial direction and the \textbf{vertical velocity is negligible} ($v_z \approx 0$),  the disk must be in \textbf{vertical hydrostatic equilibrium} (HSE). This means that the vertical pressure gradient balances the vertical component of gravity. In cylindrical coordinates $(R, \phi, z)$, neglecting disk self-gravity, the vertical component of the \textbf{Euler Equation} is
@@ -613,7 +722,26 @@ Thus, the vertical density profile is Gaussian:
 \exp\!\left[-\,\frac{z^2}{2H^2}\right],
 }
 \end{equation}
-where $\rho_0(R)$ is the midplane density. Notably, this is why we so frequently care to model \textbf{Gaussian Disks}!
+where $\rho_0(R)$ is the midplane density. Notably, this is why we so frequently care to model \textbf{Gaussian Disks}! If we integrate over this, we obtain
+\begin{equation}
+    \boxed{
+    \Sigma = \sqrt{2\pi} \rho_0 H.
+    }
+\end{equation}
+Likewise, if we want to know the pressure balance, we can return to the differential equation. Clearly
+\[
+dP = - \rho \Omega_k^2 z\;dz = - \rho_0 \exp\left(\frac{-z^2}{2H^2}\right) \Omega_k^2z \;dz.
+\]
+If we integrate this equation from $0$ to $\infty$, we find
+\[
+P_0 = \rho_0 \Omega_K^2 H^2 \implies P_0 = \frac{1}{\sqrt{2\pi}} \Sigma \Omega_k^2 H.
+\]
+As such, we find a relationship between the central pressure at the scale height:
+\begin{equation}
+    \boxed{
+    P_0 = \frac{1}{\sqrt{2\pi}} \Sigma \Omega_k^2 H.
+    }
+\end{equation}
 \par
 The \textbf{thin-disk approximation} requires that the disk be geometrically thin, i.e.
 \begin{equation}
@@ -673,6 +801,24 @@ v_\phi(R) \simeq v_K(R) = \sqrt{\frac{GM}{R}}.
 }
 \end{equation}
 
+\begin{bigidea}
+We have now established two of the key \textbf{vertical structural relations} that connect the thermodynamic and geometric properties of the thin disk:
+\[
+\begin{aligned}
+H &= \frac{c_s}{\Omega_K}
+& \hspace{3em} &
+(H,\, c_s,\, \Omega_K)
+\\[1em]
+\rho_0 &= \frac{\Sigma}{\sqrt{2\pi}\,H}
+& &
+(\rho_0,\, \Sigma,\, H)
+\end{aligned}
+\]
+The first defines the \textbf{vertical scale height} in hydrostatic equilibrium, showing that vertical thickness is set by the ratio of sound speed to orbital speed.  
+The second links the \textbf{midplane density} to the surface density through the Gaussian vertical structure.  
+Together, these provide the bridge between local thermodynamics (through $c_s$ and $T$) and the global mass distribution (through $\Sigma$).
+\end{bigidea}
+
 \subsection{Radiative Transport in Thin Disks}
 
 At this point, we have solved \textbf{independently} for the structure of the vertical disk:
@@ -692,6 +838,7 @@ P = \frac{\rho k_B T}{\mu m_p} + \frac{4\sigma_{\rm SB}}{3c}T^4.
 \]
 \bigskip
 \noindent
+\par
 Clearly, this equation of state alone does not \emph{close} the system of disk equations: we still lack a relation describing how energy generated by viscous dissipation is transported and radiated away. To proceed, we therefore introduce an \textbf{energy equation} based on radiative diffusion.
 
 \subsubsection*{Radiative Transfer and the Diffusion Approximation}
@@ -758,61 +905,251 @@ Finally, energy conservation in the steady state requires that the vertical dive
 \end{equation}
 Integrating this from the midplane ($z=0$, where $F=0$ by symmetry) to the disk surface ($z=H$, where $F=F_{\rm surf}$) yields the emergent flux:
 \[
+\boxed{
 F_{\rm surf} = \frac{9}{8}\,\nu\,\Sigma\,\Omega_K^2,
+}
 \]
 which must equal the radiative flux escaping from each face of the disk:
 \begin{equation}
-F_{\rm surf} = \sigma_{\rm sb}T_{\rm eff}^4.
+\boxed{
+F_{\rm surf} = \sigma_{\rm sb}T_{\rm eff}^4 = \frac{9}{8}\nu \Sigma\Omega_K^2.
+}
 \end{equation}
 This condition provides the final \textbf{closure relation} linking the vertical temperature gradient, midplane temperature, and effective surface temperature via radiative diffusion, completing the thermal structure of the thin disk.
-
-\section{The Canonical Formulation of the Thin Disk Model}
-
-The various equations derived above now form a closed system of eight algebraic relations linking the key local disk quantities
+\par
+We'd also like to know about the \textbf{core temperature} not just the \textbf{effective temperature}. We can do this using the \textbf{mean diffusion equation} written above:
+\begin{equation}
+F(z)\;=\;-\frac{16\sigma_{\rm sb}T^3}{3\,\kappa_R\rho}\,\frac{dT}{dz},
+\label{eq:diffusion_depth_start}
+\end{equation}
+introduce the Rosseland optical depth $\tau$ measured downward from the surface,
 \[
-\left\{\,\rho_c,\,H,\,c_s^2,\,P_c,\,T_c,\,T_{\rm eff},\,\nu,\,\Sigma\,\right\},
+d\tau \;\equiv\; -\,\kappa_R\,\rho\,dz,
+\qquad\Rightarrow\qquad
+\frac{d}{dz} \;=\; -\,\kappa_R\rho\,\frac{d}{d\tau}.
 \]
-together with the external parameters $\dot{M}$, $M$, $\alpha$, and the opacity law $\kappa_R(\rho, T)$.
+Equation~\eqref{eq:diffusion_depth_start} then becomes
+\begin{equation}
+F(\tau)\;=\;\frac{16\sigma_{\rm sb}T^3}{3}\,\frac{dT}{d\tau}
+\;=\;\frac{4\sigma_{\rm sb}}{3}\,\frac{dT^4}{d\tau}.
+\label{eq:F_tau_relation}
+\end{equation}
 
-\begin{table}[ht!]
-\centering
-\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{p{0.40\linewidth} p{0.52\linewidth}}
-\toprule
-\textbf{Equation} & \textbf{Description} \\
-\midrule
-$P_c = \rho_c k_B T_c / (\mu m_p) + (4\sigma_{\rm sb}/3c)T_c^4$ 
-& Equation of state (gas + radiation pressure). \\[4pt]
-$c_s^2 = P_c / \rho_c$ 
-& Definition of sound speed. \\[4pt]
-$H = c_s / \Omega_K$ 
-& Vertical hydrostatic equilibrium (defines scale height). \\[4pt]
-$\Sigma = \sqrt{2\pi}\,\rho_c\,H$ 
-& Surface density from vertical integration. \\[4pt]
-$F = \sigma_{\rm sb} T_{\rm eff}^4 = (9/8)\nu\Sigma\Omega_K^2$ 
-& Local energy balance between viscous heating and radiation. \\[4pt]
-$T_c^4 = \frac{3}{8}\kappa_R \Sigma T_{\rm eff}^4$ 
-& Vertical temperature relation (radiative diffusion). \\[4pt]
-$\nu = \alpha c_s H$ 
-& Shakura–Sunyaev $\alpha$ viscosity prescription. \\[4pt]
-$\nu\Sigma = \dot{M}/(3\pi)\,[1 - (R_{\rm in}/R)^{1/2}]$ 
-& Steady–state mass accretion constraint. \\[4pt]
-\bottomrule
-\end{tabular}
-\caption{The eight canonical thin–disk equations, forming a closed local system for $\rho_c$, $H$, $c_s$, $P_c$, $T_c$, $T_{\rm eff}$, $\nu$, and $\Sigma$ at a given radius $R$.}
-\label{tab:canonical_eqs}
-\end{table}
+In radiative equilibrium (grey atmosphere with the Eddington closure), the vertical flux is
+depth–independent and equal to the emergent flux from one disk face:
+\[
+F(\tau)\;=\;F_{\rm surf}\;=\;\sigma_{\rm sb}T_{\rm eff}^4
+\quad \text{(constant in $z$)}.
+\]
+Substituting into \eqref{eq:F_tau_relation} and integrating from the surface
+($\tau=0$) downward gives
+\begin{equation}
+T^4(\tau)\;=\;\frac{3}{4}\,T_{\rm eff}^4\,\big(\tau + q\big),
+\label{eq:grey_profile_general}
+\end{equation}
+where $q$ is an order–unity boundary constant that depends on the closure. For the
+standard Eddington boundary condition one has $q=2/3$, yielding the familiar grey–atmosphere profile
+\begin{equation}
+\boxed{ \; T^4(\tau)\;=\;\frac{3}{4}\,T_{\rm eff}^4\!\left(\tau + \frac{2}{3}\right). \;}
+\label{eq:grey_profile}
+\end{equation}
 
+For a thin disk with two identical faces, the (one–sided) Rosseland depth to the midplane is
+\[
+\tau_c \;\equiv\; \int_0^{\infty}\kappa_R\rho\,dz
+\;=\;\frac{1}{2}\,\kappa_R\,\Sigma,
+\]
+so the midplane temperature $T_c\equiv T(\tau_c)$ follows from \eqref{eq:grey_profile}:
+\begin{equation}
+\boxed{ \;
+T_c^4 \;=\;\frac{3}{4}\,T_{\rm eff}^4\!\left(\tau_c + \frac{2}{3}\right)
+\;=\;\frac{3}{4}\,T_{\rm eff}^4\!\left(\frac{\kappa_R\Sigma}{2} + \frac{2}{3}\right).
+\;}
+\label{eq:Tc_Teff_exact}
+\end{equation}
+In the optically thick limit $\tau_c\gg1$ this reduces to the widely used relation
+\begin{equation}
+\boxed{ \;
+T_c^4 \;\simeq\; \frac{3}{4}\,\tau_c\,T_{\rm eff}^4
+\;=\;\frac{3}{8}\,\kappa_R\,\Sigma\,T_{\rm eff}^4.
+\;}
+\label{eq:Tc_Teff_tau}
+\end{equation}
+\begin{itemize}
+\item The opacity enters through $\tau_c=\tfrac{1}{2}\kappa_R(\rho,T_c)\,\Sigma$, so
+\eqref{eq:Tc_Teff_tau} implicitly couples $T_c$ to $(\Sigma,\rho)$ and the chosen opacity law.
+\item Equation~\eqref{eq:grey_profile} assumes a grey, isotropic radiation field with the Eddington boundary condition. Alternative closures shift the constant $2/3$ but leave the $\propto (\tau+{\rm const})$ structure intact.
+\item If vertical viscous heating is explicitly distributed with height (so that $dF/dz=q^+(z)$), one obtains a slightly modified $T(\tau)$; in practice, for $\tau_c\gg1$, the midplane relation \eqref{eq:Tc_Teff_tau} remains accurate to order unity.
+\end{itemize}
+\begin{bigidea}
+The \textbf{radiative flux} emerging from each face of a steady, optically thick, viscous accretion disk is
+\begin{equation}
+\boxed{
+F_{\rm surf} \;=\; \sigma_{\rm sb}\,T_{\rm eff}^4
+\;=\;
+\frac{9}{8}\,\nu\,\Sigma\,\Omega_K^2.
+}
+\end{equation}
+This relation closes the thin–disk model by connecting the \textbf{thermal emission} 
+($T_{\rm eff}$) to the \textbf{dynamical quantities} ($\nu$, $\Sigma$, and $\Omega_K$) that govern viscous energy dissipation.
+We also derived that
+\[
+\boxed{
+T_c^4 = \frac{3}{8}\kappa_R \Sigma T_{\rm eff}^4.
+}
+\]
+\end{bigidea}
+
+\section{The Thin Disk Model Equations}
+
+We now have all of the ingredients necessary to summarize and connect the equations that define the \textbf{standard thin accretion disk model}. Each relation we have derived describes one aspect of the physics: mass conservation, angular momentum transport, hydrostatic support, and energy balance. Together, these form a \textbf{closed system} that fully specifies the disk structure once the parameters $\dot{M}$ (accretion rate), $M$ (central mass), and $\nu$ (viscosity law) and opacity $\kappa$ are prescribed.
+
+\subsection*{Governing Equations}
+
+\paragraph{1. Mass Conservation}
+From the steady--state continuity equation,
+\begin{equation}
+\boxed{
+\dot{M} = 2\pi R \Sigma (-v_R),
+}
+\label{eq:thin_disk_mass}
+\end{equation}
+which enforces a constant mass flux through the disk.  
+This connects the local surface density $\Sigma(R)$, radial inflow velocity $v_R$, and the global accretion rate $\dot{M}$.
+
+\vspace{1em}
+\paragraph{2. Angular Momentum Conservation}
+From the steady--state angular momentum equation and the torque definition,
+\begin{equation}
+\boxed{
+\nu \Sigma = \frac{\dot{M}}{3\pi}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
+}
+\label{eq:thin_disk_viscous}
+\end{equation}
+This expresses how the combination $\nu\Sigma$ adjusts with radius to maintain a steady flow and the chosen inner boundary condition (e.g.\ zero torque at $R_{\rm in}$).
+
+\vspace{1em}
+\paragraph{3. Vertical Hydrostatic Equilibrium}
+The vertical pressure gradient balances the vertical component of gravity:
+\begin{equation}
+\boxed{
+\frac{dP}{dz} = -\,\rho\,\Omega_K^2\,z,
+\qquad
+H = \frac{c_s}{\Omega_K}.
+}
+\label{eq:thin_disk_hse}
+\end{equation}
+This defines the \textbf{scale height} $H$ in terms of the sound speed $c_s$, linking the disk’s thermodynamics to its geometry.
+
+\vspace{1em}
+\paragraph{4. Vertical Density Structure}
+Assuming an isothermal vertical equation of state $P = \rho c_s^2$, the vertical density profile is Gaussian:
+\begin{equation}
+\boxed{
+\rho(R,z) = \rho_0(R)\,\exp\!\left[-\,\frac{z^2}{2H^2}\right],
+\qquad
+\Sigma = \sqrt{2\pi}\,\rho_0\,H.
+}
+\label{eq:thin_disk_density}
+\end{equation}
+This connects the midplane density $\rho_0$ to the surface density $\Sigma$, providing a bridge between vertical and radial structure. 
+
+\vspace{1em}
+\paragraph{5. Energy Dissipation (Viscous Heating)}
+Viscous stresses convert gravitational binding energy into heat at a rate per unit area:
+\begin{equation}
+\boxed{
+D(R) = \frac{3}{8\pi}\frac{GM\dot{M}}{R^3}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
+}
+\label{eq:thin_disk_dissipation}
+\end{equation}
+This determines where in the disk energy is released, and it peaks near the inner edge ($R \sim 2R_{\rm in}$).
+
+\vspace{1em}
+\paragraph{6. Radiative Flux and Effective Temperature}
+Assuming local energy balance ($D = \sigma_{\rm sb} T_{\rm eff}^4$), the emergent radiative flux from each face of the disk is
+\begin{equation}
+\boxed{
+F_{\rm surf} = \sigma_{\rm sb}T_{\rm eff}^4
+= \frac{9}{8}\,\nu\,\Sigma\,\Omega_K^2.
+}
+\label{eq:thin_disk_flux}
+\end{equation}
+This connects the observable surface temperature $T_{\rm eff}$ to the viscous heating rate via $\nu$, $\Sigma$, and $\Omega_K$.
+
+\vspace{1em}
+\paragraph{7. Equation of State and Sound Speed}
+Pressure arises from both gas and radiation:
+\begin{equation}
+\boxed{
+P = \frac{\rho k_B T}{\mu m_p} + \frac{4\sigma_{\rm sb}}{3c}T^4,
+\qquad
+c_s = \sqrt{\frac{P}{\rho}}.
+}
+\label{eq:thin_disk_eos}
+\end{equation}
+This relation closes the thermodynamic part of the model, allowing the temperature to determine both $H$ and the viscosity.
+\paragraph{8. Temperature Relation}
+The temperatures (core and effective) are related by
+\[
+\boxed{
+T_c^4 = \frac{3}{8}\kappa_R \Sigma T_{\rm eff}^4.
+}
+\]
+
+\bigskip
+\subsection*{Model Parameters and Interdependencies}
+
+The primary \textbf{inputs} to the thin disk model are:
+\[
+(M,\, \dot{M},\, \alpha,\, \kappa(\rho,T)),
+\]
+where $M$ is the central mass, $\dot{M}$ is the accretion rate, $\alpha$ parameterizes the viscosity through $\nu = \alpha c_s H$, and $\kappa(\rho,T)$ specifies the opacity law (e.g.\ Kramers or Thomson).
+
+Given these inputs, the system of equations 
+\eqref{eq:thin_disk_mass}–\eqref{eq:thin_disk_eos}
+can be solved self–consistently for the disk structure:
+\[
+\{\Sigma(R),\, \rho_0(R),\, T(R),\, H(R),\, \nu(R),\, v_R(R),\, T_{\rm eff}(R)\}.
+\]
+Each variable depends on the others through one or more of the relations above.  
+In practice, one typically solves iteratively for $T(R)$, since it enters both through the sound speed and the radiative diffusion law.
+
+\subsection*{Derived Quantities}
+
+Once the primary structure is known, several important derived observables can be computed:
+
+\begin{itemize}
+    \item \textbf{Luminosity:}
+    \[
+    L_{\rm disk} = 2\pi \int_{R_{\rm in}}^{R_{\rm out}} R\,D(R)\,dR
+    = \frac{GM\dot{M}}{2R_{\rm in}}.
+    \]
+    \item \textbf{Effective Temperature Profile:}
+    \[
+    T_{\rm eff}(R)
+    = \left[\frac{3GM\dot{M}}{8\pi\sigma_{\rm sb}R^3}
+    \left(1 - \sqrt{\frac{R_{\rm in}}{R}}\right)\right]^{1/4}.
+    \]
+    \item \textbf{Spectral Flux:}
+    Treating each annulus as a blackbody emitter,
+    \[
+    F_\nu = \frac{4\pi h\nu^3\cos i}{c^2 D^2}
+    \int_{R_{\rm in}}^{R_{\rm out}}
+    \frac{R\,dR}{\exp[h\nu/(k_B T_{\rm eff}(R))]-1},
+    \]
+    which yields the multi–temperature blackbody spectrum characteristic of thin disks.
+\end{itemize}
+
+\bigskip
 \noindent
-These equations collectively define the \textbf{standard thin accretion disk model} (Shakura \& Sunyaev 1973; Pringle 1981).  
-Solving them self–consistently yields the full radial structure of the disk — including its density, temperature, thickness, and emergent spectrum — as a function of radius and accretion rate.
+\textbf{Summary.}
+The thin disk model is thus governed by a small number of physically transparent equations:
+mass conservation, angular momentum conservation, vertical hydrostatic equilibrium, and radiative energy balance.  
+Once $\nu(\rho,T,R)$ and $\kappa(\rho,T)$ are specified, all other quantities—geometry, thermodynamics, and emission—follow self–consistently from these relations.
 
-\begin{remark}[Physical content]
-Equations~\eqref{tab:canonical_eqs} embody a remarkable closure:
-the entire macroscopic structure of the disk is governed by just four microphysical ingredients — 
-hydrostatic balance, viscous angular momentum transport, radiative diffusion, and local thermodynamic equilibrium — together with a single dimensionless parameter, $\alpha$.  
-Despite this simplicity, the model captures the essential physics of accretion flows across an enormous range of astrophysical environments.
-\end{remark}
 
 \section{The Emitted Spectrum}
 
@@ -863,7 +1200,7 @@ F_\nu = \frac{2\pi\cos i}{D^2}
 \int_{R_{\rm in}}^{R_{\rm out}} B_\nu[T_{\rm eff}(R)]\,R\,dR,
 \label{eq:disk_spectrum_integral}
 \end{equation}
-where $D$ is the source distance. Because $T_{\rm eff}(R)$ decreases outward, this represents a \textbf{sum of blackbodies} spanning a wide range of temperatures—an \emph{extended blackbody spectrum}. The disk’s emission thus forms a continuous spectrum rather than a single-temperature Planck curve.
+where $D$ is the source distance. Because $T_{\rm eff}(R)$ decreases outward, this represents a \textbf{sum of blackbodies} spanning a wide range of temperatures—an \emph{extended blackbody spectrum}. The disk’s emission thus forms a continuous spectrum rather than a single-temperature Planck curve.e
 
 \subsection*{Asymptotic Behavior of the Spectrum}
 
@@ -896,3 +1233,628 @@ The integral in equation~\eqref{eq:disk_spectrum_integral} yields three characte
 \noindent
 These regimes together produce the characteristic \textbf{multi–temperature disk spectrum}, rising as $\nu^2$ at low frequencies, flattening to $\nu^{1/3}$ over a broad intermediate range, and falling exponentially beyond the high–energy cutoff.  
 The result is remarkably insensitive to the detailed viscosity prescription—only the temperature profile $T_{\rm eff}(R)$ matters.
+
+\section{The $\alpha$-Disk}
+We have now completed our derivation of the \textbf{thin-disk} accretion model and we may now start generating solutions to the coupled equations which can be applied to data! In order to generate a solution to the problem, we need to insist on a prescription for both the \textbf{viscosity} and the \textbf{opacity} of the material. In the famous $\boldsymbol{\alpha}$-\textbf{disk}, we make a single prescription for $\nu$:
+\[
+\boxed{
+\nu = \alpha c_s H,
+}
+\]
+which is our standard $\alpha$ prescription. This alone does not given us a solution as we need the \textbf{opacity law}. In practice, we choose between \textbf{two different opacity laws}:
+\vspace{20pt}
+\begin{enumerate}
+    \item \textbf{Kramer's Opacity}: Describes the opacity due to \textbf{bound-free} absorption where an atom is ionized while absorbing a photo-ionizing photon. This is an effective prescription which is commonly used to describe this type of radiative transfer:
+\begin{equation}
+    \kappa_{\rm kramer} = 5\times 10^{24}\; \rho T_c^{-7/2}\; {\rm cm^2\;g^{-1}.}
+\end{equation}
+    \item \textbf{Electron Scattering Opacity}: When temperatures transition to a fully ionized medium, bound-free transitions become considerably less favorable and we instead have relatively generic scattering due to electrons: \textbf{Thompson scattering}. This comes with a generic prescription for the opacity:
+\begin{equation}
+    \kappa_{\rm thompson} = 0.2 \;(1+X)\;{\rm cm^2\;g^{-1}},
+\end{equation}
+where $X$ is the Hydrogen abundance fraction.
+\end{enumerate}
+\vspace{20pt}
+We then also consider scenarios where either \textbf{gas pressure dominates}, or \textbf{radiation pressure dominates}. This gives us \textbf{4 distinct region}, which each have different general solutions, but all of which have algebraic closure. In the following sections, we'll discuss each of the regimes.
+
+\subsection{Region A: Radiation Pressure \& Electron Scattering}
+\label{sec:region_a}
+
+We begin with perhaps the simplest algebraic regime of the $\alpha$-disk model: the  \textbf{radiation pressure–dominated, electron scattering} region of the disk. This case applies to the innermost parts of bright accretion disks around compact objects, where temperatures are sufficiently high that the gas is fully ionized and radiation pressure exceeds gas pressure. The physical assumptions defining this region are:
+\begin{equation}
+\boxed{
+P \simeq P_{\rm rad} = \frac{a}{3}T_c^4, \qquad \kappa = \kappa_{\rm es} = \text{constant}.
+}
+\end{equation}
+In steady state, angular momentum conservation requires (equation~\eqref{eq:thin_disk_viscous})
+\begin{equation}
+\nu \Sigma = \frac{\dot{M}}{3\pi}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right]
+\;\equiv\; \dot{M}\, f^4,
+\end{equation}
+where we defined, for compactness,
+\[
+f^4 = \frac{1}{3\pi}\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
+\]
+The $\alpha$–disk ansatz relates \textbf{viscosity to local pressure and sound speed}:
+\[
+\nu = \alpha c_s H = \alpha \frac{c_s^2}{\Omega_K}
+= \alpha \frac{P}{\rho\,\Omega_K}.
+\]
+Using vertical hydrostatic equilibrium (\(P \sim \Sigma \Omega_K^2 H\)) and $\rho \sim \Sigma/H$, we can eliminate $\rho$ and $H$:
+\begin{align}
+\nu &\sim \alpha \frac{P}{(\Sigma/H)\Omega_K}
+= \alpha \frac{P H}{\Sigma \Omega_K}, \\
+H &\sim \frac{P}{\Sigma \Omega_K^2}
+\quad\Rightarrow\quad
+\nu \sim \alpha \frac{P^2}{\Sigma^2 \Omega_K^3}.
+\end{align}
+This important relation shows that, in a radiation-pressure–dominated disk, the \textbf{viscosity depends quadratically on the pressure}.
+
+The radiation pressure gives
+\[
+P = \frac{a}{3}T_c^4.
+\]
+From radiative diffusion (equation~\eqref{eq:Tc_Teff_tau}),
+\[
+T_c^4 = \frac{3}{8}\kappa_{\rm es}\Sigma T_{\rm eff}^4,
+\qquad
+\sigma_{\rm sb}T_{\rm eff}^4 = \frac{3GM\dot{M}}{8\pi R^3}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
+\]
+Substituting and simplifying yields
+\[
+P \sim \frac{a}{3}
+\left(\frac{3}{8}\kappa_{\rm es}\Sigma\right)
+\left(\frac{3GM\dot{M}}{8\pi\sigma_{\rm sb}R^3}f^4\right),
+\]
+or schematically, \(P \propto \Sigma\, \kappa_{\rm es}\, \dot{M}\, \Omega_K^2 f^4.\) Substituting this form of $P$ into $\nu \sim \alpha P^2 \Sigma^{-2}\Omega_K^{-3}$ gives
+\[
+\nu \sim \alpha\,\kappa_{\rm es}^2\,\dot{M}^2\,\Omega_K\,f^8,
+\]
+so that, combining with $\nu\Sigma = \dot{M}f^4$,
+\begin{equation}
+\boxed{
+\Sigma \;\sim\;
+\frac{1}{\alpha\,\kappa_{\rm es}^2\,\dot{M}\,\Omega_K}\;f^{-4}.
+}
+\label{eq:sigma_regionA}
+\end{equation}
+This scaling shows that the surface density \textbf{decreases with increasing accretion rate and $\alpha$.}
+Physically, stronger turbulence (larger $\alpha$) or higher $\dot{M}$ implies a lighter, thinner disk.
+
+Once $\Sigma$ is known, the remaining quantities follow directly:
+
+\[
+\begin{aligned}
+H &\sim \frac{P}{\Sigma\Omega_K^2}
+    \;\propto\;
+    \frac{\dot{M}f^4}{\Omega_K},
+\\[6pt]
+\rho &\sim \frac{\Sigma}{H}
+    \;\propto\;
+    \alpha^{-1}\,\kappa_{\rm es}^{-2}\,
+    \dot{M}^{-2}\,f^{-8}\,\Omega_K,
+\\[6pt]
+T_c &\sim
+\left(\frac{P}{a/3}\right)^{1/4}
+    \;\propto\;
+    \alpha^{-1/4}\,\kappa_{\rm es}^{-1/4}\,
+    \Omega_K^{1/8}\,R^{-3/8},
+\\[6pt]
+\tau &= \frac{1}{2}\kappa_{\rm es}\Sigma
+    \;\propto\;
+    \alpha^{-1}\,\kappa_{\rm es}^{-1}\,\dot{M}^{-1}\,
+    \Omega_K^{-1}\,f^{-4},
+\\[6pt]
+\nu &\propto \alpha\,\kappa_{\rm es}^2\,\dot{M}^2\,\Omega_K\,f^8,
+\\[6pt]
+v_R &= -\,\frac{\dot{M}}{2\pi R\Sigma}
+     \;\propto\;
+     -\,\alpha\,\kappa_{\rm es}^2\,\dot{M}^2\,\Omega_K\,R^{-1}\,f^4.
+\end{aligned}
+\]
+These relations reproduce the standard \textbf{Region A} results from \citet{1973A&A....24..337S} showing explicitly that $T_c$ is \emph{independent of $\dot{M}$} and only weakly dependent on $M$ and $R$. One very important implication of this derivation is the linear dependence of $H$ on $\dot{M}$. If $\dot{M}$ becomes sufficiently large, $H/R$ ceases to be $\ll 1$, violating the thin-disk assumption.  This leads directly to the \textbf{Eddington limit breakdown}. The radiation pressure dominance of Region A implies that a significant fraction of the local vertical force balance is supported by radiation. The radiative flux at each radius is
+\[
+F = \sigma_{\rm sb} T_{\rm eff}^4 = \frac{3GM\dot{M}}{8\pi R^3}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
+\]
+The vertical component of radiation pressure exerts an upward acceleration on the gas:
+\[
+a_{\rm rad} = \frac{\kappa_{\rm es} F}{c}.
+\]
+For the disk to remain gravitationally bound, this must be smaller than the vertical component of gravity at $z = H$:
+\[
+a_{\rm grav} = \Omega_K^2 H.
+\]
+Equating these defines the condition for the \textbf{local Eddington limit}:
+\begin{equation}
+\frac{\kappa_{\rm es} F}{c} \;=\; \Omega_K^2 H.
+\end{equation}
+Using $F$ from above gives
+\[
+H \;=\; \frac{3}{8\pi}\frac{\kappa_{\rm es}}{c}\,\frac{GM\dot{M}}{R^3}\,\frac{1}{\Omega_K^2}
+\;\simeq\;
+\frac{3}{8\pi}\frac{\kappa_{\rm es}\dot{M}}{c}.
+\]
+Notably, $H$ becomes independent of radius --- the disk inflates to a constant scale height once radiation pressure dominates completely.  
+When $H/R \sim 1$, the thin-disk approximation breaks down, and vertical radiative forces can drive powerful outflows.
+
+This critical point roughly corresponds to an accretion rate near the \textbf{Eddington accretion rate}:
+\[
+\dot{M}_{\rm Edd} = \frac{4\pi GM}{\eta\,\kappa_{\rm es}\,c},
+\]
+where $\eta$ is the radiative efficiency ($\sim 0.1$ for thin disks).  
+When $\dot{M} \gtrsim \dot{M}_{\rm Edd}$, the disk becomes geometrically thick and radiatively inefficient, transitioning to a \textbf{slim disk} or \textbf{super-Eddington} accretion flow.
+
+
+\begin{bigidea}
+\textbf{Summary of Region A: Radiation Pressure + Electron Scattering}
+This region corresponds to the inner, radiation–dominated part of the disk near compact accretors.
+Its breakdown near the Eddington limit marks the transition to
+\textbf{slim disks} and the onset of thermal–viscous instabilities.
+\end{bigidea}
+
+The final solution for this region corresponds to the following
+\begin{equation}
+\begin{aligned}
+\Sigma &= 48\;
+\alpha_{-1}^{-1}\,
+\dot{M}_{17}^{-1}\,
+m_1^{-1/2}\,
+r_6^{3/2}\,
+f^{-1}
+\quad {\rm g\,cm^{-2}}, \\[6pt]
+H &= 1.7\times10^{5}\;
+\dot{M}_{17}\,
+f
+\quad {\rm cm}, \\[6pt]
+\rho &= 1.6\times10^{-3}\;
+\alpha_{-1}^{-1}\,
+\dot{M}_{17}^{-2}\,
+m_1^{-1/2}\,
+r_6^{3/2}\,
+f^{-2}
+\quad {\rm g\,cm^{-3}}, \\[6pt]
+T_c &= 3.7\times10^{7}\;
+\alpha_{-1}^{-1/4}\,
+m_1^{1/8}\,
+r_6^{-3/8}
+\quad {\rm K}, \\[6pt]
+\tau &= 82\;
+\alpha_{-1}^{-1}\,
+\dot{M}_{17}^{-1}\,
+m_1^{-1/2}\,
+r_6^{3/2}\,
+f^{-1}, \\[6pt]
+\nu &= 2.1\times10^{14}\;
+\alpha_{-1}\,
+\dot{M}_{17}^{2}\,
+m_1^{1/2}\,
+r_6^{-3/2}\,
+f^{2}
+\quad {\rm cm^2\,s^{-1}}, \\[6pt]
+v_R &= -3.2\times10^{7}\;
+\alpha_{-1}\,
+\dot{M}_{17}\,
+m_1^{1/2}\,
+r_6^{-5/2}\,
+f
+\quad {\rm cm\,s^{-1}}, \\[6pt]
+\text{with}\quad
+f &= 1 - \sqrt{\frac{R_{\rm in}}{R}},
+\end{aligned}
+\end{equation}
+where $\alpha_{-1} = \alpha / 0.1$.
+
+\subsection{Region B: Gas Pressure \& Electron Scattering}
+\label{sec:region_b}
+
+We now turn to the next regime of the $\alpha$–disk model, where the disk remains \textbf{electron–scattering dominated} in opacity but \textbf{gas pressure} provides the dominant support against gravity. This typically applies to intermediate radii in luminous accretion disks, beyond the radiation–pressure–dominated zone but before the outer free–free opacity region takes over.
+
+The physical assumptions defining this region are:
+\begin{equation}
+\boxed{
+P \simeq P_{\rm gas} = \frac{\rho k_B T_c}{\mu m_p},
+\qquad
+\kappa = \kappa_{\rm es} = \text{constant}.
+}
+\end{equation}
+As before, angular–momentum conservation gives
+\begin{equation}
+\nu \Sigma = \frac{\dot{M}}{3\pi}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right]
+\;\equiv\; \dot{M}\, f^4,
+\end{equation}
+and the $\alpha$–prescription implies
+\[
+\nu = \alpha c_s H = \alpha \frac{c_s^2}{\Omega_K}.
+\]
+Vertical equilibrium requires
+\[
+P = \rho \Omega_K^2 H^2,
+\qquad
+\rho = \frac{\Sigma}{2H},
+\]
+so that
+\[
+H = \frac{c_s}{\Omega_K}
+= \frac{1}{\Omega_K}\left(\frac{k_B T_c}{\mu m_p}\right)^{1/2}.
+\]
+For an optically thick, scattering–dominated disk, the diffusive flux gives
+\[
+T_c^4 = \frac{3}{8}\,\kappa_{\rm es}\,\Sigma\,T_{\rm eff}^4,
+\qquad
+\sigma_{\rm sb} T_{\rm eff}^4 = \frac{3GM\dot{M}}{8\pi R^3}f^4.
+\]
+Combining these yields
+\[
+T_c^4 \propto \kappa_{\rm es}\,\Sigma\,\frac{GM\dot{M}}{R^3}\,f^4.
+\]
+Using $P = \rho k_B T_c / \mu m_p$ and $\rho \sim \Sigma / 2H$,
+\[
+P \sim \frac{\Sigma k_B T_c}{2H \mu m_p}.
+\]
+Since $\nu = \alpha c_s H = \alpha (k_B T_c / \mu m_p) H / \Omega_K$, we can combine
+\[
+\nu \Sigma \sim \dot{M} f^4
+\quad \Rightarrow \quad
+\alpha\,\frac{k_B T_c}{\mu m_p}\,\frac{H \Sigma}{\Omega_K} \sim \dot{M}f^4.
+\]
+Replacing $H = c_s / \Omega_K \propto T_c^{1/2}\Omega_K^{-1}$ and eliminating $\Sigma$ using the diffusion relation gives the closure conditions necessary to solve for all scalings. After substitution and simplification, one finds the characteristic dependences
+\[
+\boxed{
+\begin{aligned}
+T_c &\propto \alpha^{-1/5}\,\dot{M}^{2/5}\,M^{3/10}\,R^{-9/10}\,f^{2/5},\\[3pt]
+\Sigma &\propto \alpha^{-4/5}\,\dot{M}^{3/5}\,M^{1/5}\,R^{-3/5}\,f^{3/5},\\[3pt]
+H &\propto \alpha^{-1/10}\,\dot{M}^{1/5}\,M^{9/10}\,R^{21/20}\,f^{1/5},\\[3pt]
+\rho &\propto \alpha^{-7/10}\,\dot{M}^{2/5}\,M^{-7/10}\,R^{-33/20}\,f^{1/5},\\[3pt]
+\tau &\propto \alpha^{-4/5}\,\dot{M}^{3/5}\,M^{1/5}\,R^{-3/5}\,f^{3/5}.
+\end{aligned}
+}
+\]
+The disk remains geometrically thin and gas–pressure supported, with moderate optical depth.
+Using the same cgs normalization as \citet{FrankKingRaine2002}, we obtain
+\begin{equation}
+\boxed{
+\begin{aligned}
+\Sigma &= 5.2\times10^{3}\;
+\alpha_{-1}^{-4/5}\,
+\dot{M}_{17}^{3/5}\,
+m_1^{1/5}\,
+r_6^{-3/5}\,
+f^{3/5}
+\quad {\rm g\,cm^{-2}},\\[6pt]
+H &= 1.7\times10^{4}\;
+\alpha_{-1}^{-1/10}\,
+\dot{M}_{17}^{1/5}\,
+m_1^{9/10}\,
+r_6^{21/20}\,
+f^{1/5}
+\quad {\rm cm},\\[6pt]
+\rho &= 1.6\times10^{-4}\;
+\alpha_{-1}^{-7/10}\,
+\dot{M}_{17}^{2/5}\,
+m_1^{-7/10}\,
+r_6^{-33/20}\,
+f^{1/5}
+\quad {\rm g\,cm^{-3}},\\[6pt]
+T_c &= 1.4\times10^{5}\;
+\alpha_{-1}^{-1/5}\,
+\dot{M}_{17}^{2/5}\,
+m_1^{3/10}\,
+r_6^{-9/10}\,
+f^{2/5}
+\quad {\rm K},\\[6pt]
+\tau &= 2.6\times10^{3}\;
+\alpha_{-1}^{-4/5}\,
+\dot{M}_{17}^{3/5}\,
+m_1^{1/5}\,
+r_6^{-3/5}\,
+f^{3/5},\\[6pt]
+\nu &= 1.8\times10^{13}\;
+\alpha_{-1}^{4/5}\,
+\dot{M}_{17}^{2/5}\,
+m_1^{1/5}\,
+r_6^{3/5}\,
+f^{2/5}
+\quad {\rm cm^2\,s^{-1}},\\[6pt]
+v_R &= -6.5\times10^{4}\;
+\alpha_{-1}^{4/5}\,
+\dot{M}_{17}^{2/5}\,
+m_1^{-2/5}\,
+r_6^{-2/5}\,
+f^{-3/5}
+\quad {\rm cm\,s^{-1}},\\[6pt]
+\text{with}\quad
+f &= 1 - \sqrt{\frac{R_{\rm in}}{R}},
+\end{aligned}
+}
+\end{equation}
+where $\alpha_{-1}=\alpha/0.1$, $m_1=M/M_\odot$, $r_6=R/10^6\,{\rm cm}$,and $\dot{M}_{17}=\dot{M}/10^{17}\,{\rm g\,s^{-1}}$.
+
+In this regime, the disk’s vertical support comes from gas pressure,
+but the opacity is still dominated by Thomson scattering.
+Unlike Region~A, the midplane temperature $T_c$ now \emph{increases with}~$\dot{M}$, and
+the surface density also rises with accretion rate.
+The disk remains geometrically thin ($H/R\ll1$) and stable under modest perturbations,
+making Region~B the archetypal case for many X–ray binary and AGN disks.
+
+\begin{bigidea}
+\textbf{Summary of Region B: Gas Pressure + Electron Scattering}
+\[
+\Sigma \propto \alpha^{-4/5}\,\dot{M}^{3/5}\,M^{1/5}\,R^{-3/5}\,f^{3/5},
+\quad
+T_c \propto \alpha^{-1/5}\,\dot{M}^{2/5}\,M^{3/10}\,R^{-9/10},
+\]
+representing a gas–pressure, constant–opacity disk that smoothly connects the inner
+radiation–pressure zone to the outer free–free (Kramers) regime.
+\end{bigidea}
+
+
+\subsection{Region C: Gas Pressure \& Free-Free Scattering}
+\label{sec:region_c}
+
+Here the midplane pressure is gas pressure and the Rosseland mean opacity is
+set by free--free processes (Kramers law):
+\[
+\boxed{
+P \simeq P_{\rm gas} = \frac{\rho k_B T_c}{\mu m_p}, 
+\qquad
+\kappa = \kappa_0\,\rho\,T_c^{-7/2},
+\quad \kappa_0 \approx 5\times10^{24}\;{\rm cm^2\,g^{-2}\,K^{7/2}}.}
+\]
+With $\nu=\alpha c_s^2/\Omega_K$ and $c_s^2=k_B T_c/(\mu m_p)$, the steady condition $\nu\Sigma = (\dot M/3\pi)\,f$ (free inner torque, cf.\ eq.~\eqref{eq:thin_disk_viscous}) and radiative diffusion $T_c^4 = (3/8)\kappa\Sigma T_{\rm eff}^4$ with $\sigma_{\rm sb}T_{\rm eff}^4 = (3GM\dot{M}/8\pi R^3)\,f$ close the system. Solving these relations gives the classic Region~C dependences (absorbing order–unity constants into the normalizations):
+\[
+\boxed{
+\begin{aligned}
+\Sigma &\;\propto\; 
+\alpha^{-4/5}\,\kappa_0^{-1/10}\,
+\dot{M}^{7/10}\,
+M^{1/4}\,R^{-3/4}\,
+f^{7/10},
+\\[4pt]
+T_c &\;\propto\;
+\alpha^{-1/5}\,\kappa_0^{1/10}\,
+\dot{M}^{3/10}\,
+M^{1/4}\,R^{-3/4}\,
+f^{3/10},
+\\[4pt]
+H &\;=\;\frac{c_s}{\Omega_K}\;\propto\;
+\alpha^{-1/10}\,\kappa_0^{1/20}\,
+\dot{M}^{3/20}\,
+M^{-3/8}\,R^{9/8}\,
+f^{3/20},
+\\[4pt]
+\rho &\;=\;\frac{\Sigma}{2H}\;\propto\;
+\alpha^{-7/10}\,\kappa_0^{-3/20}\,
+\dot{M}^{11/20}\,
+M^{5/8}\,R^{-15/8}\,
+f^{2/5},
+\\[4pt]
+\tau &\;=\;\tfrac{1}{2}\kappa\Sigma\;\propto\;
+\alpha^{-4/5}\,\kappa_0^{11/20}\,
+\dot{M}^{1/5}\,
+f^{1/20}
+\quad(\text{notably independent of }M,R),
+\\[4pt]
+\nu &\;=\;\alpha\frac{c_s^2}{\Omega_K}\;\propto\;
+\alpha^{4/5}\,\kappa_0^{1/10}\,
+\dot{M}^{3/10}\,
+M^{-1/4}\,R^{3/4}\,
+f^{3/10},
+\\[4pt]
+v_R &\;=\;-\frac{\dot{M}}{2\pi R\Sigma}\;\propto\;
+\alpha^{4/5}\,\kappa_0^{1/10}\,
+\dot{M}^{3/10}\,
+M^{-1/4}\,R^{-1/4}\,
+f^{-7/10}.
+\end{aligned}}
+\]
+
+Introducing the usual normalizations
+\[
+\alpha_{-1}=\frac{\alpha}{0.1},\quad
+\dot{M}_{17}=\frac{\dot M}{10^{17}\,{\rm g\,s^{-1}}},\quad
+m_1=\frac{M}{M_\odot},\quad
+r_6=\frac{R}{10^6\,{\rm cm}},\quad
+\kappa_{24}=\frac{\kappa_0}{5\times10^{24}},
+\]
+the Region~C solution may be written in the compact scaling form
+\begin{equation}
+\boxed{
+\begin{aligned}
+\Sigma &\;=\; \Sigma_0\;
+\alpha_{-1}^{-4/5}\,
+\kappa_{24}^{-1/10}\,
+\dot{M}_{17}^{7/10}\,
+m_1^{1/4}\,
+r_6^{-3/4}\,
+f^{7/10}\quad [{\rm g\,cm^{-2}}],
+\\[6pt]
+T_c &\;=\; T_{c,0}\;
+\alpha_{-1}^{-1/5}\,
+\kappa_{24}^{1/10}\,
+\dot{M}_{17}^{3/10}\,
+m_1^{1/4}\,
+r_6^{-3/4}\,
+f^{3/10}\quad [{\rm K}],
+\\[6pt]
+H &\;=\; H_0\;
+\alpha_{-1}^{-1/10}\,
+\kappa_{24}^{1/20}\,
+\dot{M}_{17}^{3/20}\,
+m_1^{-3/8}\,
+r_6^{9/8}\,
+f^{3/20}\quad [{\rm cm}],
+\\[6pt]
+\rho &\;=\; \rho_0\;
+\alpha_{-1}^{-7/10}\,
+\kappa_{24}^{-3/20}\,
+\dot{M}_{17}^{11/20}\,
+m_1^{5/8}\,
+r_6^{-15/8}\,
+f^{2/5}\quad [{\rm g\,cm^{-3}}],
+\\[6pt]
+\tau &\;=\; \tau_0\;
+\alpha_{-1}^{-4/5}\,
+\kappa_{24}^{11/20}\,
+\dot{M}_{17}^{1/5}\,
+f^{1/20},
+\\[6pt]
+\nu &\;=\; \nu_0\;
+\alpha_{-1}^{4/5}\,
+\kappa_{24}^{1/10}\,
+\dot{M}_{17}^{3/10}\,
+m_1^{-1/4}\,
+r_6^{3/4}\,
+f^{3/10}\quad [{\rm cm^2\,s^{-1}}],
+\\[6pt]
+v_R &\;=\; -\,v_{R,0}\;
+\alpha_{-1}^{4/5}\,
+\kappa_{24}^{1/10}\,
+\dot{M}_{17}^{3/10}\,
+m_1^{-1/4}\,
+r_6^{-1/4}\,
+f^{-7/10}\quad [{\rm cm\,s^{-1}}],
+\\[6pt]
+&\text{with}\;\; f \;\equiv\; 1-\sqrt{\frac{R_{\rm in}}{R}}.
+\end{aligned}
+}
+\end{equation}
+Here the coefficients $(\Sigma_0, T_{c,0}, H_0, \rho_0, \tau_0, \nu_0, v_{R,0})$ are order–unity numbers that depend only on the adopted constants ($\mu$, exact $\kappa_0$, geometric factors); they can be fixed to your preferred convention (e.g.\ \citealt{FrankKingRaine2002}) by inserting $\mu\simeq0.62$ and $\kappa_0=5\times10^{24}$ and carrying the cgs algebra.
+
+\subsection{The Transitions Between Regions}
+\label{sec:region_transitions}
+The boundaries between the different $\alpha$–disk regimes occur where one physical contribution overtakes another. Specifically:
+\begin{enumerate}
+    \item The transition between \textbf{radiation–pressure} and \textbf{gas–pressure} dominance is obtained from $P_{\rm rad} = P_{\rm gas}$.
+    \item The transition between \textbf{electron–scattering} and \textbf{free–free (Kramers)} opacity is found from $\kappa_{\rm es} = \kappa_{\rm ff}$.
+\end{enumerate}
+Each of these boundaries defines a locus in the $\dot{M}$–$R$ plane, as illustrated in Figure~\ref{fig:accretion_regimes}. These curves determine where the physical assumptions underlying Regions~A–C change.
+
+\subsubsection{The Radiation Pressure Transition}
+
+Radiation pressure dominates when $P_{\rm rad } \gg P_{\rm gas}$. We know that
+\[
+P_{\rm rad} = \frac{a}{3}T_c^4
+\quad\text{and}\quad
+P_{\rm gas} = \frac{\rho k_B T_c}{\mu m_p}.
+\]
+Setting $P_{\rm rad}=P_{\rm gas}$ gives the critical density:
+\[
+\boxed{
+\rho_{\rm crit} = \frac{a \mu m_p}{3 k_B} T_c^3.
+}
+\]
+\textbf{Using the gas–pressure, electron–scattering scalings from Region~B,}
+\[
+T_c \propto \alpha^{-1/5}\dot{M}^{2/5}M^{3/10}R^{-9/10}f^{2/5}, \quad
+\rho \propto \alpha^{-7/10}\dot{M}^{2/5}M^{-7/10}R^{-33/20}f^{1/5},
+\]
+we find the transition line by solving for $\dot M$ such that $\rho=\rho_{\rm crit}$. After algebraic elimination of $T_c$, the locus of the pressure transition is:
+\[
+\boxed{
+\dot{M}_{P_{\rm rad}=P_{\rm gas}} \;\propto\;
+\alpha^{-1}\,
+M^{-1/8}\,
+R^{21/16}\,f^{-9/8}.
+}
+\]
+Numerically, adopting fiducial constants ($\mu=0.62$, $\kappa_{\rm es}=0.34$) and normalizing to cgs units, this corresponds roughly to
+\[
+\dot{M}_{P_{\rm rad}=P_{\rm gas}}
+\simeq 6\times10^{16}\;
+\alpha_{-1}^{-1}\;
+m_1^{-1/8}\;
+r_6^{21/16}\;
+f^{-9/8}\quad {\rm g\,s^{-1}}.
+\]
+To the left of this curve (smaller $R$ or larger $\dot{M}$),\textbf{ radiation pressure dominates ($P_{\rm rad}>P_{\rm gas}$, Region~A);}
+to the right,\textbf{ gas pressure dominates (Regions~B and~C).}
+
+\subsubsection{The Opacity Transition}
+The second boundary marks where the opacity changes from electron scattering to free–free absorption:
+\[
+\kappa_{\rm es} = \kappa_{\rm ff} = \kappa_0 \rho T_c^{-7/2}.
+\]
+Solving for the transition condition gives
+\[
+\rho_{\rm crit} = \frac{\kappa_{\rm es}}{\kappa_0} T_c^{7/2}.
+\]
+Using again the gas–pressure, electron–scattering scalings from Region~B for $\rho$ and $T_c$, we find:
+\[
+\alpha^{-7/10}\dot{M}^{2/5}M^{-7/10}R^{-33/20}f^{1/5}
+\;\propto\;
+T_c^{7/2}
+\;\propto\;
+\alpha^{-7/10}\dot{M}^{7/5}M^{21/20}R^{-63/20}f^{7/5}.
+\]
+Simplifying, the condition $\kappa_{\rm es}=\kappa_{\rm ff}$ yields the approximate scaling
+\[
+\boxed{
+\dot{M}_{\kappa_{\rm es}=\kappa_{\rm ff}}
+\;\propto\;
+M^{-1/4}\,
+R^{15/8}\,f^{-3/4}.
+}
+\]
+Normalizing with fiducial constants ($\kappa_{\rm es}=0.34$, $\kappa_0=5\times10^{24}$), we find numerically:
+\[
+\dot{M}_{\kappa_{\rm es}=\kappa_{\rm ff}}
+\simeq 3\times10^{16}\;
+m_1^{-1/4}\;
+r_6^{15/8}\;
+f^{-3/4}\quad{\rm g\,s^{-1}}.
+\]
+\textbf{Inside this line (smaller radii or higher $\dot{M}$), electron scattering dominates (Regions~A and~B);
+beyond it, Kramers opacity dominates (Region~C).}
+
+\subsubsection{The Temperature Transition}
+
+Finally, the disk ceases to be fully ionized when $T_c \simeq 10^4\,{\rm K}$, marking the outermost boundary of the thin, ionized $\alpha$–disk. Using the Region~C scaling $T_c \propto \alpha^{-1/5}\dot{M}^{3/10}M^{1/4}R^{-3/4}$, we can invert for the locus:
+\[
+\boxed{
+\dot{M}_{T_c=10^4{\rm K}} \;\propto\;
+\alpha^{2/3}\,
+M^{-5/4}\,
+R^{5/2}.
+}
+\]
+At radii larger than this, the disk becomes partially neutral and new opacity sources (molecular and dust) dominate. 
+
+Combining these three transition loci produces the standard regime diagram
+shown in Figure~\ref{fig:accretion_regimes}.
+Each region corresponds to one of the analytic $\alpha$–disk solutions:
+
+\[
+\begin{array}{ll}
+\textbf{Region A:} & P_{\rm rad},~\kappa_{\rm es} \quad (\text{inner, high } \dot{M})\\[3pt]
+\textbf{Region B:} & P_{\rm gas},~\kappa_{\rm es} \quad (\text{intermediate})\\[3pt]
+\textbf{Region C:} & P_{\rm gas},~\kappa_{\rm ff} \quad (\text{outer, cool})
+\end{array}
+\]
+
+These analytic boundaries depend only weakly on $\alpha$ and $M$, and approximately follow the power-law relations:
+\[
+\dot{M} \propto R^{1.3}\ \text{for the pressure boundary,}
+\qquad
+\dot{M} \propto R^{1.9}\ \text{for the opacity boundary.}
+\]
+Their intersections set the typical radii of transitions indicated in Figure~\ref{fig:accretion_regimes}.
+The vertical lines correspond roughly to characteristic stellar scales:
+the innermost stable orbit of a black hole ($R\!\sim\!10^6{\rm cm}$),
+the radius of a white dwarf ($\sim\!10^9{\rm cm}$),
+and typical Roche lobe sizes for cataclysmic variables and X–ray binaries.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Pictures/figures/accretion_regimes.png}
+    \caption{
+    The division of the standard Shakura–Sunyaev $\alpha$–disk into its analytic regimes.
+    The thick curves show the loci where $P_{\rm rad}=P_{\rm gas}$ and
+    $\kappa_{\rm es}=\kappa_{\rm ff}$,
+    separating Regions~A, B, and C.  The horizontal line near $\dot M_{\rm Edd}$ marks the
+    Eddington accretion rate for a neutron star and a black hole.}
+    \label{fig:accretion_regimes}
+\end{figure}

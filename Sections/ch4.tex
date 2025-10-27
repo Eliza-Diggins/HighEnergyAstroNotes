@@ -322,3 +322,63 @@ intermediate-mass black holes accreting near the Eddington limit, or they are st
 and neutron stars accreting at genuinely super-Eddington rates. Observations of pulsating ULXs confirm 
 that, at least in some cases, neutron stars can sustain super-Eddington accretion with the aid of strong 
 magnetic fields and beaming.
+
+\section{The Growth of Black Holes}
+\label{sec:bh_growth}
+
+Having established the Eddington limit as the natural luminosity ceiling for accreting systems, we can now use it to estimate how rapidly black holes can grow over cosmic time. This provides a direct link between accretion physics and one of the most important questions in extragalactic astrophysics: \textit{how did the first supermassive black holes reach billions of solar masses within the first billion years of cosmic history?}
+
+\subsection{Mass Growth at the Eddington Limit}
+
+Suppose a black hole of instantaneous mass $M(t)$ accretes at a luminosity $L$ that is a fixed fraction $\xi \le 1$ of its Eddington luminosity:
+\begin{equation}
+    L = \xi L_{\rm Edd} = \xi \frac{4\pi G M m_p c}{\sigma_T}.
+\end{equation}
+The radiative luminosity is powered by accretion with efficiency $\eta$, so that
+\begin{equation}
+    L = \eta \dot{M}_{\rm in} c^2,
+\end{equation}
+where $\dot{M}_{\rm in}$ is the rate at which mass is supplied to the accretion flow. However, not all of this material ends up in the black hole: a fraction $\eta$ of the infalling rest mass energy is radiated away, and only the remaining fraction $(1-\eta)$ contributes to the growth of the black hole mass:
+\begin{equation}
+    \frac{dM}{dt} = (1 - \eta)\dot{M}_{\rm in} = \frac{(1 - \eta)L}{\eta c^2}.
+\end{equation}
+Substituting $L = \xi L_{\rm Edd}$ gives
+\begin{equation}
+    \frac{dM}{dt} = \frac{(1 - \eta)}{\eta}\,\xi\,\frac{4\pi G m_p}{\sigma_T c}\,M.
+\end{equation}
+This shows that the growth rate is directly proportional to the current mass, implying \textbf{exponential growth}:
+\begin{equation}
+    M(t) = M_0 \exp\!\left[\frac{t - t_0}{t_{\rm S}}\,\xi\right],
+\end{equation}
+where $M_0$ is the initial mass at time $t_0$ and $t_{\rm S}$ is the characteristic \textbf{Salpeter timescale}, defined as
+\begin{equation}
+    \boxed{
+    t_{\rm S} = \frac{\eta c \sigma_T}{4\pi G m_p (1 - \eta)} \approx 4.5 \times 10^{7}
+    \left(\frac{\eta}{0.1}\right)
+    \left(\frac{1 - \eta}{0.9}\right)^{-1}
+    \;{\rm yr}.
+    }
+\end{equation}
+
+\subsection{Interpretation and Implications}
+
+The Salpeter timescale $t_{\rm S}$ represents the \emph{e-folding time} for black hole mass growth under steady, Eddington-limited accretion. In other words, a black hole doubles its mass approximately every
+\[
+t_{\rm double} = t_{\rm S}\ln 2 \approx 3\times10^7 \;{\rm yr}
+\quad \text{(for } \eta \approx 0.1, \, \xi = 1\text{)}.
+\]
+Thus, a seed black hole of $10^2\,M_\odot$ could in principle reach $\sim10^9\,M_\odot$ within less than a billion years if it accretes continuously at the Eddington rate:
+\[
+t_{\rm grow} = t_{\rm S}\ln\!\left(\frac{10^9}{10^2}\right) 
+\approx 7\,t_{\rm S} \approx 3\times10^8\,{\rm yr}.
+\]
+This simple calculation illustrates that Eddington-limited accretion is, in principle, sufficient to explain the rapid buildup of supermassive black holes observed as luminous quasars at redshifts $z \gtrsim 6$, provided that they can sustain near-Eddington accretion over extended periods.
+
+\begin{bigidea}
+\textbf{Takeaway:} Under Eddington-limited accretion with constant efficiency $\eta$, black holes grow exponentially on the Salpeter timescale, 
+\[
+M(t) = M_0 \exp\!\left[\frac{\xi (t - t_0)}{t_{\rm S}}\right],
+\]
+with $t_{\rm S}\sim 4\times10^7\,{\rm yr}$ for $\eta = 0.1$. 
+This makes continuous accretion a viable mechanism for producing the earliest supermassive black holes.
+\end{bigidea}

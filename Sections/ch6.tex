@@ -999,9 +999,9 @@ which is the \textbf{canonical form we anticipate}:
 \medskip
 \textbf{A very similar argument applies to accretion disks}.  Consider two neighboring annuli at radii $R$ and $R+\tilde{\lambda}$, where $\tilde{\lambda}$ is the radial displacement of turbulent eddies. In steady state the mean radial velocity vanishes, so there is no net mass flux across the annulus boundary. Nonetheless, turbulence exchanges fluid parcels between the annuli.
 
-The mass exchanged across the boundary per unit arc length $d\ell$ in a time interval $dt$ is
+The mass exchanged across the boundary per unit arc length $dL$ in a time interval $dt$ is
 \[
-dm \;\sim\; \rho \, v_{\rm turb} \, H \, d\ell \, dt ,
+dm \;\sim\; \rho \, v_{\rm turb} \, H \, dL \, dt ,
 \]
 where $\rho$ is the midplane density, $H$ is the disk scale height, and $v_{\rm turb}$ is the characteristic turbulent velocity.  
 
@@ -1023,60 +1023,51 @@ The bulk $2R\Omega$ term cancels in the symmetric exchange, leaving only the she
 \[
 \Delta \ell \;\approx\;\tilde{\lambda} \, R^2 \frac{d\Omega}{dR}.
 \]
-\rmk{Formally, one evaluates this in a frame comoving with the inner annulus; in that frame only the differential shear, not the bulk motion, contributes.}
-
-The net angular momentum flux across the boundary per unit arc length is
+\rmk{Formally, one evaluates this in a frame comoving with the inner annulus; in that frame only the differential shear, not the bulk motion, contributes.} The net angular momentum flux across the boundary per unit arc length is
 \[
-F_J \;\equiv\; \frac{dJ}{d\ell\,dt}
-   \;\sim\; \rho \, v_{\rm turb}\, H \, \Delta \ell
-   \;\sim\; \rho \, v_{\rm turb}\, H \,\tilde{\lambda} \, R^2 \frac{d\Omega}{dR}.
+F_J \;\equiv\; \frac{dJ}{dA\,dt}
+   \;\sim\; \rho \, v_{\rm turb}\, \Delta \ell
+   \;\sim\; \rho \, v_{\rm turb} \,\tilde{\lambda} \, R^2 \frac{d\Omega}{dR}.
 \]
-The $r\phi$ component of the stress tensor, $\sigma_{r\phi}$, is defined as the flux of azimuthal momentum across a radial surface—i.e.\ the angular momentum flux per unit area. Dividing by the vertical area element $H\,d\ell$ gives
+We must now be careful because we have made an implicit \textbf{sign convention} here. $\Delta \ell$ is the momentum change of the \textbf{inner annulus} and is the negative of the change in the \textbf{outer annulus}. As such, if $d\Omega / dR <0$ as is the case in Keplerian disks, we see that $F_J < 0$ meaning we are moving angular momentum \textbf{outward.} In what follows, we will swap the argument so we match the standard convention in accretion physics.
+\par
+The \textbf{momentum flux through the boundary} is a \textbf{torque per area}. If we want \textbf{force per area}, we have
 \[
-\sigma_{r\phi} \;\sim\; \frac{F_J}{H}
-   \;\sim\; \rho \, v_{\rm turb}\,\tilde{\lambda}\, R^2 \frac{d\Omega}{dR}.
+\sigma_{r\phi} = \frac{F_J}{R} \sim \rho v_{\rm turb} \tilde{\lambda} R \Omega'.
 \]
-Finally, identifying the effective turbulent viscosity
+by definition, the \textbf{shear viscosity (kinematic)} is defined such that
 \[
-\nu_{\rm turb} \;\sim\; v_{\rm turb}\,\tilde{\lambda} ,
+\sigma_{r\phi} = \eta R\Omega' \implies \eta = \rho v_{\rm turb} \tilde{\lambda}.
 \]
-the stress reduces to the familiar viscous form
-\[
-\boxed{\;\sigma_{r\phi} \;=\; - \rho \,\nu_{\rm turb}\, R \frac{d\Omega}{dR}\; = -\eta R\frac{d\Omega}{dR}.}
-\]
-This is precisely the form obtained from the Navier--Stokes equations, demonstrating the consistency between the molecular (statistical) intuition and the macroscopic fluid-dynamical description of viscosity.
+Thus,
+\begin{equation}
+    \boxed{
+    \nu = \tilde{\lambda}v_{\rm turb}.
+    }
+\end{equation}
 
 \subsection{Viscous Dissipation}
 
-Having derived the \textbf{stress tensor} for our accretion disk, we can now compute 
-the work done by viscous stresses, i.e.\ the rate of angular momentum transfer and 
-the associated energy dissipation. Consider a thin annulus of radius $R$ and vertical thickness $H$.  
-The torque exerted across its surface is
-\begin{equation}
-\tau(R) = (2\pi R H)\,\sigma_{r\phi}
-        = -\,2\pi R^2 H \,\rho \nu \,\frac{d\Omega}{dR}.
-\end{equation}
-Introducing the \textbf{surface density} $\Sigma = \rho H$, this simplifies to
-\begin{equation}
-\label{eq:disc_torque}
-\tau(R) = -\,2\pi R^2 \,\nu \Sigma \,\frac{d\Omega}{dR}.
-\end{equation}
-The \textbf{differential torque} acting on a ring of width $dR$ is
-\begin{equation}
-d\tau = \frac{d}{dR}\!\left(\tau(R)\right)\, dR.
-\end{equation}
-The rate of work done on this ring is the torque multiplied by the
-local angular velocity:
-\begin{equation}
-d\dot{W} = \Omega(R)\, d\tau
-          = \Omega(R)\,\frac{d}{dR}\!\left[-\,2\pi R^2 \nu \Sigma \,\frac{d\Omega}{dR}\right] dR.
-\end{equation}
-This expression can be rearranged as
-\begin{equation}
-d\dot{W} = d(\Omega \tau) - \tau\, d\Omega.
-\end{equation}
-The first term, $d(\Omega \tau)$, represents the \emph{convection} of angular momentum 
-through the disk and does not contribute to local heating.  The second term, $-\tau\,d\Omega$, \textbf{corresponds to the irreversible conversion of mechanical energy into heat.}
+Now that we have the \textbf{torque density} on the surface between the laminae, we can determine the \textbf{total torque} on the single laminae:
+\[
+\frac{dJ}{dt} = - 2 \pi \Sigma \nu R^3 \frac{d\Omega}{dR}.
+\]
+Now the \textbf{net torque} on a single lamina between $R$ and $R+\delta R$ is 
+\[
+G = \frac{dJ}{dt}_{R+\delta R} - \frac{dJ}{dt}_{R} = \frac{\partial}{\partial R} \left(\frac{dJ}{dt}\right) \delta R.
+\]
+This torque will, of course, perform work in its action. A general torque $\tau$ does work $dW = \tau d\phi$, so
+\[
+P = \Omega \frac{\partial}{\partial R} \left(\frac{dJ}{dt}\right) \delta R.
+\]
+is the power dissipated in the disk lamina. If we use the chain rule,
+\[
+P = \delta R\left[\frac{\partial(\Omega dJ/dt)}{\partial R} - \frac{dJ}{dt} \Omega'\right].
+\]
+This first term represents \textbf{advected work} which is done on both edges of the lamina. The second term is the \textbf{heat dissipated}. If we proceed from this, the dissipation per unit surface area is
+\[
+D(R) = - \frac{\Omega' (dJ/dt)}{4\pi R} = \frac{1}{2}\nu \Sigma \left(R\frac{d\Omega}{dR}\right)^2.
+\]
 
 \medskip
 Dividing by the annular surface area $2\pi R\,dR$ (for each disk face), 

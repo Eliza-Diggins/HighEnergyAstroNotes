@@ -29,8 +29,10 @@
   m_e c^2 &= 511\,{\rm keV} \\
   k_B &= 8.62\times10^{-5}\,{\rm eV\,K^{-1}} \\
   \sigma_T &= 6.65\times10^{-25}\,{\rm cm^2} \\
+  1\;{\rm yr} &= 8.7 \times 10^{3}\;{\rm hr} = 3.154\times10^{7}\;{\rm sec}.\\
   R_{\rm WD} &\sim 10^9\,{\rm cm} &
   R_{\rm NS} &\sim 10^6\,{\rm cm}\\
+  M_{\rm MS} &\sim R^{4/3},\;&M_{\rm DS} &\sim R^{-3}\\
 \end{aligned}
 \]
 \subsection*{Accretion Physics}
@@ -44,7 +46,8 @@ L_{\rm acc} &= \frac{GM\dot M}{R} = \eta c^2 \dot{M} = 9\times 10^{36} \;\eta\;\
 \dot M_{\rm Edd} &= \frac{L_{\rm Edd}}{\eta c^2}
 = 1.4\times10^{17}\,\eta^{-1}
 \!\left(\frac{M}{M_\odot}\right)\;{\rm g\,s^{-1}}\\
-&= 2.2 \times 10^{-9} \eta^{-1} \left(\frac{M}{\rm M_\odot}\right)\; {\rm M_\odot \; yr^{-1}}.
+&= 2.2 \times 10^{-9} \eta^{-1} \left(\frac{M}{\rm M_\odot}\right)\; {\rm M_\odot \; yr^{-1}}.\\
+\eta &\sim \{10^{-4}\;\text{(WD)}, 0.4\;\text{(MKBH)},0.06\;\text{(SchBH)}, 0.1\;\text{(NS)}\}.
 \end{aligned}
 \]
 \subsubsection*{Bondi Accretion}
@@ -52,7 +55,8 @@ L_{\rm acc} &= \frac{GM\dot M}{R} = \eta c^2 \dot{M} = 9\times 10^{36} \;\eta\;\
 \[
 \begin{aligned}
     R_{\rm B} &= \frac{2GM}{c_s^2} = \frac{2GM}{\gamma kT} m_p\mu\\
-    &\approx 17.74 \left(\frac{M}{M_\odot}\right) \left(\frac{c_s}{10\;{\rm km\;s^{-1}}}\right)^{-2}\;{\rm AU}.\\
+    &\approx 17.74 \left(\frac{M}{M_\odot}\right) \left(\frac{c_s}{10\;{\rm km\;s^{-1}}}\right)^{-2}\;{\rm AU}.\;\text{(ISM)}\\
+    &\approx 7.74\left(\frac{M}{M_\odot}\right) \left(\frac{T}{10^4\;{\rm K}}\right)^{-1} \;{\rm AU}\;\;\text{(ISM, $\gamma=5/3$, $\mu = 0.6$)}.\\
     \dot{M}_{\rm B} &= \pi G^2M^2 \frac{\rho_0}{c_{s,0}^3}\left[\frac{2}{5-3\gamma}\right]^{(5-3\gamma)/2(\gamma-1)}\approx 4\pi G^2M^2 \rho_0c_{s,0}^{-3}\\
     &\approx 3.7\times10^{11} \left(\frac{M}{M_\odot}\right)^2 \left(\frac{c_{s,0}}{10\;{\rm km\;s^{-1}}}\right)^{-3} \left(\frac{\rho_0}{m_p\;{\rm cm^{-3}}}\right) {\rm g\;s^{-1}}\\
     R_{\rm BHL} &= \frac{2GM}{\sqrt{c_s^2+v^2}},\;\dot{M}_{\rm BHL} \propto \frac{M^2 \rho_0}{(c_{s,0}^2+v^2)^{3/2}}
@@ -113,27 +117,28 @@ G(R) =-\,2\pi\,R^3\,\nu\,\Sigma\,\frac{d\Omega}{dR}\\
 \left[
 R^{1/2}\,\frac{\partial}{\partial R}\!\big(\nu\,\Sigma\,R^{1/2}\big)
 \right].\;\;    t_{\rm visc} \sim \frac{R^2}{\nu} \sim \frac{R}{v_R}\\
+v_r(R,t)
+&= -\,\frac{3}{\Sigma\,R^{1/2}}
+\frac{\partial}{\partial R}\!\left(\nu\,\Sigma\,R^{1/2}\right).\\
 \;
 \end{aligned}
 \]
 \subsubsection{Thin Disk Equations}
 \[
 \begin{aligned}
-    v_r(R,t)
-&= -\,\frac{3}{\Sigma\,R^{1/2}}
-\frac{\partial}{\partial R}\!\left(\nu\,\Sigma\,R^{1/2}\right).\\
   \dot{M} &= 2\pi R \Sigma (-v_R).\;\;\nu\Sigma = \frac{\dot{M}}{3\pi}\left[1 - \left(\frac{R_{I}}{R}\right)^{1/2}\right]\\
   D(R) &= \frac{3}{8\pi}\frac{GM\dot{M}}{R^3}
 \left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].\\
 \rho(R,z) &= \rho_0(R)\,
 \exp\!\left[-\,\frac{z^2}{2H^2}\right],\;\;H \;\equiv\; \frac{c_s}{\Omega_K}\\
 P_c &= \rho_c k_B T_c / (\mu m_p) + (4\sigma_{\rm sb}/3c)T_c^4,\;\;\Sigma = \sqrt{2\pi}\,\rho_c\,H\\
-T_c^4 &= \frac{3}{8}\kappa_R \Sigma T_{\rm eff}^4\;F = \sigma_{\rm sb}.\;\; T_{\rm eff}^4 = (9/8)\nu\Sigma\Omega_K^2\\
+T_c^4 &= \frac{3}{8}\kappa_R \Sigma T_{\rm eff}^4.\;\;F = \sigma_{\rm sb} T_{\rm eff}^4 = (9/8)\nu\Sigma\Omega_K^2\\
     T &= \left(\frac{R}{R_\star}\right)^{-3/4} \cdot\begin{cases}4.1 \times 10^4\;\dot{M}_{\rm 16}^{1/4} m_1^{1/4} R_9^{-3/4}\;{\rm K},&\text{(WD)}\\
     1.3 \times 10^7\;\dot{M}_{\rm 17}^{1/4} m_1^{1/4} R_6^{-3/4}\;{\rm K},&\text{(NS)}
     \end{cases}\\
     I_\nu(R) &= B_\nu[T_{\rm eff}(R)]
-= \frac{2h\nu^3}{c^2}\left[\exp\!\left(\frac{h\nu}{kT_{\rm eff}(R)}\right)-1\right]^{-1}.
+= \frac{2h\nu^3}{c^2}\left[\exp\!\left(\frac{h\nu}{kT_{\rm eff}(R)}\right)-1\right]^{-1}.\\
+\kappa_{\rm Kramer} &= 5\times 10^{24}\;\rho T^{-7/2}\;{\rm cm^2\;g^{-1}}.
 \end{aligned}
 \]
 \end{multicols}
