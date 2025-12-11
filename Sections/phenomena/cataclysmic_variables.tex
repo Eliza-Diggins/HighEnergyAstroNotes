@@ -1,0 +1,121 @@
+
+\subsection{Overview of Cataclysmic Variables}
+
+\begin{definition}[Cataclysmic Variable]
+\label{def:cataclysmic_variable}
+A \textbf{cataclysmic variable (CV)} is a compact binary system consisting of a \textbf{white dwarf primary} and a \textbf{low–mass, Roche–lobe–filling secondary star} (typically a late–type main–sequence star).  
+Mass transfer occurs via Roche–lobe overflow, forming an \textbf{accretion disk} around the white dwarf, except in systems with strong magnetic fields where the flow couples directly to the magnetic poles.
+\end{definition}
+
+Because the secondary star loses mass through the inner Lagrange point $L_1$, matter flows into the potential well of the white dwarf, conserving angular momentum.
+It cannot fall directly onto the accretor, and instead circularizes into a Keplerian disk at the \textbf{circularization radius}:
+\[
+R_{\rm circ} \simeq 0.1\!-\!0.3\,a,
+\]
+where $a$ is the binary separation.  
+Viscous stresses within the disk transport angular momentum outward, allowing gas to spiral inward and release gravitational potential energy as radiation.
+
+Typical mass accretion rates in quiescent CVs are
+\[
+\dot M \sim 10^{-11}\text{--}10^{-9}\;M_\odot\,{\rm yr^{-1}},
+\]
+with outbursting systems reaching $\dot M \sim 10^{-8}\,M_\odot\,{\rm yr^{-1}}$ during eruptions.
+
+\begin{definition}[Accretion Disk in a Cataclysmic Variable]
+The \textbf{accretion disk} in a CV is geometrically thin ($H/R \sim 0.01\!-\!0.1$), optically thick, and Keplerian, with local angular velocity
+\[
+\Omega_K(R) = \sqrt{\frac{GM_{\rm WD}}{R^3}},
+\]
+and midplane temperature and surface density determined by the steady–state relations
+\[
+Q^+(R) = Q^-(R) = \frac{3GM_{\rm WD}\dot M}{8\pi R^3}.
+\]
+\end{definition}
+
+For a $0.8\,M_\odot$ white dwarf, typical disk parameters are:
+\[
+T_{\rm eff}(R) \;\approx\; 
+8\times10^3
+\left(\frac{\dot M}{10^{-9}\,M_\odot\,{\rm yr^{-1}}}\right)^{1/4}
+\!\left(\frac{M_{\rm WD}}{M_\odot}\right)^{1/4}
+\!\left(\frac{R}{10^{10}\,{\rm cm}}\right)^{-3/4}
+{\rm K}.
+\]
+This gives temperatures of $\sim10^4$–$3\times10^4$ K in the optical–emitting regions and up to $\sim10^5$ K near the inner disk. Hence, CV disks emit most strongly in the optical and ultraviolet bands.
+
+\begin{remark}
+Cataclysmic variables are ideal laboratories for studying \textbf{time–dependent accretion physics}.  
+They evolve on observable timescales (hours to weeks), and the same viscous and thermal processes that govern AGN and X–ray binaries are at work here—just scaled down to white–dwarf masses and orbital periods of hours.  
+Because their disks can alternate between hot, ionized states and cool, neutral ones, they naturally exhibit outbursts driven by the \textbf{thermal–viscous instability} described in Sec.~\ref{subsec:viscous_instability}.
+\end{remark}
+
+\subsection{Dwarf Novae: Phenomenology and Physical Origin}
+\label{sec:dwarf_novae}
+
+\begin{definition}[Dwarf Nova]
+\label{def:dwarf_nova}
+A \textbf{dwarf nova} is a subclass of cataclysmic variable that undergoes \textbf{quasi–periodic optical outbursts}, brightening by 2–5 magnitudes over days and recurring on timescales of weeks to months.  
+During outburst, the disk transitions from a cool, low–viscosity state to a hot, highly viscous one, releasing stored mass and angular momentum.
+\end{definition}
+
+During quiescence, mass supplied by the donor star \textbf{accumulates in the outer disk} because the local viscous transport (and thus the accretion rate through the disk) is too low to carry the inflowing material inward efficiently.
+Over time, the surface density $\Sigma$ increases until a critical value is reached—corresponding to the lower knee of the thermal–viscous S–curve (see Fig.~\ref{fig:disk_limit_cycles}).  
+At this point, \textbf{hydrogen becomes partially ionized}, dramatically increasing the opacity and viscous stress.  
+The disk then undergoes a runaway heating transition to the hot, ionized, high–$\alpha$ branch, and a bright \textbf{outburst} begins.
+
+During the hot phase, $\dot M$ through the disk exceeds the mass inflow rate from the donor; the disk drains mass and \textbf{its surface density declines until it crosses the upper knee of the S–curve}, triggering a cooling front and a rapid return to the cold, quiescent state.  
+This limit–cycle behavior repeats as long as mass transfer continues.
+
+\begin{bigidea}
+\textbf{Thermal–Viscous Limit Cycle in Dwarf Novae}
+
+\[
+\text{Cold, low-}\alpha\ (\text{mass buildup}) \;\Rightarrow\;
+\text{Thermal instability} \;\Rightarrow\;
+\text{Hot, high-}\alpha\ (\text{outburst}) \;\Rightarrow\;
+\text{Cooling front and return}.
+\]
+Each cycle is powered by the release of gravitational potential energy of the stored disk mass.
+\end{bigidea}
+
+\subsubsection{Inside–Out vs. Outside–In Outbursts}
+
+The ignition location of the heating front determines the morphology of the outburst light curve:
+
+\begin{itemize}
+\item \textbf{Inside–Out Outbursts:}
+If the accumulated mass is modest and the surface density first exceeds the critical value at smaller radii, the instability begins near the inner disk.  
+A heating front propagates outward, raising $\dot M$ throughout the disk.  
+These outbursts typically rise more slowly, as the outer disk joins the hot state later.
+
+\item \textbf{Outside–In Outbursts:}
+If the mass transfer rate from the donor is high, the outer disk reaches the critical surface density first.  
+A heating front then travels inward, producing a rapid brightening as the outer disk (which dominates the optical luminosity) heats up almost immediately.  
+The decay follows as the front dissipates and the disk cools inward–out.
+\end{itemize}
+
+\begin{remark}
+The distinction between inside–out and outside–in outbursts reflects the interplay between \textbf{viscous diffusion times} and \textbf{mass–transfer rates}.  
+The critical criterion can be approximated by comparing the local viscous inflow rate with the external mass–supply rate $\dot M_{\rm tr}$; systems with $\dot M_{\rm tr} \gtrsim \dot M_{\rm crit}$ ignite from the outer edge.
+\end{remark}
+
+\subsubsection{Typical Parameters and Observational Consequences}
+
+For a typical dwarf nova with $M_{\rm WD}=0.8\,M_\odot$, outer disk radius $R_{\rm out}\sim10^{10}\,$cm, and mass transfer rate $\dot M_{\rm tr}\sim10^{-10}\,M_\odot\,{\rm yr^{-1}}$:
+\[
+\begin{aligned}
+T_c &\sim 5\times10^3{\text{--}}10^4\ {\rm K} & \text{(quiescence)}\\
+T_c &\sim 3\times10^4{\text{--}}7\times10^4\ {\rm K} & \text{(outburst)}\\
+L_{\rm disk} &\sim 10^{32}{\text{--}}10^{34}\ {\rm erg\ s^{-1}},\\
+t_{\rm rise} &\sim 1\text{--}3\ {\rm days}, \quad
+t_{\rm decay} \sim 5\text{--}20\ {\rm days}.
+\end{aligned}
+\]
+The recurrence period of outbursts is set by the viscous buildup time of mass in the cool disk:
+\[
+t_{\rm rec} \;\sim\; \frac{M_{\rm disk}}{\dot M_{\rm tr}}
+\;\approx\;
+\frac{\pi R_{\rm out}^2 \Sigma_{\rm max}}{\dot M_{\rm tr}}
+\;\sim\; 10{\text{--}}100\ {\rm days}.
+\]
+

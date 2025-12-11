@@ -1,0 +1,667 @@
+\textbf{Gamma--ray bursts (GRBs)} are among the most luminous and enigmatic
+transient phenomena in the universe, releasing enormous amounts of energy over
+remarkably short timescales.  Their discovery in the late 1960s by the
+\emph{Vela} satellites---instruments originally designed to monitor
+nuclear tests rather than astrophysical sources---marked the beginning of a
+new field in high--energy astrophysics.  The first published detections (in
+1973) revealed brief flashes of MeV--energy photons with durations ranging from
+milliseconds to minutes.  These early observations already hinted at the rich
+complexity of GRB behavior: \textbf{multiple emission pulses}, \textbf{rapid
+variability}, and \textbf{intermittent quiescent intervals} all appeared
+commonly in the data.
+
+We now refer to this initial flash fof high--energy radiation as the
+\textbf{prompt emission}.  It typically peaks in the $0.2$--$1.5\ {\rm MeV}$
+range, lasts less than $\sim 100\ {\rm s}$, and carries an astonishing
+$\sim 10^{51}\ {\rm erg}$ of energy in gamma rays alone.\footnote{Throughout,
+we refer to ``isotropic--equivalent'' energies unless otherwise stated.}  Even
+a cursory inspection of BATSE, \emph{Swift}, or \emph{Fermi} light curves shows
+that GRB prompt emission is anything but simple: it is highly structured,
+highly variable, and often indicative of central--engine activity over the full
+duration of the burst.
+
+\section{Prompt Emission from GRBs}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Pictures/figures/grb_pulse_gamma.png}
+    \caption{A typical GRB featuring a number of rapid $\gamma$-ray pulses. The central pulse is a great example of a FRED-like pulse.}
+    \label{fig:grb_counts}
+\end{figure}
+
+GRBs are observed primarily in the \textbf{soft $\gamma$--ray band}, with total
+durations spanning \textbf{fractions of a second up to several hundred
+seconds}.  Early localization studies demonstrated that GRBs are distributed
+\textbf{isotropically} across the sky, immediately suggesting an
+\emph{extragalactic} origin and ruling out models tied to Galactic structure.
+The key observational quantity for describing the prompt phase is the
+\textbf{fluence}, the total energy per unit area detected during the burst:
+
+\vspace{10pt}
+\begin{definition}[Fluence]
+The \textbf{fluence} $F$ of a GRB is the total received energy per unit area,
+integrated over the duration of the burst and summed over the detector's
+energy band:
+\[
+F = \int d\nu \;\int dt \;F_\nu(t).
+\]
+\end{definition}
+\vspace{10pt}
+
+Typical fluences span
+\[
+10^{-4}\ {\rm erg\,cm^{-2}} \;\text{to}\; 10^{-7}\ {\rm erg\,cm^{-2}},
+\]
+depending on the GRB's distance, intrinsic luminosity, and spectral shape.
+From the fluence $F$ and burst duration $\Delta t$, we can estimate the
+\textbf{isotropic--equivalent luminosity}
+\[
+L_{\rm iso}
+    \approx 4\pi D^2\,\frac{F}{\Delta t}
+    \sim 10^{46}
+    \left(\frac{D}{{\rm 1\ Mpc}}\right)^2
+    \left(\frac{\Delta t}{1\ {\rm s}}\right)^{-1}
+    \left(\frac{F}{10^{-4}\ {\rm erg\,cm^{-2}}}\right)
+    \ {\rm erg\,s^{-1}}.
+\]
+For cosmological distances, these luminosities routinely exceed
+$10^{50}\ {\rm erg\,s^{-1}}$, outshining entire galaxies for the duration of
+the burst.
+
+Following the prompt phase, every GRB produces a \textbf{multiwavelength
+afterglow}, a longer--lived emission component radiated at X--ray, optical,
+and radio wavelengths as the relativistic ejecta interact with the surrounding
+medium.  Afterglows can persist for weeks, months, or even years, providing
+critical clues to the explosion environment, jet geometry, and the underlying
+relativistic shock physics.  The next sections explore the physical processes
+responsible for both the prompt MeV emission and the broadband
+afterglow that follows.
+
+\subsection{Spectroscopy}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=1\linewidth]{Pictures//figures/band_function.png}
+    \caption{The spectrum of a GRB during its prompt emission phase featuring a characteristic \textbf{Band function} spectrum peaking around 1 MeV in energy.}
+    \label{fig:grb_spectrum}
+\end{figure}
+
+The prompt emission of GRBs is characterized by a \textbf{nonthermal} spectrum with a spectral peak typically located at a few hundred~keV.  
+In many bursts, the spectrum extends to much higher energies, occasionally reaching the GeV range (as observed, for example, by the \emph{Fermi}/LAT).  
+The diversity of observed spectral shapes led to the development of empirical fitting functions, the most successful of which is the \textbf{Band function}, a smoothly broken power law of the form:
+\[
+N(E) = 
+\begin{cases}
+N_0 \left(\frac{E}{E_0}\right)^{\alpha} \exp\!\left(-\frac{E}{E_0}\right), & E \le (\alpha-\beta)\,E_0, \\[8pt]
+N_0 \left(\frac{(\alpha-\beta)E_0}{E_0}\right)^{\alpha-\beta} 
+\exp(\beta-\alpha)\,
+\left(\frac{E}{E_0}\right)^{\beta}, & E > (\alpha-\beta)\,E_0.
+\end{cases}
+\]
+Here
+\begin{itemize}
+    \item $\alpha$ is the low--energy photon index,
+    \item $\beta$ is the high--energy photon index,
+    \item $E_0$ is an exponential rollover energy,
+    \item and the spectral peak in $\nu F_\nu$ occurs at $E_{\rm p} = (2+\alpha)\, E_0$.
+\end{itemize}
+
+Despite the diversity of GRB light curves, the \textbf{distribution of peak energies $E_{\rm p}$ is surprisingly narrow,} clustering around a few hundred~keV.  
+It remains uncertain whether this narrowness reflects a genuine physical property of the emission mechanism or arises from detector sensitivity and bandpass limitations.  
+Approximately $10\%$ of bursts\textbf{ exhibit a very hard high--energy tail with $\beta > -2$, implying that the $\nu F_\nu$ spectrum does not peak within the instrumental window. } 
+Conversely, a subset known as \textbf{NHE bursts} (``no high energy'') displays extremely soft spectra, with very steep high--energy indices (large negative $\beta$) and no discernible hard component.
+
+\medskip
+An important empirical trend emerges when comparing spectral hardness to burst duration: \textbf{short GRBs tend to be spectrally harder than long GRBs}.  
+This hardness--duration correlation reinforces the idea that short and long GRBs reflect distinct physical origins.  
+
+\medskip
+Finally, the temporal evolution of the spectrum often reveals additional complexity.  
+Individual pulses frequently display \textbf{FRED-like} morphologies (fast rise, exponential decay), and both spectral hardening and softening can occur over the course of the burst.  
+Such variability hints at dynamic internal conditions in the relativistic outflow responsible for the prompt emission.
+
+\subsection{Temporal Features}
+
+The temporal behavior of GRB prompt emission is extraordinarily diverse, spanning over five orders of magnitude in duration—from the shortest events at $\sim 10^{-2}\,{\rm s}$ to the longest at $\sim 10^{2}\,{\rm s}$.  
+To characterize this duration in a manner robust to instrumental noise, observers define the parameter $t_{90}$: the interval containing the central $90\%$ of the observed fluence, measured between the $5\%$ and $95\%$ cumulative-fluence levels of the light curve.  
+This convention avoids the low-flux regions where detector systematics dominate and provides a reasonably uniform measure of burst length across different instruments.
+
+\medskip
+A hallmark of GRB prompt emission is its extreme \textbf{variability}.  
+Bursts commonly show $\sim 100\%$ flux variations on timescales far shorter than the total event duration, indicating internal dissipation within a highly relativistic outflow.  
+Individual emission episodes rarely resemble one another: pulses can be isolated or overlapping, smooth or spiky, and often exhibit pronounced substructure.  
+Nevertheless, many pulses share a characteristic asymmetric morphology known as a \textbf{FRED}.
+
+\vspace{6pt}
+\begin{definition}[FREDs]
+A \emph{fast-rise, exponential-decay (FRED)} pulse is an asymmetric light-curve shape characterized by a rapid increase in flux followed by a more gradual exponential decline.  
+Quantitatively, the rise time is typically a factor of $\sim 3$ shorter than the decay time.
+FREDs provide a useful phenomenological description of many isolated GRB pulses.
+\end{definition}
+
+\medskip
+Beyond their basic shape, GRB pulses exhibit a number of systematic temporal–spectral correlations:
+
+\begin{itemize}
+    \item \textbf{Spectral lags:} Low-energy emission in a pulse typically peaks \textbf{later than the high-energy emission.}
+    These lags are \emph{anti-correlated} with burst luminosity—\textbf{more luminous bursts show longer lags.}
+    This \emph{lag–luminosity relation} provides a potential luminosity indicator for cosmological distance estimation.
+
+    \item \textbf{Energy-dependent pulse width:} Lower-energy light curves are broader than their high-energy counterparts.  
+    Empirically, the pulse width scales roughly as $W(E) \propto E^{-0.4}$ .
+
+    \item \textbf{Width–symmetry–intensity correlation:} Brighter pulses tend to be more symmetric (i.e., have a smaller decay-to-rise ratio) and exhibit shorter spectral lags.
+
+    \item \textbf{Hardness–intensity correlation:} The instantaneous spectral hardness tracks the instantaneous flux—the spectrum hardens during the rise and softens during the decay.
+\end{itemize}
+
+These correlations indicate that the temporal and spectral evolution of GRBs is governed by coherent physical processes inside the jet—likely involving time-dependent particle acceleration, magnetic dissipation, or internal shocks.
+
+\subsubsection{Populations}
+
+Using $t_{90}$ as the classification parameter, GRBs separate into two primary observational classes:
+\begin{itemize}
+    \item \textbf{Long GRBs (LGRBs):} $t_{90} \gtrsim 2\,{\rm s}$,
+    \item \textbf{Short GRBs (SGRBs):} $t_{90} \lesssim 2\,{\rm s}$.
+\end{itemize}
+This division is empirical, and both populations have broad, overlapping tails.  
+Some early studies suggested the presence of a third, ``intermediate'' class with durations $2.5 \lesssim t_{90} \lesssim 7\,{\rm s}$, though subsequent analyses questioned the statistical significance of this claim.
+
+Despite these uncertainties, the bimodal structure in the duration distribution—combined with the hardness–duration correlation—strongly indicates that long and short GRBs arise from distinct astrophysical progenitors, a theme to which we will return in later sections.
+
+\subsection{Astrometry}
+
+Early GRB observations revealed a striking fact: the bursts appear \textbf{isotropically distributed} across the sky.  
+No preferred direction, no clustering along the Galactic plane, and no concentration toward the Galactic center were found.  
+This immediately raised a fundamental question:  
+\begin{center}
+\emph{Are GRBs of Galactic origin, or are they extragalactic?}
+\end{center}
+
+If \textbf{GRBs were Galactic}, their isotropy would require a spatial distribution extending well into the Galactic halo.  
+Because the apparent fluences are modest ($10^{-7}$–$10^{-4}\,{\rm erg\,cm^{-2}}$), a Galactic-halo distance scale ($D\sim 100\ {\rm kpc}$) would imply typical isotropic energies of only
+\[
+E_{\rm iso} \sim 4\pi D^2 F \sim 10^{40}\,{\rm erg},
+\]
+entirely reasonable for a variety of Galactic compact-object phenomena.
+
+By contrast, if GRBs are at cosmological distances ($D\sim{\rm Gpc}$), then the same fluences correspond to truly enormous energy releases:
+\[
+E_{\rm iso} \sim 4\pi D^2 F \sim 10^{51}\,{\rm erg},
+\]
+comparable to or exceeding the kinetic energy of a supernova.  
+Such energies seemed extreme prior to the discovery of afterglows and redshift measurements, and for decades \textbf{the community debated whether GRBs were a local or cosmological population.}
+ 
+Suppose GRBs are standard-candle sources with a constant comoving number density and are distributed in Euclidean space.  
+For a source of isotropic luminosity $L$, the observed flux is
+\[
+S = \frac{L}{4\pi r^2}.
+\]
+The number of sources within radius $r$ scales as $N(<r) \propto r^3$, and therefore the number of sources brighter than flux $S$ scales as
+\[
+N(>S) \propto S^{-3/2}.
+\]
+Thus, an \emph{unbiased} Euclidean distribution produces a clean power law with slope $-3/2$ in a plot of $\log N$ versus $\log S$.
+
+\medskip
+However, observations from BATSE demonstrated a clear \textbf{deviation from the $S^{-3/2}$ slope at low fluxes}: the number of faint bursts is significantly \emph{deficient} relative to the Euclidean prediction.  
+This deficiency cannot be explained by detector incompleteness alone.  
+Instead, it strongly suggests that the GRB population is \emph{not} a local, homogeneous, Euclidean distribution.
+
+Two broad explanations naturally arise:
+\vspace{1cm}
+\begin{enumerate}
+    \item The sources lie at cosmological distances, where the geometry of spacetime, luminosity distance scaling, and cosmic expansion all modify the $\log N$--$\log S$ relation.
+    \item The comoving rate density of bursts is not constant with distance (e.g., tracking the cosmic star formation history).
+\end{enumerate}
+\vspace{1cm}
+Either way, the observed departure from $N \propto S^{-3/2}$ is incompatible with a simple population of Galactic-halo sources, and instead points toward a cosmological origin.  
+This conclusion was later confirmed definitively through afterglow localization and spectroscopic redshift measurements.
+
+\section{Theory of The Prompt GRB Emission}
+
+Before developing the physical models that power GRB prompt emission, it is
+helpful to summarize the essential observational clues:
+
+\begin{itemize}
+    \item GRB prompt spectra are \textbf{nonthermal}, typically fit by the empirical
+          Band function, with a broken power--law form spanning keV to MeV energies.
+    \item GRBs show \textbf{rapid variability}, with characteristic timescales
+          ($t_{90}$, $\delta t$) down to milliseconds.
+    \item The integrated fluences and peak fluxes imply \textbf{enormous
+          isotropic--equivalent luminosities}, often exceeding 
+          $10^{51}$--$10^{52}\ {\rm erg~s^{-1}}$.
+\end{itemize}
+
+Taken together, these statements imply that GRBs are both \emph{extremely
+energetic} and \emph{extremely compact} sources.  As we will now see, this leads
+directly to the ``compactness problem,'' the central argument requiring GRBs to
+arise from ultra--relativistic outflows.
+
+\subsection{The Compactness Problem of GRBs}
+
+Let us begin from a single, robust observational fact: the prompt GRB spectrum is \textbf{nonthermal}.
+A nonthermal spectrum is only produced if the emitting region is effectively
+\emph{\textbf{optically thin}}---otherwise repeated scatterings and pair interactions
+would force the spectrum toward a thermal shape. As such, we can make the argument that, whatever the source of our radiation, it must be optically thin while satisfying our other features of GRBs.
+
+Thus the emitting region must satisfy
+\[
+\tau \ll 1,
+\qquad
+\tau = \int n\,\sigma\,ds,
+\]
+where $n$ is the \textbf{number density of scatterers} and $\sigma$ is the relevant
+interaction cross section. Since we have an energy peaking around 1 MeV, we might presume that the correct interaction model is \textbf{pair-production}, and therefore that we can use $\sigma_T$ as the cross section. Thus, if the emission traverses some characteristic length $L$, then
+\[
+\tau \sim n \sigma_T L.
+\]
+We immediately deduce that, for any density $n$, if I decrease $L$, I can get a sufficiently small $\tau$. As such, I'd like to have a constraint on $L$.
+
+Now consider an individual pulse in the prompt light curve with observed width $\delta t$.
+The shortest variability timescale places a strict upper bound on the linear size of the region emitting that pulse:
+\[
+R \lesssim c\,\delta t.
+\]
+This is a simple consequence of causality: if the source were larger than $c\,\delta t$, different parts of the emitting region could not coordinate their variability on timescales as short as $\delta t$. 
+\rmk{This effectively means the mechanisms wouldn't be able to shut off together or turn on together in a coherent fashion.}
+
+Thus, for a pulse with a given variability timescale $\delta t$, we have 
+\[
+R \sim c\,\delta t,
+\]
+so
+\[
+\boxed{
+R_{\rm classical} \sim 3\times 10^{7}\;\left(\frac{\delta t}{10^{-3}\;{\rm sec}}\right)\; {\rm cm}.
+}
+\]
+
+Now, within that $\delta t$, I need to correctly produce a sufficient \textbf{fluence} 
+to power the observed GRB. Thus, there is an \textit{isotropic equivalent luminosity} of
+\[
+\boxed{
+L_{\rm iso, classical} \sim 4\pi D^2 \frac{F}{\delta t}
+\sim 1.2\times 10^{53}
+\left(\frac{D}{\rm 100\; Mpc}\right)^2 
+\left(\frac{F}{\rm 1\times 10^{-4} \;erg\;cm^{-2}}\right) 
+\left(\frac{\delta t}{\rm 10^{-3}\;s}\right)^{-1} 
+\;{\rm erg/s}
+}
+\]
+
+This luminosity is spread over a region of size $R\sim c\delta t$, meaning that
+\[
+\boxed{
+n_\gamma \sim \frac{L_{\rm iso,classical}}{4\pi (c\,\delta t)^2\, c\,\langle E_\gamma\rangle}
+}
+\]
+
+For typical values, this becomes
+\[
+n_\gamma 
+\sim 2\times 10^{31}\;
+\left(\frac{D}{\rm 100\; Mpc}\right)^2 
+\left(\frac{F}{\rm 1\times 10^{-4} \;erg\;cm^{-2}}\right) 
+\left(\frac{\delta t}{10^{-3}\;{\rm s}}\right)^{-3} 
+\left(\frac{\langle E_\gamma\rangle}{\rm 1\; MeV}\right)^{-1}
+\;{\rm cm^{-3}}.
+\]
+
+With these values, the optical depth to Thomson scattering becomes
+\[
+\tau_T \sim n_\gamma\,\sigma_T\,R
+        \sim
+        \frac{L_{\rm iso}\,\sigma_T}{4\pi c^2\,\delta t\,\langle E_\gamma\rangle}.
+\]
+
+Numerically, this evaluates to
+\[
+\tau_T \sim 10^{11}\,
+    \left(\frac{L_{\rm iso}}{10^{51}\ {\rm erg\,s^{-1}}}\right)
+    \left(\frac{\delta t}{10^{-3}\ {\rm s}}\right)^{-1}
+    \left(\frac{\langle E_\gamma\rangle}{1\ {\rm MeV}}\right)^{-1}.
+\]
+
+\textbf{Thus the emitting region should be \emph{extraordinarily opaque}, with optical
+depths far exceeding unity.}
+
+
+This conclusion becomes even stronger when we consider \textbf{photon–photon pair production}.  
+Photons above $m_e c^2 = 511~\rm keV$ readily annihilate with photons of comparable energy:
+\[
+\gamma + \gamma \;\rightarrow\; e^+ + e^-.
+\]
+Since GRB spectra routinely extend to MeV or even GeV energies, the pair production optical depth
+\[
+\tau_{\gamma\gamma}
+\]
+is typically even larger than the Thomson depth.  If $\tau_{\gamma\gamma}\gg1$, then the high--energy photons we observe should be \emph{completely absorbed}, and their energy rapidly converted into an electron–positron pair plasma.
+This would in turn thermalize the emission, producing a Wien or blackbody spectrum---in sharp contradiction with observations.
+
+\vspace{8pt}
+\begin{ideabox}
+The compactness problem: The combination of extreme luminosity and rapid variability implies photon densities so large that $\gamma\gamma$ pair production and Thomson scattering should make GRB sources highly opaque.
+Yet we observe broad, nonthermal spectra extending well above the pair production threshold.  This contradiction demands a physical mechanism that \emph{reduces the inferred photon density} and \emph{decreases the optical depth}.
+\end{ideabox}
+\vspace{8pt}
+
+\subsubsection{Relativistic Motion as the Resolution}
+
+The solution emerges naturally once we consider a relativistically expanding source.  If the emitting region moves toward us with Lorentz factor $\Gamma\gg1$, then several relativistic effects modify the inferred size and
+photon density:
+
+\begin{enumerate}
+    \item \textbf{Time dilation increases the true size of the source.}  
+          A variability timescale $\delta t$ observed by us corresponds to a larger comoving size:
+          \[
+          R' \sim \Gamma^2 c\,\delta t.
+          \]
+          This comes from our relativistic case where we have \textbf{both time-dilation}: $\delta t_{\rm events} = \Gamma \delta \tau$, and
+          from the \textbf{detection correction}: $\delta t_{\rm correction} = \delta t_{\rm events}/\delta(\theta)$, which provides a factor of $\Gamma^2$.
+          
+          increasing the volume---and reducing the particle density---by
+          factors of $\Gamma^6$. Notably, this changes our fiducial understanding of the emission scale from
+          \[
+          R_{\rm \gamma} \sim c\delta t\sim 10^7 \left(\frac{\delta t}{10^{-3}\;{\rm s}}\right)\;{\rm cm}, 
+          \]
+          to
+          \[
+          R_{\rm \gamma} \sim \Gamma^2 c\delta t\sim 10^{13} \left(\frac{\Gamma}{1000}\right)^2\left(\frac{\delta t}{10^{-3}\;{\rm s}}\right)\;{\rm cm}, 
+          \]
+          which is more similar to an AU or so.
+
+    \item \textbf{Photon energies are blue--shifted.}  
+          The high--energy photons we observe originated at lower comoving
+          energies, reducing the fraction of photons above the pair--production
+          threshold in the comoving frame.
+
+    \item \textbf{Photon number density is reduced by Lorentz transformation.}  
+          The comoving photon density satisfies
+          \[
+          n'_\gamma \sim n_\gamma/\Gamma,
+          \]
+          and the relevant path length scales as $R'/\Gamma$, giving an overall
+          suppression of optical depth by $\sim \Gamma^{-2}$--$\Gamma^{-6}$,
+          depending on geometry.
+
+    \item \textbf{Aberration of angles suppresses head--on $\gamma\gamma$
+          collisions.}  
+          Photons become beamed into a cone of opening angle $\sim 1/\Gamma$,
+          reducing the number of photon pairs with large center--of--mass
+          energy and strongly decreasing $\tau_{\gamma\gamma}$.
+\end{enumerate}
+
+Taken together, these effects can easily reduce $\tau_{\gamma\gamma}$ from
+$\sim10^{15}$ to $\ll 1$ provided that
+\[
+\Gamma \gtrsim 100.
+\]
+This number represents a typical lower limit on GRB Lorentz factors derived
+from compactness arguments alone.
+
+\vspace{8pt}
+\begin{bigidea}
+The compactness problem forces the conclusion that the emitting region of a
+GRB must be moving ultra-relativistically toward the observer.  Only with
+Lorentz factors $\Gamma \sim 100$--$1000$ do the inferred optical depths fall
+below unity, allowing high-energy photons to escape unattenuated and preserving
+the observed nonthermal spectra.
+\end{bigidea}
+
+This realization---that GRBs must involve ultra-relativistic outflows---is one
+of the foundational insights in GRB physics and underlies all modern models of
+their prompt emission and afterglow.
+
+\subsection{The Need for GRB Jets}
+
+We have resolved the compactness problem by insisting that the outflows
+responsible for the prompt GRB emission are ultra--relativistic, with Lorentz
+factors $\Gamma \sim 10^2$--$10^3$.  However, this immediately raises a deeper
+question:
+\begin{center}
+\emph{How can any astrophysical engine provide enough energy to accelerate
+material to such extreme speeds?}
+\end{center}
+This question becomes especially pressing if we imagine, even temporarily, that
+the GRB emission is \emph{isotropic}: that the gamma rays are radiated equally
+in all directions.  As we shall see, this assumption leads to an
+energetic catastrophe and forces the conclusion that GRB emission must be
+\emph{collimated into a relativistic jet}.
+
+
+Let us consider the typical observed fluence $F$ of a GRB at a luminosity
+distance $D$.  If the emission is isotropic, the total radiated energy in
+gamma rays alone is
+\[
+E_{\rm iso} = 4\pi D^2 F.
+\]
+Even for modest burst parameters, this number is staggering.  For example,
+taking a representative long GRB with
+\[
+F \sim 10^{-4}\ {\rm erg\,cm^{-2}}, \qquad D \sim 3\ {\rm Gpc},
+\]
+we find
+\[
+E_{\rm iso}
+    \sim 4\pi (3\times 10^{27}\ {\rm cm})^2
+        (10^{-4}\ {\rm erg\,cm^{-2}})
+    \sim 10^{53}\ {\rm erg}.
+\]
+This energy is emitted over a timescale of order seconds to tens of seconds,
+giving isotropic--equivalent luminosities
+\[
+L_{\rm iso} \sim 10^{51} - 10^{52}\ {\rm erg\,s^{-1}},
+\]
+making GRBs briefly the most luminous objects in the universe.
+
+However, this energy budget is only the \emph{prompt gamma--ray output}.  
+If the emitting region is a relativistic outflow with Lorentz factor $\Gamma$,
+the gamma--ray energy is only a fraction of the total energy in the flow.
+The kinetic energy of the ultra--relativistic baryons (or Poynting flux)
+carrying the jet is typically comparable to or larger than the prompt
+radiative energy.  Thus, an isotropic fireball would require a true explosion
+energy
+\[
+E_{\rm true} \gtrsim {\rm few}\times 10^{53}\ {\rm erg}.
+\]
+
+
+Such energies far exceed what known astrophysical engines can supply:
+
+\begin{itemize}
+    \item A canonical core--collapse supernova has kinetic energy
+          \[
+          E_{\rm SN} \sim 10^{51}\ {\rm erg},
+          \]
+          two orders of magnitude too small.
+    \item The gravitational binding energy of a neutron star is
+          \[
+          E_{\rm bind} \sim 3\times 10^{53}\ {\rm erg},
+          \]
+          but almost all of this escapes as neutrinos, and only
+          $\sim 10^{51}$ erg couples to the baryonic ejecta.
+    \item Even the rotational energy of a maximally spinning neutron star
+          or Kerr black hole,
+          \[
+          E_{\rm rot} \sim (10^{52} - 10^{53})\ {\rm erg},
+          \]
+          would need to be converted to gamma--ray radiation with unrealistically
+          high efficiency.
+\end{itemize}
+
+In other words: \emph{no known astrophysical process can produce an isotropic
+$10^{54}\ {\rm erg}$ explosion and simultaneously accelerate material to
+$\Gamma \sim 10^2$--$10^3$.}
+
+The resolution is simple and elegant: the emission is not isotropic.
+Instead, GRBs produce \textbf{relativistic jets}, with opening half--angle
+$\theta_j$.  Radiation from within the jet is strongly beamed: an observer
+sees an isotropic--equivalent energy larger than the true energy by the factor
+\[
+f_b^{-1} = \frac{1}{1 - \cos\theta_j}
+         \approx \frac{2}{\theta_j^2}
+\qquad (\theta_j \ll 1).
+\]
+Thus the true energy is
+\[
+E_{\rm true} = f_b\, E_{\rm iso}
+              \approx \frac{\theta_j^2}{2}\, E_{\rm iso}.
+\]
+For typical observed jet opening angles $\theta_j \sim 0.05$--$0.2$ radians, we obtain
+\[
+E_{\rm true} \sim 10^{50} - 10^{51}\ {\rm erg},
+\]
+\emph{fully compatible} with the energy reservoirs of stellar--mass black holes,
+magnetars, or compact binaries.
+
+\section{The Fireball Model}
+
+We now turn to the ``fireball'' model of GRB outflows, the earliest and still
+one of the most conceptually useful frameworks for understanding how GRBs
+accelerate material to ultra--relativistic speeds.  The central idea is that \textbf{a
+small region near the central engine is suddenly loaded with an enormous amount
+of thermal energy}, primarily in the form of photons and electron--positron
+pairs.  This photon--pair plasma initially has a temperature
+\[
+k_{\rm B} T \gtrsim m_e c^2,
+\]
+so that \textbf{photon--photon collisions efficiently produce pairs}:
+\[
+\gamma + \gamma \leftrightarrow e^+ + e^-.
+\]
+The pair--production cross section is large near threshold (comparable to, but somewhat smaller than, $\sigma_T$), and because the photon number density is extremely high, the fireball is initially \emph{highly opaque} to both
+Thomson scattering and pair creation.  As a result, \textbf{all components remain in
+near--perfect thermal equilibrium}.  In this regime, the total pressure is dominated by radiation:
+\[
+P = \frac{1}{3} a T^4
+\qquad\Rightarrow\qquad
+P = \frac{\rho}{3},
+\]
+exactly as in the early radiation--dominated universe in cosmology. 
+This fireball will be the mechanism by which we accelerate baryons to ultrarelativistic speeds.
+
+\subsection{The Radiation Dominated Phase}
+
+The first phase of the expansion is the \textbf{radiation dominated phase} of the fireball.
+During this period, the plasma is \textbf{opaque} to photons: photon–photon pair production and Thomson scattering keep photons, electrons, and positrons in near-perfect thermal equilibrium.
+In this regime the energy density is dominated by radiation, and the fluid behaves like a relativistic
+gas with equation of state
+\[
+P = \frac{\varepsilon}{3},
+\]
+where $\varepsilon$ is the \emph{internal} energy density of the radiation field.
+
+\subsubsection*{The Adiabatic Index of a Radiation Fluid}
+
+For a general ideal fluid, we can write the equation of state in the form
+\[
+P = (\hat{\gamma}-1)\,u,
+\]
+Thus, a photon–pair plasma in thermal equilibrium behaves as a fluid with
+adiabatic index $4/3$, exactly as in the radiation-dominated era of the early
+universe.
+
+In the comoving frame of the fireball, the expansion during this phase is well approximated as \textbf{adiabatic}.  The first law of thermodynamics for a fluid element reads
+\[
+d(\varepsilon V) + P\,dV = 0,
+\]
+where $V$ is the comoving volume.  Using $P = (\hat{\gamma}-1)\varepsilon$ and
+$\hat{\gamma} = 4/3$, we have
+\[
+d(\varepsilon V) + (\hat{\gamma}-1)\varepsilon\,dV
+= d(\varepsilon V) + \frac{1}{3}\varepsilon\,dV = 0.
+\]
+Expanding the first term,
+\[
+V\,d\varepsilon + \varepsilon\,dV + \frac{1}{3}\varepsilon\,dV = 0
+\quad\Rightarrow\quad
+V\,d\varepsilon + \frac{4}{3}\varepsilon\,dV = 0.
+\]
+Divide by $V\varepsilon$:
+\[
+\frac{d\varepsilon}{\varepsilon} + \frac{4}{3}\frac{dV}{V} = 0
+\quad\Rightarrow\quad
+\frac{d\varepsilon}{\varepsilon} = -\frac{4}{3}\frac{dV}{V}.
+\]
+Integrating,
+\[
+\varepsilon \propto V^{-4/3}.
+\]
+If the fireball expands approximately spherically, then $V \propto R^3$, so
+\[
+\boxed{
+\varepsilon \propto R^{-4}.
+}
+\]
+Since the radiation energy density is related to the temperature by the
+blackbody relation
+\[
+\varepsilon = a T^4,
+\]
+with $a$ the radiation constant, we obtain
+\[
+a T^4 \propto R^{-4}
+\quad\Rightarrow\quad
+\boxed{
+T \propto R^{-1}.
+}
+\]
+
+Thus, during the radiation-dominated, adiabatic expansion phase of the GRB
+fireball, the comoving temperature falls inversely with radius, and the energy
+density in radiation scales as $R^{-4}$.  The decrease in internal energy
+reflects the fact that the radiation is doing $P dV$ work on the baryons,
+accelerating them to ultra-relativistic speeds.
+
+Because the plasma is opaque, the photons remain trapped and do work on the 
+baryons (even a tiny baryon load is sufficient to absorb the momentum).  
+The result is an extremely efficient conversion of internal energy into bulk 
+kinetic energy:
+\[
+\Gamma \propto R,
+\]
+until the bulk Lorentz factor saturates at a terminal value
+$\Gamma_{\rm max} \sim \eta$, where $\eta$ is the dimensionless entropy
+(energy per unit baryon rest mass).
+
+Once the temperature drops below $\sim m_e c^2$, the pairs annihilate faster
+than they are produced.  The pair density decreases dramatically, the opacity
+falls, and the fireball becomes transparent to its own radiation.  At this 
+``photospheric'' radius, photons decouple and begin to free--stream.
+
+Beyond this point, the dynamics split into two conceptually distinct phases:
+
+\begin{enumerate}
+    \item \textbf{Coasting phase:}  
+          If the fireball has already converted most of its internal energy
+          into bulk motion before transparency, the Lorentz factor freezes out
+          at $\Gamma \simeq \Gamma_{\rm max}$ and the plasma coasts at constant
+          velocity.
+
+    \item \textbf{Matter--dominated expansion:}  
+          With radiation pressure no longer dominant, the outflow behaves like
+          a cold, relativistic wind.  Its density and temperature continue to
+          fall as $R^{-2}$ and $R^{-2/3}$, respectively.
+\end{enumerate}
+
+Thus, the fireball model divides GRB acceleration into two broad stages:
+
+\begin{description}
+    \item[Radiation--dominated acceleration:]  
+          The photon--pair plasma expands adiabatically, doing work on the
+          baryons and accelerating them to ultra--relativistic speeds.
+
+    \item[Matter--dominated coasting and expansion:]  
+          Once transparency is reached and the internal energy is depleted,
+          the baryons coast with fixed Lorentz factor.
+\end{description}
+
+Although the modern understanding of GRB jets incorporates additional physics
+(internal shocks, magnetic dissipation, reconnection), the fireball model
+provides a simple and powerful baseline: \emph{a GRB outflow is a 
+radiation--dominated explosion that naturally accelerates to extreme Lorentz
+factors before becoming transparent}.
+
+
+\section{Jet Break Models}

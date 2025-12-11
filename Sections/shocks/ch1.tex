@@ -1,0 +1,908 @@
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Pictures/figures/shock_types.png}
+    \caption{The various types of relevant shocks in astrophysical transients}
+    \label{fig:shock_types}
+\end{figure}
+Supersonic flows occur when a \textbf{disturbance propagates faster than the local speed of sound}. In this regime, information cannot propagate upstream to ``warn'' the undisturbed medium, and discontinuities in the flow (shock waves) form.
+\medskip
+
+\noindent
+Consider the following simple scenario: you (the observer) sit at the origin $(0,0)$, while a uniform flow with velocity $v$ and sound speed $c_s$ moves past you in the $+x$ direction. At some time $t_0 = 0$, you insert a tuning fork into the flow, generating periodic disturbances with period $\tau$.
+\begin{remark}
+    Intuitively, if the disturbance speed is much smaller than the sound speed ($v \ll c_s$), then the tuning fork generates small-amplitude density and pressure waves that propagate outward through the fluid at speed $c_s$ in all directions (in the fluid frame). Because these waves travel much faster than the source itself, they can reach the upstream fluid before the source arrives, giving the medium time to adjust smoothly. As a result, successive wavefronts remain separated, and the flow changes continuously without sharp discontinuities.
+
+    In contrast, if the disturbance speed is much greater than the sound speed ($v \gg c_s$), the fluid upstream cannot receive any ``advance notice'' of the approaching source. The chain of particle collisions that transmits pressure changes cannot outpace the source, so the medium only reacts when the source is already upon it. This leads to a pile-up of wavefronts into a narrow region where the density, pressure, and velocity change abruptly --- a shock front. In the supersonic regime, the envelope of these piled-up wavefronts forms the Mach cone downstream of the disturbance.
+\end{remark}
+
+In the frame of the fluid, each disturbance propagates spherically with speed $c_s$. The center of the $k$-th disturbance in the lab frame is located at:
+\[
+x_\mathrm{center} = k\,\tau\, v .
+\]
+Thus, the equation for the $k$-th wavefront is
+\begin{equation}
+    (x - k\tau v)^2 + y^2 = c_s^2 \, (t - k\tau)^2 .
+\end{equation}
+At the downstream edge of the $k$-th wavefront, we have:
+\begin{align}
+    x - k\tau v &= c_s \, (t - k\tau) , \\
+    \implies x_k &= c_s t + k\tau (v - c_s) .
+\end{align}
+The longitudinal spacing between successive wavefronts is therefore:
+\begin{equation}
+    \Delta x = x_{k+1} - x_k = \tau (v - c_s) .
+\end{equation}
+We can now classify the flow regimes:
+
+\vspace{20pt}
+\begin{enumerate}
+    \item \textbf{Subsonic} ($v < c_s$): Wavefronts remain in order; disturbances can propagate upstream.
+    \item \textbf{Sonic} ($v = c_s$): Wavefronts ``pile up'' downstream, producing a stationary compression region.
+    \item \textbf{Supersonic} ($v > c_s$): Successive wavefronts overtake one another downstream, forming a shock front.
+\end{enumerate}
+
+
+\subsection*{Mach Cone Formation}
+
+In the supersonic case ($v > c_s$), the envelope of all wavefronts forms a conical shock surface,the \emph{Mach cone} --- that trails the disturbance in the downstream direction.
+
+At time $t$, the furthest extent of any disturbance in the $y$-direction is
+\[
+y_{\max} = c_s t ,
+\]
+while the furthest downstream extent in $x$ is
+\[
+x_{\max} = v t .
+\]
+The half-opening angle $\theta$ of the Mach cone is therefore:
+\begin{equation}
+    \sin\theta = \frac{c_s}{v} .
+\end{equation}
+
+\begin{definition}[Mach Number]
+The \emph{Mach number} $M$ is the ratio of the object's speed to the local speed of sound:
+\[
+M \equiv \frac{v}{c_s} .
+\]
+In terms of $M$, the Mach angle is:
+\[
+\theta = \sin^{-1} \left( \frac{1}{M} \right) .
+\]
+\end{definition}
+
+A larger Mach number corresponds to a narrower cone, while $M \to 1^+$ corresponds to a very wide, weak cone.
+
+\section{Overview of Shock Physics}
+
+The discussion so far shows that when a disturbance moves faster than the local speed of sound,
+information cannot propagate upstream and a \emph{shock front} forms: a narrow region where
+macroscopic fluid variables such as density, velocity, and pressure change abruptly.
+
+\medskip
+In a shock, microscopic processes (collisions, electromagnetic interactions) \textbf{mediate the conversion
+of ordered bulk motion into disordered thermal energy}.  The full structure of the shock transition
+is therefore kinetic in nature and can only be captured with particle–based methods such as
+\emph{particle–in–cell (PIC)} or \emph{Monte Carlo} simulations.  
+However, away from the thin shock layer itself, both upstream and downstream, the flow may be treated as a
+continuum obeying the \textbf{fluid (Euler) equations}.  
+In this regime, we can analyze shocks using only conservation laws,
+without resolving the microscopic structure.
+
+\subsection{Governing Fluid Equations}
+
+For an inviscid, compressible, radiating fluid with density $\rho$, velocity $\mathbf{u}$,
+pressure $P$, and total energy density $\mathcal{E}$, the Euler equations in conservative form are:
+\begin{equation}
+\begin{aligned}
+    &\text{Mass:}      && \frac{\partial \rho}{\partial t}
+        + \nabla\!\cdot(\rho\mathbf{u}) = 0, \\[3pt]
+    &\text{Momentum:}  && \frac{\partial(\rho\mathbf{u})}{\partial t}
+        + \nabla\!\cdot(\rho\mathbf{u}\otimes\mathbf{u} + P\mathbb{I})
+        = \mathbf{f}, \\[3pt]
+    &\text{Energy:}    && \frac{\partial \mathcal{E}}{\partial t}
+        + \nabla\!\cdot\!\big[(\mathcal{E}+P)\mathbf{u}\big]
+        = \mathbf{f}\!\cdot\!\mathbf{u}
+        - \nabla\!\cdot\mathbf{F}_{\mathrm{rad}}
+        - \nabla\!\cdot\mathbf{q}.
+\end{aligned}
+\label{eq:euler_full}
+\end{equation}
+Here,
+\begin{itemize}
+    \item $\mathcal{E} = \tfrac{1}{2}\rho u^2 + \rho\epsilon$ is the total (kinetic + internal) energy density,  
+    \item  $\mathbf{f}$ is any external body‐force density (e.g. gravity),  
+    \item $\mathbf{F}_{\mathrm{rad}}$ and $\mathbf{q}$ are radiative and conductive energy fluxes, respectively.  
+\end{itemize}
+Alternatively, one can also use
+\[
+\mathcal{E} + P = \frac{1}{2}\rho u^2 + h,
+\]
+where $h$ is the enthalpy density.
+
+\smallskip
+In many astrophysical shocks, we can neglect radiation and conduction over the width of the shock,
+yielding the\textbf{ \emph{adiabatic Euler equations}:}
+\begin{equation}
+\begin{aligned}
+    \frac{\partial \rho}{\partial t} + \nabla\!\cdot(\rho\mathbf{u}) &= 0, \\
+    \frac{\partial(\rho\mathbf{u})}{\partial t}
+      + \nabla\!\cdot(\rho\mathbf{u}\otimes\mathbf{u} + P\mathbb{I}) &= 0, \\
+    \frac{\partial \mathcal{E}}{\partial t}
+      + \nabla\!\cdot\!\big[(\mathcal{E}+P)\mathbf{u}\big] &= 0.
+\end{aligned}
+\label{eq:euler_adiabatic}
+\end{equation}
+
+These equations are closed by an equation of state (EOS) relating $P$, $\rho$, and $\epsilon$,
+typically $P=(\Gamma-1)\rho\epsilon$ for a polytropic ideal gas with adiabatic index $\Gamma$.
+\medskip
+Within this continuum description, shocks appear as mathematical discontinuities satisfying
+integral conservation across their surface.  These jump conditions are encapsulated in the
+\textbf{Rankine–Hugoniot relations}, derived next.
+
+
+\section{The Rankine-Hugoniot Conditions}
+
+Consider a \textbf{shock front} dividing two regions of fluid. We refer to each side as the \textbf{upstream} and \textbf{downstream} side of the shock front. For the sake of simplicity, we assume the front occurs at $x = 0$ in some reference frame and that, on either side of the front, we have some $\rho_{1,2},p_{1,2}, \;\text{and}\; u_{1,2}$. Now, certain conservation laws must still be true, namely those which provide us with the \textbf{Euler Equations}. As such, we can define some elements of the behavior across the shock front in terms of these conservation rules.
+\begin{remark}
+    An \textbf{critical} realization is that the Rankine-Hugoniot relations which we are soon to derive are  valid \textbf{only in the rest frame of the shock}. As such, we are always implicitly performing a Galilean transformation into that frame when we use them. 
+    \par
+    In many cases, this makes the intuition for which side of the shock is which tricky: if a bow shock is driven into the ICM of a galaxy cluster, the gas in the galaxy cluster is the \textbf{upstream side} since it moves towards the shock in the shock's reference frame. 
+\end{remark}
+
+\subsection*{The Continuity Condition}
+In Eulerian form the continuity equation is,
+\[
+\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho u) = 0.
+\]
+if we integrate across some infinitesmal width $\delta x$ on either side of the shock front,
+\[
+\frac{\partial}{\partial t} \int_{-\delta x}^{\delta x} \rho \;dx + (\rho u)_{\delta x} - (\rho u)_{-\delta x} =0.
+\]
+Now, as $\delta x \to 0$, we clearly have that the integral term vanishes and
+\[
+\boxed{\rho_1u_1 = \rho_2u_2}.
+\]
+
+\subsection*{The Momentum Condition}
+In one-dimensional inviscid flow with an external body force ${\bf f}_{\rm ext}$, the momentum equation in \emph{conservative form} is
+\begin{equation}
+\frac{\partial (\rho u)}{\partial t} 
++ \frac{\partial}{\partial x} \left( \rho u^2 + p \right)
+= \rho {\bf f}_{\rm ext}.
+\end{equation}
+Here $\rho u$ is the momentum density, and $\rho u^2 + p$ is the momentum flux (mass flux of momentum plus the pressure force).
+
+\medskip
+
+We now integrate this equation across a thin control volume enclosing a discontinuity at $x = 0$, extending from $x = -\delta x$ to $x = +\delta x$. In the shock rest frame (steady state), the time derivative vanishes upon integration:
+\begin{equation}
+\int_{-\delta x}^{+\delta x} 
+\frac{\partial}{\partial x} \left( \rho u^2 + p \right) dx
+= \int_{-\delta x}^{+\delta x} \rho {\bf f}_{\rm ext} \, dx.
+\end{equation}
+
+If ${\bf f}_{\rm ext}$ is bounded, its contribution is $O(\delta x)$ and vanishes as $\delta x \to 0$. Therefore, in the limit we obtain
+\begin{equation}
+\left[ \rho u^2 + p \right]_{1}^{2} = 0,
+\end{equation}
+where $[A]_1^2 \equiv A_2 - A_1$ denotes the jump across the discontinuity. This is the \textbf{momentum Rankine–Hugoniot condition}:
+\begin{equation}
+\boxed{
+\rho_1 u_1^2 + p_1 \;=\; \rho_2 u_2^2 + p_2.}
+\end{equation}
+An equivalent statement may be created where the force is not bounded. See, for example, Thorne+Blandford.
+
+\subsection*{The Energy Condition}
+
+To derive the relevant condition for energy conservation across a shock, we adopt two simplifying assumptions:
+
+\begin{enumerate}
+    \item \textbf{Adiabatic flow}: there is no external heating or cooling, so we may ignore source terms in the energy equation.
+    \item \textbf{Inviscid flow}: viscous dissipation is neglected.
+\end{enumerate}
+
+\noindent
+Under these assumptions, the energy equation takes the form
+\[
+\frac{\partial E}{\partial t} + \nabla \cdot \left[(E+p)\,\mathbf{u}\right] = 0,
+\]
+where $E = \tfrac{1}{2}\rho u^2 + \rho \epsilon$ is the total energy density, with $\epsilon$ the specific internal energy.  
+
+\medskip
+This equation can also be expressed in terms of enthalpy, $h \equiv \epsilon + p/\rho$, as
+\[
+\frac{\partial E}{\partial t} + \nabla \cdot \left[\left(\tfrac{1}{2}\rho u^2 + \rho h\right)\mathbf{u}\right] = 0.
+\]
+\medskip
+
+Assuming steady state and integrating across a vanishingly thin control volume that encloses the shock, we obtain equivalent jump conditions:
+\begin{equation}
+    \begin{aligned}
+        \big[u(E+p)\big]_1^2 &= 0 
+        &&\;\;\; \text{(flux of total energy + pressure)} \\[6pt]
+        \big[u(\tfrac{1}{2}\rho u^2 + \rho h)\big]_1^2 &= 0
+        &&\;\;\; \text{(flux of kinetic + enthalpy energy)} .
+    \end{aligned}
+\end{equation}
+
+\noindent
+Finally, using the mass conservation condition $\rho u =$ const across the shock, we can eliminate $u$ and write the energy condition in more compact forms:
+\begin{equation}
+    \boxed{ \;\;\left[ \mathcal{E} + \tfrac{p}{\rho} \right]_1^2 = 0 \;\;} ,
+    \qquad\text{or equivalently}\qquad
+    \boxed{ \;\;\left[ \tfrac{1}{2}u^2 + h \right]_1^2 = 0 \;\;} .
+\end{equation}
+Here $\mathcal{E} = \epsilon + \tfrac{1}{2}u^2$ is the specific total energy.
+
+\subsection{The Rankine--Hugoniot Conditions}
+
+\begin{definition}[Rankine--Hugoniot Conditions]
+The \emph{Rankine--Hugoniot (RH) conditions} express the conservation of mass, momentum, and energy across a steady, planar shock front.  
+They are valid only in the \textbf{rest frame of the shock}, where the discontinuity is stationary and the upstream fluid flows into the front.  
+Together, they constrain the allowed discontinuities in density, velocity, pressure, and temperature.
+
+\medskip
+For upstream quantities $(\rho_1, u_1, p_1)$ and downstream quantities $(\rho_2, u_2, p_2)$, the RH conditions are:
+
+\begin{enumerate}
+    \item \textbf{Mass conservation (continuity):}
+\begin{equation}
+    \label{eq:rh_continuity}
+    \rho_1u_1 = \rho_2 u_2
+\end{equation}
+    The mass flux through the shock is the same on both sides.
+
+    \item \textbf{Momentum conservation:}
+    \begin{equation}
+   \label{eq:rh_momentum}
+                \rho_1 u_1^2 + p_1 \;=\; \rho_2 u_2^2 + p_2 .
+    \end{equation}
+    The sum of momentum flux and pressure force is conserved.
+
+    \item \textbf{Energy conservation:}
+    \begin{equation}
+        \label{eq:rh_energy}
+        \frac{1}{2}u_1^2 + h_1 \;=\; \frac{1}{2}u_2^2 + h_2 ,
+    \end{equation}
+    where $h = \epsilon + p/\rho$ is the specific enthalpy.  
+    This states that the specific total energy (kinetic plus thermal) is continuous across the shock.
+\end{enumerate}
+
+\noindent
+Together, these three relations define the \emph{Rankine--Hugoniot conditions}.  
+They show that shocks are not arbitrary discontinuities: only those jumps that satisfy mass, momentum, and energy conservation are physically possible.
+\end{definition}
+
+
+\subsection{Additional Forms of the RH Conditions}
+
+Now, in their current form, equations~\ref{eq:rh_energy}, \eqref{eq:rh_momentum}, and \eqref{eq:rh_energy} are dependent on the flow velocity, the internal energy, and the density / pressure. In many scenarios,\textbf{ these are not all measurable properties of the flow} and instead we seek to find a simpler / more useful way to cast these relationships. The first step in doing so is to better understand the internal energy $E$ which appears in the above equations. Let us formally \textbf{assume} a polytropic equation of state of the form,
+\[
+p = \rho^\Gamma,
+\]
+The convenience of this assumption is that the enthalpy is 
+\[
+h = \int^P \frac{dP}{\rho} = \int^\rho \Gamma \rho^{\Gamma -2} \;d \rho = \frac{\Gamma}{\Gamma -1} \rho^{\Gamma -1}.
+\]
+Noting that
+\[
+c_s^2 = \frac{\partial P}{\partial \rho} = \Gamma \rho^{\Gamma -1} \implies \boxed{h = \frac{c_s^2}{\Gamma -1}.}
+\]
+We can therefore get the very convenient form of the energy condition \eqref{eq:rh_energy}:
+\begin{equation}
+    \label{eq:rh_energy_enth}
+    \boxed{
+    \frac{1}{2}u_1^2 + \frac{c_1^2}{\Gamma -1} = \frac{1}{2}u_2^2 +\frac{c_2^2}{\Gamma -1}
+    }
+\end{equation}
+This form of the \textbf{Rankine-Huginiot condition} is already quite nice, but there are many manipulations to be made to these expressions in order to get various forms worth exploration. At this stage, it is worth developing something of a heuristic picture of how these can be used.
+\par
+We have, in this form of the RH conditions, 4 sets of variables: $\rho_{[1,2]}$, $u_{[1,2]}$, $c_{[1,2]}^2$, and $P_{[1,2]}$. Now, the RH conditions (and the EOS) provide the following relationships:
+\vspace{0.5cm}
+\begin{enumerate}
+    \item \textbf{Continuity}: Relates $\rho$ and $u$.
+    \item \textbf{Momentum}: Relates $P$ and $u$.
+    \item \textbf{Energy}: Relates $u$ and $c_s^2$.
+    \item \textbf{EOS}: Relates $P$ and $\rho$.
+\end{enumerate}
+\vspace{0.5cm}
+\subsubsection*{Mach Number Form of the RH Conditions}
+
+It is often useful to re–express the Rankine--Hugoniot conditions in terms of the
+\textbf{Mach number},
+\[
+M \equiv \frac{u}{c_s},
+\]
+which combines the flow speed $u$ and the sound speed $c_s$ into a single dimensionless variable.  
+This is particularly helpful in astrophysical contexts, where shocks are commonly characterized by their upstream Mach number $M_1$.
+
+\medskip
+
+Starting from the energy condition across the shock, we can write
+\[
+\frac{1}{2} + \frac{M_1^{-2}}{\Gamma -1}
+= \frac{1}{2}\frac{u_2^2}{u_1^2} + \frac{(c_2^2/u_1^2)}{\Gamma -1},
+\]
+where $\Gamma$ is the adiabatic index.  
+
+\medskip
+
+From the continuity condition (\eqref{eq:rh_continuity}) we know that
+\[
+\frac{\rho_1}{\rho_2} = \frac{u_2}{u_1} \equiv x ,
+\]
+so that
+\[
+\frac{1}{2} + \frac{M_1^{-2}}{\Gamma -1}
+= \frac{1}{2}x^2 + \frac{c_2^2}{c_1^2}\frac{M_1^{-2}}{\Gamma -1}.
+\]
+Rearranging gives
+\[
+\frac{1}{2}(1-x^2) = \frac{M_1^{-2}}{\Gamma -1}\left(\frac{c_2^2}{c_1^2} - 1\right).
+\]
+
+\medskip
+
+The ratio of sound speeds follows from the equation of state:
+\[
+\frac{c_2^2}{c_1^2} = \frac{P_2}{P_1}\frac{\rho_1}{\rho_2} = \frac{P_2}{P_1}x.
+\]
+
+To eliminate $P_2/P_1$, we use the momentum Rankine--Hugoniot condition:
+\[
+\rho_1 u_1^2 + P_1 = \rho_2 u_2^2 + P_2.
+\]
+Dividing through by $P_1$ and using $x \equiv u_2/u_1 = \rho_1/\rho_2$, we can rewrite the right-hand side:
+\[
+\frac{\rho_2 u_2^2}{P_1} = \frac{\rho_2 (x u_1)^2}{P_1}
+= \frac{\rho_1 u_1^2}{P_1}\,x.
+\]
+\noindent
+Therefore the momentum condition becomes
+\[
+\frac{\rho_1 u_1^2}{P_1} + 1 = \frac{\rho_1 u_1^2}{P_1}\,x + \frac{P_2}{P_1}.
+\]
+
+\noindent
+Rearranging gives
+\[
+1 - \frac{P_2}{P_1} = \frac{\rho_1 u_1^2}{P_1}(x-1).
+\]
+Next, we express the prefactor in terms of the Mach number. Since
+\[
+M_1^2 = \frac{u_1^2}{c_1^2}, \qquad c_1^2 = \frac{\Gamma P_1}{\rho_1},
+\]
+we have
+\[
+\frac{\rho_1 u_1^2}{P_1} = \frac{\rho_1}{P_1} M_1^2 c_1^2
+= \frac{\rho_1}{P_1} M_1^2 \frac{\Gamma P_1}{\rho_1}
+= \Gamma M_1^2.
+\]
+
+\noindent
+Thus the pressure jump condition is
+\[
+\frac{P_2}{P_1} = 1 + \Gamma M_1^2(1-x).
+\]
+Finally, recalling that $c^2 = \Gamma P/\rho$, the sound speed ratio may be expressed as
+\[
+\frac{c_2^2}{c_1^2} = \frac{P_2}{P_1}\frac{\rho_1}{\rho_2}
+= \frac{P_2}{P_1}\,x
+= x\left[1 + \Gamma M_1^2(1-x)\right].
+\]
+Substituting this into the modified energy equation yields
+\[
+\frac{M_1^2}{2}(x^2-1) = \frac{1}{\Gamma -1}\left[\Gamma x(1-x)M_1^{2} + x - 1\right].
+\]
+
+Factoring out $(x-1)$ from the modified energy equation and simplifying gives
+\[
+\frac{1}{2}(\Gamma -1) M_1^2 (x+1) + \Gamma x - M_1^2 = 0.
+\]
+Solving this quadratic relation for $x = \rho_1/\rho_2$ and inverting, we obtain the 
+classic \textbf{compression ratio} across a shock:
+\begin{equation}
+\label{eq:rh_density_ratio_from_mach}
+\boxed{\;\;\frac{\rho_2}{\rho_1} \;=\; \frac{(\Gamma+1)M_1^2}{(\Gamma-1)M_1^2 + 2}\;\;}
+\end{equation}
+\noindent
+This compact expression shows that the density jump depends only on the upstream Mach number.  
+In the strong shock limit ($M_1 \to \infty$), the ratio saturates at
+$\rho_2/\rho_1 = (\Gamma+1)/(\Gamma-1)$, which equals \framebox{$4$ for a monatomic ideal gas ($\Gamma = 5/3$)}. As the shock weakens, the density ratio becomes $1$.
+\par
+From the derivation above, we can also write down the \textbf{pressure ratio} in the form
+\begin{equation}
+\boxed{\;\;\frac{P_2}{P_1} = 1 + \frac{2\Gamma}{\Gamma+1}\,(M_1^2 - 1)\;\;},
+\end{equation}
+where we have used the fact that $x = u_2/u_1 = \rho_1/\rho_2$ and the expression we derived from $P_2/P_1$ in terms of $x$ above.
+\par
+
+\subsubsection*{The Density-Pressure Form}
+It is sometimes convenient to eliminate the Mach number entirely and express
+the compression ratio $\rho_2/\rho_1$ directly in terms of the pressure ratio
+$P_2/P_1$. Starting from the momentum condition in dimensionless form,
+\[
+\frac{P_2}{P_1} = 1 + \Gamma M_1^2 (1 - x),
+\]
+with $x \equiv \rho_1/\rho_2$, we can rearrange this relation to isolate $M_1^2$:
+\[
+M_1^2 = \frac{ \tfrac{P_2}{P_1} - 1 }{ \Gamma(1 - x) }.
+\]
+On the other hand, from the density ratio expressed in terms of Mach number
+(eq.~\ref{eq:rh_density_ratio_from_mach}),
+\[
+\frac{\rho_2}{\rho_1} = \frac{(\Gamma+1) M_1^2}{(\Gamma-1)M_1^2 + 2}.
+\]
+
+Substituting the above expression for $M_1^2$ into this equation and simplifying
+yields a direct relation between the density and pressure ratios:
+\[
+\frac{\rho_2}{\rho_1} =
+\frac{ \tfrac{P_2}{P_1} + \tfrac{\Gamma -1}{\Gamma +1} }
+     { \tfrac{\Gamma}{\Gamma +1}\,\tfrac{P_2}{P_1} + \tfrac{1}{\Gamma +1} } .
+\]
+Equivalently, this can be written in a slightly cleaner form:
+\begin{equation}
+\boxed{\;\;
+\frac{\rho_2}{\rho_1}
+= \frac{ (\Gamma - 1)P_1 + (\Gamma + 1)P_2 }
+       { (\Gamma + 1)P_1 + (\Gamma - 1)P_2}
+\;\;}
+\end{equation}
+\noindent
+This form of the Rankine--Hugoniot condition is particularly useful in practice:
+if the pressure jump across a shock is measured (for example in X-ray
+observations of galaxy clusters), the corresponding compression ratio of the
+gas can be inferred directly.
+
+\subsubsection*{The Temperature RH Conditions}
+
+The behavior of the temperature across the RH conditions is determined from the
+other ratios we have already derived. Specifically,
+\[
+\frac{T_2}{T_1} = \frac{P_2}{P_1} \cdot \frac{\rho_1}{\rho_2}.
+\]
+Substituting the expressions for the pressure and density ratios in Mach form,
+\[
+\frac{P_2}{P_1} = 1 + \frac{2\Gamma}{\Gamma+1}\left(M_1^2 - 1\right),
+\qquad
+\frac{\rho_2}{\rho_1} = \frac{(\Gamma+1)M_1^2}{(\Gamma-1)M_1^2+2},
+\]
+we arrive at
+\[
+\frac{T_2}{T_1} =
+\left[\,1 + \frac{2\Gamma}{\Gamma+1}\left(M_1^2 - 1\right)\,\right]
+\left[\frac{(\Gamma-1)M_1^2+2}{(\Gamma+1)M_1^2}\right].
+\]
+Simplifying gives the compact form
+\begin{equation}
+\boxed{\;\;
+\frac{T_2}{T_1} =
+\frac{\left[\,2\Gamma M_1^2 - (\Gamma - 1)\,\right]
+      \left[(\Gamma-1)M_1^2+2\right]}
+     {(\Gamma+1)^2 M_1^2}
+\;\;}
+\end{equation}
+\noindent
+As a check, in the strong-shock limit $M_1 \to \infty$,
+\[
+\frac{T_2}{T_1} \;\longrightarrow\;
+\frac{2\Gamma(\Gamma-1)}{(\Gamma+1)^2}\,M_1^2.
+\]
+For a monatomic ideal gas ($\Gamma=5/3$), this reduces to
+\[
+\frac{T_2}{T_1} \;\longrightarrow\; \frac{5}{16}\,M_1^2.
+\]
+\begin{bigidea}
+    For \textbf{strong shocks}, there ratio in the thermodynamic properties across the shock is a universal function of $M_1$ and $\Gamma$ as follows:
+    \[
+    \begin{aligned}
+        \frac{\rho_2}{\rho_1} &= \frac{(\Gamma+1)M_1^2}{(\Gamma-1)M_1^2+2} &\Rightarrow  \frac{(\Gamma +1)}{(\Gamma -1)}\\
+        \frac{v_2}{v_1} &= \frac{\rho_1}{\rho_2} &\Rightarrow \frac{\Gamma -1}{\Gamma+1}\\
+        \frac{P_2}{P_1} &= 1 + \frac{2\Gamma}{1+\Gamma} \left(M_1^2-1\right) &\Rightarrow \infty\\
+        \frac{T_2}{T_1} &= \frac{\left[\,2\Gamma M_1^2 - (\Gamma - 1)\,\right]
+      \left[(\Gamma-1)M_1^2+2\right]}
+     {(\Gamma+1)^2 M_1^2} &\Rightarrow \frac{2\Gamma(\Gamma-1)}{(\Gamma+1)^2} M_1^2\\
+     M_2 &= \frac{2+(\Gamma-1)M_1^2}{2\Gamma M_1^2 - (\Gamma -1)}
+    \end{aligned}
+    \]
+    As such, if we know the Mach number we can compute a great many things. Likewise we can measure the mach number by taking the ratio of the temperatures on either side of the shock.
+\end{bigidea}
+
+\section{Measuring Shock Properties}
+\label{sec:shock_measurement}
+
+The Rankine--Hugoniot conditions derived above allow us to determine the physical properties of a shock \textbf{once \emph{one} upstream quantity is measured.}
+In observational astrophysics, this typically means that we can estimate the shock Mach number, velocities, temperatures, or compression ratios from a combination of imaging, spectroscopy, and dynamical modeling.  
+Below we summarize how the shock velocity---arguably the most important observable---yields
+all other downstream quantities.
+
+\subsection{Determining the Shock Velocity}
+
+The fundamental quantity characterizing a shock \textbf{is its speed $v_s$ in the rest frame of the unshocked fluid.  }
+(Equivalently, in the shock rest frame, the upstream fluid approaches with speed $u_1=v_s$.)
+
+Several observational techniques provide access to $v_s$:
+
+\begin{enumerate}
+    \item \textbf{VLBI imaging (radio).}  
+    Spatially resolving the expanding ejecta gives the angular growth rate 
+    $\dot{\theta}$, so that
+    \[
+    v_s \simeq D\,\dot{\theta},
+    \]
+    where $D$ is the distance. This provides a geometric measurement of $R(t)$ 
+    and $v_s=\dot{R}$.
+
+    \item \textbf{Synchrotron emission modeling.}  
+    Broadband radio--X-ray fits constrain the post-shock magnetic field, 
+    electron distribution, and density.  
+    In afterglow theory these parameters directly fix the shock radius and velocity.
+
+    \item \textbf{Spectral-line diagnostics.}  
+    Non-relativistic shocks produce broadened or split emission lines (e.g.\ in SN remnants).
+    For cluster shocks or bow shocks around galaxies, ion line widths give the 
+    post-shock temperature, which directly determines $v_s$.
+\end{enumerate}
+
+\begin{bigidea}
+A single measurement of the shock velocity $v_s$ fixes the entire downstream
+thermodynamic state through the Rankine--Hugoniot relations.
+\end{bigidea}
+
+\subsection{Deriving Shock Properties from the Shock Velocity}
+\label{sec:shock_from_velocity}
+
+We now show \emph{explicitly} how a measurement of the shock velocity determines all other downstream quantities.  
+We adopt two assumptions appropriate for most astrophysical blasts:
+\begin{enumerate}
+    \item The shock is \textbf{strong}: $M_1\gg 1$.
+    \item The unshocked gas is \textbf{cold}: $T_1\approx 0$, hence $P_1\approx 0$.
+\end{enumerate}
+
+These assumptions simplify the Rankine--Hugoniot relations into clean algebraic relations.
+
+% -----------------------------------------------------
+\paragraph{Step 1: Post-shock Velocities}
+% -----------------------------------------------------
+
+In the shock rest frame:
+\[
+\boxed{u_1 = v_s.}
+\]
+
+For a strong shock in an ideal monatomic gas ($\Gamma=5/3$),
+the RH density jump gives
+\[
+\frac{\rho_2}{\rho_1} = \frac{\Gamma+1}{\Gamma-1} = 4.
+\]
+
+Mass conservation requires:
+\[
+\rho_1 u_1 = \rho_2 u_2
+\quad\Longrightarrow\quad
+\boxed{u_2 = \frac{u_1}{4} = \frac{v_s}{4}.}
+\]
+Thus the downstream flow speed (in the shock frame) is one quarter of the shock speed. Keeping in mind that this is a measurement made in the rest-frame of the shock, the velocity observed relative to the unshocked gas is $u_2 = (3/4) v_s$, so the shock effectively \textbf{accelerates the material} to close to the shock speed.
+
+% -----------------------------------------------------
+\paragraph{Step 2: Post-shock Pressure}
+% -----------------------------------------------------
+
+Use the momentum RH condition:
+\[
+\rho_1u_1^2 + P_1 = \rho_2 u_2^2 + P_2.
+\]
+
+Because the upstream gas is cold, $P_1\simeq 0$, so:
+\[
+P_2 = \rho_1 u_1^2 - \rho_2 u_2^2.
+\]
+
+Substitute $u_1=v_s$, $\rho_2=4\rho_1$, and $u_2=v_s/4$:
+\[
+P_2
+= \rho_1 v_s^2 - 4\rho_1\left(\frac{v_s}{4}\right)^2
+= \rho_1 v_s^2 - \frac{1}{4}\rho_1 v_s^2
+= \frac{3}{4}\rho_1 v_s^2.
+\]
+
+Thus,
+\[
+\boxed{P_2 = \frac{3}{4}\rho_1 v_s^2.}
+\]
+
+% -----------------------------------------------------
+\paragraph{Step 3: Post-shock Temperature}
+% -----------------------------------------------------
+
+Use the ideal gas law:
+\[
+P_2 = \frac{\rho_2 k_B T_2}{\mu m_p}
+\quad\Longrightarrow\quad
+T_2 = \frac{\mu m_p}{k_B}\frac{P_2}{\rho_2}.
+\]
+
+Insert $P_2=\frac{3}{4}\rho_1 v_s^2$ and $\rho_2=4\rho_1$:
+\[
+T_2
+= \frac{\mu m_p}{k_B}
+\left(\frac{3}{4}\frac{\rho_1 v_s^2}{4\rho_1}\right)
+= \frac{3}{16}\frac{\mu m_p}{k_B}v_s^2.
+\]
+
+Thus,
+\[
+\boxed{
+k_B T_2 = \frac{3}{16}\,\mu m_p\, v_s^2.
+}
+\]
+This widely used relation connects a spectroscopic temperature measurement directly to the shock speed.
+For typical shock speeds, this provides
+\[
+T_2 \sim 1 \times 10^{9}\; \left(\frac{v_s}{10^4\;{\rm km\;s^{-1}}}\right)^{2}\;{\rm K}.
+\]
+
+% -----------------------------------------------------
+\paragraph{Step 4: Thermal Energies}
+% -----------------------------------------------------
+
+The thermal energy per particle:
+\[
+E_{\rm th,2} = \frac{3}{2}k_B T_2 
+= \frac{9}{32}\,\mu m_p v_s^2.
+\]
+
+Thermal energy per unit mass:
+\[
+\epsilon_{\rm th,2}
+= \frac{E_{\rm th,2}}{\mu m_p}
+= \frac{9}{32}v_s^2.
+\]
+
+Thermal energy density:
+\[
+u_{\rm th,2}
+= \rho_2 \epsilon_{\rm th,2}
+= 4\rho_1\left(\frac{9}{32}v_s^2\right)
+= \frac{9}{8}\rho_1 v_s^2.
+\]
+
+% =====================================================
+\begin{bigidea}
+\textbf{Strong-Shock Relations from a Measured Shock Velocity}
+
+\[
+\boxed{
+\begin{aligned}
+\text{Velocities:}\qquad
+&u_2 = \frac{v_s}{4},\\[4pt]
+\text{Densities:}\qquad
+&\rho_2 = 4\rho_1,\\[4pt]
+\text{Pressure:}\qquad
+&P_2 = \frac{3}{4}\rho_1 v_s^2,\\[4pt]
+\text{Temperature:}\qquad
+&k_B T_2 = \frac{3}{16}\,\mu m_p\, v_s^2,\\[4pt]
+\text{Thermal energy per particle:}\qquad
+&E_{\rm th,2}=\frac{9}{32}\,\mu m_p v_s^2,\\[4pt]
+\text{Thermal energy per unit mass:}\qquad
+&\epsilon_{\rm th,2}=\frac{9}{32} v_s^2,\\[4pt]
+\text{Thermal energy density:}\qquad
+&u_{\rm th,2}=\frac{9}{8}\rho_1 v_s^2.
+\end{aligned}
+}
+\]
+
+\medskip
+\textbf{Once the shock velocity is known, every other post-shock thermodynamic quantity follows
+immediately and algebraically.}
+\end{bigidea}
+
+\section{Sedov-Taylor Blastwave}
+
+One particular scenario involving shocks is of particular interest astrophysically: \textbf{blastwaves}.
+To be concrete, we will define a blastwave rigorously such that
+\vspace{20pt}
+\begin{definition}[Blastwave]
+a \textbf{blastwave} is a \textbf{point-like explosion} of total energy $E_0$ released at $t=0$ into a uniform medium of constant density $\rho_0$.
+The explosion energy is assumed to be \textbf{deposited instantaneously} and to \textbf{remain conserved}:
+\[
+E_0 = \text{constant}.
+\]
+We further assume:
+
+\begin{enumerate}
+    \item The \textbf{shock is strong} ($M \to \infty$), so the upstream pressure $P_0$ is negligible compared to the post-shock pressure $P_1$.
+    \item The \textbf{flow is adiabatic} with adiabatic index $\gamma$.
+    \item The medium is \textbf{spherically symmetric}, with no gravitational or external forces.
+\end{enumerate}
+
+
+In most contexts, this is an effective phase of the evolution: the internal pressure is much higher than the upstream pressure and the radiative efficiency of the shocked material is low, leading to minimal losses. 
+Often times, blastwaves will eventually breakdown once their temperatures drop low enough for efficient cooling.
+\end{definition}
+\vspace{20pt}
+In such a scenario, there are only \textbf{two parameters}: $E_0$, the energy injected into the medium to drive the expansion; and $\rho_0$, the \textbf{upstream density} of the unshocked medium.
+We assume that the upstream material is \textbf{cold}, so $P_0\sim T_0 \sim 0$.
+From these two parameters, we should be able to fully characterize the expansion in terms of $\rho(r,t)$, $P(r,t)$, $u_{\rm sh}(r,t)$, etc.
+
+\subsection{Self-Similarity and Dimesional Analysis}
+
+Let's now begin treating this problem in detail. We consider a blastwave driven by some energy $E_0$ into an unshocked medium of density $\rho_1$ which is cold. We wish to characterize the flow.
+The first thing to notice is that our two parameters $E_0$ and $\rho_0$ \textbf{cannot combine to form a length or timescale.}
+This is an interesting feature of the problem:
+\vspace{10pt}
+\begin{proposition}
+    Because there is no natural length / timescale in the problem, we \textbf{cannot have such a scale}. Thus, the solution must depend only on a \textbf{dimensionless variable} $\xi$ constructed from the parameters. This is then the "scale-free" solution.
+\end{proposition}
+\vspace{10pt}
+Let's now go about determining how $\xi$ should be defined. We need a \textbf{dimensionless} combination of $r$, $t$, $\rho_0$, and $E$, so if
+\[
+\xi = r^\alpha t^\beta E_0^\gamma \rho_0^\kappa \implies \left[\xi\right] = \left[L\right]^{\alpha + 2\gamma - 3\kappa}\left[T\right]^{\beta-2\gamma}\left[M\right]^{\gamma+\kappa}.
+\]
+Thus, $\gamma = -\kappa$, $\beta = 2\gamma$, and $\alpha =- 5\gamma$. Letting $\alpha = 1$, we have $\gamma = -1/5$, $\beta =- 2/5$, and $\kappa=1/5$, so
+\begin{equation}
+    \boxed{
+    \xi = r t^{-2/5} \rho_0^{1/5} E_0^{-1/5}.
+    }
+\end{equation}
+\textbf{Now, the position of the shock itself must be at some $\xi_0$ determined by numerical solutions.} Assuming that we have said $\xi_0$, we have
+\begin{equation}
+    \label{eq:sedov-taylor-radius}
+    R_{\rm shock}(t) = \xi_0\left(\frac{E_0t^2}{\rho_0}\right)^{1/5}.
+\end{equation}
+  For $\gamma = 5/3$, $\xi_0 \approx 1.15$. Taking the derivative, we have
+\begin{equation}
+    \label{eq:sedov-taylor-shock-velocity}
+    u_{\rm shock} = \frac{dR_{\rm shock}}{dt} = \frac{2}{5}\xi_0 \left(\frac{E_0}{\rho_0 t^3}\right)^{1/5} = \frac{2}{5}\xi_0^{5/2} \left(\frac{E_0}{\rho_0}\right)^{1/2} R_{\rm shock}^{-3/2}.
+\end{equation}
+
+If we calculate these for the typical scalings relevant to \textbf{supernova remnants}, we will find that
+\[
+R_{\rm shock} \approx 2.3 \left(\frac{E_0}{10^{51}\;\rm erg}\right)^{1/5} \left(\frac{\rho_0}{10^{-24}\;\rm g\;cm^{-3}}\right)^{-1/5}\left(\frac{t}{1000\;\rm yr}\right)^{2/5}\;{\rm pc}.
+\]
+and
+\[
+u_{\rm shock} \approx 9 \times 10^3 \left(\frac{E_0}{10^{51}\;\rm erg}\right)^{1/5} \left(\frac{\rho_0}{10^{-24}\;\rm g\;cm^{-3}}\right)^{-1/5}\left(\frac{t}{1000\;\rm yr}\right)^{-3/5}\;{\rm km/s.}
+\]
+
+\subsection{Shock-Features}
+
+At the shock front ($\xi=1$), the \textbf{Rankine--Hugoniot relations} provide the boundary values
+of the flow variables relative to the upstream state $(\rho_0, u_0=0, P_0=0)$.
+
+For a strong adiabatic shock, we have:
+\begin{align}
+\rho_2 &= \frac{\gamma+1}{\gamma-1}\rho_0 \implies \rho_2 = 4 \rho_0\\
+u_2 &= \frac{2}{\gamma+1}\,\dot{R}, \implies  6.7 \times 10^3 \left(\frac{E_0}{10^{51}\;\rm erg}\right)^{1/5} \left(\frac{\rho_0}{10^{-24}\;\rm g\;cm^{-3}}\right)^{-1/5}\left(\frac{t}{1000\;\rm yr}\right)^{-3/5}\;{\rm km/s.} \\
+P_2 &= \frac{2}{\gamma+1}\,\rho_0 \dot{R}^2 \implies  6 \times 10^{-7} \left(\frac{E_0}{10^{51}\;\rm erg}\right)^{2/5} \left(\frac{\rho_0}{10^{-24}\;\rm g\;cm^{-3}}\right)^{3/5}\left(\frac{t}{1000\;\rm yr}\right)^{-6/5}\;{\rm erg/cm^3.} \\
+T_2 &= \frac{m_p\mu}{k_B} \dot{R}^2 \frac{2(\gamma-1)}{(\gamma+1)^2} \implies 1\times 10^{8}\mu \left(\frac{E_0}{10^{51}\;\rm erg}\right)^{2/5} \left(\frac{\rho_0}{10^{-24}\;\rm g\;cm^{-3}}\right)^{-2/5}\left(\frac{t}{1000\;\rm yr}\right)^{-6/5}\;{\rm K}.
+\end{align}
+
+\subsection{The Post--Shock Material}
+\label{sec:sedov_postshock}
+
+Having determined the shock radius $R_{\rm sh}(t)$ and shock velocity $u_{\rm sh}(t)=\dot{R}_{\rm sh}$ from dimensional analysis, we now turn to the \textbf{interior structure} of the blastwave.  
+The Sedov--Taylor solution is not merely a relation for $R(t)$; it is a  \textbf{fully self--similar solution} for the spatial profiles of density, pressure, and velocity behind the shock front.
+
+The key insight is that, because the problem contains no intrinsic length or timescale, \textbf{every physical quantity must depend on $r$ and $t$ only through the dimensionless similarity variable}
+\begin{equation}
+    \xi \equiv \frac{r}{R_{\rm sh}(t)}.
+\end{equation}
+Here $\xi=1$ corresponds to the location of the shock, and $\xi=0$ corresponds to the origin.
+
+We therefore search for solutions of the form
+\begin{equation}
+\begin{aligned}
+    u(r,t) &= \dot{R}_{\rm sh}(t)\, V(\xi), \\[4pt]
+    \rho(r,t) &= \rho_0\, G(\xi), \\[4pt]
+    P(r,t) &= \rho_0\, \dot{R}_{\rm sh}^2(t)\, Z(\xi),
+\end{aligned}
+\label{eq:sedov_ansatz}
+\end{equation}
+where $(V,G,Z)$ are dimensionless functions of $\xi$ alone. \rmk{The argument here is that we need dimensionless function of $\xi$ scaled by any relevant dimensional scales, which are easily identified for each case.}
+
+Substituting the ansatz (\ref{eq:sedov_ansatz}) into the Euler equations for a spherically symmetric, adiabatic flow produces \textbf{a system of coupled, nonlinear ordinary differential equations for $(V,G,Z)$.  }
+After some algebra,
+\begin{align}
+\label{eq:sedov_ode1}
+\left( V - \xi \right)\frac{dG}{d\xi}
+    + G \left( \frac{dV}{d\xi} + \frac{2V}{\xi} \right)
+    &= 0,
+\\[6pt]
+\label{eq:sedov_ode2}
+\left( V - \xi \right)\frac{dV}{d\xi}
+    + \frac{1}{G}\frac{dZ}{d\xi}
+    &= -\frac{3}{2}\,V,
+\\[6pt]
+\label{eq:sedov_ode3}
+\left( V - \xi \right)\frac{dZ}{d\xi}
+    + \Gamma Z\,\frac{dV}{d\xi}
+    &= - (3\Gamma -1)\,Z.
+\end{align}
+
+Equations \eqref{eq:sedov_ode1}--\eqref{eq:sedov_ode3} constitute a closed system of first--order ODEs for the similarity functions.  
+These ODEs cannot be solved in closed form for general $\Gamma$ and must be integrated numerically, subject to the shock boundary conditions.
+
+At $\xi=1$, the fluid variables must match the Rankine--Hugoniot jump conditions for a strong shock, with upstream state $(\rho_0,u_0=0,P_0\approx0)$. For an ideal gas of adiabatic index $\Gamma$, these conditions give:
+\begin{align}
+    G(1) &= \frac{\rho_2}{\rho_0}
+          = \frac{\Gamma+1}{\Gamma-1},
+    \\[6pt]
+    V(1) &= \frac{u_2}{u_1}
+          = \frac{2}{\Gamma+1},
+    \\[6pt]
+    Z(1) &= \frac{P_2}{\rho_0 u_{\rm sh}^2}
+          = \frac{2}{\Gamma+1}.
+\end{align}
+For a monatomic gas ($\Gamma=5/3$),
+\[
+G(1)=4, \qquad V(1)=\frac{1}{4}, \qquad Z(1)=\frac{3}{4}.
+\]
+
+These boundary values serve as initial data for integrating equations~\eqref{eq:sedov_ode1}--\eqref{eq:sedov_ode3} inward from the shock toward the origin.
+
+\subsubsection*{Behavior in the Interior}
+
+Although the full profiles require numerical integration, several qualitative features and asymptotic behaviors are universal:
+
+\begin{enumerate}
+    \item \textbf{Density profile $G(\xi)$:}  
+    The density rises sharply at the shock ($G=4$ for $\Gamma=5/3$) and then decreases monotonically toward the origin. Near $\xi \to 0$, one finds the asymptotic power--law behavior
+    \[
+        G(\xi) \propto \xi^{\frac{3}{\Gamma -1}}.
+    \]
+    For $\Gamma=5/3$, this implies $G\propto \xi^{9/2}$, so the density falls rapidly near the center.
+
+    \item \textbf{Velocity profile $V(\xi)$:}  
+    Just behind the shock, the flow speed is a fixed fraction of the shock velocity:
+    \[
+        V(1) = \frac{2}{\Gamma+1}.
+    \]
+    Moving inward, $V(\xi)$ decreases smoothly. As $\xi\to 0$, the velocity approaches a linear scaling:
+    \[
+        V(\xi) \propto \xi.
+    \]
+    This is required by regularity at the origin.
+
+    \item \textbf{Pressure profile $Z(\xi)$:}  
+    The pressure is nearly uniform throughout most of the shocked region. This is a hallmark of a pressure--driven blastwave. Only close to the shock does $Z(\xi)$ deviate significantly from its interior value.
+\end{enumerate}
+
+These qualitative features match intuitive expectations: pressure is nearly uniform (as needed for self-similar expansion),  velocity drops to zero at the origin, and density drops to maintain constant total mass within the blastwave.
+
+\subsubsection*{Numerical Integration and the Constant $\xi_0$}
+
+The ODE system determines the similarity functions up to an overall scale factor.
+To determine the shock position, one imposes the \emph{global} energy constraint:
+\[
+E_0 
+= \int_0^{R_{\rm sh}}
+    \left(
+    \frac{1}{2}\rho u^2 
+    + \frac{P}{\Gamma-1}
+    \right)4\pi r^2 dr.
+\]
+
+Substituting the self--similar forms (\ref{eq:sedov_ansatz}) and performing the 
+integration yields a dimensionless constant involving $(G,V,Z)$.  
+This constant uniquely determines $\xi_0$ for each $\Gamma$.  
+For $\Gamma=5/3$, numerical integration gives the well--known value
+\[
+\boxed{
+\xi_0 \approx 1.15167.
+}
+\]
+
+Thus the complete Sedov--Taylor solution consists of:
+\begin{itemize}
+    \item the shock radius 
+    \[
+        R_{\rm sh}(t) = \xi_0 \left(\frac{E_0 t^2}{\rho_0}\right)^{1/5},
+    \]
+    \item the self--similar profiles $(G,V,Z)$ obtained from numerical integration,
+    \item the shock boundary conditions arising from the Rankine--Hugoniot relations.
+\end{itemize}
+
+

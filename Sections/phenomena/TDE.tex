@@ -1,6 +1,7 @@
-A \textbf{tidal disruption event} occurs in scenarios where a star's orbit brings it within a close enough radius of a black hole to disrupt the star. The material from the star may then be either partially accreted or fully accreted in a luminous transient event. In this section, we'll discuss the theory and relevant observational context of these events.
+A \textbf{tidal disruption event} occurs in scenarios where a star's orbit brings it \textbf{within a close enough radius of a black hole to disrupt the star.} The material from the star may then be either partially accreted or fully accreted in a luminous transient event. In this section, we'll discuss the theory and relevant observational context of these events.
 
 \section{TDE Theory}
+
 Before we dig into the observational details of TDEs, we'll first discuss the theory of TDE formation and the relevant scalings and typical equations in play. 
 
 \subsection{Tidal Disruption}
@@ -30,7 +31,9 @@ The corresponding \textbf{differential force} due to a shift $\delta {\bf x}$ is
 \par
 For a point-mass potential $\Phi = -GM/r$, this becomes
 \[
+\boxed{
 T_{ij} = \frac{GM}{r^3}\left(3 - \delta_{ij}\right).
+}
 \]
 The eigenvalues of $T_{ij}$ quantify the degree of stretching or compression along different directions in space.
 \end{definition}
@@ -66,6 +69,7 @@ It is worth looking at this scaling in a fiducial context. For stars of approxim
     &\approx 0.5 \left(\frac{R_\star}{R_\odot}\right) \left(\frac{M}{10^6\;{\rm M_\odot}}\right)^{1/3} \left(\frac{M_\star}{M_\odot}\right)^{-1/3} \; {\rm AU}
 \end{aligned}
 \]
+Notably, the \textbf{radius of the star} is a more powerful scaling in this equation than the mass ratio. As such, it is much easier to disrupt large, diffuse stars.
 \par
 Another feature of these systems which is worth being aware of is the $r_t$ is \textbf{not always outside the event horizon}. For a Schwarzchild black hole, 
 \[
@@ -75,7 +79,7 @@ For relevant scalings,
 \[
 \frac{r_t}{r_s} \approx 5 \left(\frac{R_\star}{R_\odot}\right) \left(\frac{M_\star}{M_\odot}\right)^{-1/3}\left(\frac{M}{10^7\;{\rm M_\odot}}\right)^{-2/3}.
 \]
-And so for black holes larger than about $10^7$, tidal disruption simply cannot occur.
+And so for black holes larger than about $10^8$, \textbf{tidal disruption simply cannot occur.}
 \par
 If the \textbf{pericenter} of the stellar orbit passes within $r_t$ of the black hole, then disruption will occur. The degree of disruption depends sensitively on the ratio $\beta \equiv r_t / r_p$, known as the \textbf{penetration factor}. For $\beta \lesssim 1$, the star \textbf{may only be partially stripped}, losing a small fraction of its envelope. For $\beta \gtrsim 1$, the \textbf{star is fully disrupted}, and its material is stretched into a long, thin stream by tidal forces.
 
@@ -165,5 +169,33 @@ Because the mass in debris is (to leading order) uniformly distributed in specif
 \end{equation}
 The normalization (the factor $1/3$) is conventional and encodes the near-uniform $dM/d\epsilon$ assumption; detailed stellar structure, partial disruptions ($\beta\lesssim 1$), and relativistic effects can modify both the peak and early-time behavior.
 
+\section{Observational Properties}
 
+\subsection{X-Ray Emission}
+
+- A thermal soft component is sometimes present emerging from the region close to $r_g$ of the black hole. This is emission from the material that is actively accreting.
+
+- Hard X-rays can also be observed from both synchrotron and comptomization. 
+
+- TDEs may have one, both, or neither of these components.
+
+\subsection{Optical \& UV Emission}
+
+- Much less constrained. Seems to emerge from much larger radii $r \gg r_g$. This could be reprocessing of the X-rays (Roth+16, Dai+18, etc.) The reprocessing material could be winds (Metzger+16)  or due to collision induced outflows CIO (Lu+20).
+
+In the later case, we anticipate that the emission trace the fallback rate of $t^{-5/3}$, which is commonly observed.
+
+Piran+15 suggests that this emission is not reprocessing but simply direct emission from stream interaction.
+
+Loeb97, Metzger22 introduced a new idea where the optical emission is from a quasi-spherical pressure supported envelope. This predicts $t^{-3/2}$.
+
+There is also the emerge
+
+\subsection{Radio Emission}
+
+Largely driven by synchrotron emission in material much further than $r_g$. Some TDEs appear to have on-axis jets. (some of these are relativistic, some are not).
+
+Some TDEs are not detected immediately in the radio.
+
+In some recently reported scenarios, there is radio emission years after the discovery of the TDE in x-ray or optical.
 

@@ -1,7 +1,7 @@
 
 In this chapter, we will explore the \textbf{standard model of accretion disk physics}: the so-called \textbf{thin disk model}. This model forms the cornerstone of modern accretion theory and underlies our understanding of systems ranging from protostellar disks to luminous quasars. Despite its simplicity, the thin disk model is remarkably predictive, yielding quantitative relations between disk structure, luminosity, and accretion rate that are broadly consistent with observations.
 \par
-Before we get into the details of the thin disk model, we'll want to first derive the equations of fluid dynamics in axisymmetric coordinates.
+Before we get into the details of the thin disk model, we'll want to first derive the equations of fluid dynamics in axisymmetric coordinates. Doing so will provide us the framework we need in order to model accretion disks properly.
 
 \section{Fluid Dynamics of an Axisymmetric Rotating Disk}
 
@@ -373,8 +373,8 @@ Before we proceed to the derivation, we will want to also address various assump
 \textbf{Nearly Circular Orbits} & The flow is dominated by rotation, $v_\phi \gg v_r, v_z$.  To leading order, the centrifugal and gravitational forces balance: $\Omega \simeq \Omega_K$. \\[4pt]
 \textbf{Vertical Hydrostatic Equilibrium} & The vertical velocity is negligible ($v_z \approx 0$), and $dP/dz = -\rho \Omega_K^2 z$.  This defines the Gaussian vertical density profile and the scale height $H=c_s/\Omega_K$. \\[4pt]
 \textbf{Neglect of Self-Gravity} & The disk’s own gravity is small compared to the central potential: $\Phi \simeq -GM/\sqrt{R^2+z^2}$. \\[4pt]
-\bottomrule
  {\bf Steady State}&We assume that dynamical changes in the conditions of the accretion source happen on time scales longer than those of the viscous time scales determining the structure of the disk. This permits a steady state assumption.\\
+\bottomrule
 \end{tabular}
 \caption{Structural assumptions defining the thin disk geometry and kinematics.}
 \end{table}
@@ -1248,6 +1248,7 @@ which is our standard $\alpha$ prescription. This alone does not given us a solu
 \begin{equation}
     \kappa_{\rm kramer} = 5\times 10^{24}\; \rho T_c^{-7/2}\; {\rm cm^2\;g^{-1}.}
 \end{equation}
+Critically, \textbf{Kramer's Law} is an effective model of opacities between about $T\sim 10^4$, where ionization fails and $T^{7}$, when electron scattering becomes the dominant source of opacity. 
     \item \textbf{Electron Scattering Opacity}: When temperatures transition to a fully ionized medium, bound-free transitions become considerably less favorable and we instead have relatively generic scattering due to electrons: \textbf{Thompson scattering}. This comes with a generic prescription for the opacity:
 \begin{equation}
     \kappa_{\rm thompson} = 0.2 \;(1+X)\;{\rm cm^2\;g^{-1}},
@@ -1257,8 +1258,18 @@ where $X$ is the Hydrogen abundance fraction.
 \vspace{20pt}
 We then also consider scenarios where either \textbf{gas pressure dominates}, or \textbf{radiation pressure dominates}. This gives us \textbf{4 distinct region}, which each have different general solutions, but all of which have algebraic closure. In the following sections, we'll discuss each of the regimes.
 
+\begin{remark}
+    Before we dive into the solutions below, there are a few thematic manipulations to keep track off. First off, we have
+    \[
+    \nu \Sigma \sim \dot{M} f^4,
+    \]
+    and $\nu = \alpha c_s H = \alpha P/ \rho \Omega_k$. We can use the fact that $P \sim \Sigma \Omega_k^2 H$ and $\rho \sim \Sigma / H$ to produce this manipulation. This is almost universal, but the procedure following that will depend on the nature of the pressure support and the opacity.
+\end{remark}
+
 \subsection{Region A: Radiation Pressure \& Electron Scattering}
 \label{sec:region_a}
+
+In the inner most region of the disk, we are at the \textbf{hottest region of the disk} and anticipate that the disk will be radiation pressure dominated with electron scattering opacity. 
 
 We begin with perhaps the simplest algebraic regime of the $\alpha$-disk model: the  \textbf{radiation pressure–dominated, electron scattering} region of the disk. This case applies to the innermost parts of bright accretion disks around compact objects, where temperatures are sufficiently high that the gas is fully ionized and radiation pressure exceeds gas pressure. The physical assumptions defining this region are:
 \begin{equation}
@@ -1266,7 +1277,31 @@ We begin with perhaps the simplest algebraic regime of the $\alpha$-disk model: 
 P \simeq P_{\rm rad} = \frac{a}{3}T_c^4, \qquad \kappa = \kappa_{\rm es} = \text{constant}.
 }
 \end{equation}
-In steady state, angular momentum conservation requires (equation~\eqref{eq:thin_disk_viscous})
+
+\subsubsection{Relevance}
+
+\textbf{Region A} should only occur in the \textbf{hottest}, inner most regions of the disk. To be concrete, there are two conditions which both provide constraints:
+\vspace{10pt}
+\begin{itemize}
+    \item \textbf{The Opacity}: Since the opacity must be \textbf{electron-scattering dominated}, we need
+    \[
+    \kappa_{\rm es} > \kappa_{\rm kramer}.
+    \]
+    As we'll see later, this places an effective boundary between \textbf{regions A/B} and \textbf{regions C/D}.
+    \item \textbf{The Pressure}: We are also assuming that the pressure is dominated by the \textbf{radiation pressure}, so
+    \[
+    \frac{aT^4}{3} \gg \frac{\rho kT}{\mu m_p}\implies T^3 \gg \rho \frac{3k_B}{\mu m_p a}.
+    \]
+    For a ``typical'' density of $10^{-5} \;{\rm g/cm^3}$, this requires that
+    \[
+    T \gtrsim 10^6\;\left(\frac{\rho}{10^{-5}\;{\rm g/cm^3}}\right)\; {\rm K}.
+    \]
+    This means that either or both of these assumptions could fail at low temperatures.
+\end{itemize}
+
+\subsubsection{Scalings}
+
+Let's now derive the scalings. We'll start with the surface density and then everything else will follow relatively trivially. We have angular momentum conservation, which requires (equation~\eqref{eq:thin_disk_viscous})
 \begin{equation}
 \nu \Sigma = \frac{\dot{M}}{3\pi}
 \left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right]
@@ -1276,26 +1311,27 @@ where we defined, for compactness,
 \[
 f^4 = \frac{1}{3\pi}\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
 \]
-The $\alpha$–disk ansatz relates \textbf{viscosity to local pressure and sound speed}:
+Now, I currently have $\Sigma$ in terms of two fundamentals $(\dot{M}, f)$ and $\nu$. We really want to be able to reduce the expression for $\nu$. To do so, we use the \textbf{$\alpha$-disk assumption:}
 \[
 \nu = \alpha c_s H = \alpha \frac{c_s^2}{\Omega_K}
 = \alpha \frac{P}{\rho\,\Omega_K}.
 \]
-Using vertical hydrostatic equilibrium (\(P \sim \Sigma \Omega_K^2 H\)) and $\rho \sim \Sigma/H$, we can eliminate $\rho$ and $H$:
-\begin{align}
-\nu &\sim \alpha \frac{P}{(\Sigma/H)\Omega_K}
-= \alpha \frac{P H}{\Sigma \Omega_K}, \\
-H &\sim \frac{P}{\Sigma \Omega_K^2}
-\quad\Rightarrow\quad
-\nu \sim \alpha \frac{P^2}{\Sigma^2 \Omega_K^3}.
-\end{align}
-This important relation shows that, in a radiation-pressure–dominated disk, the \textbf{viscosity depends quadratically on the pressure}.
+Using vertical hydrostatic equilibrium,
+\[
+P = \rho \Omega_k^2 H^2,\;\text{and},\; \Sigma = \sqrt{2\pi} \rho H,\;\text{so}\; H = \sqrt{2\pi} P \Sigma^{-1} \Omega_k^{-2}.
+\]
+Substituting in,
+\[
+\nu = \sqrt{2\pi} \frac{\alpha}{\Omega_k}\frac{PH}{\Sigma} = 2\pi \frac{\alpha}{\Omega_k^3} \Sigma^{-2} P^2.
+\]
+This important relation shows that, in any disk, the \textbf{viscosity depends quadratically on the pressure}. 
 
+We now need to find a closure for $P$ in terms of primitive variables. To do this, we'll connect to radiative transfer.
 The radiation pressure gives
 \[
 P = \frac{a}{3}T_c^4.
 \]
-From radiative diffusion (equation~\eqref{eq:Tc_Teff_tau}),
+From radiative diffusion (equation~\eqref{eq:Tc_Teff_tau}) and our dissipation closure,
 \[
 T_c^4 = \frac{3}{8}\kappa_{\rm es}\Sigma T_{\rm eff}^4,
 \qquad
@@ -1304,153 +1340,250 @@ T_c^4 = \frac{3}{8}\kappa_{\rm es}\Sigma T_{\rm eff}^4,
 \]
 Substituting and simplifying yields
 \[
-P \sim \frac{a}{3}
-\left(\frac{3}{8}\kappa_{\rm es}\Sigma\right)
-\left(\frac{3GM\dot{M}}{8\pi\sigma_{\rm sb}R^3}f^4\right),
+P = \frac{3a}{64\pi \sigma_{\rm sb}} \kappa_{\rm es} \Sigma \frac{GM\dot{M}}{R^3} f^4 = \frac{3}{16\pi c} \kappa_{\rm es} \Sigma \frac{GM\dot{M}}{R^3}f^4.
 \]
-or schematically, \(P \propto \Sigma\, \kappa_{\rm es}\, \dot{M}\, \Omega_K^2 f^4.\) Substituting this form of $P$ into $\nu \sim \alpha P^2 \Sigma^{-2}\Omega_K^{-3}$ gives
+We can now start combining pieces again. Since we have $P$, we know that
 \[
-\nu \sim \alpha\,\kappa_{\rm es}^2\,\dot{M}^2\,\Omega_K\,f^8,
-\]
-so that, combining with $\nu\Sigma = \dot{M}f^4$,
-\begin{equation}
 \boxed{
-\Sigma \;\sim\;
-\frac{1}{\alpha\,\kappa_{\rm es}^2\,\dot{M}\,\Omega_K}\;f^{-4}.
+\nu = \frac{2\pi \alpha}{\Omega_K^3} \frac{P^2}{\Sigma^2} = \frac{9G^2}{128\pi c^2}\alpha\kappa_{\rm es}^2 M^{^2} \dot{M}^{2} \Omega_k^{-3} R^{-6} f^8= \frac{9G^{1/2}}{128 \pi c^2} \alpha \kappa_{\rm es}^2 M^{1/2} \dot{M}^2 R^{-3/2} f^8.
 }
-\label{eq:sigma_regionA}
-\end{equation}
-This scaling shows that the surface density \textbf{decreases with increasing accretion rate and $\alpha$.}
-Physically, stronger turbulence (larger $\alpha$) or higher $\dot{M}$ implies a lighter, thinner disk.
-
-Once $\Sigma$ is known, the remaining quantities follow directly:
-
-\[
-\begin{aligned}
-H &\sim \frac{P}{\Sigma\Omega_K^2}
-    \;\propto\;
-    \frac{\dot{M}f^4}{\Omega_K},
-\\[6pt]
-\rho &\sim \frac{\Sigma}{H}
-    \;\propto\;
-    \alpha^{-1}\,\kappa_{\rm es}^{-2}\,
-    \dot{M}^{-2}\,f^{-8}\,\Omega_K,
-\\[6pt]
-T_c &\sim
-\left(\frac{P}{a/3}\right)^{1/4}
-    \;\propto\;
-    \alpha^{-1/4}\,\kappa_{\rm es}^{-1/4}\,
-    \Omega_K^{1/8}\,R^{-3/8},
-\\[6pt]
-\tau &= \frac{1}{2}\kappa_{\rm es}\Sigma
-    \;\propto\;
-    \alpha^{-1}\,\kappa_{\rm es}^{-1}\,\dot{M}^{-1}\,
-    \Omega_K^{-1}\,f^{-4},
-\\[6pt]
-\nu &\propto \alpha\,\kappa_{\rm es}^2\,\dot{M}^2\,\Omega_K\,f^8,
-\\[6pt]
-v_R &= -\,\frac{\dot{M}}{2\pi R\Sigma}
-     \;\propto\;
-     -\,\alpha\,\kappa_{\rm es}^2\,\dot{M}^2\,\Omega_K\,R^{-1}\,f^4.
-\end{aligned}
 \]
-These relations reproduce the standard \textbf{Region A} results from \citet{1973A&A....24..337S} showing explicitly that $T_c$ is \emph{independent of $\dot{M}$} and only weakly dependent on $M$ and $R$. One very important implication of this derivation is the linear dependence of $H$ on $\dot{M}$. If $\dot{M}$ becomes sufficiently large, $H/R$ ceases to be $\ll 1$, violating the thin-disk assumption.  This leads directly to the \textbf{Eddington limit breakdown}. The radiation pressure dominance of Region A implies that a significant fraction of the local vertical force balance is supported by radiation. The radiative flux at each radius is
+As such,
 \[
-F = \sigma_{\rm sb} T_{\rm eff}^4 = \frac{3GM\dot{M}}{8\pi R^3}
-\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
+\boxed{\Sigma = \frac{\dot{M} f^4}{3\pi \nu} = \frac{128}{27} c^2 G^{-1/2} \kappa_{\rm es}^{-2} \;\;\alpha^{-1} M^{-1/2}\dot{M}^{-1} f^{-4} R^{3/2} 
+}
 \]
-The vertical component of radiation pressure exerts an upward acceleration on the gas:
+Using the pressure, we can get the scale height:
 \[
-a_{\rm rad} = \frac{\kappa_{\rm es} F}{c}.
+H = \sqrt{2\pi} \frac{P}{\Sigma} \Omega_k^{-2} = \frac{3}{16\pi c} \sqrt{2\pi} \kappa_{\rm es} \frac{GM\dot{M}}{R^3} f^4 \Omega_k^{-2}.
 \]
-For the disk to remain gravitationally bound, this must be smaller than the vertical component of gravity at $z = H$:
+Simplifying,
 \[
-a_{\rm grav} = \Omega_K^2 H.
+\boxed{
+H = \frac{3}{16c}\sqrt{\frac{2}{\pi}} \kappa_{\rm es} \dot{M} f^4.
+}
 \]
-Equating these defines the condition for the \textbf{local Eddington limit}:
-\begin{equation}
-\frac{\kappa_{\rm es} F}{c} \;=\; \Omega_K^2 H.
-\end{equation}
-Using $F$ from above gives
+The \textbf{effective temperature} is
 \[
-H \;=\; \frac{3}{8\pi}\frac{\kappa_{\rm es}}{c}\,\frac{GM\dot{M}}{R^3}\,\frac{1}{\Omega_K^2}
-\;\simeq\;
-\frac{3}{8\pi}\frac{\kappa_{\rm es}\dot{M}}{c}.
+T_{\rm eff} = \left(\frac{3G}{8\pi \sigma_{\rm SB}}\right)^{1/4} M^{1/4} \dot{M}^{1/4} R^{-3/4} f.
 \]
-Notably, $H$ becomes independent of radius --- the disk inflates to a constant scale height once radiation pressure dominates completely.  
-When $H/R \sim 1$, the thin-disk approximation breaks down, and vertical radiative forces can drive powerful outflows.
-
-This critical point roughly corresponds to an accretion rate near the \textbf{Eddington accretion rate}:
+The \textbf{core temperature} is
 \[
-\dot{M}_{\rm Edd} = \frac{4\pi GM}{\eta\,\kappa_{\rm es}\,c},
+T_{\rm c} = \left(\frac{3}{8}\right)^{1/4} \kappa_{\rm es}^{1/4} \Sigma^{1/4} T_{\rm eff} = \left(\frac{9G}{64 \pi \sigma_{\rm SB}}\right)^{1/4}\kappa_{\rm es}^{1/4} \Sigma^{1/4} M^{1/4} \dot{M}^{1/4} R^{-3/4} f.
 \]
-where $\eta$ is the radiative efficiency ($\sim 0.1$ for thin disks).  
-When $\dot{M} \gtrsim \dot{M}_{\rm Edd}$, the disk becomes geometrically thick and radiatively inefficient, transitioning to a \textbf{slim disk} or \textbf{super-Eddington} accretion flow.
-
-
-\begin{bigidea}
-\textbf{Summary of Region A: Radiation Pressure + Electron Scattering}
-This region corresponds to the inner, radiation–dominated part of the disk near compact accretors.
-Its breakdown near the Eddington limit marks the transition to
-\textbf{slim disks} and the onset of thermal–viscous instabilities.
-\end{bigidea}
-
-The final solution for this region corresponds to the following
-\begin{equation}
-\begin{aligned}
-\Sigma &= 48\;
-\alpha_{-1}^{-1}\,
-\dot{M}_{17}^{-1}\,
-m_1^{-1/2}\,
-r_6^{3/2}\,
+Using our equation for $\Sigma$, we find
+\[
+\Sigma^{1/4}
+=
+\left(\frac{128}{27}\right)^{1/4}
+c^{1/2}
+G^{-1/8}
+\kappa_{\rm es}^{-1/2}
+\alpha^{-1/4}
+M^{-1/8}
+\dot{M}^{-1/4}
 f^{-1}
-\quad {\rm g\,cm^{-2}}, \\[6pt]
-H &= 1.7\times10^{5}\;
-\dot{M}_{17}\,
-f
-\quad {\rm cm}, \\[6pt]
-\rho &= 1.6\times10^{-3}\;
-\alpha_{-1}^{-1}\,
-\dot{M}_{17}^{-2}\,
-m_1^{-1/2}\,
-r_6^{3/2}\,
-f^{-2}
-\quad {\rm g\,cm^{-3}}, \\[6pt]
-T_c &= 3.7\times10^{7}\;
-\alpha_{-1}^{-1/4}\,
-m_1^{1/8}\,
-r_6^{-3/8}
-\quad {\rm K}, \\[6pt]
-\tau &= 82\;
-\alpha_{-1}^{-1}\,
-\dot{M}_{17}^{-1}\,
-m_1^{-1/2}\,
-r_6^{3/2}\,
-f^{-1}, \\[6pt]
-\nu &= 2.1\times10^{14}\;
-\alpha_{-1}\,
-\dot{M}_{17}^{2}\,
-m_1^{1/2}\,
-r_6^{-3/2}\,
-f^{2}
-\quad {\rm cm^2\,s^{-1}}, \\[6pt]
-v_R &= -3.2\times10^{7}\;
-\alpha_{-1}\,
-\dot{M}_{17}\,
-m_1^{1/2}\,
-r_6^{-5/2}\,
-f
-\quad {\rm cm\,s^{-1}}, \\[6pt]
-\text{with}\quad
-f &= 1 - \sqrt{\frac{R_{\rm in}}{R}},
-\end{aligned}
+R^{3/8}.
+\]
+Substituting into the midplane temperature expression,
+\[
+T_{\rm c}
+=
+\left(\frac{9G}{64 \pi \sigma_{\rm SB}}\right)^{1/4}
+\kappa_{\rm es}^{1/4}
+\Sigma^{1/4}
+M^{1/4} \dot{M}^{1/4} R^{-3/4} f,
+\]
+we obtain
+\[
+\boxed{
+T_{\rm c}
+=
+\left(\frac{9G}{64 \pi \sigma_{\rm SB}}\right)^{1/4}
+\left(\frac{128}{27}\right)^{1/4}
+c^{1/2}
+G^{-1/8}
+\kappa_{\rm es}^{-1/4}
+\alpha^{-1/4}
+M^{1/8}
+R^{-3/8}
+f^{-1}.
+}
+\]
+Moving on to the \textbf{optical depth}, 
+\[
+\tau = \frac{1}{2}\kappa_{\rm es}\Sigma,
+\]
+thus
+\[
+\boxed{
+\tau
+=
+\frac{64}{27}
+c^2
+G^{-1/2}
+\kappa_{\rm es}^{-1}
+\alpha^{-1}
+M^{-1/2}
+\dot{M}^{-1}
+f^{-4}
+R^{3/2}.
+}
+\]
+We can, of course, use $\Sigma$ and $H$ to derive the midplane density as
+\[
+\rho = \frac{\Sigma}{\sqrt{2\pi}H},
+\qquad 
+H = \frac{3}{16c}\sqrt{\frac{2}{\pi}} \kappa_{\rm es} \dot{M} f^4,
+\]
+so
+\[
+\rho =
+\frac{
+\frac{128}{27} c^2 G^{-1/2} \kappa_{\rm es}^{-2}
+\alpha^{-1} M^{-1/2} \dot{M}^{-1} f^{-4} R^{3/2}
+}{
+\frac{3}{8c} \kappa_{\rm es}\dot{M} f^{4}
+}.
+\]
+After simplification,
+\[
+\boxed{
+\rho =
+\frac{1024}{81}
+c^3
+G^{-1/2}
+\kappa_{\rm es}^{-3}
+\alpha^{-1}
+M^{-1/2}
+\dot{M}^{-2}
+f^{-8}
+R^{3/2}.
+}
+\]
+Finally, we can compute the radial inflow speed as 
+\[
+v_r = -\frac{\dot{M}}{2\pi R \Sigma},
+\]
+so using $\Sigma$,
+\[
+v_r 
+= 
+-\frac{\dot{M}}{2\pi R}
+\left(\frac{27}{128}\right)
+c^{-2}
+G^{1/2}
+\kappa_{\rm es}^2
+\alpha
+M^{1/2}
+\dot{M}
+f^{4}
+R^{-3/2}.
+\]
+Thus,
+\[
+\boxed{
+v_r
+=
+-\frac{27}{256\pi}
+\alpha\,\kappa_{\rm es}^2\,
+c^{-2}\,
+G^{1/2}\,
+M^{1/2}\,
+\dot{M}^{2}
+R^{-5/2}
+f^{4}.
+}
+\]
+
+Thus, for \textbf{standard scalings},
+\begin{equation}
+    \boxed{
+    \begin{aligned}
+        \Sigma =& 854 \;\alpha_{-1}^{-1} M_1^{-1/2} \dot{M}_{16}^{-1} R_{7}^{3/2} f^{-4}\;{\rm g \; cm^{-2}}\\
+        \nu = &1.1\times10^{10} \;\alpha_{-1} M_1^{1/2} \dot{M}_{16}^{2} R_{7}^{-3/2} f^8\;{\rm cm^2\;s^{-1}}\\
+        H =&1.8\times 10^4\;\dot{M} f^4\;{\rm cm}\\
+        T_C =& 1.36\times10^{7}\;\alpha_{-1}^{-1/4} M_{1}^{1/8} R_{7}^{-3/8} f^{-1}\;{\rm K}\\
+        \tau =& 1.671\times10^4\;\alpha_{-1}^{-1} M_1^{-1/2} \dot{M}_{16}^{-1} R_{7}^{3/2} f^{-4}\\
+        \rho =& 1.8\times10^{-2} \;\alpha_{-1}^{-1} M_{1}^{-1/2} \dot{M}_{16}^{-2} R^{3/2}_{7} f^{-8}\;\;{\rm g/cm^3} \\
+        v_r =& 1.6\times10^3 \alpha_{-1} M_1^{1/2} \dot{M}_{16}^2 R_{7}^{-5/2} f^4\;{\rm cm/s}\\
+    \end{aligned}
+    }
 \end{equation}
-where $\alpha_{-1} = \alpha / 0.1$.
+
+\subsubsection{Failures of the Thin Disk Assumption}
+
+There is a very important result which emerges from this set of solutions: it is relatively \textbf{easy to violate the thin disk assumption}. Recall that, in Region~A,
+\[
+H = \frac{3}{16c}\sqrt{\frac{2}{\pi}} \,\kappa_{\rm es}\,\dot{M}\,f^4,
+\]
+so the scale height is independent of radius and depends linearly on the accretion rate.
+
+It is convenient to express this in terms of the \textbf{Eddington accretion rate}. Using
+\[
+\dot{M}_{\rm Edd}
+= \frac{L_{\rm Edd}}{\eta c^2}
+= \frac{4\pi G M}{\kappa_{\rm es}\,\eta\,c}
+= \frac{4\pi c R_g}{\kappa_{\rm es}\,\eta},
+\qquad
+R_g \equiv \frac{GM}{c^2},
+\]
+we define the dimensionless accretion rate
+\[
+\dot{m} \equiv \frac{\dot{M}}{\dot{M}_{\rm Edd}}.
+\]
+Then
+\begin{align}
+H
+&= \frac{3}{16c}\sqrt{\frac{2}{\pi}} \,\kappa_{\rm es}\,\dot{M}\,f^4 \\
+&= \frac{3}{16c}\sqrt{\frac{2}{\pi}} \,\kappa_{\rm es}\,\dot{m}\,\dot{M}_{\rm Edd}\,f^4 \\
+&= \frac{3}{16c}\sqrt{\frac{2}{\pi}} \,\kappa_{\rm es}\,\dot{m}\,
+\left(\frac{4\pi c R_g}{\kappa_{\rm es}\,\eta}\right) f^4 \\
+&= \frac{3\pi}{4}\sqrt{\frac{2}{\pi}}\,\frac{\dot{m}}{\eta}\,R_g\,f^4
+\end{align}
+Thus,
+\begin{equation}
+H \;\simeq\; 1.9\,\frac{\dot{m}}{\eta}\,R_g\,f^4.
+\end{equation}
+
+The \textbf{geometrical thin disk condition} requires $H/R \ll 1$. Using the above,
+\begin{equation}
+\frac{H}{R}
+\simeq 1.9\,\frac{\dot{m}}{\eta}\,\frac{R_g}{R}\,f^4.
+\end{equation}
+Outside of the \textbf{very innermost disk}, (where $f \sim 1$), this becomes
+\begin{equation}
+\frac{H}{R}
+\simeq 1.9\,\frac{\dot{m}}{\eta}\,\left(\frac{R_g}{R}\right).
+\end{equation}
+The thin disk approximation breaks down when $H/R \sim 1$, which corresponds to a critical dimensionless accretion rate
+\begin{equation}
+\dot{m}_{\rm crit}
+\sim \frac{\eta}{1.9}\left(\frac{R}{R_g}\right) f^{-4}
+\simeq 0.5\,\eta\left(\frac{R}{R_g}\right) f^{-4}.
+\end{equation}
+
+If we adopt a characteristic radiative efficiency $\eta \sim 0.1$ and evaluate near the inner disk, say $R \sim 10\,R_g$ and $f \approx 1$, then
+\[
+\dot{m}_{\rm crit} \sim 0.5 \times 0.1 \times 10 \;\sim\; 0.5.
+\]
+Thus, \textbf{even for \emph{sub–Eddington} accretion rates,}
+\[
+\dot{M} \sim 0.5\,\dot{M}_{\rm Edd},
+\]
+the inner, radiation–pressure dominated regions of the disk are already becoming geometrically thick with $H/R \sim \mathcal{O}(1)$.
+
+This illustrates a key lesson: in the radiation–pressure dominated inner disk,\textbf{ it is relatively easy to violate the thin disk assumption}. Long before the global accretion rate becomes strongly super–Eddington, the inner regions may puff up into a geometrically thick configuration, signaling the breakdown of the standard thin $\alpha$–disk description and the onset of the ``slim'' or advection–dominated regime.
+
 
 \subsection{Region B: Gas Pressure \& Electron Scattering}
 \label{sec:region_b}
 
-We now turn to the next regime of the $\alpha$–disk model, where the disk remains \textbf{electron–scattering dominated} in opacity but \textbf{gas pressure} provides the dominant support against gravity. This typically applies to intermediate radii in luminous accretion disks, beyond the radiation–pressure–dominated zone but before the outer free–free opacity region takes over.
+We now turn to the next regime of the $\alpha$–disk model, where the disk remains \textbf{electron–scattering dominated} in opacity but \textbf{gas pressure} provides the dominant support against gravity. This typically applies to intermediate radii in luminous accretion disks, beyond the radiation–pressure–dominated zone but before the outer free–free opacity region takes over. In many scenarios, this is a very \textbf{thin region} and may not even appear at all in some solutions.
+
+\subsubsection{Relevance}
+
+As we saw in \textbf{region A}, the assumption of \textbf{electron scattering opacity} breaks down around temperatures of $T\sim 10^6$ or $T\sim10^7$ but the radiation pressure domination requires temperatures around $T\sim 10^8$ depending on the density. Therefore, in some scenarios, there is an \textbf{intermediate regime} in which the disk is \textbf{gas pressure dominated} and \textbf{electron scattered}.
 
 The physical assumptions defining this region are:
 \begin{equation}
@@ -1460,140 +1593,94 @@ P \simeq P_{\rm gas} = \frac{\rho k_B T_c}{\mu m_p},
 \kappa = \kappa_{\rm es} = \text{constant}.
 }
 \end{equation}
-As before, angular–momentum conservation gives
-\begin{equation}
-\nu \Sigma = \frac{\dot{M}}{3\pi}
-\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right]
-\;\equiv\; \dot{M}\, f^4,
-\end{equation}
-and the $\alpha$–prescription implies
+\subsubsection{Scalings}
+
+Let's now derive the scalings. In large part, we can \textbf{borrow from Region A}. We still have the same relationships between $\nu, \rho, \Sigma, H,$ and $P$, so specifically
 \[
-\nu = \alpha c_s H = \alpha \frac{c_s^2}{\Omega_K}.
+\nu = \sqrt{2\pi} \frac{\alpha}{\Omega_k}\frac{PH}{\Sigma} = 2\pi \frac{\alpha}{\Omega_k^3} \Sigma^{-2} P^2
 \]
-Vertical equilibrium requires
+still holds. The difference now is that we have a remnant \textbf{pressure contribution} that depends on $\rho$. Thus, we'll instead want to utilize the form
 \[
-P = \rho \Omega_K^2 H^2,
+\nu = \alpha c_s H = \alpha \frac{c_s^2}{\Omega_K}
+= \alpha \frac{P}{\rho\,\Omega_K}.
+\]
+As before, we now need to find a closure for $P$ in terms of primitive variables. To do this, we'll connect to radiative transfer.
+The \textbf{gas pressure} gives
+\[
+\frac{P}{\rho} = \frac{k_B T}{m_p \mu}.
+\]
+From radiative diffusion (equation~\eqref{eq:Tc_Teff_tau}) and our dissipation closure,
+\[
+T_c^4 = \frac{3}{8}\kappa_{\rm es}\Sigma T_{\rm eff}^4,
 \qquad
-\rho = \frac{\Sigma}{2H},
+\sigma_{\rm sb}T_{\rm eff}^4 = \frac{3GM\dot{M}}{8\pi R^3}
+\left[1 - \left(\frac{R_{\rm in}}{R}\right)^{1/2}\right].
 \]
-so that
+Substituting and simplifying yields
 \[
-H = \frac{c_s}{\Omega_K}
-= \frac{1}{\Omega_K}\left(\frac{k_B T_c}{\mu m_p}\right)^{1/2}.
+\frac{P}{\rho} = \frac{k_B}{\mu m_p}\left(\frac{9}{64\pi\sigma_{\rm sb}} \kappa_{\rm es} \Sigma \frac{GM\dot{M}}{R^3} f^4\right)^{1/4}
 \]
-For an optically thick, scattering–dominated disk, the diffusive flux gives
+In this case, we have
 \[
-T_c^4 = \frac{3}{8}\,\kappa_{\rm es}\,\Sigma\,T_{\rm eff}^4,
-\qquad
-\sigma_{\rm sb} T_{\rm eff}^4 = \frac{3GM\dot{M}}{8\pi R^3}f^4.
+\nu = \frac{\alpha}{\Omega_k} \frac{k_B}{\mu m_p}\left(\frac{9}{64\pi\sigma_{\rm sb}} \kappa_{\rm es} \Sigma \frac{GM\dot{M}}{R^3} f^4\right)^{1/4},
 \]
-Combining these yields
+and
 \[
-T_c^4 \propto \kappa_{\rm es}\,\Sigma\,\frac{GM\dot{M}}{R^3}\,f^4.
+\Sigma = \frac{\dot{M} f^4}{\nu} = \frac{\Omega_k}{\alpha} f^3 \dot{M}\frac{\mu m_p}{k_B} \left(\frac{9}{64\pi\sigma_{\rm sb}} \kappa_{\rm es} \Sigma \frac{GM\dot{M}}{R^3} \right)^{-1/4}
 \]
-Using $P = \rho k_B T_c / \mu m_p$ and $\rho \sim \Sigma / 2H$,
 \[
-P \sim \frac{\Sigma k_B T_c}{2H \mu m_p}.
+\Sigma^{5/4} = \frac{\Omega_k}{\alpha} f^3 \dot{M}\frac{\mu m_p}{k_B} \left(\frac{9}{64\pi\sigma_{\rm sb}} \kappa_{\rm es} \frac{GM\dot{M}}{R^3} \right)^{-1/4}
 \]
-Since $\nu = \alpha c_s H = \alpha (k_B T_c / \mu m_p) H / \Omega_K$, we can combine
-\[
-\nu \Sigma \sim \dot{M} f^4
-\quad \Rightarrow \quad
-\alpha\,\frac{k_B T_c}{\mu m_p}\,\frac{H \Sigma}{\Omega_K} \sim \dot{M}f^4.
-\]
-Replacing $H = c_s / \Omega_K \propto T_c^{1/2}\Omega_K^{-1}$ and eliminating $\Sigma$ using the diffusion relation gives the closure conditions necessary to solve for all scalings. After substitution and simplification, one finds the characteristic dependences
-\[
-\boxed{
-\begin{aligned}
-T_c &\propto \alpha^{-1/5}\,\dot{M}^{2/5}\,M^{3/10}\,R^{-9/10}\,f^{2/5},\\[3pt]
-\Sigma &\propto \alpha^{-4/5}\,\dot{M}^{3/5}\,M^{1/5}\,R^{-3/5}\,f^{3/5},\\[3pt]
-H &\propto \alpha^{-1/10}\,\dot{M}^{1/5}\,M^{9/10}\,R^{21/20}\,f^{1/5},\\[3pt]
-\rho &\propto \alpha^{-7/10}\,\dot{M}^{2/5}\,M^{-7/10}\,R^{-33/20}\,f^{1/5},\\[3pt]
-\tau &\propto \alpha^{-4/5}\,\dot{M}^{3/5}\,M^{1/5}\,R^{-3/5}\,f^{3/5}.
-\end{aligned}
-}
-\]
-The disk remains geometrically thin and gas–pressure supported, with moderate optical depth.
-Using the same cgs normalization as \citet{FrankKingRaine2002}, we obtain
+so
 \begin{equation}
 \boxed{
-\begin{aligned}
-\Sigma &= 5.2\times10^{3}\;
-\alpha_{-1}^{-4/5}\,
-\dot{M}_{17}^{3/5}\,
-m_1^{1/5}\,
-r_6^{-3/5}\,
-f^{3/5}
-\quad {\rm g\,cm^{-2}},\\[6pt]
-H &= 1.7\times10^{4}\;
-\alpha_{-1}^{-1/10}\,
-\dot{M}_{17}^{1/5}\,
-m_1^{9/10}\,
-r_6^{21/20}\,
-f^{1/5}
-\quad {\rm cm},\\[6pt]
-\rho &= 1.6\times10^{-4}\;
-\alpha_{-1}^{-7/10}\,
-\dot{M}_{17}^{2/5}\,
-m_1^{-7/10}\,
-r_6^{-33/20}\,
-f^{1/5}
-\quad {\rm g\,cm^{-3}},\\[6pt]
-T_c &= 1.4\times10^{5}\;
-\alpha_{-1}^{-1/5}\,
-\dot{M}_{17}^{2/5}\,
-m_1^{3/10}\,
-r_6^{-9/10}\,
-f^{2/5}
-\quad {\rm K},\\[6pt]
-\tau &= 2.6\times10^{3}\;
-\alpha_{-1}^{-4/5}\,
-\dot{M}_{17}^{3/5}\,
-m_1^{1/5}\,
-r_6^{-3/5}\,
-f^{3/5},\\[6pt]
-\nu &= 1.8\times10^{13}\;
-\alpha_{-1}^{4/5}\,
-\dot{M}_{17}^{2/5}\,
-m_1^{1/5}\,
-r_6^{3/5}\,
-f^{2/5}
-\quad {\rm cm^2\,s^{-1}},\\[6pt]
-v_R &= -6.5\times10^{4}\;
-\alpha_{-1}^{4/5}\,
-\dot{M}_{17}^{2/5}\,
-m_1^{-2/5}\,
-r_6^{-2/5}\,
-f^{-3/5}
-\quad {\rm cm\,s^{-1}},\\[6pt]
-\text{with}\quad
-f &= 1 - \sqrt{\frac{R_{\rm in}}{R}},
-\end{aligned}
-}
+    \Sigma = \left(\frac{\mu m_p}{k_B}\right)^{4/5} \left(\frac{9\kappa_{\rm es}}{64 \pi\sigma_{\rm sb}}\right)^{-1/5} \alpha^{-4/5} \dot{M}^{3/5}  M^{1/5} G^{1/5} R^{-3/5} f^{12/5}
+    }
 \end{equation}
-where $\alpha_{-1}=\alpha/0.1$, $m_1=M/M_\odot$, $r_6=R/10^6\,{\rm cm}$,and $\dot{M}_{17}=\dot{M}/10^{17}\,{\rm g\,s^{-1}}$.
-
-In this regime, the disk’s vertical support comes from gas pressure,
-but the opacity is still dominated by Thomson scattering.
-Unlike Region~A, the midplane temperature $T_c$ now \emph{increases with}~$\dot{M}$, and
-the surface density also rises with accretion rate.
-The disk remains geometrically thin ($H/R\ll1$) and stable under modest perturbations,
-making Region~B the archetypal case for many X–ray binary and AGN disks.
-
-\begin{bigidea}
-\textbf{Summary of Region B: Gas Pressure + Electron Scattering}
+Having established the scaling for $\Sigma$, we can recover $\nu$ quickly
+\begin{equation}
+\boxed{
+    \nu = \Sigma^{-1} \dot{M} f^4 = \left(\frac{\mu m_p}{k_B}\right)^{-4/5} \left(\frac{9\kappa_{\rm es}}{64 \pi\sigma_{\rm sb}}\right)^{1/5} \alpha^{4/5} \dot{M}^{2/5}  M^{-1/5} G^{-1/5} R^{3/5} f^{8/5}
+    }
+\end{equation}
+Following this, we have the relation for the scale height in terms of the viscosity and $\alpha$:
 \[
-\Sigma \propto \alpha^{-4/5}\,\dot{M}^{3/5}\,M^{1/5}\,R^{-3/5}\,f^{3/5},
-\quad
-T_c \propto \alpha^{-1/5}\,\dot{M}^{2/5}\,M^{3/10}\,R^{-9/10},
+\nu = \alpha c_s H = \alpha \sqrt{\frac{P}{\rho}} H,
 \]
-representing a gas–pressure, constant–opacity disk that smoothly connects the inner
-radiation–pressure zone to the outer free–free (Kramers) regime.
-\end{bigidea}
+so,
+
+\begin{equation} 
+\boxed{ H = \left(\frac{\mu m_p}{k_B}\right)^{-2/5} \left(\frac{9\kappa_{\rm es}}{64 \pi\sigma_{\rm sb}}\right)^{1/10} \alpha^{-1/10} \dot{M}^{1/5} M^{-7/20} G^{-7/20} R^{21/20} f^{4/5} } 
+\end{equation}
+We can, of course, use $\Sigma$ and $H$ to derive the midplane density as
+
+\[
+\rho = \frac{\Sigma}{\sqrt{2\pi}H} = \frac{1}{\sqrt{2\pi}} \left(\frac{\mu m_p}{k_B}\right)^{6/5} \left(\frac{9\kappa_{\rm es}}{64 \pi\sigma_{\rm sb}}\right)^{-3/10} \alpha^{-7/10} \dot{M}^{2/5}  M^{11/20} G^{11/20} R^{-33/20} f^{8/5}
+\]
+
+\rmk{We should complete these scalings at some point.}
+
+Thus, for \textbf{standard scalings},
+\begin{equation}
+    \boxed{
+    \begin{aligned}
+        \Sigma =&  422\; \alpha_{-1}^{-4/5} \dot{M}_{16}^{3/5}  M_1^{1/5} R_{10}^{-3/5} f^{12/5}\;{\rm g/cm^2}\\
+        \nu =& 2.37 \times 10^{13}\; \alpha_{-1}^{4/5} \dot{M}_{16}^{2/5}  M_1^{-1/5} R_{10}^{3/5} f^{8/5}\;{\rm cm^2/s}\\
+        H =&1.8\times 10^4\;\dot{M} f^4\;{\rm cm}\\
+        T_C =& 1.36\times10^{7}\;\alpha_{-1}^{-1/4} M_{1}^{1/8} R_{7}^{-3/8} f^{-1}\;{\rm K}\\
+        \tau =& 1.671\times10^4\;\alpha_{-1}^{-1} M_1^{-1/2} \dot{M}_{16}^{-1} R_{7}^{3/2} f^{-4}\\
+        \rho =& 1.8\times10^{-2} \;\alpha_{-1}^{-1} M_{1}^{-1/2} \dot{M}_{16}^{-2} R^{3/2}_{7} f^{-8}\;\;{\rm g/cm^3} \\
+        v_r =& 1.6\times10^3 \alpha_{-1} M_1^{1/2} \dot{M}_{16}^2 R_{7}^{-5/2} f^4\;{\rm cm/s}\\
+    \end{aligned}
+    }
+\end{equation}
+
 
 
 \subsection{Region C: Gas Pressure \& Free-Free Scattering}
 \label{sec:region_c}
+
+We now turn to the final regime of the $\alpha$–disk model, where the disk becomes susceptible to \textbf{Kramer opacity} but \textbf{gas pressure} provides the dominant support against gravity. This applies to the \textbf{intermediate / outer regions} of the disc and is considered the \textbf{canonical disk solution} by most.
 
 Here the midplane pressure is gas pressure and the Rosseland mean opacity is
 set by free--free processes (Kramers law):
@@ -1604,125 +1691,66 @@ P \simeq P_{\rm gas} = \frac{\rho k_B T_c}{\mu m_p},
 \kappa = \kappa_0\,\rho\,T_c^{-7/2},
 \quad \kappa_0 \approx 5\times10^{24}\;{\rm cm^2\,g^{-2}\,K^{7/2}}.}
 \]
-With $\nu=\alpha c_s^2/\Omega_K$ and $c_s^2=k_B T_c/(\mu m_p)$, the steady condition $\nu\Sigma = (\dot M/3\pi)\,f$ (free inner torque, cf.\ eq.~\eqref{eq:thin_disk_viscous}) and radiative diffusion $T_c^4 = (3/8)\kappa\Sigma T_{\rm eff}^4$ with $\sigma_{\rm sb}T_{\rm eff}^4 = (3GM\dot{M}/8\pi R^3)\,f$ close the system. Solving these relations gives the classic Region~C dependences (absorbing order–unity constants into the normalizations):
-\[
-\boxed{
-\begin{aligned}
-\Sigma &\;\propto\; 
-\alpha^{-4/5}\,\kappa_0^{-1/10}\,
-\dot{M}^{7/10}\,
-M^{1/4}\,R^{-3/4}\,
-f^{7/10},
-\\[4pt]
-T_c &\;\propto\;
-\alpha^{-1/5}\,\kappa_0^{1/10}\,
-\dot{M}^{3/10}\,
-M^{1/4}\,R^{-3/4}\,
-f^{3/10},
-\\[4pt]
-H &\;=\;\frac{c_s}{\Omega_K}\;\propto\;
-\alpha^{-1/10}\,\kappa_0^{1/20}\,
-\dot{M}^{3/20}\,
-M^{-3/8}\,R^{9/8}\,
-f^{3/20},
-\\[4pt]
-\rho &\;=\;\frac{\Sigma}{2H}\;\propto\;
-\alpha^{-7/10}\,\kappa_0^{-3/20}\,
-\dot{M}^{11/20}\,
-M^{5/8}\,R^{-15/8}\,
-f^{2/5},
-\\[4pt]
-\tau &\;=\;\tfrac{1}{2}\kappa\Sigma\;\propto\;
-\alpha^{-4/5}\,\kappa_0^{11/20}\,
-\dot{M}^{1/5}\,
-f^{1/20}
-\quad(\text{notably independent of }M,R),
-\\[4pt]
-\nu &\;=\;\alpha\frac{c_s^2}{\Omega_K}\;\propto\;
-\alpha^{4/5}\,\kappa_0^{1/10}\,
-\dot{M}^{3/10}\,
-M^{-1/4}\,R^{3/4}\,
-f^{3/10},
-\\[4pt]
-v_R &\;=\;-\frac{\dot{M}}{2\pi R\Sigma}\;\propto\;
-\alpha^{4/5}\,\kappa_0^{1/10}\,
-\dot{M}^{3/10}\,
-M^{-1/4}\,R^{-1/4}\,
-f^{-7/10}.
-\end{aligned}}
-\]
 
-Introducing the usual normalizations
-\[
-\alpha_{-1}=\frac{\alpha}{0.1},\quad
-\dot{M}_{17}=\frac{\dot M}{10^{17}\,{\rm g\,s^{-1}}},\quad
-m_1=\frac{M}{M_\odot},\quad
-r_6=\frac{R}{10^6\,{\rm cm}},\quad
-\kappa_{24}=\frac{\kappa_0}{5\times10^{24}},
-\]
-the Region~C solution may be written in the compact scaling form
+\subsubsection{Scalings}
+
+Fortunately, we do not need to solve these by hand as they are worked out in the original work by \citet{1973A&A....24..337S}. The scalings are solved for in much the same manner as we did in the previous cases but with relevant modifications for the corresponding changes in the pressure and opacity prescription.
+
+The resulting scaling relations are 
 \begin{equation}
 \boxed{
 \begin{aligned}
-\Sigma &\;=\; \Sigma_0\;
-\alpha_{-1}^{-4/5}\,
-\kappa_{24}^{-1/10}\,
-\dot{M}_{17}^{7/10}\,
-m_1^{1/4}\,
-r_6^{-3/4}\,
-f^{7/10}\quad [{\rm g\,cm^{-2}}],
+\Sigma &\;=\;5.2\;
+\alpha^{-4/5}\,
+\dot{M}_{16}^{7/10}\,
+M_1^{1/4}\,
+R_{10}^{-3/4}\,
+f^{14/5}\quad [{\rm g\,cm^{-2}}],
 \\[6pt]
-T_c &\;=\; T_{c,0}\;
-\alpha_{-1}^{-1/5}\,
-\kappa_{24}^{1/10}\,
-\dot{M}_{17}^{3/10}\,
-m_1^{1/4}\,
-r_6^{-3/4}\,
-f^{3/10}\quad [{\rm K}],
+T_c &\;=\; 1.4 \times 10^{4}\;
+\alpha^{-1/5}\,
+\dot{M}_{16}^{3/10}\,
+M_1^{1/4}\,
+R_{10}^{-3/4}\,
+f^{6/5}\quad [{\rm K}],
 \\[6pt]
-H &\;=\; H_0\;
-\alpha_{-1}^{-1/10}\,
-\kappa_{24}^{1/20}\,
-\dot{M}_{17}^{3/20}\,
-m_1^{-3/8}\,
-r_6^{9/8}\,
-f^{3/20}\quad [{\rm cm}],
+H &\;=\; 1.7\times10^{8}\;
+\alpha^{-1/10}\,
+\dot{M}_{16}^{3/20}\,
+M_1^{-3/8}\,
+R_{10}^{9/8}\,
+f^{3/5}\quad [{\rm cm}],
 \\[6pt]
-\rho &\;=\; \rho_0\;
-\alpha_{-1}^{-7/10}\,
-\kappa_{24}^{-3/20}\,
-\dot{M}_{17}^{11/20}\,
-m_1^{5/8}\,
-r_6^{-15/8}\,
-f^{2/5}\quad [{\rm g\,cm^{-3}}],
+\rho &\;=\; 3.1\times10^{-8}\;
+\alpha^{-7/10}\,
+\dot{M}_{16}^{11/20}\,
+M_1^{5/8}\,
+R_{10}^{-15/8}\,
+f^{11/5}\quad [{\rm g\,cm^{-3}}],
 \\[6pt]
-\tau &\;=\; \tau_0\;
-\alpha_{-1}^{-4/5}\,
-\kappa_{24}^{11/20}\,
-\dot{M}_{17}^{1/5}\,
-f^{1/20},
+\tau &\;=\; 190\;
+\alpha^{-4/5}\,
+\dot{M}_{16}^{1/5}\,
+f^{4/5},
 \\[6pt]
-\nu &\;=\; \nu_0\;
-\alpha_{-1}^{4/5}\,
-\kappa_{24}^{1/10}\,
-\dot{M}_{17}^{3/10}\,
-m_1^{-1/4}\,
-r_6^{3/4}\,
-f^{3/10}\quad [{\rm cm^2\,s^{-1}}],
+\nu &\;=\; 1.8\times10^{14}\;
+\alpha^{4/5}\,
+\dot{M}_{16}^{3/10}\,
+M_1^{-1/4}\,
+R_{10}^{3/4}\,
+f^{6/5}\quad [{\rm cm^2\,s^{-1}}],
 \\[6pt]
-v_R &\;=\; -\,v_{R,0}\;
-\alpha_{-1}^{4/5}\,
-\kappa_{24}^{1/10}\,
-\dot{M}_{17}^{3/10}\,
-m_1^{-1/4}\,
-r_6^{-1/4}\,
-f^{-7/10}\quad [{\rm cm\,s^{-1}}],
+v_R &\;=\; 2.7\times10^{4}\;
+\alpha^{4/5}\,
+\dot{M}_{16}^{3/10}\,
+M_1^{-1/4}\,
+R_{10}^{-1/4}\,
+f^{-14/5}\quad [{\rm cm\,s^{-1}}],
 \\[6pt]
-&\text{with}\;\; f \;\equiv\; 1-\sqrt{\frac{R_{\rm in}}{R}}.
+&\text{with}\;\; f^4 \;\equiv\; 1-\sqrt{\frac{R_{\rm in}}{R}}.
 \end{aligned}
 }
 \end{equation}
-Here the coefficients $(\Sigma_0, T_{c,0}, H_0, \rho_0, \tau_0, \nu_0, v_{R,0})$ are order–unity numbers that depend only on the adopted constants ($\mu$, exact $\kappa_0$, geometric factors); they can be fixed to your preferred convention (e.g.\ \citealt{FrankKingRaine2002}) by inserting $\mu\simeq0.62$ and $\kappa_0=5\times10^{24}$ and carrying the cgs algebra.
 
 \subsection{The Transitions Between Regions}
 \label{sec:region_transitions}
@@ -1731,122 +1759,80 @@ The boundaries between the different $\alpha$–disk regimes occur where one phy
     \item The transition between \textbf{radiation–pressure} and \textbf{gas–pressure} dominance is obtained from $P_{\rm rad} = P_{\rm gas}$.
     \item The transition between \textbf{electron–scattering} and \textbf{free–free (Kramers)} opacity is found from $\kappa_{\rm es} = \kappa_{\rm ff}$.
 \end{enumerate}
-Each of these boundaries defines a locus in the $\dot{M}$–$R$ plane, as illustrated in Figure~\ref{fig:accretion_regimes}. These curves determine where the physical assumptions underlying Regions~A–C change.
+Each of these boundaries defines a locus in the $\dot{M}$–$R$ plane, as illustrated in Figure~\ref{fig:accretion_regimes}. These curves determine where the physical assumptions underlying Regions~A–C change. In this section, we'll \textbf{assume Region C} solutions and determine when they break down and require the other regions to come into play.
+
+\subsubsection{The Opacity Transition}
+The first interesting boundary marks where \textbf{the opacity changes from electron scattering to free–free absorption}:
+\[
+\kappa_{\rm es} = \kappa_{\rm ff} = 5\times10^{24}  \rho T_c^{-7/2}\;{\rm cm^2/g}.
+\]
+For a standard hydrogen abundance of $X$, the \textbf{opacity ratio} is
+\[
+\chi_{\rm opacity} = \frac{\kappa_{\rm ff}}{\kappa_{\rm Kramer}} = 4\times 10^{-26}\; (1+X) \rho^{-1} T_c^{7/2}.
+\]
+In the \textbf{outer region (Region C)}, we find that
+\[
+\chi_{\rm opacity} = 4\times 10^{-4} \;(1+X) \dot{M}_{16}^{1/2} M_1^{1/4} R_{10}^{-3/4} f^2
+\]
+Equivalently,
+\[
+R_{\rm opacity} = 2.5\times10^{7} \dot{M}_{16}^{2/3}\;M_1^{1/3} f^{8/3}\;{\rm cm}.
+\]
+For a \textbf{solar mass accretor}, the gravitational radius is
+\[
+R_g \sim 1.4\times10^{5}\;{\rm cm},
+\]
+so we see this transition around $100 R_g$ in the disk. Within this region, we need to use regions \textbf{B} and \textbf{A} instead.
+\begin{remark}
+    For a \textbf{Schwarschild blackhole}, this is pretty easy to get because $r_{\rm isco} \sim 6 R_g$. Even for a \textbf{maximally spinning black hole}, we can still easily get this sort of a disk since $r_{\rm isco} \sim 9 R_g$. For accretion disks around white dwarfs, we \textbf{certainly will not} have this transition because the radius far exceeds the boundary for the opacity boundary unless there is a really extreme accretion rate.
+\end{remark}
+
+\begin{bigidea}
+    Inside of accretion disks around \textbf{compact objects}, there is typically a regime in which the \textbf{opacity} transitions from \textbf{Kramer Opacity} to \textbf{Electron Scattering} and the disk structure changes from the \textbf{Region C} solution to \textbf{Regions A/B}.
+\end{bigidea}
 
 \subsubsection{The Radiation Pressure Transition}
 
-Radiation pressure dominates when $P_{\rm rad } \gg P_{\rm gas}$. We know that
+The second important transition is the transition from radiation pressure to gas pressure. Radiation pressure \textbf{dominates} when $P_{\rm rad } \gg P_{\rm gas}$. We know that
 \[
 P_{\rm rad} = \frac{a}{3}T_c^4
 \quad\text{and}\quad
 P_{\rm gas} = \frac{\rho k_B T_c}{\mu m_p}.
 \]
-Setting $P_{\rm rad}=P_{\rm gas}$ gives the critical density:
+The ratio of these two quantities is
 \[
-\boxed{
-\rho_{\rm crit} = \frac{a \mu m_p}{3 k_B} T_c^3.
-}
+\chi_{\rm rad} = \frac{P_{\rm rad}}{P_{\rm gas}} = \frac{4\sigma_{\rm SB} m_p \mu}{3c  k_B} T_c^3 \rho^{-1}.
 \]
-\textbf{Using the gas–pressure, electron–scattering scalings from Region~B,}
-\[
-T_c \propto \alpha^{-1/5}\dot{M}^{2/5}M^{3/10}R^{-9/10}f^{2/5}, \quad
-\rho \propto \alpha^{-7/10}\dot{M}^{2/5}M^{-7/10}R^{-33/20}f^{1/5},
-\]
-we find the transition line by solving for $\dot M$ such that $\rho=\rho_{\rm crit}$. After algebraic elimination of $T_c$, the locus of the pressure transition is:
-\[
-\boxed{
-\dot{M}_{P_{\rm rad}=P_{\rm gas}} \;\propto\;
-\alpha^{-1}\,
-M^{-1/8}\,
-R^{21/16}\,f^{-9/8}.
-}
-\]
-Numerically, adopting fiducial constants ($\mu=0.62$, $\kappa_{\rm es}=0.34$) and normalizing to cgs units, this corresponds roughly to
-\[
-\dot{M}_{P_{\rm rad}=P_{\rm gas}}
-\simeq 6\times10^{16}\;
-\alpha_{-1}^{-1}\;
-m_1^{-1/8}\;
-r_6^{21/16}\;
-f^{-9/8}\quad {\rm g\,s^{-1}}.
-\]
-To the left of this curve (smaller $R$ or larger $\dot{M}$),\textbf{ radiation pressure dominates ($P_{\rm rad}>P_{\rm gas}$, Region~A);}
-to the right,\textbf{ gas pressure dominates (Regions~B and~C).}
-
-\subsubsection{The Opacity Transition}
-The second boundary marks where the opacity changes from electron scattering to free–free absorption:
-\[
-\kappa_{\rm es} = \kappa_{\rm ff} = \kappa_0 \rho T_c^{-7/2}.
-\]
-Solving for the transition condition gives
-\[
-\rho_{\rm crit} = \frac{\kappa_{\rm es}}{\kappa_0} T_c^{7/2}.
-\]
-Using again the gas–pressure, electron–scattering scalings from Region~B for $\rho$ and $T_c$, we find:
-\[
-\alpha^{-7/10}\dot{M}^{2/5}M^{-7/10}R^{-33/20}f^{1/5}
-\;\propto\;
-T_c^{7/2}
-\;\propto\;
-\alpha^{-7/10}\dot{M}^{7/5}M^{21/20}R^{-63/20}f^{7/5}.
-\]
-Simplifying, the condition $\kappa_{\rm es}=\kappa_{\rm ff}$ yields the approximate scaling
-\[
-\boxed{
-\dot{M}_{\kappa_{\rm es}=\kappa_{\rm ff}}
-\;\propto\;
-M^{-1/4}\,
-R^{15/8}\,f^{-3/4}.
-}
-\]
-Normalizing with fiducial constants ($\kappa_{\rm es}=0.34$, $\kappa_0=5\times10^{24}$), we find numerically:
-\[
-\dot{M}_{\kappa_{\rm es}=\kappa_{\rm ff}}
-\simeq 3\times10^{16}\;
-m_1^{-1/4}\;
-r_6^{15/8}\;
-f^{-3/4}\quad{\rm g\,s^{-1}}.
-\]
-\textbf{Inside this line (smaller radii or higher $\dot{M}$), electron scattering dominates (Regions~A and~B);
-beyond it, Kramers opacity dominates (Region~C).}
+With standard scalings from \textbf{Region C}, this ratio is
+\begin{equation}
+    \boxed{
+    \chi_{\rm rad} \sim 2.8 \times 10^{-3} \alpha ^{1/10} \dot{M}_{\rm 16}^{7/10} R_{\rm 10}^{-3/8} f^{7/5}.
+    }
+\end{equation}
+Clearly, for \textbf{sufficiently small radii}, we can get $\chi_{\rm rad}$ close to $1$; however, the resulting radius is around $1\times10^{3}\;{\rm cm}$, which is clearly within the other regime, meaning we cannot trust these scalings.
+In general, these scenarios are \textbf{only relevant} for neutron stars and black holes and only at relatively \textbf{high accretion rates}.
 
 \subsubsection{The Temperature Transition}
 
-Finally, the disk ceases to be fully ionized when $T_c \simeq 10^4\,{\rm K}$, marking the outermost boundary of the thin, ionized $\alpha$–disk. Using the Region~C scaling $T_c \propto \alpha^{-1/5}\dot{M}^{3/10}M^{1/4}R^{-3/4}$, we can invert for the locus:
+The final relevant transition to keep track of is the fact that at \textbf{large radii}, the disk solution may produce temperatures for which the opacity is no longer modeled by Kramer's opacity because of how low the temperature is.
+
+Since the disk's material will cease to be highly ionized at $T \sim 10 {\rm eV} \sim 10^4\;{\rm K}$, we will need to allow for other behaviors beyond 
 \[
-\boxed{
-\dot{M}_{T_c=10^4{\rm K}} \;\propto\;
-\alpha^{2/3}\,
-M^{-5/4}\,
-R^{5/2}.
-}
+T_c \le 10^4 \implies 10^4 {\rm K} \ge 1.4 \times 10^{4}\;
+\alpha^{-1/5}\,
+\dot{M}_{16}^{3/10}\,
+M_1^{1/4}\,
+R_{10}^{-3/4}\,
+f^{6/5}\quad {\rm K},
 \]
-At radii larger than this, the disk becomes partially neutral and new opacity sources (molecular and dust) dominate. 
-
-Combining these three transition loci produces the standard regime diagram
-shown in Figure~\ref{fig:accretion_regimes}.
-Each region corresponds to one of the analytic $\alpha$–disk solutions:
-
+This corresponds to a \textbf{critical radius}, such that
 \[
-\begin{array}{ll}
-\textbf{Region A:} & P_{\rm rad},~\kappa_{\rm es} \quad (\text{inner, high } \dot{M})\\[3pt]
-\textbf{Region B:} & P_{\rm gas},~\kappa_{\rm es} \quad (\text{intermediate})\\[3pt]
-\textbf{Region C:} & P_{\rm gas},~\kappa_{\rm ff} \quad (\text{outer, cool})
-\end{array}
+R^{3/4}_{\rm crit-temp,10} = 1.4\; \alpha^{-1/5}\,\dot{M}_{16}^{3/10}\,M_1^{1/4}\,f^{6/5},
 \]
-
-These analytic boundaries depend only weakly on $\alpha$ and $M$, and approximately follow the power-law relations:
+Thus,
 \[
-\dot{M} \propto R^{1.3}\ \text{for the pressure boundary,}
-\qquad
-\dot{M} \propto R^{1.9}\ \text{for the opacity boundary.}
+R_{\rm crit-temp} = 1.5\times10^{10}\; \alpha^{-4/15} \dot{M}_{16}^{4/10} M_1^{1/3} f^{8/5}\;{\rm cm}.
 \]
-Their intersections set the typical radii of transitions indicated in Figure~\ref{fig:accretion_regimes}.
-The vertical lines correspond roughly to characteristic stellar scales:
-the innermost stable orbit of a black hole ($R\!\sim\!10^6{\rm cm}$),
-the radius of a white dwarf ($\sim\!10^9{\rm cm}$),
-and typical Roche lobe sizes for cataclysmic variables and X–ray binaries.
-
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{Pictures/figures/accretion_regimes.png}
@@ -1858,3 +1844,17 @@ and typical Roche lobe sizes for cataclysmic variables and X–ray binaries.
     Eddington accretion rate for a neutron star and a black hole.}
     \label{fig:accretion_regimes}
 \end{figure}
+
+\section{Observations of Thin Disks}
+
+Our final discussion point for this topic will be the confrontation of these disks with observation. As we have discussed previously, there is a reasonably small domain of systems in which the "classical" thin disk can be applied. Let's look briefly at the conditions for the \textbf{Region C disk} that we've derived earlier. In order to be within region $C$, we need to maintain a \textbf{Kramer's Opacity} dominated scenario, so
+\[
+R_{\rm opacity} = 2.5\times10^{7} \dot{M}_{16}^{2/3}\;M_1^{1/3} f^{8/3}\;{\rm cm}.
+\]
+Now, we can choose stellar accretion onto either BH, WD, or NS. Regardless, we know that the emission from the disk is dominated by emission in the \textbf{UV/IR} for a standard disk: $T\sim 10^5 \;{\rm K}$ for fiducial values of the parameters. We therefore want \textbf{small donor stars} so that we do not interrupt the emission from the disk. 
+
+If we have a compact object donor, we know that the gravitational radius will be a good proxy for the inner radius of the disk. This corresponds to $R_{\rm min} \sim 10^5{\rm cm}$, so there will be an \textbf{opacity transition} away from the \textbf{Region C disk}. We therefore would want to potentially use a white dwarf: Thus, we use a \textbf{cataclysmic variable star}.
+
+To test the assumption, we can observe a transit of the donor in front of the disk in different wave bands. Because the different wavebands select for different radii in the disk, the widths of the lightcurve dips will differ and provide a way to measure $T(R)$.
+
+

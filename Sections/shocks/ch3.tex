@@ -1,0 +1,881 @@
+Having now covered the details of \textbf{non-relativistic shocks}, we are ready to consider the differences which arise when we are considering relativistic outflows. 
+These conditions occur commonly in two scenarios: \textbf{relativistic jets}, in which we have collimated, relativistic outflows, and the less-energetic relativistic shocks which occur in some supernovae.
+In both cases, we will want to revisit the features of our shock conditions in the fully relativistic framework and then consider how special-relativistic effects influence our observations of shocks.
+Before we dive into the details of shocks, we need to discuss the covariant formulation of fluid dynamics.
+
+\section{Relativistic Fluid Dynamics}
+
+The essential difference between relativistic and Newtonian fluids is that 
+\emph{energy, momentum, and pressure all contribute to inertia} in relativity, and must therefore be treated on the same footing.
+
+\subsection{The Perfect Fluid}
+
+The fundamental dynamical object is the \textbf{stress--energy tensor} 
+$T^{\mu\nu}$, whose form depends on the matter model.  
+Throughout these notes we assume that the material on either side of the shock front 
+can be described as a \emph{perfect fluid}, the natural relativistic generalization of an ideal gas.
+
+\vspace{1em}
+\begin{definition}[Perfect Fluid]
+A \textbf{perfect fluid} is a continuous medium with:
+\begin{itemize}
+    \item no viscosity,
+    \item no heat conduction,
+    \item no shear stresses.
+\end{itemize}
+In the fluid’s local rest frame, microscopic motions are isotropic, so that all internal stresses reduce to a single isotropic pressure $P$.  
+
+The thermodynamic state is characterized by:
+\[
+\rho \;\text{(rest--mass density)},\qquad 
+e \;\text{(internal energy density)},\qquad
+P \;\text{(pressure)}.
+\]
+
+Its total \emph{enthalpy density}
+\[
+w \equiv \rho c^2 + e + P
+\]
+acts as the effective inertia of the fluid.
+\end{definition}
+\vspace{1em}
+
+In special relativity with metric $\eta_{\mu\nu}=\mathrm{diag}(-1,1,1,1)$,
+the stress--energy tensor of a perfect fluid is
+\begin{equation}
+\boxed{
+T^{\mu\nu}
+= w\, U^\mu U^\nu + P\,\eta^{\mu\nu},
+}
+\label{eq:Tmunu_perfect}
+\end{equation}
+where $U^\mu = \Gamma (c, \mathbf{v})$ is the four-velocity 
+and $\Gamma = 1/\sqrt{1-\beta^2}$ is the Lorentz factor.
+
+This form automatically encodes:
+\begin{itemize}
+    \item \textbf{Energy density} ($T^{00}$),
+    \item \textbf{Momentum density} ($T^{0i}$),
+    \item \textbf{Momentum flux and pressure} ($T^{ij}$).
+\end{itemize}
+
+In the fluid rest frame ($U^\mu = (c,0,0,0)$), this reduces to
+\[
+T^{\mu}{}_{\nu} =
+\begin{pmatrix}
+w & 0 & 0 & 0\\
+0 & P & 0 & 0\\
+0 & 0 & P & 0\\
+0 & 0 & 0 & P
+\end{pmatrix},
+\]
+so that $T^{00}=w$ (the total energy density) and the spatial diagonal components give the isotropic pressure.
+
+\subsection{Relativistic Fluid Equations}
+
+The dynamics of a perfect fluid follow from \textbf{two conservation laws}:
+
+\paragraph{1. Conservation of energy–momentum}
+\begin{equation}
+\boxed{
+\nabla_\nu T^{\mu\nu} = 0
+}
+\label{eq:relativistic_euler}
+\end{equation}
+
+This is the relativistic generalization of the Euler equations.
+Its four components express:
+\[
+\text{energy conservation} \;( \mu=0 ),\qquad
+\text{momentum conservation} \;( \mu=i ).
+\]
+
+\paragraph{2. Conservation of baryon number}
+\begin{equation}
+\boxed{
+\nabla_\nu (\rho U^\nu) = 0
+}
+\label{eq:relativistic_continuity}
+\end{equation}
+This replaces the classical continuity equation.
+
+Together, Eqs.~\eqref{eq:relativistic_euler} and \eqref{eq:relativistic_continuity}
+provide the complete set of relativistic fluid equations, up to an equation of state.
+
+\subsection{Equation of State}
+
+To close the system, an \textbf{equation of state (EOS)} relating $\rho$, $e$, and $P$ must be specified.
+
+Common examples include:
+\begin{itemize}
+    \item \textbf{Cold upstream medium}: $P_1 \approx 0$.
+    \item \textbf{Relativistically hot gas}: $P = e/3$ (appropriate downstream of a GRB shock).
+    \item \textbf{Polytropic fluids}: $P = (\Gamma - 1)e$.
+\end{itemize}
+
+The EOS determines the relative contributions of rest-mass, thermal energy, and pressure
+to the enthalpy density $w$, and therefore shapes the relativistic shock jump conditions.
+
+\subsection{Lorentz Transformations}
+
+Because relativistic shocks are often described in multiple frames
+(lab frame, fluid frame, shock rest frame),
+we record the standard Lorentz transformation for boosts along the $x$-axis:
+\begin{equation}
+\begin{bmatrix}
+ct'\\x'\\y'\\z'
+\end{bmatrix}
+=
+\begin{bmatrix}
+\Gamma & -\Gamma\beta & 0 & 0\\
+-\Gamma\beta & \Gamma & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+ct\\x\\y\\z
+\end{bmatrix}.
+\end{equation}
+
+These transformations will be essential when relating shock velocities,
+energy densities, and fluxes between frames.
+
+\begin{bigidea}
+\textbf{Relativistic fluids differ from Newtonian fluids in one crucial way:}
+energy, pressure, and momentum are fundamentally inseparable and all contribute to inertia.
+The covariant equations of motion arise from 
+\[
+\nabla_\nu T^{\mu\nu}=0, \qquad \nabla_\nu(\rho U^\nu)=0,
+\]
+with the perfect-fluid stress--energy tensor 
+\[
+T^{\mu\nu}=w U^\mu U^\nu + P \eta^{\mu\nu}.
+\]
+These equations form the foundation for the relativistic
+Rankine--Hugoniot conditions and the physics of relativistic shocks.
+\end{bigidea}
+
+\section{Relativistic Shock Conditions}
+
+In the classical scenario with shock speeds $v_s \ll c$, we applied the \textbf{classical Rankine--Hugoniot (RH) conditions} across a planar shock.
+Working in the shock rest frame, with upstream (1) and downstream (2) states, these follow from conservation of mass, momentum, and energy:
+\begin{align}
+\rho_1 v_1 &= \rho_2 v_2, \label{eq:rh_mass_classical}\\[4pt]
+P_2 + \rho_2 v_2^2 &= P_1 + \rho_1 v_1^2, \label{eq:rh_mom_classical}\\[4pt]
+\frac{1}{2}v_1^2 + \frac{\gamma}{\gamma - 1}\frac{P_1}{\rho_1}
+&=
+\frac{1}{2}v_2^2 + \frac{\gamma}{\gamma - 1}\frac{P_2}{\rho_2}. \label{eq:rh_energy_classical}
+\end{align}
+Here $\gamma$ is the (classical) adiabatic index.  These relations are perfectly adequate \textbf{so long as all velocities are non-relativistic} and internal energies remain small compared to the rest-mass energy $\rho c^2$.
+
+\medskip
+In \textbf{relativistic} shocks, such as those relevant for GRB external shocks, this approximation fails dramatically:
+the \textbf{upstream flow may be ultra-relativistic}, and the downstream internal energy can exceed the rest-mass energy by many orders of magnitude.
+In this regime, we must replace Eqs.~\eqref{eq:rh_mass_classical}--\eqref{eq:rh_energy_classical} with \textbf{fully Lorentz-covariant conservation laws.}
+The most convenient choice is to work in the rest frame of the shock, where the discontinuity is stationary and the upstream and downstream fluids flow steadily across it.
+
+Consider a planar shock whose normal points along the $x$–direction. In \textit{the shock rest frame}, the upstream (region 1) and downstream (region 2) four–velocities may be written as
+\[
+U_1^\mu = \Gamma_1 (c, v_1, 0, 0), \qquad
+U_2^\mu = \Gamma_2 (c, v_2, 0, 0),
+\]
+where $v_1$ and $v_2$ are the fluid velocities measured in the shock frame, and $\Gamma_i = (1 - v_i^2/c^2)^{-1/2}$ are the corresponding Lorentz factors. We assume that on both sides of the shock the gas can be modeled as a perfect fluid with stress–energy tensor
+\[
+T^{\mu\nu} = w\, U^\mu U^\nu + P\,\eta^{\mu\nu},
+\]
+where $w = \rho c^2 + e + P$ is the enthalpy density and $\eta^{\mu\nu}$ is the Minkowski metric with space–positive signature.
+
+The conservation laws that replace the classical continuity and Euler equations are
+\[
+\nabla_\nu (\rho U^\nu) = 0,
+\qquad
+\nabla_\nu T^{\mu\nu} = 0.
+\]
+Across a stationary, planar shock these imply that the \emph{normal components} of the baryon current and the energy–momentum flux must be continuous. In other words,\textbf{ the fluxes of rest mass, energy, and momentum normal to the shock surface are the same on both sides.} Choosing the shock normal along $x$, and working explicitly in the shock rest frame, this yields three scalar jump conditions.
+
+First, \textbf{baryon number conservation} requires continuity of the $x$–component of the baryon current $J^\mu = \rho U^\mu$:
+\begin{equation}
+    J^x = \rho U^x = \rho \Gamma v
+\quad\Rightarrow\quad
+\boxed{\rho_1 \Gamma_1 v_1 = \rho_2 \Gamma_2 v_2.}
+\end{equation}
+\rmk{Notice that this is precisely the same as the classical case except that we have now modified the velocities by $\Gamma$.}
+
+Next, we examine the \textbf{energy flux}. The mixed component $T^{0x}$ describes the flux of energy in the $x$–direction:
+\[
+T^{0x}
+= w U^0 U^x + P\,\eta^{0x}
+= w\, \Gamma^2 c\, v,
+\]
+since $\eta^{0x} = 0$. Continuity of this component therefore gives
+\begin{equation}
+    \boxed{
+    w_1 \Gamma_1^2 v_1 = w_2 \Gamma_2^2 v_2.
+    }
+\end{equation}
+
+Finally, the $xx$–component, $T^{xx}$, represents the flux of $x$–momentum in the $x$–direction. Using the perfect fluid form, we find
+\[
+T^{xx}
+= w U^x U^x + P\,\eta^{xx}
+= w\,\Gamma^2 v^2 + P,
+\]
+and continuity of $T^{xx}$ yields the relativistic momentum jump condition:
+\begin{equation}
+   \boxed{ w_1 \Gamma_1^2 v_1^2 + P_1 = w_2 \Gamma_2^2 v_2^2 + P_2.}
+\end{equation}
+
+Collecting these, the \textbf{relativistic Rankine--Hugoniot conditions} in the shock rest frame can be written succinctly as
+\begin{align}
+\rho_1 \Gamma_1 v_1 &= \rho_2 \Gamma_2 v_2, \label{eq:rh_rel_mass}\\[6pt]
+w_1 \Gamma_1^2 v_1 &= w_2 \Gamma_2^2 v_2, \label{eq:rh_rel_energy}\\[6pt]
+w_1 \Gamma_1^2 v_1^2 + P_1 &= w_2 \Gamma_2^2 v_2^2 + P_2. \label{eq:rh_rel_mom}
+\end{align}
+Equation~\eqref{eq:rh_rel_mass} expresses\textbf{ conservation of baryon number}, while Eqs.~\eqref{eq:rh_rel_energy} and \eqref{eq:rh_rel_mom} encode \textbf{conservation of energy and momentum}, respectively. Together with an equation of state for each side of the shock, these relations determine the transformation from upstream to downstream thermodynamic variables in a fully relativistic setting.
+
+It is often useful to recast these relations in a form that eliminates the \textbf{explicit velocities and Lorentz factors in favor of purely thermodynamic quantities.} This leads naturally to the\textbf{ Taub adiabat}, which plays the same role in relativistic hydrodynamics as the Hugoniot curve does in the classical theory.
+
+\subsection{The Taub Adiabat}
+
+The relativistic jump conditions \eqref{eq:rh_rel_mass}–\eqref{eq:rh_rel_mom} may be combined into a single relation connecting the upstream and downstream thermodynamic states $(\rho_1, P_1, w_1)$ and $(\rho_2, P_2, w_2)$, independent of the detailed values of $v_1$ and $v_2$. To obtain this, it is convenient to introduce the baryon flux
+\[
+j \equiv \rho_1 \Gamma_1 v_1 = \rho_2 \Gamma_2 v_2,
+\]
+and to work with the specific enthalpy $h \equiv w/\rho$.
+
+Dividing the energy flux condition \eqref{eq:rh_rel_energy} by the mass flux condition \eqref{eq:rh_rel_mass}, we find
+\[
+\frac{w_1 \Gamma_1^2 v_1}{\rho_1 \Gamma_1 v_1}
+=
+\frac{w_2 \Gamma_2^2 v_2}{\rho_2 \Gamma_2 v_2}
+\quad\Rightarrow\quad
+\frac{w_1 \Gamma_1}{\rho_1} = \frac{w_2 \Gamma_2}{\rho_2}.
+\]
+In terms of the specific enthalpy, this becomes
+\[
+h_1 \Gamma_1 = h_2 \Gamma_2.
+\]
+Using the definition of the Lorentz factor,
+\[
+\Gamma_i^2 = \frac{1}{1 - v_i^2/c^2},
+\]
+and the expression for the baryon flux,
+\[
+j = \rho_i \Gamma_i v_i,
+\]
+one can express $v_i$ and $\Gamma_i$ \textbf{entirely in terms of $j$ and $\rho_i$.} After some algebra, it is possible to eliminate $v_1$, $v_2$, $\Gamma_1$, and $\Gamma_2$ between Eqs.~\eqref{eq:rh_rel_mass}–\eqref{eq:rh_rel_mom}, yielding a purely thermodynamic relation between the upstream and downstream states.
+
+The result is the \textbf{Taub adiabat}:
+
+\begin{definition}[Taub Adiabat]
+The Taub adiabat is the locus of downstream thermodynamic states $(\rho_2, P_2, w_2)$ that can be connected to a given upstream state $(\rho_1, P_1, w_1)$ by a steady, planar relativistic shock. It plays the same role in relativistic hydrodynamics as the Hugoniot curve does in the classical theory: once the upstream state and equation of state are specified, Eq.~\eqref{eq:taub_adiabat} determines the allowed downstream combinations of density, pressure, and enthalpy.
+\begin{equation}
+\left(\frac{w_2}{\rho_2}\right)^2 - \left(\frac{w_1}{\rho_1}\right)^2
+=
+\left(P_2 - P_1\right)
+\left(
+\frac{w_2}{\rho_2^2} + \frac{w_1}{\rho_1^2}
+\right).
+\label{eq:taub_adiabat}
+\end{equation}
+
+\end{definition}
+
+In practice, one supplies an equation of state $P = P(\rho, e)$ so that $w(\rho, P)$ is known. Given a particular upstream state, the Taub adiabat then provides a one–parameter family of downstream solutions, parameterized for example by the compression ratio $\rho_2/\rho_1$. For shocks relevant to GRB afterglows and other high–energy phenomena, we are often interested in the \emph{strong–shock limit}, in which the upstream pressure and internal energy are negligible compared to the downstream values. In this regime the Taub adiabat simplifies considerably and yields simple analytic expressions for the jump conditions.
+
+\subsection{The Strong Shock Conditions}
+
+We now specialize to the case most relevant for GRB external shocks: an ultra–relativistic blast wave propagating into a cold, unshocked interstellar medium. In this situation, the upstream quantities satisfy
+\[
+P_1 \simeq 0, \qquad e_1 \simeq 0, \qquad w_1 \simeq \rho_1 c^2,
+\]
+so the upstream fluid is effectively \textbf{a cold gas whose enthalpy density is dominated by rest–mass energy}. The downstream material, on the other hand, is assumed to form a relativistically hot gas with adiabatic index $\hat{\gamma} = 4/3$, so that
+\[
+P_2 = (\hat{\gamma} - 1)e_2 = \frac{1}{3} e_2,
+\qquad
+w_2 = \rho_2 c^2 + e_2 + P_2 = \rho_2 c^2 + \frac{4}{3} e_2.
+\]
+For a \textbf{strong relativistic shock}, the internal energy generated by the shock far exceeds the rest–mass energy of the downstream material, $e_2 \gg \rho_2 c^2$. In this limit we may approximate
+\[
+w_2 \simeq \frac{4}{3} e_2,
+\qquad
+P_2 \simeq \frac{1}{3} e_2,
+\]
+so that the enthalpy is essentially carried by the ultrarelativistic particle population.
+
+To make the algebra more transparent, it is convenient to set $c=1$ for the next few steps, restoring explicit factors of $c$ at the end. In the shock rest frame, the relativistic RH conditions \eqref{eq:rh_rel_mass}–\eqref{eq:rh_rel_mom} become (\rmk{letting $w_1 = \rho_1$})
+\begin{align}
+\rho_1 \Gamma_1 v_1 &= \rho_2 \Gamma_2 v_2, \label{eq:rel_ss_mass}\\[4pt]
+\rho_1 \Gamma_1^2 v_1 &= w_2 \Gamma_2^2 v_2, \label{eq:rel_ss_energy}\\[4pt]
+\rho_1 \Gamma_1^2 v_1^2 &= w_2 \Gamma_2^2 v_2^2 + P_2. \label{eq:rel_ss_mom}
+\end{align}
+Here we have used $w_1 \simeq \rho_1$ and $P_1 \simeq 0$ in the strong–shock, cold–upstream limit. We are also interested in the regime where the upstream flow is ultra–relativistic in the shock frame, so that
+\[
+\Gamma_1 \gg 1, \qquad v_1 \simeq 1.
+\]
+
+Substituting $w_2 \simeq (4/3)e_2$ and $P_2 \simeq (1/3)e_2$ (from our $\gamma = 4/3$ equation of state) into Eqs.~\eqref{eq:rel_ss_energy} and \eqref{eq:rel_ss_mom}, we can write
+\begin{align}
+\rho_1 \Gamma_1^2 v_1 &\simeq \frac{4}{3} e_2 \Gamma_2^2 v_2, \label{eq:rel_ss_energy2}\\[4pt]
+\rho_1 \Gamma_1^2 v_1^2 &\simeq \frac{4}{3} e_2 \Gamma_2^2 v_2^2 + \frac{1}{3} e_2. \label{eq:rel_ss_mom2}
+\end{align}
+Dividing Eq.~\eqref{eq:rel_ss_mom2} by Eq.~\eqref{eq:rel_ss_energy2} eliminates $e_2$ and $\rho_1 \Gamma_1^2$:
+\[
+\frac{\rho_1 \Gamma_1^2 v_1^2}{\rho_1 \Gamma_1^2 v_1}
+=
+\frac{\frac{4}{3} e_2 \Gamma_2^2 v_2^2 + \frac{1}{3} e_2}{\frac{4}{3} e_2 \Gamma_2^2 v_2}
+\quad\Rightarrow\quad
+v_1
+=
+\frac{4 \Gamma_2^2 v_2^2 + 1}{4 \Gamma_2^2 v_2}.
+\]
+In the ultra–relativistic limit $v_1 \simeq 1$, this becomes an equation purely for $v_2$ and $\Gamma_2$:
+\[
+1 = \frac{4 \Gamma_2^2 v_2^2 + 1}{4 \Gamma_2^2 v_2}.
+\]
+Using $\Gamma_2^2 = 1/(1 - v_2^2)$, one finds after a short algebraic manipulation that this equation has the unique physical solution
+\[
+v_2 = \frac{1}{3}, \qquad
+\Gamma_2^2 = \frac{1}{1 - v_2^2} = \frac{9}{8},
+\]
+so the downstream flow \textbf{is only mildly relativistic in the shock frame.} This is a key difference from the classical case: even when the upstream flow is ultra–relativistic, \textbf{the post–shock fluid moves away from the shock at only $v_2 \simeq c/3$.}
+
+With $v_2$ and $\Gamma_2$ determined, we can now solve for the downstream internal energy density $e_2$. Returning to Eq.~\eqref{eq:rel_ss_energy2} and setting $v_1 \simeq 1$, we have
+\[
+\rho_1 \Gamma_1^2
+\simeq
+\frac{4}{3} e_2 \Gamma_2^2 v_2.
+\]
+Substituting $\Gamma_2^2 = 9/8$ and $v_2 = 1/3$, we obtain
+\[
+\rho_1 \Gamma_1^2
+\simeq
+\frac{4}{3} e_2 \left(\frac{9}{8}\right) \left(\frac{1}{3}\right)
+=
+\frac{3}{2} e_2,
+\]
+and therefore
+\[
+e_2 \simeq \frac{2}{3} \rho_1 \Gamma_1^2 \times \frac{3}{1}
+= 2 \rho_1 \Gamma_1^2.
+\]
+Restoring factors of $c$, this becomes
+\[
+e_2 \simeq 2\,\rho_1 c^2 \Gamma_1^2.
+\]
+In words, the internal energy density behind a strong ultra–relativistic shock is \textbf{of order $\Gamma_1^2$ times the upstream rest–mass energy density}. This quadratic dependence on the upstream Lorentz factor is the origin of the enormous energy densities found in GRB afterglows.
+
+We can now derive the density compression factor. The mass flux condition \eqref{eq:rel_ss_mass} reads
+\[
+\rho_1 \Gamma_1 v_1 = \rho_2 \Gamma_2 v_2.
+\]
+Setting $v_1 \simeq 1$ and using $v_2 = 1/3$ and $\Gamma_2 = 3/\sqrt{8}$, we find
+\[
+\frac{\rho_2}{\rho_1}
+\simeq
+\frac{\Gamma_1 v_1}{\Gamma_2 v_2}
+=
+\frac{\Gamma_1}{\Gamma_2 v_2}
+=
+\Gamma_1 \frac{1}{(3/\sqrt{8})(1/3)}
+=
+\Gamma_1 \sqrt{8}
+=
+2\sqrt{2}\,\Gamma_1.
+\]
+Thus, the compression ratio grows linearly with the upstream Lorentz factor in the shock frame,
+\[
+\frac{\rho_2}{\rho_1} \simeq 2\sqrt{2}\,\Gamma_1 \gg 4 \quad (\Gamma_1 \gg 1),
+\]
+in stark contrast to the classical strong–shock limit $\rho_2/\rho_1 \to 4$.
+
+Using $e_2 = 3 P_2$ for a relativistic gas, we also obtain the downstream pressure:
+\[
+P_2 \simeq \frac{1}{3} e_2 \simeq \frac{2}{3}\,\rho_1 c^2 \Gamma_1^2.
+\]
+If we further assume that the downstream gas is dominated by baryons with number density $n_2 = \rho_2/m_p$, then the relativistic equation of state $e_2 = 3 n_2 k_B T_2$ yields
+\[
+T_2 = \frac{e_2}{3 n_2 k_B}
+\simeq
+\frac{2 \rho_1 c^2 \Gamma_1^2}{3 (\rho_2/m_p) k_B}
+=
+\frac{2 m_p c^2 \Gamma_1^2}{3 \rho_2 k_B / \rho_1}
+\simeq
+\frac{2 m_p c^2 \Gamma_1^2}{3 (2\sqrt{2}\,\Gamma_1) k_B}
+=
+\frac{\Gamma_1}{3\sqrt{2}}\,\frac{m_p c^2}{k_B}.
+\]
+Thus the characteristic downstream temperature satisfies
+\[
+k_B T_2 \sim \Gamma_1 m_p c^2,
+\]
+up to an order–unity factor. In other words, each proton acquires an energy of order $\Gamma_1$ times its rest–mass energy as it passes through the shock.
+
+To summarize: in the strong ultra–relativistic limit relevant to GRB external shocks, the relativistic Rankine–Hugoniot conditions imply that the downstream fluid is only mildly relativistic in the shock frame ($v_2 \simeq c/3$), the internal energy density scales as $e_2 \propto \Gamma_1^2 \rho_1 c^2$, the density compression factor grows linearly with $\Gamma_1$, and the pressure and temperature jumps are correspondingly enormous. These results form the backbone of GRB afterglow theory and provide the bridge between the microscopic shock physics and the macroscopic blast–wave dynamics described by the Blandford–McKee solution.
+
+\section{Emission From Relativistic Sources}
+
+So far, we have seen how \textbf{relativistic shocks} differ from their classical counterparts in terms of their dynamics; however, we have yet to discuss how the \textbf{emission} differs between the two scenarios. 
+This turns out to be a very rich subject due to a number of tricky relativistic effects: \textbf{relativistic beaming}, \textbf{abberation}, \textbf{Doppler shifting}, and apparent \textbf{super-luminal} motion. 
+In this section, we'll discuss the details of each of these phenomena in detail to understand how light emits from a relativistic source.
+In the next section, we'll discuss how we detect those photons and the potential relativistic phenomena involved there.
+
+\subsection{The Covariant Intensity}
+
+To begin, we need to acknowledge a fundamental annoyance about radiation processes in relativistic scenarios: the \textbf{specific intensity is NOT covariant}. 
+Thus, when we shift frames the intensity $I_\nu$ is not conserved and will have very odd transformation rules.
+In order to get a handle on this, we'll need to rely on a more fundamental quantity:
+\vspace{10pt}
+\begin{ideabox}
+    Because the intensity is not a scalar, \textbf{we cannot simply ``boost'' it as we would a density}. Instead, we make use of a key relativistic invariant: the \textbf{phase–space density of photons.} It can be shown (via Liouville’s theorem and the invariance of the photon distribution function) that the quantity
+\[
+\frac{I_\nu}{\nu^3}
+\]
+is Lorentz invariant. In other words,
+\[
+\frac{I_\nu(\nu,\mathbf{n})}{\nu^3}
+=
+\frac{I'_{\nu'}(\nu',\mathbf{n}')}{\nu'^3}.
+\]
+\end{ideabox}
+\vspace{10pt}
+As such, if we know $I_\nu$ and $\nu$ in the comoving frame, and we know how ${\bf n}$ and $\nu$ transform under Lorentz transformation, then we can easily recover the correct intensity function. 
+Discovering these constituent transformation laws will be the focus on the next few subsections.
+
+\subsection{Aberration and Doppler Boosting}
+
+Our first task will be to consider an important building block of the other transformations we need to perform: the \textbf{transformation of angles} and the \textbf{Doppler Boosting} of photons!
+
+Let's consider the following scenario: consider two frames:
+\vspace{10pt}
+\begin{itemize}
+    \item The \textbf{Lab Frame} (primed) observes the emitting medium to be moving along the ${\bf x}$ direction with a particular $\beta$ and $\Gamma$. 
+    \item The \textbf{Comoving Frame} (unprimed) is comoving with the emitting material. 
+\end{itemize}
+\vspace{10pt}
+
+A \textbf{photon} will have a \textbf{covariant} momentum vector $p^\mu$ which transforms self-consistently between frames.
+In the \textbf{comoving frame}, a photon moving with angle $\theta$ relative to the ${\bf x}$ direction will have a 4-momentum
+\[
+p^\mu = \frac{h\nu}{c} \left<1,\cos\theta,\sin\theta, 0\right>.
+\]
+Likewise, in the \textbf{lab frame},
+\[
+p'^\mu = \frac{h\nu'}{c} \left<1,\cos\theta',\sin\theta',0\right>.
+\]
+We can therefore seek to determine $\nu'$ and $\theta'$ in terms of $\nu$ and $\theta$ using the fact that
+\[
+p'^\mu = \Lambda^\mu_\nu p^\nu.
+\]
+There are \textbf{two transformed components} of these vectors: index 0 and index 1. For index 0, we have
+\[
+p'^0 = \frac{h\nu}{c}\Gamma(1+\beta \cos \theta) = \frac{h\nu'}{c},
+\]
+and for index 1, we have
+\[
+p'^1 = \frac{h\nu}{c} \Gamma(\beta+\cos\theta) = \frac{h\nu'}{c} \cos \theta'.
+\]
+These are \textbf{two equations for two unknowns} which we can now solve for these two very important relativistic phenomena.
+
+\subsubsection{Aberration of Light}
+
+Let's begin by substituting $p'^0 = h\nu'/c$ into the equation for $p'^1$, which yields
+\[
+p'^1 = \frac{h\nu}{c} \Gamma(\beta + \cos \theta) = \frac{h\nu}{c} \Gamma (1+\beta \cos \theta) \cos\theta'.
+\]
+Thus,
+\begin{equation}
+\label{eq:abberation_of_light}
+    \boxed{
+    \cos \theta' = \frac{\beta + \cos \theta}{1+\beta \cos \theta} \iff \cos \theta = \frac{\cos \theta' - \beta}{1-\beta \cos \theta'}.
+    }
+\end{equation}
+There are a number of interesting results to take away from this:
+\vspace{10pt}
+\begin{enumerate}
+\item \textbf{Forward Focusing:} 
+    In the small--angle limit we may write
+    \[
+    \cos\theta' \simeq 1 - \frac{\theta'^2}{2},
+    \qquad
+    \cos\theta \simeq 1 - \frac{\theta^2}{2}.
+    \]
+    Using the inverse aberration relation,
+    \[
+    \cos\theta = \frac{\cos\theta' - \beta}{1 - \beta \cos\theta'},
+    \]
+    and substituting the small--angle form of $\cos\theta'$, we obtain
+    \[
+    \cos\theta \;\simeq\;
+    \frac{(1 - \tfrac{1}{2}\theta'^2) - \beta}
+         {1 - \beta(1 - \tfrac{1}{2}\theta'^2)}.
+    \]
+    Simplifying numerator and denominator:
+    \[
+    \cos\theta \;\simeq\;
+    \frac{1 - \beta - \tfrac{1}{2}\theta'^2}
+         {1 - \beta + \tfrac{1}{2}\beta\theta'^2}.
+    \]
+    
+    Next, recall that
+    \[
+    1-\beta^2 = (1-\beta)(1+\beta) = \frac{1}{\Gamma^2},
+    \qquad 
+    1+\beta \simeq 2,
+    \]
+    so
+    \[
+    1-\beta \;\simeq\; \frac{1}{2\Gamma^2}.
+    \]
+    Factor out $(1-\beta)$ from numerator and denominator:
+    \[
+    \cos\theta \;\simeq\;
+    \frac{(1-\beta)
+    \left[1 - \dfrac{\theta'^2}{2(1-\beta)}\right]}
+    {(1-\beta)\left[1 + \dfrac{\beta\,\theta'^2}{2(1-\beta)}\right]}.
+    \]
+    The factors cancel, leaving
+    \[
+    \cos\theta 
+    \simeq
+    \frac{1 - \dfrac{\theta'^2}{2(1-\beta)}}
+         {1 + \dfrac{\beta\,\theta'^2}{2(1-\beta)}}.
+    \]
+    
+    For small angles we may expand the denominator:
+    \[
+    \cos\theta 
+    \;\simeq\;
+    1 - \frac{\theta'^2}{2(1-\beta)} - 
+          \frac{\beta\,\theta'^2}{2(1-\beta)}
+    =
+    1 - \frac{(1+\beta)\theta'^2}{2(1-\beta)}.
+    \]
+    Using $1+\beta\simeq 2$ and $1-\beta\simeq 1/(2\Gamma^2)$:
+    \[
+    \cos\theta \;\simeq\;
+    1 - 2\Gamma^2\,\theta'^2.
+    \]
+    
+    But for small angles,
+    \[
+    \cos\theta \simeq 1 - \frac{\theta^2}{2},
+    \]
+    so equating the two expressions,
+    \[
+    1 - \frac{\theta^2}{2}
+    \simeq
+    1 - 2\Gamma^2\,\theta'^2,
+    \]
+    which immediately gives
+    \[
+    \theta^2 \simeq 4\Gamma^2 \theta'^2
+    \quad\Longrightarrow\quad
+    \boxed{\theta \simeq 2\,\Gamma\,\theta'}.
+    \]
+    
+    In the usual order--of--magnitude form:
+    \[
+    \boxed{\theta' \sim \frac{\theta}{\Gamma}},
+    \]
+    \textbf{demonstrating that angles are compressed by a factor $\sim 1/\Gamma$ in the forward direction.}
+\item \textbf{Limiting Scenarios}:  
+The aberration formula behaves sensibly in the two extreme limits:
+\begin{itemize}
+    \item \emph{Non–relativistic limit} ($\beta = 0$):  
+    \[
+    \cos\theta' = \cos\theta,
+    \]
+    so there is no change in direction, as expected.
+    \item \emph{Ultra–relativistic limit} ($\beta \to 1$):  
+    \[
+    \cos\theta' \to 1,
+    \]
+    meaning that photons from \emph{any} direction in the comoving frame appear to arrive almost exactly along the forward direction in the lab frame.  
+    This is the geometric origin of strong relativistic beaming.
+\end{itemize}
+
+\item \textbf{Backward Photons}:  
+    Photons emitted directly backward in the comoving frame 
+    ($\theta = \pi$, so $\cos\theta = -1$) transform to
+    \[
+    \cos\theta' 
+    = \frac{\beta - 1}{1 - \beta}
+    = -1,
+    \]
+    so they remain backward–moving in the lab frame.  
+    Thus, aberration \emph{does not} drag backward–emitted photons into the forward cone; only photons with $\theta < \pi/2$ are significantly beamed.
+    
+\item \textbf{Perpendicular Photons}:  
+    Photons emitted perpendicular to the motion in the comoving frame 
+    ($\theta = \pi/2$, so $\cos\theta = 0$) transform to
+    \[
+    \cos\theta' = \beta,
+    \qquad
+    \theta' = \arccos\beta.
+    \]
+    For relativistic flows, $\beta \simeq 1 - 1/(2\Gamma^2)$, so
+    \[
+    \theta' \simeq \frac{1}{\Gamma}.
+    \]
+    Thus photons emitted \emph{sideways} in the comoving frame appear to come from a narrow forward cone of opening angle $\sim 1/\Gamma$ in the lab frame—one of the clearest manifestations of relativistic beaming.
+\end{enumerate}
+
+\subsubsection{Doppler Boosting}
+
+Let's now move on to \textbf{Doppler Boosting}. We have previously derived the transformation law for angles, which will allow us to isolate the behavior of $\nu$ under Lorentz transformation.
+Recall that we were in the process of solving the system of equations
+\[
+p'^0 = \frac{h\nu}{c}\Gamma(1+\beta \cos \theta) = \frac{h\nu'}{c},
+\]
+and
+\[
+p'^1 = \frac{h\nu}{c} \Gamma(\beta+\cos\theta) = \frac{h\nu'}{c} \cos \theta'.
+\]
+If we look at the $p'^0$ component, we see that
+\[
+\boxed{
+\nu' = \nu \Gamma(1+\beta \cos \theta),\;\;\;\text{(Lorentz Boost)}
+}
+\]
+This is already a somewhat useful expression; however, we would really like to have $\nu'$ written in terms of the \textbf{lab frame angle} since that is what we can actually measure.
+We therefore rely on equation~\eqref{eq:abberation_of_light}, which tells us that
+\[
+\nu' = \nu \Gamma \left(1+\beta\frac{\cos \theta' - \beta}{1-\beta \cos \theta'}\right) = \frac{\nu}{\Gamma(1-\beta \cos \theta')}.
+\]
+Thus,
+\begin{equation}
+    \label{eq:doppler_boosting_relativistic}
+    \boxed{
+    \begin{aligned}
+    \nu' &= \frac{\nu}{\Gamma(1-\beta \cos \theta')} = \nu\Gamma(1+\beta \cos \theta),\\
+    \nu &= \Gamma(1-\beta \cos \theta')\nu' = \frac{\nu'}{\Gamma(1+\beta \cos \theta)}
+    \end{aligned}
+    }
+\end{equation}
+We commonly introduce the so-called \textbf{Doppler Factor}, $\delta(\theta)$ such that
+\begin{equation}
+    \label{eq:doppler-factor}
+    \boxed{
+    \delta(\theta') = \frac{1}{\Gamma(1-\beta \cos \theta')}, \;\delta(\theta) = \Gamma(1+\beta \cos \theta).
+    }
+\end{equation}
+Thus,
+\[
+\nu' = \delta \;\nu.
+\]
+This is the famous \textbf{relativistic Doppler effect}! 
+
+There are a couple of scenarios worthy of mention before moving on:
+
+\paragraph{Transverse Doppler Boosting}
+
+Even when photons are emitted \textbf{perpendicular} to the direction of motion, and $\delta(\theta') = 1/\Gamma$, we still have a \textbf{Doppler Boost}. This is an effect entirely due to \textbf{time dilation}. 
+As observed by the lab frame, photons are emitted more slowly than they are in the lab frame, so the frequency is redshifted due to the effect.
+
+\paragraph{Longitudinal Doppler Boosting}
+
+In the alternative scenario, when $\theta \sim 0$, we have \textbf{longitudinal boosting}, which combines the time dilation effects and the finite speed of light. In this case, $\delta \sim 1/\Gamma(1-\beta)$. Recalling that 
+\[
+1-\beta \sim \frac{1}{2\Gamma^2},
+\]
+\[
+\delta \sim \frac{1}{\Gamma (1-\beta)} \sim 2 \Gamma,
+\]
+which means that the frequencies are \textbf{boosted} by the motion toward the observer.
+
+\subsection{The Transformation of Specific Intensity}
+
+Let us now complete our discussion of the \textbf{relativistic transformation} of $I_\nu$. We recall that the quantity $I_\nu / \nu^3$ is \textbf{covariant} and therefore requires that
+\[
+I_\nu/\nu^3 = I'_\nu/\nu'^3.
+\]
+As such,
+\[
+I'_{\nu'}(\nu',\theta')
+=
+\left(\frac{\nu'}{\nu}\right)^3
+I_{\nu}(\nu,\theta).
+\]
+We remember that $\nu' = \delta \nu$, so we have
+\[
+\boxed{
+I'_{\nu'}(\nu',\theta') = \delta^3 I_\nu\left(\frac{\nu'}{\delta}, \theta\right)
+}
+\]
+For \textbf{isotropic emission} on the rest frame, the intensity will not depend on the direction $\theta$ and we therefore find that
+\[
+I'_{\nu'} (\nu',\theta') = \delta^3 I_\nu(\nu'/\delta).
+\]
+If we write this out, the result is
+\[
+\boxed{
+I_{\nu'} = \frac{1}{\Gamma^3(1-\beta \cos \theta')^3}I_\nu\left(\nu' \Gamma (1-\beta \cos \theta')\right).
+}
+\]
+Notably, there are \textbf{two effects at play here}:
+\vspace{10pt}
+\begin{enumerate}
+    \item \textbf{Relativistic Doppler Shift}: The fact that we evaluate $I_\nu$ at the frequency
+    \[
+    \nu' = \delta(\theta) \nu = \frac{\nu}{\Gamma(1-\cos \theta)}
+    \]
+means that we observe photons at $\nu$ which were actually emitted at \textbf{lower frequencies} in the rest frame. This is the standard relativistic doppler shift prescription including the correction for the transverse correction. 
+\item \textbf{Relativistic Beaming}: For a specific intensity, the prefactor
+\[
+I_\nu \sim \frac{1}{\Gamma^3(1-\beta \cos \theta)^3} I_\nu'
+\]
+means that photons are \textbf{highly biased} toward the forward direction $\theta$. 
+\end{enumerate}
+\vspace{10pt}
+In the ultra–relativistic limit, $\Gamma \gg 1$, this beaming becomes extremely strong. For small $\theta$, one may expand
+\[
+1 - \beta \cos\theta \simeq \frac{1}{2\Gamma^2} + \frac{\theta^2}{2},
+\]
+so that
+\[
+\delta(\theta) \simeq \frac{2\Gamma}{1 + \Gamma^2 \theta^2}.
+\]
+The intensity then scales approximately as
+\[
+I_\nu(\theta) \propto \delta^3(\theta) \propto
+\left[\frac{2\Gamma}{1 + \Gamma^2 \theta^2}\right]^3,
+\]
+which is sharply peaked for $\theta \lesssim 1/\Gamma$ and \textbf{falls off rapidly for larger angles.} Thus, to an observer in the lab frame, emission from a relativistically moving fluid element appears confined to a cone of angular width $\sim 1/\Gamma$ about the direction of motion, even though in the comoving frame it was emitted isotropically.
+
+\begin{bigidea}
+    Most of the emission from a relativistic emitter is beamed in a cone of opening angle $1/\Gamma$. This cone contains about 50\% of the photons and nearly all of the energy.
+\end{bigidea}
+
+\section{Detection of Relativistic Photons}
+
+Now that we've covered the details of how \textbf{photons emitted from relativistic sources} behave, let's turn our attention to the use of \textbf{measuring devices} that use light.
+
+Recall that, in a \textit{theoretical sense}, the spacetime coordinates of an \textbf{event} are some $(ct,{\bf x})$ as measured by a set of \textit{synchronized clocks} everywhere in the frame. Thus, when we talk about the dilation of time, it is the dilation of time as measured by these sets of synchronized clocks.
+Unfortunately, the real world does not have a set of perfectly synchronized clocks that we can observe everywhere in space. 
+We therefore need to use other proxies: most commonly light; however, this inserts additional phenomenology into our discussion.
+
+\subsection{Time Dilation}
+
+To better understand this complication, let's consider a source moving with some velocity ${\bf v} = \boldsymbol{\beta} c$ along the ${\bf x}$ direction relative to the \textbf{lab frame}.
+Now, if two photons are emitted at a difference $\Delta \tau$ in the \textbf{comoving frame}, then they correspond to comoving events at
+\[
+(t_1', x_1') = (t_1', 0),
+\qquad
+(t_2', x_2') = (t_2', 0).
+\]
+The Lorentz transformation into the \textbf{lab frame} takes the form
+\[
+t = \Gamma\left(t' + \frac{\beta x'}{c}\right), \qquad
+x = \Gamma\left(x' + \beta c t'\right),
+\]
+with $\Gamma = (1-\beta^2)^{-1/2}$.
+Because $x_1' = x_2' = 0$, the time coordinates of the emission events in $S$ are
+\[
+t_1 = \Gamma t_1', \qquad t_2 = \Gamma t_2',
+\]
+so the lab-frame separation is simply
+\[
+\boxed{\Delta t \equiv t_2 - t_1 = \Gamma\,\Delta t' = \Gamma\,\Delta \tau.}
+\]
+\textbf{This is just ordinary time dilation: the emission interval appears longer in the lab frame.}
+Here's the catch: \textbf{we don't measure their arrival times using these clocks!}
+
+Let's instead consider what the time difference will be as seen by a \textbf{detector} once the photons actually pass through the detector apparatus.
+
+In the comoving frame $S'$, let the photons be emitted in some direction
+making an angle $\theta$ with the $+x'$ axis.  
+For a monochromatic wave of frequency $\nu$, successive crests are separated by
+\[
+\Delta t= \frac{1}{\nu}.
+\]
+Transforming to the lab frame, one finds the standard relativistic Doppler relation
+\[
+\nu' = \delta(\theta)\,\nu,
+\qquad
+\delta(\theta) \equiv \Gamma\left(1 + \beta\cos\theta\right),
+\]
+so that the time between crests in the lab frame is
+\[
+\Delta t' = \frac{1}{\nu'} = \frac{1}{\delta(\theta)\,\nu}
+= \frac{\Delta t}{\delta(\theta)}.
+\]
+Thus
+\[
+\boxed{\Delta t' = \frac{\Delta t}{\delta(\theta)}},
+\]
+Note that this $\Delta t$ is the lab-frame time between photons measured locally,
+and it reduces to $\Gamma \Delta t'$ when $\theta' = \pi/2$ (no component along the direction of motion).
+
+\begin{bigidea}
+Our takeaway is that when we measure the \textbf{time between photon detections}, we are not measuring the \textbf{time between emissions} in \textbf{any frame}. We are getting an inherently Doppler modified measurement of the time difference and this can lead to interesting scenarios.
+\end{bigidea}
+
+\subsection{The Inferred Transverse Velocity}
+
+One very odd effect that comes about from relativistic photon detection is the
+apparent \textbf{superluminal transverse motion} of blobs in relativistic jets.
+This is not a violation of relativity; it is a consequence of Doppler-modified
+arrival times.
+
+Consider an emitting blob moving with velocity $\mathbf{v} = \beta c$ at an
+angle $\theta'$ relative to our line of sight.  Let the $z$--axis point toward
+the observer, and let $x$ be the direction transverse to the line of sight in
+the plane of the sky.
+
+During a lab-frame emission interval $\Delta t_{\rm emit}$, the blob moves a
+distance
+\[
+\Delta \mathbf{x}
+= c\,\beta\,\Delta t_{\rm emit},
+\]
+with transverse component
+\[
+\Delta x_\perp = c\,\beta\,\Delta t_{\rm emit}\,\sin\theta'.
+\]
+
+However, we \emph{do not} measure $\Delta t_{\rm emit}$ directly.  Instead, the
+arrival-time separation between the two photons is shortened because the blob
+moves closer to the observer while emitting:
+\[
+\Delta t_{\rm arr}
+= \Delta t_{\rm emit} - \frac{\Delta z}{c}
+= \Delta t_{\rm emit}(1 - \beta\cos\theta').
+\]
+
+Thus the apparent transverse speed inferred from observations is
+\[
+v_{\perp,\rm app}
+= \frac{\Delta x_\perp}{\Delta t_{\rm arr}}
+=
+\frac{c\,\beta\,\sin\theta'\,\Delta t_{\rm emit}}
+     {\Delta t_{\rm emit}(1 - \beta\cos\theta')}
+=
+\boxed{
+v_{\perp,\rm app}
+= \frac{c\,\beta\sin\theta'}{1 - \beta\cos\theta'}.
+}
+\]
+
+This can exceed the speed of light for sufficiently small $\theta'$.  The maximum
+occurs when
+\[
+\frac{d v_{\perp,\rm app}}{d\theta'} = 0,
+\]
+which yields
+\[
+\theta'_{\rm max} \simeq \frac{1}{\Gamma}.
+\]
+Evaluating $v_{\perp,\rm app}$ at this angle gives
+\[
+v_{\perp,\rm app, max}
+\simeq \Gamma\,c,
+\]
+so the apparent motion can exceed $c$ by large factors when the emitter is
+ultra-relativistic and viewed at small angles to the line of sight.
+
+\begin{bigidea}
+Apparent superluminal motion is not a violation of relativity.  
+It results from the combination of relativistic aberration and the shortened photon
+arrival-time intervals when the source is moving almost directly toward the observer.
+\end{bigidea}

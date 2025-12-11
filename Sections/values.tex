@@ -24,7 +24,8 @@
   M_\odot &= 1.99\times10^{33}\,{\rm g} &
   L_\odot &= 3.83\times10^{33}\,{\rm erg\,s^{-1}}\\
   R_\odot &= 6.96\times10^{10}\,{\rm cm} &
-  1\;{\rm AU} &\approx 1.5 \times 10^{13}\;{\rm cm} \\
+  1\;{\rm AU} &\approx 1.5 \times 10^{13}\;{\rm cm}\\
+  1\;{\rm pc} &\approx 3\times 10^{18}\;{\rm cm} &1\;{\rm eV}&= 1.6\times10^{-12}\;{\rm erg}\\
   m_p c^2 &= 938\,{\rm MeV} &
   m_e c^2 &= 511\,{\rm keV} \\
   k_B &= 8.62\times10^{-5}\,{\rm eV\,K^{-1}} \\
@@ -138,10 +139,120 @@ T_c^4 &= \frac{3}{8}\kappa_R \Sigma T_{\rm eff}^4.\;\;F = \sigma_{\rm sb} T_{\rm
     \end{cases}\\
     I_\nu(R) &= B_\nu[T_{\rm eff}(R)]
 = \frac{2h\nu^3}{c^2}\left[\exp\!\left(\frac{h\nu}{kT_{\rm eff}(R)}\right)-1\right]^{-1}.\\
-\kappa_{\rm Kramer} &= 5\times 10^{24}\;\rho T^{-7/2}\;{\rm cm^2\;g^{-1}}.
+\kappa_{\rm Kramer} &= 5\times 10^{24}\;\rho T^{-7/2}\;{\rm cm^2\;g^{-1}}.\\
+\kappa_{\rm thompson} &= 0.2 \;(1+X)\;{\rm cm^2\;g^{-1}},\\
+\chi_{\rm rad} &\sim 2.8 \times 10^{-3} \alpha ^{1/10} \dot{M}_{\rm 16}^{7/10} R_{\rm 10}^{-3/8} f^{7/5}.\\
+\chi_{\rm opacity} &= 4\times 10^{-4} \;(1+X) \dot{M}_{16}^{1/2} M_1^{1/4} R_{10}^{-3/4} f^2\\
+R_{\rm opacity} &= 2.5\times10^{7} \dot{M}_{16}^{2/3}\;M_1^{1/3} f^{8/3}\;{\rm cm}\\
+\end{aligned}
+\]
+\subsubsection*{Time Dependence}
+\[
+\begin{aligned}
+        t_{\rm dyn} &= \frac{2\pi}{\Omega_K} \sim 10^4\;\left(\frac{R}{R_\odot}\right)^{3/2} \left(\frac{M}{M_\odot}\right)^{-1/2}\;{\rm s}.\\
+        t_{\rm visc} &\;\sim\; \frac{R^2}{\nu}\;=\;4\times10^5\;
+\alpha_{-1}^{-1}\;
+R_{10}^{3/2}\;
+m_1^{-1/2}\;
+\left(\frac{H/R}{0.05}\right)^{-2}\;
+{\rm s}.\\
 \end{aligned}
 \]
 \end{multicols}
-
+\newpage 
+\footnotesize
+\begin{multicols}{2}
+\[
+\begin{aligned}
+    \frac{dQ^+}{dT_c}& \lesssim \frac{dQ^{-}}{dT_c} \implies \frac{d \log (\Lambda/\alpha)}{d\log T_c} < \frac{3}{2}.\\
+s(k)&= -\,3\,D'(\Sigma_0)\,k^2\,\; \frac{d\dot M}{d\Sigma}\Big|_{R_0} > 0\\
+t_{\rm therm} &= \frac{\varepsilon}{Q^+} \sim \frac{\Sigma c_s^2}{D(R)} = \frac{1}{\alpha \Omega} = \alpha^{-1} t_{\rm dyn}.\\
+t_z \sim t_{\rm dyn} &\ll t_{\rm therm}  \ll t_{\rm visc}.\\
+\end{aligned}
+\]
+\subsection*{Shock Physics}
+\[
+\begin{aligned}
+    \frac{\rho_1}{\rho_2} &= \frac{u_2}{u_1},
+    \hspace{0.5cm}\rho_1u_1^2+P_1 =\rho_2u_2^2 + P_2,
+    \hspace{0.5cm} \frac{1}{2}u_1^2 + h_1 = \frac{1}{2}u_2^2 + h_2\\
+    \frac{\rho_2}{\rho_1}&= \frac{(\Gamma+1)M_1^2}{(\Gamma-1)M_1^2 + 2},
+    \hspace{0.5cm}\frac{P_2}{P_1} = 1+\frac{2\Gamma}{\Gamma+1} (M_1^2-1) \\
+    \frac{T_2}{T_1} &= \frac{\left(2\Gamma M_1^2 - (\Gamma -1)\right) \left((\Gamma -1 )M_1^2 + 2\right)}{(\Gamma + 1)^2 M_1^2} \hspace{0.5cm}M_2 = \frac{2+(\Gamma-1)M_1^2}{2\Gamma M_1^2 - (\Gamma -1)}\\
+T^{\mu\nu} &= w U^\mu U^\nu + P \eta^{\mu \nu},
+\hspace{0.5cm}\nabla_\nu T^{\mu \nu} = 0,
+\hspace{0.5cm}\nabla_\nu(\rho U^\nu) = 0\\
+\left[\rho \Gamma v\right]_1^2&=0,
+\hspace{0.5cm}\left[w\Gamma^2 v\right]_1^2=0
+\hspace{0.5cm}\left[w\Gamma^2v^2 + P\right]_1^2 = 0\\
+\left(\frac{w_2}{\rho_2}\right)^2 &- \left(\frac{w_1}{\rho_1}\right)^2 = (P_2-P_1)\left(\frac{w_2}{\rho_2^2} + \frac{w_1}{\rho_1^2}\right) 
+\hspace{0.5cm}w=\rho c^2 + \mathcal{E} + P\\
+    \cos \theta' &= \frac{\beta + \cos \theta}{1+\beta \cos \theta} \iff \cos \theta = \frac{\cos \theta' - \beta}{1-\beta \cos \theta'} \\
+\nu' &= \frac{\nu}{\Gamma(1-\beta \cos \theta')} = \nu\Gamma(1+\beta \cos \theta)\\
+\nu &= \Gamma(1-\beta \cos \theta')\nu' = \frac{\nu'}{\Gamma(1+\beta \cos \theta)}\\
+\boldsymbol{\Lambda} &= \begin{bmatrix}\Gamma & - \Gamma \boldsymbol{\beta}^T\\-\Gamma \boldsymbol{\beta} & {\bf I} + (\Gamma-1) \frac{\boldsymbol{\beta}\otimes\boldsymbol{\beta}}{\beta^2}\end{bmatrix}\\
+I'_{\nu'}(\nu',\theta') &= \delta^3 I_\nu\left(\frac{\nu'}{\delta}, \theta\right),
+\hspace{0.5cm}\Delta t = \Gamma \Delta \tau.
+\hspace{0.5cm}\Delta t' = \frac{\Delta t}{\delta(\theta)}
+\end{aligned}
+\]
+\[
+\begin{aligned}
+    R_{\rm shock}(t)&= \xi_0\left(\frac{E_0t^2}{\rho_1}\right)^{1/5}
+    \hspace{0.5cm}    u_{\rm shock} = \frac{2}{5}\xi_0 \left(\frac{E_0}{\rho_0 t^3}\right)^{1/5}\\
+    R_{\rm shock} &\approx 2.3 E_{51}^{1/5} \rho_{-24}^{-1/5}t_3^{2/5}\;{\rm pc}.\\
+    u_{\rm shock} &\approx 9 \times 10^3 E_{51}^{1/5} \rho_{-24}^{-1/5}t_3^{-3/5}\;{\rm km/s.}\\
+    \rho_2 = \frac{\gamma+1}{\gamma-1}\rho_0 &\implies \rho_2 = 4 \rho_0\\
+u_2 = \frac{2}{\gamma+1}\,\dot{R}, &\implies  6.7 \times 10^3 E_{51}^{1/5} \rho_{-24}^{-1/5}t_3^{-3/5}\;{\rm km/s.} \\
+P_2 = \frac{2}{\gamma+1}\,\rho_0 \dot{R}^2 &\implies  6 \times 10^{-7} E_{51}^{2/5} \rho_{-24}^{3/5}t_3^{-6/5}\;{\rm erg/cm^3.} \\
+T_2 = \frac{m_p\mu}{k_B} \dot{R}^2 \frac{2(\gamma-1)}{(\gamma+1)^2} &\implies 1\times 10^{8} \mu E_{51}^{2/5} \rho_{-24}^{-2/5}t_3^{-6/5}\;{\rm K}.
+\end{aligned}
+\]
+\subsubsection*{Supernova Shocks}
+\[
+\begin{aligned}
+    R_{\rm shock} \sim v_{\rm ej} t &= 1.02 \left(\frac{v_{\rm ej}}{\rm 10^4\; km\;s^{-1}}\right)\left(\frac{t}{\rm 100\;yr}\right)\; {\rm pc}. \;\text{(FE)}\\
+    v_{\rm ej} &= 10^4\;\left(\frac{M_{\rm ej}}{M_\odot}\right)^{-1/2} \left(\frac{E_0}{10^{51}\;{\rm erg}}\right)^{1/2}\; {\rm km\;s^{-1}}\;\text{(FE)}\\
+        t \sim &\left(\frac{3M_{\rm ej}}{4\pi \rho_0}\right)^{1/3} \frac{1}{v_{\rm ej}}, \;R\sim \left(\frac{3 M_{\rm ej}}{4\pi \rho}\right)^{1/3}.\;\text{(FE)}\\
+        R_{\rm FE} &\sim 2.5 \left(\frac{M_{\rm ej}}{M_\odot}\right)^{1/3} \left(\frac{\rho_0}{10^{-24}\;{\rm g/cm^3}}\right)^{-1/3}\; {\rm pc}. \;\text{(FE)}\\
+        \rho_{\rm FE}(r,t) &= t^{-3} F(v) = t^{-3}F(r/t)\\
+        t_{\rm FE} \sim 244&\;\left(\frac{v_{\rm ej}}{10^4\;{\rm km/s}}\right)^{-1}\left(\frac{M_{\rm ej}}{M_\odot}\right)^{1/3} \left(\frac{\rho_0}{10^{-24}\;{\rm g/cm^3}}\right)^{-1/3}\; {\rm pc}. \;\text{(FE)}\\
+        t_{\rm rad} \;\approx&\;1.6\times 10^4\,E_{51}^{2/11}\rho_{0,-24}^{-7/11}\Lambda_{0,-22}^{-5/11}\;{\rm yr}.\\
+        R_{\rm rad} \;\approx&\;18\;\,E_{51}^{3/11}\rho_{0,-24}^{-5/11}\Lambda_{0,-22}^{-2/11}\;{\rm pc}.\\
+        R(t) &\propto t^{1/4},\;\;v_s(t) \propto t^{-3/4}\;\text{(Radiative)}
+\end{aligned}
+\]
+\columnbreak
+\subsubsection*{GRBs}
+\[
+\begin{aligned}
+R_{\rm classical} &\sim 3\times 10^{7} \left(\frac{\delta t}{10^{-3}\;{\rm sec}}\right) \;{\rm cm}  \\
+L_{\rm iso, classical} &\sim \frac{4\pi D^2 f}{\delta t} \sim 1.2\times10^{53}\;D_{2}^{2} f_{-4} \delta t_{-3}^{-1}\;{\rm erg/s}.\\
+n_\gamma &\sim \frac{L_{\rm iso}}{4\pi c^3 \delta t^2 \left<E_\gamma\right>} = 2\times 10^{31}\;D_{2}^2 f_{-4} \delta t_{-3}^{-3} \left<E\right>_{\rm MeV}^{-1}\;{\rm cm^{-3}}.\\
+\tau_{\rm classical} &\sim 10^{11} L_{\rm 51} \delta t_{-3}^{-1} \left<E_\gamma\right>_{\rm MeV}^{-1}
+\end{aligned}
+\]
+\subsubsection*{AGN}
+\[
+\begin{aligned}
+    r_{\rm ISCO, Sch} &= \frac{6GM}{c^2},\;\;r_{\rm ISCO, KerrMax} \sim \frac{GM}{c^2}\\
+    \dot{M}_{\rm AGN} &\simeq 0.02 \left(\frac{L}{10^{45}\;\rm{erg/s}}\right) \left(\frac{\eta}{0.1}\right)^{-1}\;{\rm M_\odot/yr}\\
+    M_{\rm BH} = \frac{L\Delta t}{\eta c^2} &\simeq 8\times10^7 \left(\frac{L}{10^{45}\;\rm{erg/s}}\right) \left(\frac{\eta}{0.1}\right)^{-1}\;{\rm M_\odot}\\
+    r_g &= \frac{GM_{\rm BH}}{c^2} \;\simeq\; 1.5\times10^{13}\,
+\left(\frac{M_{\rm BH}}{10^8\,M_\odot}\right)
+{\rm cm}\\
+t_{\rm dyn} &\sim \frac{1}{\Omega_K} = \left(\frac{r^3}{GM_{\rm BH}}\right)^{1/2} \;\approx\; 10^3\,
+\left(\frac{r}{10\,r_g}\right)^{3/2}
+\left(\frac{M_{\rm BH}}{10^8\,M_\odot}\right)\!{\rm s}, \\
+t_{\rm th} &\sim \frac{t_{\rm dyn}}{\alpha} \;\approx\; 10^5\,
+\left(\frac{\alpha}{0.01}\right)^{-1}
+\left(\frac{r}{10\,r_g}\right)^{3/2}\!{\rm s}, \\
+t_{\rm visc} &\sim \frac{t_{\rm th}}{(H/R)^2} \;\approx\;
+10^7\,
+\left(\frac{\alpha}{0.01}\right)^{-1}
+\left(\frac{H/R}{0.1}\right)^{-2}\!{\rm s},
+\end{aligned}
+\]
+\end{multicols}
 
 \restoregeometry

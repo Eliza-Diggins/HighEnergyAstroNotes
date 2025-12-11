@@ -1,0 +1,554 @@
+
+We have, so far, discussed primarily the\textbf{ steady–state} disk and its behavior.  
+Unfortunately, there are many scenarios in which the disk evolves over time, and therefore impacts our model predictions.  
+Additionally, we previously saw that $\alpha$ appears with\textbf{ only first–order power} in the steady–state $\alpha$–disk scalings.  
+This is beneficial from a theorist’s standpoint: it means the model’s structural form is robust to our particular choice of $\alpha$.  
+From an observational standpoint, however, this makes it difficult to measure $\alpha$ directly from steady–state properties alone.
+
+When we instead consider \textbf{time variability}, the situation changes.  
+The rate at which angular momentum, heat, and vertical support adjust all depend sensitively on $\alpha$, and thus provide indirect constraints on viscous transport.  
+We therefore begin by identifying the fundamental \emph{timescales} of disk accretion.
+
+\subsection{The Timescales of Disk Accretion}
+
+As in many astrophysical systems, the key to understanding disk evolution lies in comparing the natural timescales that govern different processes. We now define and derive the principal timescales relevant to thin–disk evolution.
+
+\subsubsection{The Orbital (Dynamical) Timescale}
+
+The shortest and most fundamental timescale in any Keplerian disk is the orbital (or \textbf{dynamical}) timescale, which characterizes how quickly material responds to gravitational forces and completes one revolution:
+\vspace{10pt}
+\begin{definition}[Orbital or Dynamical Timescale]
+\label{def:disk_orbital_timescale}
+The \textbf{orbital (or dynamical) timescale} represents the characteristic time over which material in the disk responds to the local gravitational potential and completes one Keplerian orbit.  
+It is the timescale for the disk to restore hydrostatic or centrifugal balance after any perturbation, and therefore sets the period over which the velocity and density fields can adjust dynamically.  
+In essence, it is the local \emph{free–fall or orbital adjustment time}:
+\[
+t_{\rm dyn} \;=\; \frac{2\pi}{\Omega_K} 
+\;=\;
+2\pi\sqrt{\frac{R^3}{GM}}.
+\]
+On this timescale, pressure gradients and Coriolis forces maintain the Keplerian velocity field; 
+slower processes such as heat transport or viscous angular momentum exchange occur on much longer timescales.
+\end{definition}
+
+At a radius $R=10^{10}\,{\rm cm}$ around a $1\,M_\odot$ accretor,
+\[
+t_{\rm dyn} \approx 500\,R_{10}^{3/2}\,m_1^{-1/2}\ {\rm s},
+\]
+where $R_{10}=R/10^{10}\,{\rm cm}$ and $m_1=M/M_\odot$. This is the timescale over which the disk can reach local hydrostatic equilibrium or adjust dynamically. With solar scaling,
+\begin{equation}
+    \boxed{
+    t_{\rm dyn} = \frac{2\pi}{\Omega_K} \sim 10^4\;\left(\frac{R}{R_\odot}\right)^{3/2} \left(\frac{M}{M_\odot}\right)^{-1/2}\;{\rm s}.
+    }
+\end{equation}
+As such, for typical parameters, the dynamical timescale is on the order of \textbf{hours}.
+
+\subsubsection{The Viscous Timescale}
+
+The second timescale describes the much slower radial redistribution of matter due to viscosity. Recall that the Euler equation takes the form
+\[
+\frac{\partial {\bf u}}{\partial t} \sim \nu \nabla^2{\bf u}
+\]
+when viscosity is the dominant force (low Reynold's Number flows). As such, over a characteristic length scale $R$,
+\[
+\frac{\partial {\bf u}}{\partial t} \sim \frac{U}{T} \sim \frac{\nu U}{L^2} \implies T \sim \frac{L^2}{\nu}.
+\]
+As such, the characteristic time scale of the problem is the \textbf{viscous timescale} as defined below:
+\vspace{10pt}
+\begin{definition}[Viscous Timescale]
+The \textbf{viscous timescale} characterizes the rate at which angular momentum is redistributed and mass is accreted through the disk due to viscous torques.  It represents the time required for material at radius $R$ to lose enough angular momentum to drift inward by a distance of order $R$, or equivalently, for the disk to evolve significantly in its surface density profile.
+\[
+t_{\rm visc} \;\sim\; \frac{R^2}{\nu}
+\;=\;
+\frac{R^2}{\alpha c_s H}
+\;\simeq\;
+\frac{1}{\alpha}\left(\frac{R}{H}\right)^2\frac{1}{\Omega_K}.
+\]
+This is typically many orders of magnitude longer than the orbital or thermal timescales, since the ratio $(R/H)^2 \gg 1$ for thin disks. It therefore sets the \emph{global evolutionary timescale} of the accretion disk, governing both mass inflow and angular momentum transport.
+\end{definition}
+\vspace{10pt}
+Numerically, for typical parameters:
+\[
+t_{\rm visc} \;\approx\;
+4\times10^5\;
+\alpha_{-1}^{-1}\;
+R_{10}^{3/2}\;
+m_1^{-1/2}\;
+\left(\frac{H/R}{0.05}\right)^{-2}\;
+{\rm s}.
+\]
+This timescale is generically on the order of \textbf{days}.
+
+\subsubsection{The Thermal Timescale}
+
+We now consider the time required for the disk to radiatively adjust its temperature following a change in heating rate or opacity.
+While the dynamical and viscous timescales describe mechanical and angular–momentum responses, the \textbf{thermal timescale} governs how rapidly the disk can restore \emph{thermal equilibrium} between viscous heating and radiative cooling.
+
+The total internal energy per unit surface area is roughly $\Sigma c_s^2$, while the local viscous dissipation rate per unit area is $Q^+ \simeq (9/8)\,\nu\,\Sigma\,\Omega_K^2$.  
+Their ratio therefore gives the characteristic timescale for the disk’s heat content to adjust:
+\[
+t_{\rm therm}
+= \frac{\Sigma c_s^2}{Q^+}
+\simeq
+\frac{\Sigma c_s^2}{(9/8)\nu\Sigma\Omega_K^2}
+= \frac{8}{9}\frac{c_s^2}{\nu\Omega_K^2}
+= \frac{1}{\alpha\,\Omega_K}.
+\]
+\begin{definition}[Thermal Timescale]
+The \textbf{thermal timescale} is the time required for the disk to radiatively equilibrate after a perturbation in temperature or heating rate:
+\[
+t_{\rm therm} \;\sim\; \frac{1}{\alpha\,\Omega_K}
+\;\approx\;
+\alpha^{-1}\,t_{\rm dyn}.
+\]
+\end{definition}
+Physically, this is the timescale for the disk to restore local energy balance between viscous heating ($Q^+$) and radiative cooling ($Q^-$).  
+Because $\alpha \ll 1$, $t_{\rm therm}$ is typically \textbf{much longer than the orbital period} but \textbf{far shorter than the viscous evolution time}:
+\[
+t_{\rm dyn} \;\ll\; t_{\rm therm} \;\ll\; t_{\rm visc}.
+\]
+This hierarchy implies that while the disk can dynamically and vertically readjust within a few orbits, its thermal structure (and hence emission) can vary over tens to hundreds of orbits before reaching a new equilibrium.
+
+Numerically, for a thin disk at $R = 10^{10}\,{\rm cm}$ around a $1\,M_\odot$ accretor,
+\[
+t_{\rm therm} \;\approx\;
+2\times10^3\;
+\alpha_{-1}^{-1}\;
+R_{10}^{3/2}\;
+m_1^{-1/2}\;
+{\rm s},
+\]
+corresponding to roughly half an hour for $\alpha=0.1$.  
+Such thermal adjustment times are comparable to the short–term variability observed in dwarf novae and X–ray binaries, where heating and cooling instabilities can trigger significant luminosity changes.
+
+\subsubsection{The Vertical (Hydrostatic) Timescale}
+
+The final local timescale describes how quickly the disk re–establishes vertical hydrostatic equilibrium following a perturbation in pressure, temperature, or gravity.  
+Any change in the midplane pressure immediately alters the vertical pressure gradient, causing the disk’s surface layers to expand or contract until a new equilibrium between gas pressure and vertical gravity is restored.
+
+From the condition of hydrostatic balance,
+\[
+\frac{\partial P}{\partial z} = -\,\rho\,\Omega_K^2 z,
+\]
+a disturbance will propagate vertically at approximately the sound speed $c_s$.  
+The characteristic response time is thus the sound–crossing time across the disk’s thickness:
+\begin{definition}[Vertical Hydrostatic Timescale]
+The \textbf{vertical (hydrostatic) timescale} measures the time required for the disk to restore vertical pressure balance:
+\[
+t_z \;\sim\; \frac{H}{c_s}
+\;=\;
+\frac{1}{\Omega_K}
+\;=\;
+\frac{t_{\rm dyn}}{2\pi}.
+\]
+\end{definition}
+Physically, $t_z$ represents the time for the disk’s atmosphere to “breathe” in response to heating, cooling, or dynamical perturbations.  
+Because the vertical restoring force is so strong, $t_z$ is of the same order as the orbital timescale and is many orders of magnitude shorter than either the thermal or viscous timescales:
+\[
+t_z \;\sim\; t_{\rm dyn} \;\ll\; t_{\rm therm} \;\ll\; t_{\rm visc}.
+\]
+Thus, a thin disk remains in vertical hydrostatic equilibrium almost instantaneously, even as its temperature or surface density evolve on much longer timescales.
+
+\subsubsection{Comparative Timescales}
+
+Collecting the above relations, we find the hierarchy
+\[
+t_z \;\sim\; t_{\rm dyn} \;\ll\; t_{\rm therm} \;\ll\; t_{\rm visc},
+\]
+and the proportionalities
+\[
+t_\phi \;\sim\; t_z \;\sim\; \alpha\,t_{\rm therm}
+\;\sim\;
+\alpha\left(\frac{H}{R}\right)^2 t_{\rm visc}.
+\]
+This scaling explicitly shows that
+\[
+t_{\rm dyn} : t_{\rm therm} : t_{\rm visc}
+\;=\;
+1 : \alpha^{-1} : \alpha^{-1}\left(\frac{R}{H}\right)^2.
+\]
+For representative parameters:
+\[
+\begin{aligned}
+t_{\rm dyn} &\approx 200\,R_{10}^{3/2}\,m_1^{-1/2}\ {\rm s},\\
+t_{\rm therm} &\approx 2\times10^3\,\alpha_{-1}^{-1}\,R_{10}^{3/2}\,m_1^{-1/2}\ {\rm s},\\
+t_{\rm visc} &\approx 4\times10^5\,\alpha_{-1}^{-1}\,R_{10}^{3/2}\,m_1^{-1/2}\,(H/R)_{-2}^{-2}\ {\rm s}.
+\end{aligned}
+\]
+Thus, a disk at $R=10^{10}\,{\rm cm}$ evolves dynamically on minutes, thermally on tens of minutes, and viscously on days to weeks—consistent with the typical variability timescales observed in X–ray binaries and cataclysmic variables.
+
+\begin{bigidea}
+\textbf{Timescale Hierarchy of Thin Accretion Disks}
+\[
+t_{\rm dyn} \;\sim\; t_z \;\ll\; t_{\rm therm} \;\ll\; t_{\rm visc},
+\qquad
+t_{\rm visc} \;\simeq\; \frac{1}{\alpha}\left(\frac{R}{H}\right)^2 t_{\rm dyn}.
+\]
+This ordering governs how the disk responds to perturbations:
+hydrostatic balance is instantaneous,
+thermal equilibrium relaxes moderately,
+and mass redistribution proceeds only on the slow viscous timescale.
+\end{bigidea}
+
+\section{Disk Instabilities}
+\label{sec:disk_instabilities}
+
+Having established the characteristic timescales of thin accretion disks, \textbf{we now address their \emph{stability}.  }
+The timescale hierarchy
+\[
+t_z \sim t_{\rm dyn} \ll t_{\rm therm} \ll t_{\rm visc}
+\]
+is central: on dynamical/vertical timescales the disk maintains hydrostatic balance, while on thermal timescales it adjusts its temperature to balance heating and cooling, and on viscous timescales it redistributes angular momentum and mass.  
+Linear stability analyses are therefore performed by \textbf{holding the quantities that equilibrate on shorter timescales fixed} when examining the response on longer ones (e.g.\ hold $\Sigma$ fixed when analyzing thermal stability).
+
+We first treat the \emph{thermal stability} of disks, i.e.\ the tendency of the local radiative/thermal balance to return to equilibrium after a small perturbation in temperature.  
+Viscous and other secular instabilities are deferred to subsequent subsections.
+
+\subsection{Thermal Instability of Accretion Disks}
+\label{subsec:thermal_instability}
+
+Consider a local annulus at radius $R$ in an accretion disk.
+The conceptual basis of thermal instability is really quite simple: if the temperature $T_c$ \textbf{increases}, then the heating and cooling rates $Q^\pm$ will change.
+If the \textbf{heating rate} increases more than the cooling rate, then $T_c$ will \textbf{increase even more}, creating a runaway behavior.
+\par
+To be more precise, let's first recall that the \textbf{heating of the disk} is driven by \textbf{turbulent dissipation}. Since equation~\eqref{eq:keplerian_disk_heating_law} gives the dissipation rate per unit surface area, we know also that (\rmk{because $Q^+$ is a per volume statement}), 
+\[
+Q^+ \sim  D(R)/H = \frac{9}{8}\,\frac{\nu\,\Sigma}{H}\,\Omega^2.
+\]
+Since we are really interested in the \textbf{temperature dependence}, we recognize that it is really $\nu$ which couples the the temperature:
+\[
+\nu \sim \alpha c_s H \sim \alpha H T_c^{1/2},
+\]
+(\rmk{using the fact that $c_s^2 \sim k_B T$}) so
+\[
+Q^+ \sim f(\Omega, \Sigma) \cdot \alpha(T)  T_c^{1/2}.
+\]
+(\rmk{what we're doing here is specifically isolating the temperature dependent terms}).
+\par
+If we wish to continue making deductions, we will need to be able to say something about the cooling rate $Q^-$. This will depend on the radiative balance going on in the system; specifically if the disk is optically thick or thin and what the dominant source of opacity is.
+
+\subsubsection{Optically Thin Disk Regimes}
+
+In the \textbf{optically thin regime}, the cooling rate is determined simply by radiative transfer. Since
+\[
+\frac{dI_\nu}{ds} = -j_\nu.
+\]
+Given that the energy density of the radiation field is
+\[
+u_\nu = \frac{dE}{dV\;d\nu} = \frac{1}{c} \frac{dE}{dt\;d\nu \;dA} = \frac{1}{c} \int_{4\pi} I_\nu \;d\Omega,
+\]
+we can write that
+\[
+\frac{d u_\nu}{dt} = \frac{1}{c} \frac{\partial}{\partial t} \int_{4\pi} I_\nu \;d\Omega
+\]
+Since $ds \sim c \;dt$, 
+\[
+\boxed{
+\frac{du_\nu}{dt} = -4\pi j_\nu.
+}
+\]
+In most scenarios, the emission rate is determined by \textbf{two-body interactions}, which means that we have
+\[
+j_\nu = \underbrace{\rho^2}_{\text{collision scaling}} \underbrace{\Lambda(T,Z)}_{\text{cooling function}}.
+\]
+What are the relevant scalings with the disc temperature?
+Well, we know that $\rho \sim \Sigma/H$ and $H \sim c_s/\Omega$, so $\rho^2 \sim \Sigma^2 \Omega^2/c_s^2$, and $c_s^2 \sim T$, so
+\[
+j_\nu \sim q(\Omega, \Sigma) \cdot T^{-1} \Lambda(T,Z).
+\]
+As such,
+\[
+\frac{d\log Q^-}{d\log T_C} = \frac{d \log j_\nu}{d\log T_c} = -1 + \frac{d\log \Lambda}{dT_c},\;\text{and},\;\frac{d\log Q^+}{d\log T_c} = \frac{d\log \alpha}{d\log T_c} + \frac{1}{2}.
+\]
+We therefore arrive at an important statement:
+\begin{equation}
+   \boxed{ \frac{dQ^+}{dT_c} \lesssim \frac{dQ^{-}}{dT_c} \implies \frac{d \log (\Lambda/\alpha)}{d\log T_c} < \frac{3}{2}.}
+\end{equation}
+What do we learn from this? In general, for $T_c \gtrsim 10^4\;{\rm K}$, $d\log \Lambda /d\log T_c < 0$, which means that it is \textbf{very hard to get $\alpha$ to save stability.} As such, these disks are \textbf{usually unstable}. \rmk{This comes from Kramer's law in effect.}
+\vspace{10pt}
+\begin{bigidea}
+A small upward perturbation in $T_c$ therefore makes heating exceed cooling even more, leading to a runaway increase in temperature and luminosity.
+
+\[
+\boxed{\displaystyle 
+\frac{d\log(\Lambda/\alpha)}{d\log T_c} < \frac{3}{2} 
+\;\;\Longrightarrow\;\;
+\text{Thermal Instability.}
+}
+\]
+
+Thus, optically thin disks are \emph{\textbf{intrinsically unstable}} at most astrophysical temperatures, since radiative losses cannot keep pace with viscous heating.  
+\textbf{This behavior underlies the rapid variability seen in low–density accretion flows, such as advection–dominated or coronal disk regions.}
+\end{bigidea}
+\vspace{20pt}
+\subsubsection{Optically Thick Disk Regimes}
+
+We have already treated the scenario where the disk is \textbf{optically thin}. 
+Let's now consider the more important case of an \textbf{optically thick disk}, which would correspond to the classical $\alpha$-disk solution.
+As we saw when we were solving the $\alpha$-disk, the \textbf{optically thick} regime is dominated by \textbf{radiative diffiusion} and the cooling rate is described by
+\[
+Q^{-} = \frac{dF}{dz} \sim \frac{F}{H} = \frac{\sigma_{\rm sb} T_{\rm eff}^4}{H}.
+\]
+If we use the relationship between $T_c$ and $T_{\rm eff}$, we have
+\[
+Q^- \sim \frac{8\sigma_{\rm sb}T_c^4}{3\kappa_R \Sigma H} \sim \frac{8\sigma_{\rm sb}}{3\kappa \rho H^2}.
+\]
+Now, unlike the previous scenario, the details of stability here will \textbf{depend substantially on the nature of the equation of state. }
+Specifically, we will need to pay careful attention to \textbf{radiative dominated} versus \textbf{pressure dominated} disk regimes.
+Let's treat each individually:
+\vspace{10pt}
+\paragraph{Gas–pressure, Kramers–opacity regime (optically thick).}
+Assume gas pressure dominates: $P \simeq \rho k_B T_c/(\mu m_p)$, so $c_s \propto T_c^{1/2}$ and $H \propto T_c^{1/2}\Omega_K^{-1}$.  
+Then
+\[
+\nu \;=\; \alpha c_s H \;\propto\; \alpha\,\frac{T_c}{\Omega_K},
+\qquad
+Q^+ \;\propto\; \alpha\,\Sigma\,\Omega_K\,T_c.
+\]
+For Kramers opacity, $\kappa_R \propto \rho\,T_c^{-7/2}$. Using $\rho \sim \Sigma/(2H) \propto \Sigma\,\Omega_K\,T_c^{-1/2}$, we obtain
+\[
+\kappa_R \;\propto\; \Sigma\,\Omega_K\,T_c^{-4},
+\qquad
+\tau \;\propto\; \kappa_R \Sigma \;\propto\; \Sigma^2 \Omega_K\,T_c^{-4}.
+\]
+Thus from \eqref{eq:Qminus_diffusion}
+\[
+Q^- \;\propto\; \frac{T_c^4}{\tau} \;\propto\; \frac{T_c^8}{\Sigma^2 \Omega_K}.
+\]
+At fixed $(\Sigma,\Omega_K)$,
+\[
+\left.\frac{\partial \ln Q^+}{\partial \ln T_c}\right|_{\Sigma}=1,
+\qquad
+\left.\frac{\partial \ln Q^-}{\partial \ln T_c}\right|_{\Sigma}=8,
+\]
+hence $Q^-$ rises much faster with $T_c$ than $Q^+$ and the disk\textbf{ is \emph{thermally stable} in this regime.}
+
+\paragraph{Radiation–pressure, electron–scattering regime (optically thick).}
+Let $P \simeq P_{\rm rad} = a T_c^4/3$ and $\kappa_R \simeq \kappa_{\rm es} = \text{const}$.  
+Using hydrostatic balance with $\rho \sim \Sigma/(2H)$,
+\[
+c_s^2 \;=\; \frac{P}{\rho}
+\;=\;
+\frac{a T_c^4/3}{\Sigma/(2H)}
+\;\Rightarrow\;
+c_s \;=\; \frac{2a}{3}\,\frac{T_c^4}{\Sigma\,\Omega_K},
+\qquad
+H \;=\; \frac{c_s}{\Omega_K} \;\propto\; \frac{T_c^4}{\Sigma\,\Omega_K^2}.
+\]
+Therefore
+\[
+\nu \;=\; \alpha c_s H \;\propto\; \alpha\,\frac{T_c^8}{\Sigma^2\,\Omega_K^3},
+\qquad
+Q^+ \;=\; \frac{9}{8}\nu\Sigma\Omega_K^2 \;\propto\; \alpha\,\frac{T_c^8}{\Sigma\,\Omega_K}.
+\]
+For cooling, $\tau \propto \kappa_{\rm es}\Sigma$ so $Q^- \propto T_c^4/\Sigma$.  
+Thus (at fixed $\Sigma,\Omega_K$)
+\[
+\left.\frac{\partial \ln Q^+}{\partial \ln T_c}\right|_{\Sigma}=8,
+\qquad
+\left.\frac{\partial \ln Q^-}{\partial \ln T_c}\right|_{\Sigma}=4,
+\]
+and the heating rises \emph{faster} with temperature than cooling: \textbf{the disk is \emph{thermally unstable}.  }
+This is the classical \textbf{radiation–pressure thermal instability} of $\alpha$–disks.
+\medskip
+\begin{bigidea}
+When the disk is \textbf{gas–pressure dominated} with Kramers opacity, the optical depth $\tau \propto \Sigma^2 T_c^{-4}$ decreases rapidly as temperature rises, so the cooling rate grows very steeply as $Q^- \propto T_c^8$.  
+In radiation–pressure dominated regions, however, $Q^+ \propto T_c^8$ and $Q^- \propto T_c^4$; heating rises faster than cooling, so the disk \textbf{becomes \emph{thermally unstable}.  }
+\end{bigidea}
+
+\subsection{Viscous Instabilities of Accretion Disks}
+\label{subsec:viscous_instability}
+
+Let's now consider instabilities driven by the \textbf{viscous evolution of the accretion disk}. 
+In this case, all the other timescales are \textbf{small relative to the viscous timescale}, which means that at time evolution occurs, all of the other quantities update based on the same microphysics we've used for the steady state scenario.
+\vspace{10pt}
+\begin{bigidea}
+    For \textbf{time dependent disks}, we can partition the problem into the evolution of the viscous flow (evolution of $\Sigma$) and then the resulting changes to the state of the disk.
+\end{bigidea}
+\vspace{10pt}
+As we have previously seen, the relevant \textbf{time-dependent evolution equation} for accretion flows is the \textbf{Pringle Diffusion Equation}:
+\begin{equation}
+\label{eq:pringle}
+\boxed{
+\frac{\partial \Sigma}{\partial t}
+=
+\frac{3}{R}\frac{\partial}{\partial R}
+\left[
+R^{1/2}\frac{\partial}{\partial R}\!\left(\nu\,\Sigma\, R^{1/2}\right)
+\right].
+}
+\end{equation}
+To cast this in a light which is particularly useful, we define a \textbf{non-linear diffusion coefficient}
+\[
+D(r,t) = D\left[\Sigma(r,t),T_c(r,t)\right] = D(\nu,\Sigma) = \nu(T_c,\Sigma) \Sigma
+\]
+In this case, our corresponding diffusion equation takes the form
+\[
+\frac{\partial \Sigma}{\partial t} = \frac{3}{R}\frac{\partial}{\partial R} \left[R^{1/2} \frac{\partial}{\partial R}\left(D R^{1/2}\right)\right].
+\]
+\rmk{From a numerical standpoint, we'd take $D$ from the previous timestep, use it in this equation to update $\Sigma$, then use all the other thin disk equations to update $\nu$ and $T_c$ and then recompute $D$.}
+
+Let's now look at the stability of this sort of flow when we make changes to the surface density of the material.
+
+\subsubsection{Stability Analysis}
+
+Let's now do some \textbf{perturbation theory} to determine when stability occurs.
+Consider a narrow annulus centered at radius $R_0$ and a steady $\Sigma_0$ surface density corresponding to some $T_0$ and other relevant parameters. By definition, these parameters satisfy the statement that
+\[
+\frac{3}{R}\frac{\partial}{\partial R}\left(R^{1/2} \frac{\partial}{\partial R}\left(D_0R^{1/2}\right)\right) = 0.
+\]
+If we now introduce a \textbf{perturbation} in our state, such that $\Sigma \to \Sigma_0 + \delta \Sigma$ and the temperature goes to some $T \to T_0 + \delta T(\Sigma)$, we have an \textbf{effective perturbation} in $D$:
+\[
+D(\Sigma_0+\delta \Sigma) = D(\Sigma_0) + \frac{dD}{d\Sigma} \delta \Sigma + \mathcal{O}(\delta \Sigma^2).
+\]
+Let's now linearize the equation. We have
+\[
+\frac{\partial \delta \Sigma}{\partial t} = \frac{3}{R} \frac{\partial}{\partial R} \left[R^{1/2} \frac{\partial}{\partial R}\left(D'(\Sigma) \delta \Sigma R^{1/2}\right)\right].
+\]
+Consider a patch $R\approx R_0$ where $R$-dependences of prefactors are weak compared to the rapid phase variation of a perturbation with radial wavenumber $k$ (i.e.\ $kR_0\gg1$). \rmk{This is WKB approximation.}
+If we adopt a normal mode
+\[
+\delta\Sigma(R,t) = \hat{\Sigma}\,e^{s t + i k (R-R_0)}.
+\]
+In \eqref{eq:lin-eq}, the leading contribution comes from the highest radial derivatives (the $k^2$ term).
+Carrying the $R^{1/2}$ factors explicitly and then freezing $R\to R_0$ in the coefficients gives
+\[
+\frac{\partial\,\delta\Sigma}{\partial t}
+\;\simeq\;
+\frac{3}{R_0}\,\frac{\partial}{\partial R}
+\left[
+R_0^{1/2}\,\frac{\partial}{\partial R}
+\left(D'(\Sigma_0)\,\delta\Sigma\,R_0^{1/2}\right)
+\right]
+\;=\;
+3\,D'(\Sigma_0)\,\frac{\partial^2 \delta\Sigma}{\partial R^2}
+\;+\; \mathcal{O}(k)\,.
+\]
+Applying $\partial_R^2\to -k^2$ for the WKB mode yields the \emph{dispersion relation}
+\begin{equation}
+\label{eq:dispersion}
+s\,\delta\Sigma
+=
+-\,3\,D'(\Sigma_0)\,k^2\,\delta\Sigma
+\qquad\Longrightarrow\qquad
+\boxed{\,s(k)= -\,3\,D'(\Sigma_0)\,k^2\,}.
+\end{equation}
+
+Equation \eqref{eq:dispersion} shows that short–wavelength perturbations ($kR_0\gg1$) \emph{decay} if $D'(\Sigma_0)>0$ \textbf{and \emph{grow} if $D'(\Sigma_0)<0$:}
+\begin{equation}
+\label{eq:viscous_criterion}
+\boxed{
+\text{Viscously stable} \;\Longleftrightarrow\; D'(\Sigma_0)=\frac{d(\nu\Sigma)}{d\Sigma}\Big|_{R_0}>0.
+}
+\end{equation}
+Using the steady thin–disk relation $\dot M = 3\pi \nu \Sigma$ at fixed $R_0$, this is equivalent to
+\[
+\boxed{\,\displaystyle \frac{d\dot M}{d\Sigma}\Big|_{R_0} > 0\,,}
+\]
+while $d\dot M/d\Sigma<0$ implies a \textbf{viscous (mass–transfer) instability} with growth rate
+\[
+|s|\;=\;3\,|D'(\Sigma_0)|\,k^2.
+\]
+
+What's the big idea? If we \textbf{add a little mass} to the system and the \textbf{accretion rate decreases}, then we are \textbf{unstable} and the surface density will balloon rapidly. If we instead \textbf{increase the accretion rate}, that perturbation will be rapidly smoothed out at that radius. When we consider this in the context of the full disk, we see that for $d\dot{M}/d\Sigma < 0$, we will get the disk to \textbf{break up into rings} in a form of fragmentation.
+
+Recall also that \textbf{locally}, 
+\[
+\nu \Sigma \propto \dot{M} \propto T_c^4,
+\]
+so we can equivalently require that
+\[
+\frac{d T_c}{d\Sigma} > 0.
+\]
+
+\subsubsection{Limit Cycle Analysis}
+
+Let's explore a particularly interesting side effect of these instabilities: \textbf{limit cycle evolution}. Let's localize our discussion to a particular annulus of the disk at some $R_0$. Now, we can look at the \textbf{permissible states} of the disk on a $(T_c, \Sigma)$ graph, which allows us to both identify \textbf{viscous instability} and \textbf{thermal instability}. 
+
+An important concept arises here: when we have \textbf{viscous instability}, our assumptions about the thermal stability must breakdown, and, in fact, we can show that this is the case on the basis of the the scalings for $T_c$ and $\Sigma.$ As such, if I reach an \textbf{unstable branch} in the $(T_c,\Sigma)$ plane, I cannot enter it and become thermally unstable. If I am below the current stable temperature, I will rapidly cool to the next stable branch and if I am hotter, I will rapidly heat to the next stable branch. This then creates \textbf{limit cycles} driving periodic variability in the light curves of some disks. A few relevant cases:
+
+\vspace{15pt}
+
+\paragraph{(i) Hydrogen ionization (cool disks; dwarf novae).}
+
+Near $T_c\sim 6\times 10^3$--$10^4\,{\rm K}$ the Rosseland mean opacity rises steeply as hydrogen
+ionizes.  The thermal equilibrium locus in the $(\Sigma,T_c)$ plane acquires an \emph{S--shape}:
+a cool, neutral branch; a hot, ionized branch; and an intermediate, thermally unstable branch.
+Along parts of the cool branch the increased opacity makes the heating/cooling solution imply
+\emph{decreasing} $\nu\Sigma$ with increasing $\Sigma$, i.e.\ $d\dot M/d\Sigma<0$; these sections are
+\emph{viscously unstable}.  Together with the thermal instability of the middle branch this produces
+the classic \emph{dwarf nova limit cycle}: slow mass build--up on the cool branch, a rapid
+heating/ionization front to the hot branch (outburst), followed by viscous draining and a return to
+the cool state.
+
+\paragraph{(ii) Radiation--pressure dominated, electron--scattering disks (inner XRB/AGN).}
+Assume $P\simeq P_{\rm rad}=aT_c^4/3$ and $\kappa_R\simeq \kappa_{\rm es}=\text{const}$.
+From vertical balance and $Q^+=Q^-$ (see Sec.~\ref{subsec:thermal_instability}):
+\[
+\nu \;=\; \alpha c_s H \;\propto\; \alpha\,\frac{T_c^8}{\Sigma^2\,\Omega_K^3},
+\qquad
+Q^+ \propto \alpha\,\frac{T_c^8}{\Sigma\,\Omega_K},
+\qquad
+Q^- \propto \frac{T_c^4}{\Sigma}.
+\]
+Equating $Q^+=Q^-$ implies $T_c^4 \propto \Omega_K/\alpha$ (weak $\Sigma$-dependence).
+Hence
+\[
+\nu\Sigma \;\propto\; \frac{T_c^8}{\Omega_K^3} \;\propto\; \frac{\Omega_K^2}{\alpha^2\,\Omega_K^3}
+\;\propto\; \frac{1}{\alpha^2\,\Omega_K} ,
+\]
+\emph{nearly independent of $\Sigma$}.  In more realistic mixtures where $P_{\rm gas}$ contributes
+slightly, this becomes a \emph{decreasing} function of $\Sigma$,
+\begin{equation}
+\label{eq:LE_condition}
+\frac{d(\nu\Sigma)}{d\Sigma}\;<\;0,
+\end{equation}
+which is the \textbf{Lightman--Eardley viscous instability}.  Physically, a small \emph{increase} in
+$\Sigma$ lowers $H$ and $c_s$ (at fixed $Q^+=Q^-$), reducing the stress $\nu\Sigma$ and thereby
+\emph{further} reducing the local outflow of angular momentum; mass piles up (runaway to higher
+$\Sigma$) while neighboring regions are depleted.
+
+\subsubsection{Relation to limit cycles}
+\label{subsec:limit_cycles_connection}
+When the thermal equilibrium curve is S--shaped, the disk possesses two stable thermal branches
+(cool and hot) separated by an unstable segment.  If, somewhere on the curve, the viscous criterion
+\eqref{eq:viscous_criterion} is \emph{also} violated, the diffusion equation \eqref{eq:pringle} drives
+the surface density away from a steady value rather than toward it.  The coupled system
+(thermal balance + viscous transport) then admits a global \emph{limit cycle}:
+
+\begin{enumerate}
+\item \emph{Quiescent build--up (cool, neutral branch).} 
+Low $\nu$ implies $t_{\rm visc}\gg t_{\rm therm}$; matter accumulates, $\Sigma$ slowly increases.
+\item \emph{Trigger.}  Reaching the knee of the S--curve makes the annulus both thermally and
+viscously unstable.  A heating front propagates, ionizing hydrogen and raising $T_c$, $H$, and $\nu$.
+\item \emph{Outburst (hot, ionized branch).} 
+Large $\nu$ shortens $t_{\rm visc}$; the disk rapidly transports angular momentum and drains mass,
+reducing $\Sigma$.
+\item \emph{Cooling front and return.} 
+As $\Sigma$ drops, the annulus crosses the upper knee, cooling precipitously back to the cool state,
+where the cycle restarts.
+\end{enumerate}
+
+This cycle is ubiquitous in dwarf novae and soft X--ray transients, and an analogous (though more
+debatable) version may operate in inner radiation--pressure dominated regions of luminous XRBs/AGN.
+
+\begin{bigidea}
+\textbf{Viscous stability requires $d\dot M/d\Sigma>0$ at fixed $R$.} \\
+If $d\dot M/d\Sigma<0$ (as in radiation--pressure dominated $\alpha P_{\rm tot}$ disks, or in portions
+of the hydrogen ionization regime), the diffusion coefficient $D(\Sigma)=\nu\Sigma$ has a negative slope
+and surface--density perturbations \emph{grow} instead of diffusing away, feeding global limit cycles.
+\end{bigidea}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Pictures/figures/disk_limit_cycles.png}
+    \caption{\textbf{Thermal/viscous phase plane and limit cycles.}
+    Grey curve: thermal equilibria $Q^+=Q^-$ (\,$h=0$\,). Horizontal line: mass--flow nullcline
+    (\,$k=0$\,). \emph{Left:} a monotonic $h=0$ curve yields a single, stable fixed point
+    $(\Sigma_0,T_0)$. \emph{Right:} an S--shaped $h=0$ curve (e.g.\ hydrogen ionization or
+    radiation--pressure dominated inner disk) possesses a thermally unstable middle branch;
+    combined with a viscous-unstable slope ($d\dot M/d\Sigma<0$) the trajectories cycle between the
+    cool and hot branches, producing outbursts. Arrows indicate the local direction field in the
+    $(\Sigma,T)$ plane.}
+    \label{fig:disk_limit_cycles}
+\end{figure}

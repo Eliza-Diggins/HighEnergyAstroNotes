@@ -1,0 +1,493 @@
+In this section, we'll discuss the details of astrophysical particle acceleration in shocks from supernovae and other high energy transients. Before diving into the details of particle acceleration, we'll need to briefly review some concepts from plasma physics.
+
+\section{Plasma Physics Background}
+\label{sec:plasma_background}
+
+Astrophysical shocks accelerate charged particles extremely efficiently.
+Before diving into the details of shock acceleration, we review several
+fundamental concepts from plasma physics: cyclotron motion, the Larmor
+frequency, Larmor precession, and the conservation of the magnetic moment.
+
+% --------------------------------------------------------------
+\subsection{Charged Particle Motion in a Magnetic Field}
+% --------------------------------------------------------------
+
+For a particle of charge $q$ and mass $m$ moving in a magnetic field
+$\mathbf{B}$, the Lorentz force equation is
+\begin{equation}
+    m \frac{d\mathbf{v}}{dt} = q\,\mathbf{v} \times \mathbf{B}.
+\end{equation}
+Because the magnetic force is always perpendicular to the velocity,
+\[
+    \mathbf{v}\cdot(\mathbf{v}\times\mathbf{B}) = 0,
+\]
+it does no work, and the particle's speed remains constant:
+\[
+    \frac{d}{dt}\left(\tfrac{1}{2}m v^2\right)=0.
+\]
+We decompose the motion into components parallel and perpendicular to the
+field:
+\[
+    \mathbf{v} = \mathbf{v}_\parallel + \mathbf{v}_\perp, \qquad
+    \mathbf{v}_\parallel = (\mathbf{v}\!\cdot\!\hat{\mathbf{b}})\,\hat{\mathbf{b}},
+    \qquad \hat{\mathbf{b}} = \mathbf{B}/B.
+\]
+The parallel component evolves freely ($d\mathbf{v}_\parallel/dt = 0$),
+while the perpendicular component undergoes circular motion.  Setting
+$\mathbf{B}=B\hat{\mathbf{z}}$, the perpendicular equation of motion becomes
+\[
+    m \frac{d\mathbf{v}_\perp}{dt} = q\,\mathbf{v}_\perp \times \mathbf{B}.
+\]
+This will result in \textbf{circular motion} about the magnetic field lines at the \textbf{cyclotron frequency:}
+
+\begin{definition}
+In an external magnetic field ${\bf B}$, a particle with charge $q$ and mass $m$ will propagate along the magnetic field lines helically with the \textbf{cyclotron frequency}
+\begin{equation}
+\boxed{
+    \Omega_c = \frac{qB}{m}
+}
+\end{equation}
+\end{definition}
+The corresponding circular radius is called the \textbf{Larmour Radius}
+\begin{equation}
+\boxed{
+    R_{\rm L} = \frac{v_\perp}{\Omega_c} = \frac{m v_\perp}{qB}.
+}
+\end{equation}
+When the particle has no velocity in the parallel direction, it will not propogate and we will have perfectly circular motion. If there is some $v_\parallel$, then the particle will continue to propogate along the field line helically with a \textbf{pitch angle} between the velocity and the field satisfies
+\begin{equation}
+\boxed{
+    \tan\alpha = \frac{v_\perp}{v_\parallel}.
+}
+\end{equation}
+
+In a \emph{perfectly uniform} magnetic field, this gyromotion fully
+describes the particle trajectory.  However, real astrophysical plasmas
+contain magnetic-field gradients and curvature, and particles possess an
+associated magnetic moment that interacts with these variations.
+
+% --------------------------------------------------------------
+\subsection{Magnetic Dipole Moment of Gyromotion}
+% --------------------------------------------------------------
+
+A \textbf{charged particle} moving in a circular orbit establishes an electric
+\textbf{current}
+\[
+    I = \frac{q}{T} = \frac{q\Omega_c}{2\pi}.
+\]
+The orbit therefore has a magnetic dipole moment
+\begin{equation}
+    \boldsymbol{\mu}_{\rm orb} = I A\,\hat{\mathbf{b}}
+    = \frac{q}{2m}L\,\hat{\mathbf{b}},
+\end{equation}
+where $A=\pi R_{\rm L}^2$ is the orbital area and
+$L=m R_{\rm L}^2\Omega_c$ is the orbital angular momentum.
+
+If we then calculate the \textbf{torque} applied on the current loop by the magnetic field, we find that
+\[
+    \boldsymbol{\tau} = \boldsymbol{\mu}_{\rm orb} \times \mathbf{B},
+\]
+which causes the\textbf{ dipole moment to \emph{precess}} around the direction of
+$\mathbf{B}$.  This precession occurs at the \emph{Larmor precession
+frequency}:
+
+\begin{equation}
+\boxed{
+    \omega_L = \frac{qB}{2m}.
+}
+\end{equation}
+Unlike the cyclotron frequency, which describes the actual orbital motion
+of the charge, the \textbf{Larmor frequency describes the precession of the
+\emph{magnetic dipole moment vector}. } The two frequencies are related but
+distinct:
+
+\begin{itemize}
+    \item $\Omega_c$ = rotation of the particle in real space (helical motion).
+    \item $\omega_L$ = rotation of the \emph{dipole moment} in magnetic-moment space.
+\end{itemize}
+
+Larmor precession becomes relevant when:
+\begin{itemize}
+    \item the magnetic field is \emph{non-uniform} or curved, so the dipole
+          moment experiences a torque;
+    \item external forces (e.g.\ electric fields, wave perturbations)
+          modify the gyro-orbit and cause the magnetic moment to tilt;
+    \item the particle interacts with fluctuations, driving slow evolution of
+          the pitch angle.
+\end{itemize}
+In a perfectly uniform magnetic field with no perturbations,
+$\boldsymbol{\mu}_{\rm orb}$ is aligned with $\mathbf{B}$ and no precession occurs.
+
+
+\subsection{The Magnetic Moment (First Adiabatic Invariant)}
+
+As we have previously shown, the \textbf{magnetic moment} of this gyromotion is
+\[
+\boldsymbol{\mu} = \frac{q}{2} \Omega_c R_L^2 \;\hat{\bf b} = \frac{q}{2} \frac{qB}{m} \frac{m^2v_\perp^2}{q^2B^2} \hat{\bf b} = \frac{p_\perp^2}{2m B} \hat{\bf b}.
+\]
+If the magnetic field changes \emph{slowly} compared to the gyroperiod
+($\Omega_c^{-1}$), the action integral of the circular motion,
+\[
+    J = \oint p_{\perp}\,d\ell,
+\]
+remains constant. \rmk{Recall that the \textbf{action integral} is a conserved quantity of a periodic process if the conditions change much more slowly than the gyration period.}
+This implies conservation of the magnetic moment:
+\begin{equation}
+    \boxed{
+        \mu = \frac{p_{\perp}^2}{2mB} = \text{constant}
+    }
+    \qquad \text{(first adiabatic invariant)}.
+\end{equation}
+
+Because the magnetic force does no work, the total momentum is conserved:
+\[
+    p^2 = p_{\parallel}^2 + p_{\perp}^2 = \text{constant}.
+\]
+Thus, \textbf{if a particle moves into a region of stronger magnetic field, $B$
+increases, so $p_{\perp}$ must increase to keep $\mu$ fixed.}  This leads to a truly beautiful concept:
+\begin{bigidea}
+    \textbf{Magnetic Mirroring}: For a particle moving in a magnetic field, the \textbf{adiabatic invariance} of the magnetic moment means that as the particle moves into \textbf{stronger magnetic fields}, $v_\parallel$ must \textbf{decrease}. This can be used to \textbf{confine particles} in specific regions of the field trapped between two regions of higher field strength.
+ \end{bigidea}
+ 
+\section{Particle Acceleration in a Magnetic Mirror}
+\label{sec:mirror_accel}
+
+Having established the microphysics of gyromotion, adiabatic invariants, and
+magnetic mirroring, we now turn to the \textbf{basic mechanism by which magnetic
+mirrors can accelerate charged particles.}  This represents the simplest incarnation of the \emph{Fermi acceleration} process.  The key idea is that if a magnetic
+mirror \textbf{is not stationary}, but instead moves with some velocity $\mathbf{v}$,
+then the energy of a particle that reflects from that mirror will change in the
+lab frame.  The acceleration arises entirely from the relative motion between
+the particle and the moving magnetic irregularity.
+
+Consider a particle with charge $q$, four-momentum $p^\mu$, and spatial
+momentum $\mathbf{p}$ in the lab frame.  Let the magnetic mirror---a region of
+enhanced magnetic field strength that forces magnetic reflection---move with
+non-relativistic velocity $\mathbf{v}$ relative to the lab frame.  To determine
+the particle's energy gain, it is convenient to \emph{Lorentz transform} into
+\textbf{the instantaneous rest frame of the mirror}.  This transformation depends on the
+angle between the particle's incoming momentum and the direction of mirror
+motion.
+
+Let the cosine of this angle be
+\[
+\cos\vartheta = \frac{\mathbf{p}\cdot \mathbf{v}}
+                     {|\mathbf{p}|\,|\mathbf{v}|}.
+\]
+In the mirror rest frame (primed variables), the particle’s energy and
+momentum are obtained by the usual Lorentz boost:
+\begin{align}
+E' &= \gamma \left(E - \mathbf{v}\cdot\mathbf{p}\right), \\
+\mathbf{p}'_\parallel &= \gamma\left( \mathbf{p}_\parallel - \frac{v}{c^2} E \right), \\
+\mathbf{p}'_\perp &= \mathbf{p}_\perp,
+\end{align}
+where $\parallel$ and $\perp$ denote directions parallel and perpendicular to
+$\mathbf{v}$, and $\gamma = (1-v^2/c^2)^{-1/2}$.
+
+In the mirror frame, the reflection is assumed \textbf{elastic}.  The parallel
+component of momentum reverses sign while the perpendicular component remains unchanged:
+\[
+\mathbf{p}'_\parallel \rightarrow - \mathbf{p}'_\parallel,
+\qquad
+\mathbf{p}'_\perp \rightarrow \mathbf{p}'_\perp.
+\]
+We \textbf{may now boost back into the lab frame}.  Because the energy in the mirror
+frame does not change, any energy gain must originate entirely from the
+Lorentz transformation itself.  Reversing the boost yields
+\begin{equation}
+E_{\rm final}
+ = \gamma\left(E' + \mathbf{v}\cdot\mathbf{p}'\right)
+ = \gamma\left(E' - \mathbf{v}\cdot\mathbf{p}_\parallel'\right).
+\end{equation}
+Inserting the reversed momentum and expanding for a non-relativistic mirror
+speed ($v\ll c$), one finds after a small amount of algebra that the fractional
+energy gain is
+\begin{equation}
+\boxed{
+\frac{\Delta E}{E}
+    = \frac{2 v}{c}\,\cos\vartheta
+      + \mathcal{O}\!\left(\frac{v^2}{c^2}\right).
+}
+\label{eq:firstorder-gain}
+\end{equation}
+\textbf{This expression is the essential ingredient of the Fermi acceleration process.}
+If the particle strikes the mirror \emph{head-on} ($\cos\vartheta < 0$ relative
+to the mirror’s motion), the particle gains energy.  If the particle strikes
+the mirror \emph{from behind} ($\cos\vartheta > 0$), the particle loses energy.
+Thus, the energy gain depends sensitively on the distribution of pitch angles.
+
+To compute the average energy gain, we must therefore understand how often a
+particle encounters a mirror at a given angle.  \textbf{This requires the
+\emph{relativistic aberration of angles}.}  For relativistic particles moving
+isotropically in the lab frame, the probability density for $\cos\vartheta$
+in the rest frame of a slowly moving mirror is weighted toward head-on
+encounters.  This bias arises because a particle with speed close to $c$
+samples magnetic irregularities preferentially from the forward direction:
+the phase-space density ``piles up'' along head-on directions.  Explicitly,
+for $v \ll c$,
+\[
+dP(\cos\vartheta) \propto (1 - \cos\vartheta)\,d\cos\vartheta.
+\]
+The factor of $(1 - \cos\vartheta)$ encodes the fact that head-on interactions
+($\cos\vartheta\approx -1$) are far more probable than overtaking interactions
+($\cos\vartheta\approx +1$).
+
+Averaging the energy-gain expression (\ref{eq:firstorder-gain}) over this
+distribution yields the famous result of \textbf{second-order Fermi
+acceleration}:
+\begin{equation}
+\boxed{
+\left\langle \frac{\Delta E}{E} \right\rangle
+    = \frac{4}{3}\,\frac{v^2}{c^2}.
+}
+\end{equation}
+The acceleration is called ``second order'' because the mean energy gain scales
+as $(v/c)^2$, even though an individual collision yields a first-order term
+proportional to $v/c$.  The symmetry between head-on and tail-on interactions
+cancels the linear term when averaged over an isotropic distribution, leaving
+a net quadratic effect.
+
+This simple mechanism underlies the stochastic acceleration of charged
+particles in turbulent magnetic fields.  In astrophysical environments such as
+supernova remnants, neutron star winds, relativistic outflows, and many other
+high-energy transients, such random interactions with moving magnetic mirrors
+seed the distribution of high-energy particles that eventually participate in
+the more efficient process of diffusive shock acceleration.
+
+\paragraph{Implications}
+Let's think a little bit more deeply about this. Consider a mirror moving at some fiducial $v \ll c$, and a particle we wish to acceleration from kinetic energies on the scale of ${\rm eV}$ to ${\rm GeV}$. If we need a factor of $10^9$ in the energy scaling, then we need
+\[
+ \frac{\Delta E}{E} = \frac{4}{3}\beta^2 \implies \Delta \log E \sim N \frac{4}{3}\beta^2,
+\]
+So I need
+\[
+10^1 \sim N \beta^2 \sim 10^{-10} \; N,
+\]
+so we need \textbf{may may collisions} to get particles all the way up to these energies. This is not really a feasible mechanism. If, instead, \textbf{all collisions were head on}, then we could do a bit better:
+\[
+\frac{\Delta E}{E} \propto \beta,
+\]
+so we'd only need about $10^{5}$. As it turns out, this is exactly what can be done in \textbf{shock waves}!
+
+\section{Diffusive Shock Acceleration}
+\label{sec:DSA}
+
+The stochastic energization described above provides an elegant conceptual
+foundation for particle acceleration in turbulent plasmas.  However, in many
+astrophysical environments---most notably in supernova remnants and
+relativistic outflows---there exists a far more efficient acceleration
+mechanism.  This mechanism, known as \textbf{diffusive shock acceleration
+(DSA)}, relies on repeated reflections of charged particles across a shock
+front.  Each crossing results in a systematic energy gain, and the cumulative
+effect produces the familiar power-law energy spectra observed in cosmic rays.
+
+To appreciate how this process operates, we begin by considering a
+non-relativistic shock propagating with speed $u_{\rm sh}$ into an upstream
+medium.  In the rest frame of the shock, plasma flows toward the shock from
+the upstream side with velocity $u_1$ and exits into the downstream region
+with velocity $u_2$, where $u_1 > u_2$.  These velocities \textbf{are related by the
+compression ratio}
+\[
+r = \frac{u_1}{u_2}.
+\]
+For a strong, non-relativistic shock in an ideal gas with adiabatic index
+$\gamma_{\rm ad}=5/3$, one has $r=4$, so the downstream plasma is substantially
+slower and denser than the upstream flow.
+
+Charged particles in the presence of magnetic turbulence undergo pitch-angle
+scattering \textbf{that isotropizes their momenta in the local plasma rest frame.}
+This scattering causes the particles to diffuse spatially on both sides of the
+shock.  Importantly, the scattering occurs on scales small compared to the
+shock width, ensuring that particles cross the shock many times before
+escaping.  Each time a particle crosses from the upstream region into the
+downstream region (or vice versa), it encounters a bulk flow moving toward it,
+much like a magnetic mirror.  \textbf{The energy gain from these encounters is
+therefore a \emph{first-order} Fermi process.}
+
+A Lorentz transformation between the upstream and downstream rest frames shows
+that the fractional energy gain per shock crossing is
+\begin{equation}
+\boxed{
+\left\langle \frac{\Delta E}{E} \right\rangle
+    = \frac{4}{3}\,\frac{u_1 - u_2}{c}
+}
+\end{equation}
+for relativistic particles with nearly isotropic distributions in each fluid
+frame.  Unlike the second-order Fermi mechanism, which is quadratic in the
+velocity of scattering centers, the DSA energy gain is \emph{linear} in the
+velocity jump across the shock.  This linear scaling makes DSA vastly more
+efficient, \textbf{especially for typical supernova shocks with $u_{\rm sh} \sim
+10^4~{\rm km\,s^{-1}}$.}
+
+The acceleration is sustained only so long as the particle remains confined to
+the shock region.  Each scattering event has some probability of returning the
+particle to the shock and some probability of allowing escape.  If we denote
+the escape probability per cycle by $P_{\rm esc}$, then after $n$ shock
+crossings the particle energy becomes
+\[
+E_n = E_0 (1 + \langle\Delta E/E\rangle)^n,
+\]
+while the probability that the particle has \emph{not} yet escaped is
+approximately $(1 - P_{\rm esc})^n$.  The resulting steady-state energy
+distribution is therefore given by
+\[
+N(E)\,dE \propto \left(1 - P_{\rm esc}\right)^{n(E)} dE,
+\]
+where $n(E)$ is the number of shock cycles required to reach energy $E$.
+Solving for $N(E)$ leads directly to a power law:
+\[
+N(E) \propto E^{-p}.
+\]
+\textbf{The spectral index $p$ depends only on the compression ratio $r$ and is given
+by the celebrated result}
+\begin{equation}
+\boxed{
+p = \frac{r + 2}{r - 1}.
+}
+\end{equation}
+For a strong shock with $r=4$, this yields
+\[
+p = 2,
+\]
+in excellent agreement with the approximate $E^{-2}$ power-law slope observed
+in cosmic-ray spectra across many decades in energy.
+
+This remarkable universality arises from the fact that DSA depends only on the
+large-scale bulk motions of the plasma and not on the detailed microphysics of
+individual scattering events.  \textbf{As long as pitch-angle scattering efficiently
+isotropizes the particle distribution in each fluid frame, and as long as
+particles can cross the shock multiple times without immediately escaping, the
+power-law spectrum naturally emerges.}  The process thus represents a robust and
+efficient means of accelerating charged particles to extreme energies in a
+wide range of astrophysical environments, providing the backbone for our
+modern understanding of cosmic-ray production.
+
+\subsection{Sources of DSA Particles}
+
+We have now derived the power-law energy spectrum produced by diffusive shock
+acceleration, but this spectrum tells us nothing about how \emph{high} a given
+particle may be accelerated.  In realistic astrophysical systems, the power
+law must truncate at some maximum energy $E_{\max}$, because particles can only
+gain energy for a finite amount of time before they escape the shock region or
+the accelerator itself disappears.  A complete description therefore requires
+understanding both the \emph{injection} of particles into the acceleration
+process and the \emph{timescale} on which particles gain energy in the shock
+environment.
+
+The injection problem is one of microphysics: only particles with sufficiently
+large gyroradii and energies can successfully cross the shock multiple times,
+and the precise criteria depend on the shock structure and plasma conditions.
+However, once a particle is able to participate in the DSA cycle, its
+subsequent evolution is governed by a remarkably simple and universal
+consideration: \textbf{particles diffuse around the shock via a random walk
+driven by magnetic turbulence}.  This random walk controls how often the
+particle reencounters the shock and therefore determines the rate at which its
+energy increases.
+
+Let $D(E)$ be the spatial diffusion coefficient for a particle of energy $E$.
+This coefficient encapsulates the strength of magnetic turbulence and is
+typically assumed to be proportional to the gyroradius, $D(E)\propto r_L(E)c$,
+in the so-called Bohm limit.  In the shock frame, the upstream plasma streams
+toward the shock at velocity $u_1$, while the downstream plasma flows away at
+velocity $u_2$.  A particle that wanders a distance $\sim D/u_1$ into the
+upstream region will be overtaken by the shock on a timescale
+$D/u_1^2$, whereas in the downstream region the corresponding timescale is
+$D/u_2^2$.
+
+These considerations lead to the standard expression for the
+\textbf{acceleration timescale}:
+\begin{equation}
+\boxed{
+T_{\rm acc}(E)
+    = \frac{3}{u_1 - u_2}
+      \left(
+        \frac{D_1(E)}{u_1}
+        +
+        \frac{D_2(E)}{u_2}
+      \right)
+}
+\end{equation}
+where $D_1$ and $D_2$ are the upstream and downstream diffusion coefficients.
+For a strong non-relativistic shock with compression ratio $r=u_1/u_2=4$, the
+expression simplifies considerably.  Setting $u_1 = u_{\rm sh}$ and
+$u_2 = u_{\rm sh}/4$, and assuming $D_1 \approx D_2 \equiv D(E)$, we obtain
+\begin{equation}
+T_{\rm acc}(E)
+    \approx
+    \frac{6}{r-1}\,
+    \frac{D(E)}{u_{\rm sh}^2}
+    =
+    \frac{6}{3}\,
+    \frac{D(E)}{u_{\rm sh}^2}
+    =
+    \boxed{
+    2\,\frac{D(E)}{u_{\rm sh}^2}
+    }.
+\end{equation}
+This relation has a very simple interpretation: \emph{the acceleration time is
+the diffusion time across a region of size $\sim D/u_{\rm sh}$, multiplied by
+a factor of order unity due to repeated shock crossings}.  Faster shocks or
+smaller diffusion coefficients both lead to more rapid acceleration.
+
+\paragraph{Scaling for Supernova Remnants}
+
+To estimate the maximum particle energy attainable in a typical supernova
+remnant (SNR), we adopt representative values.  A young SNR shock expands at
+\[
+u_{\rm sh} \sim 10^4~{\rm km\,s^{-1}} \approx 0.03c,
+\]
+and the magnetic field strength can be amplified by cosmic-ray streaming
+instabilities to values on the order of
+\[
+B \sim 100~\mu{\rm G}.
+\]
+In the Bohm limit, the diffusion coefficient is approximately
+\[
+D(E) \sim \frac{1}{3} r_L(E) c
+       = \frac{1}{3} \frac{E}{qBc}.
+\]
+Substituting this into the acceleration timescale yields
+\[
+T_{\rm acc}(E)
+    \sim
+    \frac{2}{u_{\rm sh}^2}
+    \left(
+        \frac{E}{3 q B c}
+    \right)
+    =
+    \frac{2 E}{3 q B c\,u_{\rm sh}^2}.
+\]
+
+The highest energy a particle can reach is then set by the condition that the
+acceleration time be shorter than the lifetime of the shock in its efficient
+acceleration phase, typically on the order of a few hundred to a thousand
+years:
+\[
+T_{\rm SNR} \sim 10^3~{\rm yr}.
+\]
+Using the above numbers, we find a characteristic maximum energy
+\begin{equation}
+E_{\max}
+    \sim
+    \left(3 q B c\, u_{\rm sh}^2\right)\,
+    T_{\rm SNR}
+    \sim
+    10^{14}\text{--}10^{15}~{\rm eV},
+\end{equation}
+placing supernova remnants naturally in the regime required to explain the
+\emph{knee} of the Galactic cosmic-ray spectrum.
+
+This simple scaling argument encapsulates the essential features of diffusive
+shock acceleration: the maximum energy increases with magnetic-field strength,
+shock velocity, and accelerator lifetime, and depends critically on the level
+of magnetic turbulence surrounding the shock.  The ability of SNRs to amplify
+their own magnetic fields makes them extremely effective accelerators,
+potentially capable of energizing particles to even higher energies under
+favorable conditions.
+
+
+
+
+
+
+
